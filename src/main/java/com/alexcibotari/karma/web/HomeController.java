@@ -11,22 +11,18 @@
  * specific language governing permissions and limitations under the License.
  */
 
-package com.alexcibotari.karma;
+package com.alexcibotari.karma.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
 import java.util.Map;
 
-/**
- * @author Rob Winch
- * @author Doo-Hwan Kwak
- */
+
 @Controller
 @RequestMapping("/")
-public class MessageController {
+public class HomeController {
 
     @RequestMapping
     public String home(Map<String, Object> model) {
