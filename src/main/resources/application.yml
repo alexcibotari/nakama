@@ -1,0 +1,13 @@
+# Allow Thymeleaf templates to be reloaded at dev time
+spring:
+  thymeleaf:
+    cache: false
+security:
+  basic:
+    enabled: false
+  user:
+    password: password
+server:
+  tomcat:
+    access_log_enabled: true
+    basedir: target/tomcat
