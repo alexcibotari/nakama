@@ -1,7 +1,7 @@
 buildscript {
 
     ext {
-        springBootVersion = '1.3.0.RELEASE'
+        springBootVersion = '1.3.1.RELEASE'
         springLoadedVersion = '1.2.4.RELEASE'
     }
     repositories {
@@ -46,10 +46,6 @@ dependencies {
 
     //DEV
     compile 'org.springframework.boot:spring-boot-devtools'
-
-    //JACKSON
-    //compile 'com.fasterxml.jackson.core:jackson-core'
-    //compile 'com.fasterxml.jackson.core:jackson-databind'
 
     //Logging with SLF4J & LogBack
     //compile 'org.springframework.boot:spring-boot-starter-logging'
