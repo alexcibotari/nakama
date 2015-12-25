@@ -1,4 +1,4 @@
-package com.alexcibotari.karma.config;
+package com.alexcibotari.nakama.config;
 
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;

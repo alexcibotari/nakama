@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.alexcibotari.karma;
+package com.alexcibotari.nakama;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

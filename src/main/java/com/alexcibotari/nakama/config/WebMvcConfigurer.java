@@ -1,4 +1,4 @@
-package com.alexcibotari.karma.config;
+package com.alexcibotari.nakama.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;

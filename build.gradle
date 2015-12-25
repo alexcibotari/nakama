@@ -23,7 +23,7 @@ springBoot {
 }
 
 jar {
-    baseName = 'karma'
+    baseName = 'nakama'
     version =  '0.0.0'
 }
 
