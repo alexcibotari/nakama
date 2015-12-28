@@ -5,11 +5,24 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers("/scripts/**/*.{js,html}")
+                .antMatchers("/bower_components/**");
+                //.antMatchers("/i18n/**")
+                //.antMatchers("/assets/**")
+                //.antMatchers("/swagger-ui/index.html")
+                //.antMatchers("/test/**")
+                //.antMatchers("/console/**");
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
