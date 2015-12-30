@@ -1,13 +1,24 @@
 spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/nakama?useUnicode=true&characterEncoding=utf8
+    name:
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show_sql: false
   thymeleaf:
     cache: false
 security:
   basic:
     enabled: false
-  user:
-    password: password
 server:
   port: 8080
   tomcat:
     access_log_enabled: true
     basedir: build/tomcat
+logging:
+  level:
+    org.hibernate.SQL: debug
