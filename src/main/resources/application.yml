@@ -19,6 +19,3 @@ server:
   tomcat:
     access_log_enabled: true
     basedir: build/tomcat
-logging:
-  level:
-    org.hibernate.SQL: debug
