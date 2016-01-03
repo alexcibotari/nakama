@@ -1,4 +1,4 @@
-package com.alexcibotari.nakama.util;
+package com.alexcibotari.nakama.domain.util;
 
 import com.alexcibotari.nakama.domain.generic.IdDomain;
 

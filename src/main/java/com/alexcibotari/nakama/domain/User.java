@@ -1,7 +1,7 @@
 package com.alexcibotari.nakama.domain;
 
 import com.alexcibotari.nakama.domain.generic.IdDomain;
-import com.alexcibotari.nakama.util.DomainUtil;
+import com.alexcibotari.nakama.domain.util.DomainUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
