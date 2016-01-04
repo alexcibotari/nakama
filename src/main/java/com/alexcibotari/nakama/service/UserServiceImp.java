@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -41,5 +42,13 @@ public class UserServiceImp implements UserService {
         user.setAuthorities(authorities);
 
         return userRepository.save(user);
+    }
+
+    public Optional<User> findOneByUserName(String username){
+        return userRepository.findOneByUserName(username);
+    }
+
+    public Optional<User> findOneByEmail(String email){
+        return userRepository.findOneByEmail(email);
     }
 }
