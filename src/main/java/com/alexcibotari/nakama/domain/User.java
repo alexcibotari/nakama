@@ -1,14 +1,12 @@
 package com.alexcibotari.nakama.domain;
 
 import com.alexcibotari.nakama.domain.generic.IdDomain;
-import com.alexcibotari.nakama.domain.util.DomainUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 public class User implements Serializable, IdDomain {
