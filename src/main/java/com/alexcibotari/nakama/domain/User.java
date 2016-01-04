@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class User implements Serializable, IdDomain {
@@ -21,6 +22,9 @@ public class User implements Serializable, IdDomain {
     @Column(nullable = false, unique = true)
     private String userName;
 
+    @Column(nullable = false, unique = true)
+    private String email;
+
     @Column(nullable = false, length = 255)
     @JsonIgnore
     private String password;
@@ -28,11 +32,12 @@ public class User implements Serializable, IdDomain {
     @Column(nullable = false)
     private Boolean enabled;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "authorities",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
+            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
     private Set<Authority> authorities = new HashSet<>();
 
 
@@ -87,6 +92,14 @@ public class User implements Serializable, IdDomain {
         this.version = version;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public int hashCode() {
         return toString().hashCode();
     }
@@ -96,7 +109,7 @@ public class User implements Serializable, IdDomain {
         sb.append("{");
         sb.append("Id: ").append(getId()).append(", ");
         sb.append("UserName: ").append(getUserName()).append(", ");
-        sb.append("Authorities Ids: ").append(DomainUtil.getIds(getAuthorities())).append(", ");
+        sb.append("Email: ").append(getEmail()).append(", ");
         sb.append("Enabled : ").append(getEnabled()).append(", ");
         sb.append("Version: ").append(getVersion());
         sb.append("}");

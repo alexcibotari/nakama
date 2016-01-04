@@ -26,7 +26,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
     UserRepository userRepository;
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.debug("Authenticating {}", username);
         String lowercaseUsername = username.toLowerCase();
