@@ -36,9 +36,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
             if (!user.getEnabled()) {
                 throw new UserNotEnabledException("User " + lowercaseUsername + " was not enabled");
             }
-            List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()
-                    .map(authority -> new SimpleGrantedAuthority(authority.getName()))
-                    .collect(Collectors.toList());
+            List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream().collect(Collectors.toList());
             return new org.springframework.security.core.userdetails.User(lowercaseUsername,
                     user.getPassword(),
                     grantedAuthorities);
