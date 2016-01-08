@@ -1,21 +1,13 @@
 package com.alexcibotari.nakama.domain;
 
-import com.alexcibotari.nakama.domain.generic.IdDomain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class User implements Serializable, IdDomain {
-
-    @Id
-    private Long id;
-
-    @Version
-    private int version;
+public class User extends AbstractAuditingEntity {
 
     @Column(nullable = false, unique = true)
     private String userName;
@@ -74,22 +66,6 @@ public class User implements Serializable, IdDomain {
         this.enabled = enabled;
     }
 
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getVersion() {
-        return this.version;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -108,8 +84,7 @@ public class User implements Serializable, IdDomain {
         sb.append("Id: ").append(getId()).append(", ");
         sb.append("UserName: ").append(getUserName()).append(", ");
         sb.append("Email: ").append(getEmail()).append(", ");
-        sb.append("Enabled : ").append(getEnabled()).append(", ");
-        sb.append("Version: ").append(getVersion());
+        sb.append("Enabled : ").append(getEnabled());
         sb.append("}");
         return sb.toString();
     }

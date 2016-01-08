@@ -46,6 +46,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-devtools'
 
     //Database
+    compile 'org.hibernate:hibernate-envers'
     compile 'mysql:mysql-connector-java'
 
     //Commons
