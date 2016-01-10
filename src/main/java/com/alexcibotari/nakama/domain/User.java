@@ -15,7 +15,7 @@ public class User extends AbstractAuditingEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 255)
+    @Column(name = "password_hash", nullable = false, length = 255)
     @JsonIgnore
     private String password;
 

@@ -4,19 +4,16 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.io.Serializable;
 
 @Entity
-public class Authority implements GrantedAuthority, Serializable {
+public class Authority extends AbstractIdEntity implements GrantedAuthority {
 
     /**
      *
      */
     private static final long serialVersionUID = 7190787175352450609L;
 
-    @Id
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, unique = true, length = 50)
     private String name;
 
     public String getName() {

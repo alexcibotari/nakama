@@ -7,9 +7,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.EntityListeners;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.time.ZonedDateTime;
 
 @MappedSuperclass
@@ -18,26 +16,30 @@ import java.time.ZonedDateTime;
 public abstract class AbstractAuditingEntity extends AbstractIdEntity {
 
     @CreatedBy
-    @Column(nullable = false, updatable = false)
-    private String createdBy;
+    //@Column(nullable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "created_by", nullable = false, updatable = false)
+    private User createdBy;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private ZonedDateTime createdDate = ZonedDateTime.now();
 
     @LastModifiedBy
-    @Column
-    private String lastModifiedBy;
+    //@Column
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "last_modified_by")
+    private User lastModifiedBy;
 
     @LastModifiedDate
     @Column
     private ZonedDateTime lastModifiedDate = ZonedDateTime.now();
 
-    public String getCreatedBy() {
+    public User getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(String createdBy) {
+    public void setCreatedBy(User createdBy) {
         this.createdBy = createdBy;
     }
 
@@ -49,11 +51,11 @@ public abstract class AbstractAuditingEntity extends AbstractIdEntity {
         this.createdDate = createdDate;
     }
 
-    public String getLastModifiedBy() {
+    public User getLastModifiedBy() {
         return lastModifiedBy;
     }
 
-    public void setLastModifiedBy(String lastModifiedBy) {
+    public void setLastModifiedBy(User lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
     }
 

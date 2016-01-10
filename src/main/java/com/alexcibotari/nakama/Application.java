@@ -32,7 +32,7 @@ public class Application {
                 serverPort);
 
 
-/*        User u = new User();
+        User u = new User();
         u.setUserName("test");
         u.setEmail("test@test");
         u.setPassword("test");
@@ -45,7 +45,7 @@ public class Application {
         System.out.println("--------------------------------------------");
         System.out.println(u);
         System.out.println(u.getCreatedDate());
-        System.out.println("--------------------------------------------");*/
+        System.out.println("--------------------------------------------");
 
     }
 

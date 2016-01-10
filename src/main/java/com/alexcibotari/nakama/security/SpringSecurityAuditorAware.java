@@ -1,5 +1,8 @@
 package com.alexcibotari.nakama.security;
 
+import com.alexcibotari.nakama.domain.User;
+import com.alexcibotari.nakama.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
 
@@ -7,11 +10,17 @@ import org.springframework.stereotype.Component;
  * Implementation of AuditorAware based on Spring Security.
  */
 @Component
-public class SpringSecurityAuditorAware implements AuditorAware<String> {
+public class SpringSecurityAuditorAware implements AuditorAware<User> {
+
+    @Autowired
+    UserRepository userRepository;
 
     @Override
-    public String getCurrentAuditor() {
+    public User getCurrentAuditor() {
         String userName = SecurityUtils.getCurrentUserName();
-        return (userName != null ? userName : AuthoritiesConstants.SYSTEM_ACCOUNT);
+        if (userName == null) {
+            userName = "system";
+        }
+        return userRepository.findOneByUserName(AuthoritiesConstants.SYSTEM_ACCOUNT).get();
     }
 }
