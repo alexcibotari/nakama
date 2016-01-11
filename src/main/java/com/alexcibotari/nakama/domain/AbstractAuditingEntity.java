@@ -16,30 +16,26 @@ import java.time.ZonedDateTime;
 public abstract class AbstractAuditingEntity extends AbstractIdEntity {
 
     @CreatedBy
-    //@Column(nullable = false, updatable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by", nullable = false, updatable = false)
-    private User createdBy;
+    @Column(nullable = false, updatable = false)
+    private String createdBy;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private ZonedDateTime createdDate = ZonedDateTime.now();
 
     @LastModifiedBy
-    //@Column
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "last_modified_by")
-    private User lastModifiedBy;
+    @Column
+    private String lastModifiedBy;
 
     @LastModifiedDate
     @Column
     private ZonedDateTime lastModifiedDate = ZonedDateTime.now();
 
-    public User getCreatedBy() {
+    public String getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(User createdBy) {
+    public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
 
@@ -51,11 +47,11 @@ public abstract class AbstractAuditingEntity extends AbstractIdEntity {
         this.createdDate = createdDate;
     }
 
-    public User getLastModifiedBy() {
+    public String getLastModifiedBy() {
         return lastModifiedBy;
     }
 
-    public void setLastModifiedBy(User lastModifiedBy) {
+    public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
     }
 
