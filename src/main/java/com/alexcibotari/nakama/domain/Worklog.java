@@ -10,10 +10,15 @@ public class Worklog extends AbstractAuditingEntity {
     @JoinColumn(name = "issue_id", nullable = false, updatable = false)
     private Issue issue;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_user_id", nullable = false, updatable = false)
+    private User author;
+
     @Column
     private String body;
 
-    @Column(nullable = false)
+    //In Minutes
+    @Column(name = "timewrked", nullable = false)
     private Long timeWorked;
 
     @Column(nullable = false)
