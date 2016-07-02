@@ -29,6 +29,14 @@ public class Issue extends AbstractAuditingEntity{
     @Column(nullable = false)
     private String description;
 
+    //In Minutes
+    @Column
+    private Long timespent;
+
+    //In Minutes
+    @Column
+    private Long timeestimate;
+
     public Project getProject() {
         return project;
     }
@@ -75,6 +83,22 @@ public class Issue extends AbstractAuditingEntity{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getTimespent() {
+        return timespent;
+    }
+
+    public void setTimespent(Long timespent) {
+        this.timespent = timespent;
+    }
+
+    public Long getTimeestimate() {
+        return timeestimate;
+    }
+
+    public void setTimeestimate(Long timeestimate) {
+        this.timeestimate = timeestimate;
     }
 
     @Override
