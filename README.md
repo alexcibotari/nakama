@@ -3,6 +3,7 @@
 ## Pre-requirements
 + Java 8
 + NodeJS
++ MySQL with schema 'nakama'
 
 ## Install
 ### NodeJS dependencies
@@ -16,5 +17,5 @@
     gradlew bootRun
 #### Java
 Run Application.java
-### Tomcat WAR
+#### Tomcat WAR
 Add project into Tomcat
