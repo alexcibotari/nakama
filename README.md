@@ -17,5 +17,8 @@
     gradlew bootRun
 #### Java
 Run Application.java
-#### Tomcat WAR
+### Tomcat WAR
 Add project into Tomcat
+
+## Application credentials
+admin / admin

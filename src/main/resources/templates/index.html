@@ -14,7 +14,7 @@
 		}
 	</style>
 </head>
-<body ng-app="NakamaApp">
+<body>
 
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
@@ -29,14 +29,14 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li ui-sref-active="active">
-						<a ui-sref="dashboard">Dashboard</a>
+					<li>
+						<a>Dashboard</a>
 					</li>
-					<li ui-sref-active="active">
-						<a ui-sref="state1">State1</a>
+					<li>
+						<a>State1</a>
 					</li>
-					<li ui-sref-active="active">
-						<a ui-sref="state2">State2</a>
+					<li>
+						<a>State2</a>
 					</li>
 				</ul>
 				<form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
@@ -49,7 +49,6 @@
 
 
 	<div class="container">
-		<div ui-view=""></div>
 	</div>
 
 
@@ -57,9 +56,11 @@
 
 	<script src="bower_components/jquery/dist/jquery.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="bower_components/react/react.js"></script>
+	<script src="bower_components/react/react-dom.js"></script>
 
 
-	<script src="scripts/app.js"></script>
+	<script src="app.js"></script>
 
 
 </body>
