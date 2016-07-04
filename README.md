@@ -8,9 +8,8 @@
 ## Install
 ### NodeJS dependencies
     npm install
-    npm install -g bower
-### Bower dependencies
-    bower install
+    npm install webpack -g
+
 ## Run
 ### Spring Boot
 #### Gradle

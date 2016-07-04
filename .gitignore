@@ -138,5 +138,5 @@ javadoc/
 # lock file, a part of Oracle Credential Store Framework
 cwallet.sso.lck
 
-#Bower
-/src/main/webapp/bower_components
+#WebPack exclude
+src/main/webapp/built/

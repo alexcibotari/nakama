@@ -4,15 +4,19 @@
   "description": "Description for Nakama",
   "private": true,
   "cacheDirectories": [
-    "node_modules",
-    "src/main/webapp/bower_components"
+    "node_modules"
   ],
   "dependencies": {
-    "bower": "^1.7.9"
+    "babel-core": "6.10.4",
+    "babel-loader": "6.2.4",
+    "bootstrap": "3.3.6",
+    "react": "15.2.0",
+    "requirejs": "2.2.0",
+    "webpack": "^1.13.1"
   },
   "devDependencies": {
   },
-  "engines": {
-    "node": "^0.12 || ^4.2"
+  "scripts": {
+    "watch": "webpack --watch -d"
   }
 }
