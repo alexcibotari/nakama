@@ -1,6 +1,7 @@
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+var builtDir = "./src/main/webapp/built/";
 module.exports = {
     entry: ['./src/main/webapp/app.js'],
     devtool: 'sourcemaps',
@@ -8,7 +9,7 @@ module.exports = {
     debug: true,
     output: {
         path: __dirname,
-        filename: './src/main/webapp/built/bundle.js'
+        filename: builtDir + 'bundle.js'
     },
     module: {
         loaders: [
@@ -24,6 +25,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin("./src/main/webapp/built/styles.css")
+        new ExtractTextPlugin(builtDir + "styles.css"),
+        new CopyWebpackPlugin([{from: 'node_modules/bootstrap/dist', to: builtDir+"bootstrap"}])
     ]
 };
