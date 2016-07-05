@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,8 +23,8 @@ public class ProjectServiceImp implements ProjectService {
         return projectRepository.findOneById(id);
     }
 
-    public Iterable<Project> findAll(){
-        return projectRepository.findAll();
+    public List<Project> findAll(){
+        return (List<Project>) projectRepository.findAll();
     }
 
 

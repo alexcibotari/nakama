@@ -1,6 +1,6 @@
+require("./main.css");
 const React = require('react');
-var ReactDOM = require('react-dom');
-
+const ReactDOM = require('react-dom');
 var HelloMessage = React.createClass({
     render: function() {
         return <div>Hello {this.props.name}</div>;
