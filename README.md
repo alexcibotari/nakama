@@ -9,7 +9,8 @@
 ### NodeJS dependencies
     npm install
     npm install webpack -g
-
+### Node Library
+    gradlew copyNodeLibs
 ## Run
 ### Spring Boot
 #### Gradle

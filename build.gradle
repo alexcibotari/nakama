@@ -63,7 +63,11 @@ idea {
     }
 }
 
-
 task wrapper(type: Wrapper) {
     gradleVersion = '2.14'
+}
+
+task copyNodeLibs(type: Copy) {
+    from 'node_modules/bootstrap/dist'
+    into 'src/main/webapp/built/bootstrap'
 }
