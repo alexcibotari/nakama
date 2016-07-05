@@ -37,7 +37,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
                 .antMatchers("/scripts/**/*.{js,html}")
-                .antMatchers("/bower_components/**");
+                .antMatchers("/built/**");
         //.antMatchers("/i18n/**")
         //.antMatchers("/assets/**")
         //.antMatchers("/swagger-ui/index.html")
