@@ -7,8 +7,11 @@
 
 ## Install
 ### NodeJS dependencies
+#### Install
     npm install
     npm install webpack -g
+#### Update
+    npm update
 ### Node Library
     gradlew copyNodeLibs
 ## Run

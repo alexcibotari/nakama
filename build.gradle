@@ -69,5 +69,5 @@ task wrapper(type: Wrapper) {
 
 task copyNodeLibs(type: Copy) {
     from 'node_modules/bootstrap/dist'
-    into 'src/main/webapp/built/bootstrap'
+    into 'src/main/webapp/build/bootstrap'
 }

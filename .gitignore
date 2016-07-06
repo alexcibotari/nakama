@@ -139,4 +139,4 @@ javadoc/
 cwallet.sso.lck
 
 #WebPack exclude
-src/main/webapp/built/
+src/main/webapp/build/

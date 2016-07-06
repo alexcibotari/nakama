@@ -1,29 +1,40 @@
 var path = require('path');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var builtDir = "./src/main/webapp/built/";
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var ROOT_PATH = path.resolve(__dirname);
+var BUILD_PATH = path.join(ROOT_PATH, '/src/main/webapp/build/');
+var JSX_PATH = path.join(ROOT_PATH, '/src/main/jsx/');
+
 module.exports = {
-    entry: ['./src/main/webapp/app.js'],
-    devtool: 'sourcemaps',
+    entry: ['./src/main/jsx/app.jsx'],
+    /*devtool: 'sourcemaps',*/
     cache: true,
     debug: true,
+    /*resolve: {
+     extensions: ['', '.js', '.jsx']
+     },*/
     output: {
         path: __dirname,
-        filename: builtDir + 'bundle.js'
+        filename: './src/main/webapp/build/bundle.js'
     },
     module: {
         loaders: [
             {
-                test: path.join(__dirname, '.'),
+                test: /\.jsx?$/,
+                //include: JSX_PATH,
                 exclude: /(node_modules)/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ['react']
+                    presets: ['es2015', 'react'],
+                    cacheDirectory: true
                 }
             },
-            {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader")}
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+            }
         ]
     },
     plugins: [
-        new ExtractTextPlugin(builtDir + "styles.css")
+        new ExtractTextPlugin("./src/main/webapp/build/styles.css")
     ]
 };
