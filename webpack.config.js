@@ -9,9 +9,9 @@ module.exports = {
     /*devtool: 'sourcemaps',*/
     cache: true,
     debug: true,
-    /*resolve: {
+    resolve: {
      extensions: ['', '.js', '.jsx']
-     },*/
+     },
     output: {
         path: __dirname,
         filename: './src/main/webapp/build/bundle.js'
