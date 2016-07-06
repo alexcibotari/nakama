@@ -8,7 +8,9 @@
 ## Install Steps
     npm install
     npm install webpack -g
+    npm webpack
     gradlew copyNodeLibs
+
 
 ## Run
 ### Spring Boot
