@@ -5,15 +5,11 @@
 + NodeJS
 + MySQL with schema 'nakama'
 
-## Install
-### NodeJS dependencies
-#### Install
+## Install Steps
     npm install
     npm install webpack -g
-#### Update
-    npm update
-### Node Library
     gradlew copyNodeLibs
+
 ## Run
 ### Spring Boot
 #### Gradle
