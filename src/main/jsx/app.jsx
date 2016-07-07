@@ -1,13 +1,21 @@
 import './app.css';
 
-import React from 'react';
+import React, {Component}from 'react';
 import ReactDOM from 'react-dom';
-import Header from './componenets/header';
+import { Router, Route, browserHistory } from 'react-router';
+import MainLayout from './componenets/main-layout';
+import Home from './componenets/home';
+import Projects from './componenets/projects';
 
-class NakamaApp extends React.Component {
+class App extends Component {
     render() {
         return (
-            <Header/>
+            <Router history={browserHistory}>
+                <Route component={MainLayout}>
+                    <Route path="/" component={Home}/>
+                    <Route path="/projects" component={Projects}/>
+                </Route>
+            </Router>
         )
     }
 }
@@ -17,5 +25,5 @@ init();
 function init() {
     var main = document.createElement('main');
     document.body.appendChild(main);
-    ReactDOM.render(<NakamaApp/>, main);
+    ReactDOM.render(<App/>, main);
 }

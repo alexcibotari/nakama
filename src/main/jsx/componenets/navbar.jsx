@@ -1,6 +1,6 @@
-import React from 'react';
-
-class Header extends React.Component {
+import React, {Component} from 'react';
+import { Link } from 'react-router';
+class NavBar extends Component {
     render() {
         return (
             <nav className="navbar navbar-default navbar-fixed-top">
@@ -13,15 +13,15 @@ class Header extends React.Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <a className="navbar-brand" href="#">Nakama</a>
+                        <a className="navbar-brand" href="#">{this.props.brand}</a>
                     </div>
                     <div classID="navbar" className="navbar-collapse collapse">
                         <ul className="nav navbar-nav">
                             <li>
-                                <a>Dashboard</a>
+                                <Link to="/">Dashboard</Link>
                             </li>
                             <li>
-                                <a>State1</a>
+                                <Link to="/projects">Projects</Link>
                             </li>
                             <li>
                                 <a>State2</a>
@@ -37,4 +37,4 @@ class Header extends React.Component {
     }
 }
 
-export default Header;
+export default NavBar;
