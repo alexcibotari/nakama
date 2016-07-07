@@ -12,7 +12,7 @@ public class Project extends AbstractAuditingEntity{
     private String key;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lead_user_id", nullable = false)
+    @JoinColumn(name = "lead_user_id"/*, nullable = false*/)
     private User lead;
 
     @Column

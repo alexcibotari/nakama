@@ -2,7 +2,7 @@ import './app.css';
 
 import React, {Component}from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, hashHistory } from 'react-router';
 import MainLayout from './componenets/main-layout';
 import Home from './componenets/home';
 import Projects from './componenets/projects';
@@ -10,7 +10,7 @@ import Projects from './componenets/projects';
 class App extends Component {
     render() {
         return (
-            <Router history={browserHistory}>
+            <Router history={hashHistory}>
                 <Route component={MainLayout}>
                     <Route path="/" component={Home}/>
                     <Route path="/projects" component={Projects}/>
