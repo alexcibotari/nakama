@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
 
 class Project extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
-            <div>
-                Projects
+            <div className="project">
+                {this.props.project.key}
             </div>
         )
     }

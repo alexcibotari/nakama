@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import client from './../client';
+import Project from './project'
 
 class Projects extends Component {
 
@@ -11,20 +12,20 @@ class Projects extends Component {
         }
     }
 
-    loadProjectsFromServer() {
+    componentWillMount() {
         client({method: 'GET', path: this.state.url}).then(response => {
-            console.log(response);
+            this.setState({data: response.entity});
         });
-    }
-
-    componentDidMount() {
-        this.loadProjectsFromServer();
     }
 
     render() {
         return (
-            <div>
-                Projects
+            <div className="projects">
+                {this.state.data.map((project) => {
+                    return (
+                        <Project project={project} key={project.key}/>
+                    )
+                })}
             </div>
         )
     }
