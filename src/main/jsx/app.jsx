@@ -3,7 +3,7 @@ import './app.css';
 import React, {Component}from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory } from 'react-router';
-import MainLayout from './componenets/main-layout';
+import MainLayout from './componenets/layout/main';
 import Home from './componenets/home';
 import Projects from './componenets/projects';
 
