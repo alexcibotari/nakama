@@ -32,6 +32,7 @@ public class ProjectServiceImp implements ProjectService {
         return (List<Project>) projectRepository.findAll();
     }
 
+    @Transactional
     public Project create(ProjectDTO dto){
         Project project = new Project();
         project.setKey(dto.getKey());
@@ -40,6 +41,7 @@ public class ProjectServiceImp implements ProjectService {
         return projectRepository.save(project);
     }
 
+    @Transactional
     public Project update(ProjectDTO dto){
         Project project = projectRepository.findOneByKey(dto.getKey());
         project.setName(dto.getName());
@@ -47,6 +49,7 @@ public class ProjectServiceImp implements ProjectService {
         return projectRepository.save(project);
     }
 
+    @Transactional
     public void delete(String key){
         projectRepository.deleteOneByKey(key);
     }

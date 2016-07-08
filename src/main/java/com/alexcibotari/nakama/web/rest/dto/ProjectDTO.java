@@ -10,6 +10,8 @@ public class ProjectDTO {
 
     private String description;
 
+    public ProjectDTO(){}
+
     public ProjectDTO(String name, String key, String description){
         this.setName(name);
         this.setKey(key);
