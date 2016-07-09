@@ -27,6 +27,12 @@ public class ProjectResource {
         return projectService.findAll().stream().map(ProjectDTO::new).collect(Collectors.toList());
     }
 
+    @RequestMapping(value = "/{key}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public ProjectDTO getOne(@PathVariable String key) {
+        return new ProjectDTO(projectService.findOneByKey(key));
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public ProjectDTO create(@RequestBody ProjectDTO dto) {
