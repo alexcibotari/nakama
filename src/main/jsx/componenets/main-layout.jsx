@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import NavBar from '../componenets/navbar'
+import NavBar from './navbar'
 
 class MainLayout extends Component {
     render() {

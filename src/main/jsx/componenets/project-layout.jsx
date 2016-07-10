@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
-import client from './../client';
-import Project from './../componenets/project';
+import client from '../client';
+import Project from './project';
 
 class ProjectLayout extends Component {
 

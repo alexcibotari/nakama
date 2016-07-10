@@ -3,8 +3,8 @@ import './app.css';
 import React, {Component}from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import MainLayout from './layout/main';
-import ProjectLayout from './layout/project';
+import MainLayout from './componenets/main-layout';
+import ProjectLayout from './componenets/project-layout';
 import Home from './componenets/home';
 
 class App extends Component {
