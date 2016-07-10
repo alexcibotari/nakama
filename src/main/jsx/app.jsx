@@ -3,9 +3,9 @@ import './app.css';
 import React, {Component}from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import MainLayout from './componenets/layout/main';
+import MainLayout from './layout/main';
+import ProjectLayout from './layout/project';
 import Home from './componenets/home';
-import Projects from './componenets/projects';
 
 class App extends Component {
     render() {
@@ -13,7 +13,7 @@ class App extends Component {
             <Router history={hashHistory}>
                 <Route path="/" component={MainLayout}>
                     <IndexRoute component={Home}/>
-                    <Route path="/projects" component={Projects}/>
+                    <Route path="/projects" component={ProjectLayout}/>
                 </Route>
             </Router>
         )
