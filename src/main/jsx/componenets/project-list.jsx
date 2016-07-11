@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router';
+import {Link} from 'react-router';
 import client from '../client';
 
 class ProjectList extends Component {
@@ -14,12 +14,22 @@ class ProjectList extends Component {
 
     componentWillMount() {
         client({method: 'GET', path: this.state.url}).then(response => {
-            this.setState({data: response.entity});
+            if (response.status.code === 200) {
+                this.setState({data: response.entity});
+            }
         });
     }
 
-    delete(){
-        console.log("Delete")
+    delete(key) {
+        client({method: 'DELETE', path: this.state.url + '/' + key}).then(response => {
+            if (response.status.code == 200) {
+                var delIndex = this.state.data.findIndex(function (project) {
+                    return project.key === key;
+                });
+                this.state.data.splice(delIndex, 1);
+                this.forceUpdate();
+            }
+        });
     }
 
     render() {
@@ -32,8 +42,11 @@ class ProjectList extends Component {
                             <p>{project.description}</p>
                             <div>
                                 <div className="btn-group btn-group-justified" role="group">
-                                    <Link to={'/projects/edit/'+project.key} className="btn btn-default glyphicon glyphicon-pencil" role="button"> Edit</Link>
-                                    <a className="btn btn-danger glyphicon glyphicon-trash" role="button" onClick={this.delete}> Delete</a>
+                                    <Link to={'/projects/edit/'+project.key}
+                                          className="btn btn-default glyphicon glyphicon-pencil"
+                                          role="button"> Edit</Link>
+                                    <a className="btn btn-danger glyphicon glyphicon-trash" role="button"
+                                       onClick={this.delete.bind(this,project.key)}> Delete</a>
                                 </div>
                             </div>
                         </div>
