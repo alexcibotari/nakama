@@ -19,5 +19,5 @@ public interface ProjectService {
 
     public Project update(ProjectDTO dto);
 
-    public void delete(String key);
+    public void delete(Long id);
 }

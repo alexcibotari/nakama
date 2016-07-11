@@ -27,10 +27,10 @@ public class ProjectResource {
         return projectService.findAll().stream().map(ProjectDTO::new).collect(Collectors.toList());
     }
 
-    @RequestMapping(value = "/{key}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public ProjectDTO getOne(@PathVariable String key) {
-        return new ProjectDTO(projectService.findOneByKey(key));
+    public ProjectDTO getOne(@PathVariable Long id) {
+        return new ProjectDTO(projectService.findOneById(id));
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -41,14 +41,14 @@ public class ProjectResource {
 
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public ProjectDTO update(@RequestBody ProjectDTO dto){
+    public ProjectDTO update(@RequestBody ProjectDTO dto) {
         return new ProjectDTO(projectService.update(dto));
     }
 
-    @RequestMapping(value = "/{key}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable String key){
-        projectService.delete(key);
+    public void delete(@PathVariable Long id) {
+        projectService.delete(id);
     }
 
 }

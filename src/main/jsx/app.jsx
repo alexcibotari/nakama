@@ -18,7 +18,7 @@ class App extends Component {
                     <Route path="projects" component={ProjectLayout}>
                         <IndexRoute component={ProjectList}/>
                         <Route path="create" component={ProjectForm}/>
-                        <Route path="edit/:key" component={ProjectForm}/>
+                        <Route path="edit/:id" component={ProjectForm}/>
                     </Route>
                 </Route>
             </Router>

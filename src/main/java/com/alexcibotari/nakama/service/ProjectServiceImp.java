@@ -50,8 +50,8 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Transactional
-    public void delete(String key){
-        projectRepository.deleteOneByKey(key);
+    public void delete(Long id){
+        projectRepository.delete(id);
     }
 
 }

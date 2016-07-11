@@ -20,11 +20,11 @@ class ProjectList extends Component {
         });
     }
 
-    delete(key) {
-        client({method: 'DELETE', path: this.state.url + '/' + key}).then(response => {
+    delete(id) {
+        client({method: 'DELETE', path: this.state.url + '/' + id}).then(response => {
             if (response.status.code == 200) {
                 var delIndex = this.state.data.findIndex(function (project) {
-                    return project.key === key;
+                    return project.id === id;
                 });
                 this.state.data.splice(delIndex, 1);
                 this.forceUpdate();
@@ -35,18 +35,18 @@ class ProjectList extends Component {
     render() {
         const projects = (Array.isArray(this.state.data) && this.state.data.length > 0) ? this.state.data.map(project => {
             return (
-                <div className="col-sm-6 col-md-4" key={project.key}>
+                <div className="col-sm-6 col-md-4" key={project.id}>
                     <div className="thumbnail">
                         <div className="caption">
                             <h3>{project.name}</h3>
                             <p>{project.description}</p>
                             <div>
                                 <div className="btn-group btn-group-justified" role="group">
-                                    <Link to={'/projects/edit/'+project.key}
+                                    <Link to={'/projects/edit/'+project.id}
                                           className="btn btn-default glyphicon glyphicon-pencil"
                                           role="button"> Edit</Link>
                                     <a className="btn btn-danger glyphicon glyphicon-trash" role="button"
-                                       onClick={this.delete.bind(this,project.key)}> Delete</a>
+                                       onClick={this.delete.bind(this,project.id)}> Delete</a>
                                 </div>
                             </div>
                         </div>

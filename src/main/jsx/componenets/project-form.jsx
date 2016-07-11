@@ -16,8 +16,8 @@ class ProjectForm extends Component {
     }
 
     componentWillMount() {
-        if (this.props.params.key) {
-            client({method: 'GET', path: this.state.url + '/' + this.props.params.key}).then(response => {
+        if (this.props.params.id) {
+            client({method: 'GET', path: this.state.url + '/' + this.props.params.id}).then(response => {
                 if (response.status.code == 200) {
                     this.setState({data: response.entity, edit: true});
                 }
