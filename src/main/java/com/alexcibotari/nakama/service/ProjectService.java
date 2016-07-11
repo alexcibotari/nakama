@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface ProjectService {
 
-    public Project findOneById(Long id);
+    public Project findOne(Long id);
 
     public Project findOneByKey(String key);
 

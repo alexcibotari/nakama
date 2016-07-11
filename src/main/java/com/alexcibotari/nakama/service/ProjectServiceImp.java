@@ -21,19 +21,20 @@ public class ProjectServiceImp implements ProjectService {
     @Autowired
     ProjectRepository projectRepository;
 
-    public Project findOneById(Long id){
-        return projectRepository.findOneById(id);
+    public Project findOne(Long id) {
+        return projectRepository.findOne(id);
     }
-    public Project findOneByKey(String key){
+
+    public Project findOneByKey(String key) {
         return projectRepository.findOneByKey(key);
     }
 
-    public List<Project> findAll(){
+    public List<Project> findAll() {
         return (List<Project>) projectRepository.findAll();
     }
 
     @Transactional
-    public Project create(ProjectDTO dto){
+    public Project create(ProjectDTO dto) {
         Project project = new Project();
         project.setKey(dto.getKey());
         project.setName(dto.getName());
@@ -42,15 +43,16 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Transactional
-    public Project update(ProjectDTO dto){
-        Project project = projectRepository.findOneByKey(dto.getKey());
+    public Project update(ProjectDTO dto) {
+        Project project = projectRepository.findOne(dto.getId());
+        project.setKey(dto.getKey());
         project.setName(dto.getName());
         project.setDescription(dto.getDescription());
         return projectRepository.save(project);
     }
 
     @Transactional
-    public void delete(Long id){
+    public void delete(Long id) {
         projectRepository.delete(id);
     }
 

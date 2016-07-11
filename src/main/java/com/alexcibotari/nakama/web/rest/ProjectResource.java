@@ -30,7 +30,7 @@ public class ProjectResource {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public ProjectDTO getOne(@PathVariable Long id) {
-        return new ProjectDTO(projectService.findOneById(id));
+        return new ProjectDTO(projectService.findOne(id));
     }
 
     @RequestMapping(method = RequestMethod.POST)
