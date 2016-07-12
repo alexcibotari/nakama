@@ -13,22 +13,16 @@ public class UserDTO {
 
     private String email;
 
-    private String password;
-
-    private Boolean enabled;
-
     private Set<String> authorities;
 
 
-    UserDTO(User user) {
-        this(user.getUserName(), user.getEmail(), null, user.getEnabled(), user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
+    public UserDTO(User user) {
+        this(user.getUserName(), user.getEmail(), user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
     }
 
-    UserDTO(String userName, String email, String password, boolean enabled, Set<String> authorities) {
+    public UserDTO(String userName, String email, Set<String> authorities) {
         this.userName = userName;
         this.email = email;
-        this.password = password;
-        this.enabled = enabled;
         this.authorities = authorities;
     }
 
@@ -48,22 +42,6 @@ public class UserDTO {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public Set<String> getAuthorities() {
         return authorities;
     }
@@ -78,8 +56,6 @@ public class UserDTO {
         return "UserDTO{" +
                 "userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", enabled=" + enabled +
                 ", authorities=" + authorities +
                 '}';
     }
