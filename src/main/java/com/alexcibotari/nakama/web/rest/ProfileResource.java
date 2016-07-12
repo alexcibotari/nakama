@@ -1,3 +1,4 @@
+
 package com.alexcibotari.nakama.web.rest;
 
 

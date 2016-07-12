@@ -67,7 +67,15 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.14'
 }
 
-task copyNodeLibs(type: Copy) {
-    from 'node_modules/bootstrap/dist'
-    into 'src/main/webapp/build/bootstrap'
+task copyNodeLibs << {
+    copy {
+        from 'node_modules/bootstrap/dist'
+        into 'src/main/webapp/build/bootstrap'
+    }
+
+    copy {
+        from 'node_modules/jquery/dist'
+        into 'src/main/webapp/build/jquery'
+    }
+
 }
