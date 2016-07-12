@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,9 +23,9 @@ public class ProjectResource {
     private ProjectService projectService;
 
     @RequestMapping(method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
-    public List<ProjectDTO> getAll() {
-        return projectService.findAll().stream().map(ProjectDTO::new).collect(Collectors.toList());
+    public ResponseEntity<List<ProjectDTO>> getAll() {
+        List<ProjectDTO> projectDTOList = projectService.findAll().stream().map(ProjectDTO::new).collect(Collectors.toList());
+        return new ResponseEntity<>(projectDTOList, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
