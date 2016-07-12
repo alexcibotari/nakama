@@ -14,5 +14,5 @@ public interface UserService {
 
     public User createUser(UserDTO user);
 
-
+    public User getUser();
 }
