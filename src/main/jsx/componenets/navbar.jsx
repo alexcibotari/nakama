@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
+
 class NavBar extends Component {
     render() {
         return (
@@ -29,7 +30,9 @@ class NavBar extends Component {
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
                             <li className="dropdown">
-                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Valeriu Crudu <span className="caret"></span></a>
+                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span className="glyphicon glyphicon-user" title={this.props.profileData.userName}></span> <span className="caret"></span>
+                                </a>
                                 <ul className="dropdown-menu">
                                     <li><Link to="/profile">Profile</Link></li>
                                     <li><Link to="/settings">Settings</Link></li>
