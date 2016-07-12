@@ -24,32 +24,29 @@ public class ProjectResource {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<ProjectDTO>> getAll() {
-        List<ProjectDTO> projectDTOList = projectService.findAll().stream().map(ProjectDTO::new).collect(Collectors.toList());
-        return new ResponseEntity<>(projectDTOList, HttpStatus.OK);
+        List<ProjectDTO> dtoList = projectService.findAll().stream().map(ProjectDTO::new).collect(Collectors.toList());
+        return new ResponseEntity<>(dtoList, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
-    public ProjectDTO getOne(@PathVariable Long id) {
-        return new ProjectDTO(projectService.findOne(id));
+    public ResponseEntity<ProjectDTO> getOne(@PathVariable Long id) {
+        return new ResponseEntity<>(new ProjectDTO(projectService.findOne(id)), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    public ProjectDTO create(@RequestBody ProjectDTO dto) {
-        return new ProjectDTO(projectService.create(dto));
+    public ResponseEntity<ProjectDTO> create(@RequestBody ProjectDTO dto) {
+        return new ResponseEntity<>(new ProjectDTO(projectService.create(dto)), HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.OK)
-    public ProjectDTO update(@RequestBody ProjectDTO dto) {
-        return new ProjectDTO(projectService.update(dto));
+    public ResponseEntity<ProjectDTO> update(@RequestBody ProjectDTO dto) {
+        return new ResponseEntity<>(new ProjectDTO(projectService.update(dto)), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         projectService.delete(id);
+        return ResponseEntity.ok().build();
     }
 
 }

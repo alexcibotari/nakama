@@ -1,29 +1,29 @@
 package com.alexcibotari.nakama.web.rest.dto;
 
-import com.alexcibotari.nakama.domain.Project;
+import com.alexcibotari.nakama.domain.Issue;
 
-public class ProjectDTO {
+public class IssueDTO {
 
     private Long id;
 
-    private String name;
-
     private String key;
+
+    private String summery;
 
     private String description;
 
-    public ProjectDTO() {
+    public IssueDTO() {
     }
 
-    public ProjectDTO(Long id, String name, String key, String description) {
+    public IssueDTO(Long id, String key, String summery, String description) {
         this.setId(id);
-        this.setName(name);
         this.setKey(key);
+        this.setSummery(summery);
         this.setDescription(description);
     }
 
-    public ProjectDTO(Project project) {
-        this(project.getId(),project.getName(),project.getKey(),project.getDescription());
+    public IssueDTO(Issue issue) {
+        this(issue.getId(), issue.getKey(), issue.getSummery(), issue.getDescription());
     }
 
     public Long getId() {
@@ -34,20 +34,20 @@ public class ProjectDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getKey() {
         return key;
     }
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public String getSummery() {
+        return summery;
+    }
+
+    public void setSummery(String summery) {
+        this.summery = summery;
     }
 
     public String getDescription() {
