@@ -27,9 +27,17 @@ class NavBar extends Component {
                                 <a>State2</a>
                             </li>
                         </ul>
-                        <form className="navbar-form navbar-right" action="/logout" method="post">
-                            <button type="submit" className="btn btn-default">Sign Out</button>
-                        </form>
+                        <ul className="nav navbar-nav navbar-right">
+                            <li className="dropdown">
+                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span className="caret"></span></a>
+                                <ul className="dropdown-menu">
+                                    <li><a href="#">Profile</a></li>
+                                    <li><a href="#">Settings</a></li>
+                                    <li role="separator" className="divider"></li>
+                                    <li><a href="/logout">Sign Out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </nav>
