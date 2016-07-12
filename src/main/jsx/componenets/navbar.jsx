@@ -29,10 +29,10 @@ class NavBar extends Component {
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
                             <li className="dropdown">
-                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span className="caret"></span></a>
+                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Valeriu Crudu <span className="caret"></span></a>
                                 <ul className="dropdown-menu">
-                                    <li><a href="#">Profile</a></li>
-                                    <li><a href="#">Settings</a></li>
+                                    <li><Link to="/profile">Profile</Link></li>
+                                    <li><Link to="/settings">Settings</Link></li>
                                     <li role="separator" className="divider"></li>
                                     <li><a href="/logout">Sign Out</a></li>
                                 </ul>
