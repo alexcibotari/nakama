@@ -3,7 +3,7 @@ package com.alexcibotari.nakama.domain;
 import javax.persistence.*;
 
 @Entity
-public class Project extends AbstractAuditingEntity{
+public class Project extends AbstractAuditingEntity {
 
     @Column(nullable = false, unique = true)
     private String name;

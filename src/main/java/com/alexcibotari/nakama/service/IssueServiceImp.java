@@ -4,7 +4,6 @@ package com.alexcibotari.nakama.service;
 import com.alexcibotari.nakama.domain.Issue;
 import com.alexcibotari.nakama.repository.IssueRepository;
 import com.alexcibotari.nakama.web.rest.dto.IssueDTO;
-import com.alexcibotari.nakama.web.rest.dto.ProjectDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

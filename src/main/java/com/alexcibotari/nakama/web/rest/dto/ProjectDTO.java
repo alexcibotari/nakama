@@ -23,7 +23,7 @@ public class ProjectDTO {
     }
 
     public ProjectDTO(Project project) {
-        this(project.getId(),project.getName(),project.getKey(),project.getDescription());
+        this(project.getId(), project.getName(), project.getKey(), project.getDescription());
     }
 
     public Long getId() {

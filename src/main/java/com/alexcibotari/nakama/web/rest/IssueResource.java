@@ -1,9 +1,7 @@
 package com.alexcibotari.nakama.web.rest;
 
 import com.alexcibotari.nakama.service.IssueService;
-import com.alexcibotari.nakama.service.ProjectService;
 import com.alexcibotari.nakama.web.rest.dto.IssueDTO;
-import com.alexcibotari.nakama.web.rest.dto.ProjectDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +30,12 @@ public class IssueResource {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<IssueDTO> getOne(@PathVariable Long id) {
-        return new ResponseEntity<>(new IssueDTO(issueService.findOne(id)),HttpStatus.OK);
+        return new ResponseEntity<>(new IssueDTO(issueService.findOne(id)), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<IssueDTO> create(@RequestBody IssueDTO dto) {
-        return new ResponseEntity<>(new IssueDTO(issueService.create(dto)),HttpStatus.CREATED);
+        return new ResponseEntity<>(new IssueDTO(issueService.create(dto)), HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.PUT)

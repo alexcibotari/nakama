@@ -31,10 +31,10 @@ public class UserResource {
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<?> createUser(@RequestBody UserDTO user, HttpServletRequest request) throws URISyntaxException {
         log.debug("REST request to save User : {}", user);
-        if(userService.findOneByUserName(user.getUserName()).isPresent()){
+        if (userService.findOneByUserName(user.getUserName()).isPresent()) {
             //User with this username already exist
             return null;
-        }else if(userService.findOneByEmail(user.getEmail()).isPresent()){
+        } else if (userService.findOneByEmail(user.getEmail()).isPresent()) {
             //User with this email already exist
             return null;
         } else {
