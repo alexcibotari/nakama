@@ -7,14 +7,14 @@ class MainLayout extends Component {
         super(props);
         this.state = {
             url: '/api/profile',
-            data: []
+            profile: []
         }
     }
 
     componentWillMount() {
         client({method: 'GET', path: this.state.url}).then(response => {
             if (response.status.code === 200) {
-                this.setState({data: response.entity});
+                this.setState({profile: response.entity});
             }
         });
     }
@@ -22,7 +22,7 @@ class MainLayout extends Component {
     render() {
         return (
             <div>
-                <NavBar brand="Nakama" profileData={this.state.data} />
+                <NavBar brand="Nakama" profile={this.state.profile} />
                 {this.props.children}
             </div>
         )
