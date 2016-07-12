@@ -8,6 +8,8 @@ import ProjectLayout from './componenets/layout/project-layout';
 import ProjectList from './componenets/project-list';
 import ProjectForm from './componenets/project-form';
 import Home from './componenets/home';
+import Profile from './componenets/profile';
+import Settings from './componenets/settings';
 
 class App extends Component {
     render() {
@@ -20,6 +22,8 @@ class App extends Component {
                         <Route path="create" component={ProjectForm}/>
                         <Route path="edit/:id" component={ProjectForm}/>
                     </Route>
+                    <Route path="profile" component={Profile} />
+                    <Route path="settings" component={Settings} />
                 </Route>
             </Router>
         )
