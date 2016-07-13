@@ -57,7 +57,6 @@ class ProjectForm extends Component {
             var arr = e.target.value.split(" ");
             if (arr.length > 1) {
                 for (var i = 0; i < arr.length; i++) {
-                    //TODO process UPPERCASE letters
                     var uppercaseletters = '';
                     for (var j = 1; j < arr[i].length; j++) {
                         if (arr[i].charAt(j) == arr[i].charAt(j).toUpperCase()) {
