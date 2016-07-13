@@ -73,7 +73,6 @@ class ProjectForm extends Component {
                     <div className="col-sm-10">
                         <input name="name" type="text" className="form-control" id="inputName" placeholder="Name"
                                value={this.state.data.name} onChange={this.handleChange}/>
-                        <span className="glyphicon glyphicon-remove form-control-feedback"/>
                     </div>
                 </div>
                 <div className="form-group">
