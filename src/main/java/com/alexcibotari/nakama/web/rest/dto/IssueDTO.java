@@ -12,18 +12,21 @@ public class IssueDTO {
 
     private String description;
 
+    private Long project;
+
     public IssueDTO() {
     }
 
-    public IssueDTO(Long id, String key, String summery, String description) {
+    public IssueDTO(Long id, String key, Long project, String summery, String description) {
         this.setId(id);
         this.setKey(key);
+        this.setProject(project);
         this.setSummery(summery);
         this.setDescription(description);
     }
 
     public IssueDTO(Issue issue) {
-        this(issue.getId(), issue.getKey(), issue.getSummery(), issue.getDescription());
+        this(issue.getId(), issue.getKey(), issue.getProject().getId(), issue.getSummery(), issue.getDescription());
     }
 
     public Long getId() {
@@ -56,5 +59,13 @@ public class IssueDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getProject() {
+        return project;
+    }
+
+    public void setProject(Long project) {
+        this.project = project;
     }
 }
