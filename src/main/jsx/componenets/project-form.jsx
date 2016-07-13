@@ -11,8 +11,7 @@ class ProjectForm extends Component {
         this.state = {
             url: '/api/projects',
             data: {name: "", key: "", description: ""},
-            edit: false,
-            tempKey: ''
+            edit: false
         }
     }
 
@@ -20,7 +19,7 @@ class ProjectForm extends Component {
         if (this.props.params.id) {
             client({method: 'GET', path: this.state.url + '/' + this.props.params.id}).then(response => {
                 if (response.status.code == 200) {
-                    this.setState({data: response.entity, edit: true, tempKey: response.entity.key});
+                    this.setState({data: response.entity, edit: true});
                 }
             });
         }
@@ -44,23 +43,29 @@ class ProjectForm extends Component {
 
     validate() {
         if (!/^[A-Za-z0-9\s]+$/.test(this.state.data.name)) {
-            document.getElementById('inputName').parentElement.parentElement.className = 'has-error form-group has-feedback';
+            this.refs.name.parentElement.parentElement.className = 'has-error form-group has-feedback';
+            console.log(this);
             return;
         }
         this.save();
     }
 
     handleChange(e) {
-        var val = '';
-        if (e.target.name == 'name' && (this.state.tempKey.indexOf(this.state.data['key']) == 0 || this.state.data['key'] == '')) {
-            var arr = e.target.value.split(" ");
-            for (var i = 0; i < arr.length; i++) {
-                val = val + arr[i].charAt(0).toUpperCase();
-            }
-            this.state.data['key'] = val;
-            this.state.tempKey = val;
-        }
         this.state.data[e.target.name] = e.target.value;
+        var val = '';
+        if (e.target.name == 'name') {
+            var arr = e.target.value.split(" ");
+            if (arr.length > 1) {
+                for (var i = 0; i < arr.length; i++) {
+                    val = val + arr[i].charAt(0).toUpperCase();
+                }
+            } else {
+                val = arr[0].toUpperCase();
+            }
+            if (val.indexOf(this.state.data.key) == 0 || this.state.data.key == ''  || this.state.data.key == arr[0].toUpperCase()) {
+                this.state.data.key = val;
+            }
+        }
         this.setState({data: this.state.data});
     }
 
@@ -71,7 +76,7 @@ class ProjectForm extends Component {
                 <div className="form-group has-feedback">
                     <label htmlFor="inputName" className="col-sm-2 control-label">Name</label>
                     <div className="col-sm-10">
-                        <input name="name" type="text" className="form-control" id="inputName" placeholder="Name"
+                        <input name="name" ref="name" type="text" className="form-control" id="inputName" placeholder="Name"
                                value={this.state.data.name} onChange={this.handleChange}/>
                     </div>
                 </div>
