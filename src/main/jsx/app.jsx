@@ -5,8 +5,11 @@ import ReactDOM from 'react-dom';
 import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import MainLayout from './componenets/layout/main-layout';
 import ProjectLayout from './componenets/layout/project-layout';
-import ProjectList from './componenets/project-list';
-import ProjectForm from './componenets/project-form';
+import IssueLayout from './componenets/layout/issue-layout';
+import ProjectList from './componenets/projects/project-list';
+import ProjectForm from './componenets/projects/project-form';
+import IssueList from './componenets/issues/issue-list';
+import IssueForm from './componenets/issues/issue-form';
 import Home from './componenets/home';
 import Profile from './componenets/profile';
 import Settings from './componenets/settings';
@@ -21,6 +24,11 @@ class App extends Component {
                         <IndexRoute component={ProjectList}/>
                         <Route path="create" component={ProjectForm}/>
                         <Route path="edit/:id" component={ProjectForm}/>
+                    </Route>
+                    <Route path="issues" component={IssueLayout}>
+                        <IndexRoute component={IssueList}/>
+                        <Route path="create" component={IssueForm}/>
+                        <Route path="edit/:id" component={IssueForm}/>
                     </Route>
                     <Route path="profile" component={Profile} />
                     <Route path="settings" component={Settings} />

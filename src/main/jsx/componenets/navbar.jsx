@@ -25,7 +25,7 @@ class NavBar extends Component {
                                 <Link to="/projects">Projects</Link>
                             </li>
                             <li>
-                                <a>State2</a>
+                                <Link to="/issues">Issues</Link>
                             </li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">

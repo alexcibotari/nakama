@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import client from '../client';
+import client from '../../client';
 
-class ProjectForm extends Component {
+class IssueForm extends Component {
 
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.save = this.save.bind(this);
         this.state = {
-            url: '/api/projects',
-            data: {name: "", key: "", description: ""},
+            url: '/api/issues',
+            data: {id: "", key: "", summery: "", description: ""},
             edit: false
         }
     }
@@ -29,13 +29,13 @@ class ProjectForm extends Component {
         if (this.state.edit) {
             client({method: 'PUT', path: this.state.url, entity: this.state.data}).then(response => {
                 if (response.status.code == 200) {
-                    this.props.history.push('/projects');
+                    this.props.history.push('/issues');
                 }
             });
         } else {
             client({method: 'POST', path: this.state.url, entity: this.state.data}).then(response => {
                 if (response.status.code == 201) {
-                    this.props.history.push('/projects');
+                    this.props.history.push('/issues');
                 }
             });
         }
@@ -50,10 +50,10 @@ class ProjectForm extends Component {
         return (
             <form className="form-horizontal">
                 <div className="form-group">
-                    <label htmlFor="inputName" className="col-sm-2 control-label">Name</label>
+                    <label htmlFor="inputId" className="col-sm-2 control-label">ID</label>
                     <div className="col-sm-10">
-                        <input name="name" type="text" className="form-control" classID="inputName" placeholder="Name"
-                               value={this.state.data.name} onChange={this.handleChange}/>
+                        <input name="id" type="text" className="form-control" classID="inputId" placeholder="ID"
+                               value={this.state.data.id} onChange={this.handleChange}/>
                     </div>
                 </div>
                 <div className="form-group">
@@ -61,6 +61,13 @@ class ProjectForm extends Component {
                     <div className="col-sm-10">
                         <input name="key" type="text" className="form-control" classID="inputKey" placeholder="Key"
                                value={this.state.data.key} onChange={this.handleChange}/>
+                    </div>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="inputSummery" className="col-sm-2 control-label">Summery</label>
+                    <div className="col-sm-10">
+                        <input name="summery" type="text" className="form-control" classID="inputSummery" placeholder="Summery"
+                               value={this.state.data.summery} onChange={this.handleChange}/>
                     </div>
                 </div>
                 <div className="form-group">
@@ -73,7 +80,7 @@ class ProjectForm extends Component {
                 <div className="form-group">
                     <div className="col-sm-offset-2 col-sm-10">
                         <a className="btn btn-primary" role="button" onClick={this.save}>Save</a>
-                        <Link to={'/projects/'} className="btn btn-danger" role="button">Cancel</Link>
+                        <Link to={'/issues/'} className="btn btn-danger" role="button">Cancel</Link>
                     </div>
                 </div>
             </form>
@@ -81,4 +88,4 @@ class ProjectForm extends Component {
     }
 }
 
-export default ProjectForm;
+export default IssueForm;
