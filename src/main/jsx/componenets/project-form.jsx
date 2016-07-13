@@ -57,12 +57,19 @@ class ProjectForm extends Component {
             var arr = e.target.value.split(" ");
             if (arr.length > 1) {
                 for (var i = 0; i < arr.length; i++) {
-                    val = val + arr[i].charAt(0).toUpperCase();
+                    //TODO process UPPERCASE letters
+                    var uppercaseletters = '';
+                    for (var j = 1; j < arr[i].length; j++) {
+                        if (arr[i].charAt(j) == arr[i].charAt(j).toUpperCase()) {
+                            uppercaseletters += arr[i].charAt(j);
+                        }
+                    }
+                    val += arr[i].charAt(0).toUpperCase() + uppercaseletters;
                 }
             } else {
                 val = arr[0].toUpperCase();
             }
-            if (val.indexOf(this.state.data.key) == 0 || this.state.data.key == ''  || this.state.data.key == arr[0].toUpperCase()) {
+            if (val.indexOf(this.state.data.key) == 0 || this.state.data.key == '' || this.state.data.key == arr[0].toUpperCase()) {
                 this.state.data.key = val;
             }
         }
@@ -76,7 +83,8 @@ class ProjectForm extends Component {
                 <div className="form-group has-feedback">
                     <label htmlFor="inputName" className="col-sm-2 control-label">Name</label>
                     <div className="col-sm-10">
-                        <input name="name" ref="name" type="text" className="form-control" id="inputName" placeholder="Name"
+                        <input name="name" ref="name" type="text" className="form-control" id="inputName"
+                               placeholder="Name"
                                value={this.state.data.name} onChange={this.handleChange}/>
                     </div>
                 </div>
