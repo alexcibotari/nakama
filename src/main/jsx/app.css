@@ -1,1 +1,3 @@
 /** My Custome CSS **/
+.form-control-feedback{display:none;}
+.has-error .form-control-feedback{display:block;}
