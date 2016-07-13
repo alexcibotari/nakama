@@ -65,7 +65,7 @@ class ProjectForm extends Component {
                             uppercaseletters += arr[i].charAt(j);
                         }
                     }
-                    val += arr[i].charAt(0).toUpperCase() + uppercaseletters;
+                    val += (arr[i].charAt(0).toUpperCase() + uppercaseletters);
                 }
             } else {
                 val = arr[0].toUpperCase();
