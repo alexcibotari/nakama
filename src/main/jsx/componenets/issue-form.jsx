@@ -49,13 +49,8 @@ class IssueForm extends Component {
     render() {
         return (
             <form className="form-horizontal">
-                <div className="form-group">
-                    <label htmlFor="inputId" className="col-sm-2 control-label">ID</label>
-                    <div className="col-sm-10">
-                        <input name="id" type="text" className="form-control" classID="inputId" placeholder="ID"
-                               value={this.state.data.id} onChange={this.handleChange}/>
-                    </div>
-                </div>
+                <input name="id" type="hidden" className="form-control" classID="inputId" placeholder="Key"
+                       value={this.state.data.id} onChange={this.handleChange}/>
                 <div className="form-group">
                     <label htmlFor="inputKey" className="col-sm-2 control-label">Key</label>
                     <div className="col-sm-10">
