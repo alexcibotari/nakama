@@ -43,9 +43,7 @@ class ProjectForm extends Component {
     }
 
     validate() {
-        var regExp = /^[A-Za-z0-9\s]+$/;
-        var splitedStr = this.state.data.name;
-        if (!regExp.test(splitedStr)) {
+        if (!/^[A-Za-z0-9\s]+$/.test(this.state.data.name)) {
             document.getElementById('inputName').parentElement.parentElement.className = 'has-error form-group has-feedback';
             return;
         }
