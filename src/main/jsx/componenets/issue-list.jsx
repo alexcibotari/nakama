@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import client from '../../client';
+import client from '../client';
 
 class IssueList extends Component {
 
