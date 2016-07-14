@@ -14,8 +14,8 @@ INSERT INTO project (id, pkey, name, description, lead_user_id, created_by, crea
 INSERT INTO project (id, pkey, name, description, lead_user_id, created_by, created_date) VALUE (4, 'BEST2', 'Best2', 'best desc', 1, 'system','2013-09-29 22:00:00');
 INSERT INTO project (id, pkey, name, description, lead_user_id, created_by, created_date) VALUE (5, 'BEST3', 'Best3', 'best desc', 1, 'system','2013-09-29 22:00:00');
 #Issues
-INSERT INTO issue (id, pkey, summery, description, project_id, created_by, created_date) VALUE (1, 'TEST-1', 'summery', 'description', 1, 'system','2013-09-29 22:00:00');
-INSERT INTO issue (id, pkey, summery, description, project_id, created_by, created_date) VALUE (2, 'TEST-2', 'summery', 'description', 1, 'system','2013-09-29 22:00:00');
-INSERT INTO issue (id, pkey, summery, description, project_id, created_by, created_date) VALUE (3, 'TEST-3', 'summery', 'description', 1, 'system','2013-09-29 22:00:00');
-INSERT INTO issue (id, pkey, summery, description, project_id, created_by, created_date) VALUE (4, 'TEST-4', 'summery', 'description', 1, 'system','2013-09-29 22:00:00');
-INSERT INTO issue (id, pkey, summery, description, project_id, created_by, created_date) VALUE (5, 'TEST-5', 'summery', 'description', 1, 'system','2013-09-29 22:00:00');
+INSERT INTO issue (id, pkey, summery, description, project_id, created_by, created_date) VALUE (1, 1, 'summery', 'description', 1, 'system','2013-09-29 22:00:00');
+INSERT INTO issue (id, pkey, summery, description, project_id, created_by, created_date) VALUE (2, 2, 'summery', 'description', 1, 'system','2013-09-29 22:00:00');
+INSERT INTO issue (id, pkey, summery, description, project_id, created_by, created_date) VALUE (3, 1, 'summery', 'description', 2, 'system','2013-09-29 22:00:00');
+INSERT INTO issue (id, pkey, summery, description, project_id, created_by, created_date) VALUE (4, 2, 'summery', 'description', 2, 'system','2013-09-29 22:00:00');
+INSERT INTO issue (id, pkey, summery, description, project_id, created_by, created_date) VALUE (5, 3, 'summery', 'description', 2, 'system','2013-09-29 22:00:00');

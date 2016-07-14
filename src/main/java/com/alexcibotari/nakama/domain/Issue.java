@@ -3,14 +3,15 @@ package com.alexcibotari.nakama.domain;
 import javax.persistence.*;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"project_id", "pkey"}))
 public class Issue extends AbstractAuditingEntity {
 
     @ManyToOne
     @JoinColumn(name = "project_id", updatable = false, nullable = false)
     private Project project;
 
-    @Column(name = "pkey", nullable = false, unique = true, updatable = false)
-    private String key;
+    @Column(name = "pkey", nullable = false, updatable = false)
+    private Long key;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reporter_user_id")
@@ -42,11 +43,11 @@ public class Issue extends AbstractAuditingEntity {
         this.project = project;
     }
 
-    public String getKey() {
+    public Long getKey() {
         return key;
     }
 
-    public void setKey(String key) {
+    public void setKey(Long key) {
         this.key = key;
     }
 
@@ -102,11 +103,13 @@ public class Issue extends AbstractAuditingEntity {
     public String toString() {
         return "Issue{" +
                 "project=" + project +
-                ", key='" + key + '\'' +
+                ", key=" + key +
                 ", reporter=" + reporter +
                 ", assigne=" + assigne +
                 ", summery='" + summery + '\'' +
                 ", description='" + description + '\'' +
+                ", timespent=" + timespent +
+                ", timeestimate=" + timeestimate +
                 '}';
     }
 }

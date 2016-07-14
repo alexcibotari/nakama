@@ -6,7 +6,7 @@ public class IssueDTO {
 
     private Long id;
 
-    private String key;
+    private Long key;
 
     private String summery;
 
@@ -17,7 +17,7 @@ public class IssueDTO {
     public IssueDTO() {
     }
 
-    public IssueDTO(Long id, String key, Long project, String summery, String description) {
+    public IssueDTO(Long id, Long key, Long project, String summery, String description) {
         this.setId(id);
         this.setKey(key);
         this.setProject(project);
@@ -37,11 +37,11 @@ public class IssueDTO {
         this.id = id;
     }
 
-    public String getKey() {
+    public Long getKey() {
         return key;
     }
 
-    public void setKey(String key) {
+    public void setKey(Long key) {
         this.key = key;
     }
 
