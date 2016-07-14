@@ -3,6 +3,7 @@ package com.alexcibotari.nakama.service;
 
 import com.alexcibotari.nakama.domain.Issue;
 import com.alexcibotari.nakama.repository.IssueRepository;
+import com.alexcibotari.nakama.repository.ProjectRepository;
 import com.alexcibotari.nakama.web.rest.dto.IssueDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public class IssueServiceImp implements IssueService {
 
     @Autowired
     IssueRepository issueRepository;
+
+    @Autowired
+    ProjectRepository projectRepository;
 
 
     public Issue findOne(Long id) {
@@ -37,6 +41,8 @@ public class IssueServiceImp implements IssueService {
     @Transactional
     public Issue create(IssueDTO dto) {
         Issue issue = new Issue();
+        issue.setProject(projectRepository.findOne(dto.getProject()));
+        issue.setKey(dto.getKey());
         issue.setSummery(dto.getSummery());
         issue.setDescription(dto.getDescription());
         return issueRepository.save(issue);
