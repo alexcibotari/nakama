@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
+import ProjectDropDown from './project-dropdown';
 
 class NavBar extends Component {
     render() {
@@ -21,12 +22,7 @@ class NavBar extends Component {
                             <li>
                                 <Link to="/">Dashboard</Link>
                             </li>
-                            <li>
-                                <Link to="/projects">Projects</Link>
-                            </li>
-                            <li>
-                                <a>State2</a>
-                            </li>
+                                <ProjectDropDown />
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
                             <li className="dropdown">
@@ -49,3 +45,4 @@ class NavBar extends Component {
 }
 
 export default NavBar;
+
