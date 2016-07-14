@@ -24,7 +24,7 @@ export default class ProjectDropDown extends React.Component {
         const projects = (Array.isArray(this.state.data) && this.state.data.length > 0) ? this.state.data.map(project => {
             return (
                 <li key={project.id}>
-                    <Link to={'/projects/'+project.id+'/issues'} role="button">{project.name}</Link>
+                    <Link to={'/projects/'+project.key+'/issues'} role="button">{project.name}</Link>
                 </li>)
         }) : (<li><p>No project found.</p></li>);
         return(
