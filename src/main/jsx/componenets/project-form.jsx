@@ -19,6 +19,7 @@ class ProjectForm extends Component {
         if (this.props.params.id) {
             client({method: 'GET', path: this.state.url + '/' + this.props.params.id}).then(response => {
                 if (response.status.code == 200) {
+                    this.refs.key.setAttribute('readonly', null);
                     this.setState({data: response.entity, edit: true});
                 }
             });
@@ -91,7 +92,7 @@ class ProjectForm extends Component {
                 <div className="form-group">
                     <label htmlFor="inputKey" className="col-sm-2 control-label">Key</label>
                     <div className="col-sm-10">
-                        <input name="key" type="text" className="form-control" classID="inputKey" placeholder="Key"
+                        <input name="key" ref="key" type="text" className="form-control" classID="inputKey" placeholder="Key"
                                value={this.state.data.key} onChange={this.handleChange}/>
                         <p className="help-block">This is a key of the project.</p>
                     </div>
