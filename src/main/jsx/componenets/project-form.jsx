@@ -30,13 +30,13 @@ class ProjectForm extends Component {
         if (this.state.edit) {
             client({method: 'PUT', path: this.state.url, entity: this.state.data}).then(response => {
                 if (response.status.code == 200) {
-                    this.props.history.push('/projects');
+                    this.props.history.push('admin/projects');
                 }
             });
         } else {
             client({method: 'POST', path: this.state.url, entity: this.state.data}).then(response => {
                 if (response.status.code == 201) {
-                    this.props.history.push('/projects');
+                    this.props.history.push('admin//projects');
                 }
             });
         }
@@ -107,7 +107,7 @@ class ProjectForm extends Component {
                 <div className="form-group">
                     <div className="col-sm-offset-2 col-sm-10">
                         <a className="btn btn-primary" role="button" onClick={this.validate}>Save</a>
-                        <Link to={'/projects/'} className="btn btn-danger" role="button">Cancel</Link>
+                        <Link to={'admin/projects'} className="btn btn-danger" role="button">Cancel</Link>
                     </div>
                 </div>
             </form>
