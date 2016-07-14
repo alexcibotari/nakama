@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import client from '../../client';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 class IssueForm extends Component {
 
@@ -10,8 +12,10 @@ class IssueForm extends Component {
         this.save = this.save.bind(this);
         this.state = {
             url: '/api/issues',
-            data: {id: "", key: "", summery: "", description: ""},
-            edit: false
+            data: {id: "", project: "", key: "", summery: "", description: ""},
+            edit: false,
+            projectsUrl: '/api/projects',
+            projects: []
         }
     }
 
@@ -20,6 +24,12 @@ class IssueForm extends Component {
             client({method: 'GET', path: this.state.url + '/' + this.props.params.id}).then(response => {
                 if (response.status.code == 200) {
                     this.setState({data: response.entity, edit: true});
+                }
+            });
+        } else {
+            client({method: 'GET', path: this.state.projectsUrl}).then(response => {
+                if (response.status.code == 200) {
+                    this.setState({projects: response.entity});
                 }
             });
         }
@@ -47,8 +57,27 @@ class IssueForm extends Component {
     }
 
     render() {
+        var projectSelect = ("");
+        if(!this.state.edit) {
+            projectSelect = (
+                <div className="form-group">
+                    <label htmlFor="selectProjectId" className="col-sm-2 control-label">Project</label>
+                    <div className="col-sm-10">
+                        <select className="form-control" name="project" onChange={this.handleChange}>
+                            <option>Please select a Project...</option>
+                            {(Array.isArray(this.state.projects) && this.state.projects.length > 0) ? this.state.projects.map(project => {
+                                return (
+                                    <option key={project.key} value={project.id}>{project.name}</option>
+                                )
+                            }) : ("")}
+                        </select>
+                    </div>
+                </div>
+            );
+        }
         return (
             <form className="form-horizontal">
+                {projectSelect}
                 <div className="form-group">
                     <label htmlFor="inputKey" className="col-sm-2 control-label">Key</label>
                     <div className="col-sm-10">
@@ -78,6 +107,7 @@ class IssueForm extends Component {
                 </div>
             </form>
         )
+
     }
 }
 

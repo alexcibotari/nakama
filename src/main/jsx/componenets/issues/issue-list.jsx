@@ -35,32 +35,42 @@ class IssueList extends Component {
     render() {
         const issues = (Array.isArray(this.state.data) && this.state.data.length > 0) ? this.state.data.map(issue => {
             return (
-                <div className="panel panel-default" key={issue.id}>
-                    <div className="panel-heading">
-                        <h3 className="panel-title">{issue.summery}</h3>
-                    </div>
-                    <div className="panel-body">
-                        <div className="pull-right">
-                            <Link to={'/issues/edit/'+issue.id}
+                <tr key={issue.id}>
+                    <td><b>{issue.summery}</b></td>
+                    <td>{issue.description}</td>
+                    <td>
+                        <div className="btn-group pull-right" role="group">
+                            <Link to={'/issues/edit/' + issue.id}
                                   className="btn btn-info glyphicon glyphicon-pencil"
-                                  role="button"> Edit</Link>
+                                  role="button"/>
                             <a className="btn btn-danger glyphicon glyphicon-trash" role="button"
-                               onClick={this.delete.bind(this,issue.id)}> Delete</a>
+                               onClick={this.delete.bind(this, issue.id)}/>
                         </div>
-                        <p>{issue.description}</p>
-                    </div>
-                </div>
+                    </td>
+                </tr>
             )
-        }) : (<h4>No issues found.</h4>);
+        }) : (<tr><td colSpan="3"><h4>No issues found.</h4></td></tr>);
         return (
             <div>
-                <div className="row add-btn">
-                    <div className="pull-right">
-                        <Link to={'/issues/create'} className="btn btn-sm btn-success glyphicon glyphicon-plus"/>
-                    </div>
+                <div className="row">
+                    <h1>Issue List:<Link to={'/issues/create'}
+                                         className="pull-right btn btn-lg btn-success glyphicon glyphicon-plus"/></h1>
                 </div>
                 <div className="row">
-                    {issues}
+                    <div className="table-responsive">
+                        <table className="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <th>Summery</th>
+                                <th>Description</th>
+                                <th className="text-right">Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {issues}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         )
