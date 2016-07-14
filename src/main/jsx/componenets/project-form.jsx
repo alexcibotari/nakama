@@ -61,7 +61,6 @@ class ProjectForm extends Component {
                     var uppercaseletters = '';
                     for (var j = 1; j < arr[i].length; j++) {
                         if (arr[i].charAt(j) == arr[i].charAt(j).toUpperCase()) {
-                            console.log(arr[i].charAt(j));
                             uppercaseletters += arr[i].charAt(j);
                         }
                     }
