@@ -42,7 +42,7 @@ class ProjectList extends Component {
                             <p>{project.description}</p>
                             <div>
                                 <div className="btn-group btn-group-justified" role="group">
-                                    <Link to={'/projects/edit/'+project.id}
+                                    <Link to={'/admin/projects/edit/'+project.id}
                                           className="btn btn-default glyphicon glyphicon-pencil"
                                           role="button"> Edit</Link>
                                     <a className="btn btn-danger glyphicon glyphicon-trash" role="button"
@@ -58,7 +58,7 @@ class ProjectList extends Component {
             <div>
                 <div className="row">
                     <div className="pull-right">
-                        <Link to={'/projects/create'} className="btn btn-sm btn-success glyphicon glyphicon-plus"/>
+                        <Link to={'/admin/projects/create'} className="btn btn-sm btn-success glyphicon glyphicon-plus"/>
                     </div>
                 </div>
                 <div className="row">

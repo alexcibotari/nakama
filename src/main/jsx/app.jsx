@@ -17,7 +17,7 @@ class App extends Component {
             <Router history={hashHistory}>
                 <Route path="/" component={MainLayout}>
                     <IndexRoute component={Home}/>
-                    <Route path="projects" component={ProjectLayout}>
+                    <Route path="admin/projects" component={ProjectLayout}>
                         <IndexRoute component={ProjectList}/>
                         <Route path="create" component={ProjectForm}/>
                         <Route path="edit/:id" component={ProjectForm}/>

@@ -24,6 +24,7 @@ class NavBar extends Component {
                             </li>
                                 <ProjectDropDown />
                         </ul>
+
                         <ul className="nav navbar-nav navbar-right">
                             <li className="dropdown">
                                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -34,6 +35,17 @@ class NavBar extends Component {
                                     <li><Link to="/settings">Settings</Link></li>
                                     <li role="separator" className="divider"></li>
                                     <li><a href="/logout">Sign Out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul className="nav navbar-nav navbar-right">
+                            <li className="dropdown">
+                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span className="glyphicon glyphicon-cog" title="Administration"></span> <span className="caret"></span>
+                                </a>
+                                <ul className="dropdown-menu">
+                                    <li><Link to="/admin/projects">Projects</Link></li>
                                 </ul>
                             </li>
                         </ul>

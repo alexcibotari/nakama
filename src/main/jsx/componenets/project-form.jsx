@@ -107,7 +107,7 @@ class ProjectForm extends Component {
                 <div className="form-group">
                     <div className="col-sm-offset-2 col-sm-10">
                         <a className="btn btn-primary" role="button" onClick={this.validate}>Save</a>
-                        <Link to={'/projects/'} className="btn btn-danger" role="button">Cancel</Link>
+                        <Link to={'admin/projects/'} className="btn btn-danger" role="button">Cancel</Link>
                     </div>
                 </div>
             </form>
