@@ -5,9 +5,9 @@ import org.springframework.data.annotation.CreatedBy;
 import javax.persistence.*;
 
 @Entity
-public class Issue extends AbstractAuditingEntity{
+public class Issue extends AbstractAuditingEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "project_id", updatable = false, nullable = false)
     private Project project;
 

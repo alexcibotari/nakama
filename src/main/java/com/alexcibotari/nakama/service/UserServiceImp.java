@@ -5,6 +5,7 @@ import com.alexcibotari.nakama.domain.Authority;
 import com.alexcibotari.nakama.domain.User;
 import com.alexcibotari.nakama.repository.AuthorityRepository;
 import com.alexcibotari.nakama.repository.UserRepository;
+import com.alexcibotari.nakama.security.SecurityUtils;
 import com.alexcibotari.nakama.service.util.RandomUtil;
 import com.alexcibotari.nakama.web.rest.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +45,17 @@ public class UserServiceImp implements UserService {
         return userRepository.save(user);
     }
 
-    public Optional<User> findOneByUserName(String username){
+    public Optional<User> findOneByUserName(String username) {
         return userRepository.findOneByUserName(username);
     }
 
-    public Optional<User> findOneByEmail(String email){
+    public Optional<User> findOneByEmail(String email) {
         return userRepository.findOneByEmail(email);
+    }
+
+    public User getUser() {
+        User user = userRepository.findOneByUserName(SecurityUtils.getCurrentUserName()).get();
+        user.getAuthorities().size();
+        return user;
     }
 }

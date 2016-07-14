@@ -23,10 +23,7 @@ public class ProjectDTO {
     }
 
     public ProjectDTO(Project project) {
-        this.setId(project.getId());
-        this.setName(project.getName());
-        this.setKey(project.getKey());
-        this.setDescription(project.getDescription());
+        this(project.getId(), project.getName(), project.getKey(), project.getDescription());
     }
 
     public Long getId() {
