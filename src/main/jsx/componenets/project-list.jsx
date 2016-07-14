@@ -20,7 +20,7 @@ class ProjectList extends Component {
         });
     }
 
-    delete(id) {
+    deleteProject(id) {
         client({method: 'DELETE', path: this.state.url + '/' + id}).then(response => {
             if (response.status.code == 200) {
                 var delIndex = this.state.data.findIndex(function (project) {
@@ -46,7 +46,7 @@ class ProjectList extends Component {
                                           className="btn btn-default glyphicon glyphicon-pencil"
                                           role="button"> Edit</Link>
                                     <a className="btn btn-danger glyphicon glyphicon-trash" role="button"
-                                       onClick={this.delete.bind(this,project.id)}> Delete</a>
+                                       onClick={this.deleteProject.bind(this,project.id)}> Delete</a>
                                 </div>
                             </div>
                         </div>
