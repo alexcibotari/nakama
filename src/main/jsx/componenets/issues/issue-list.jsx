@@ -14,7 +14,6 @@ class IssueList extends Component {
 
     componentWillMount() {
         client({method: 'GET', path: this.state.url}).then(response => {
-            console.log(response.entity);
             if (response.status.code === 200) {
                 this.setState({data: response.entity});
             }
