@@ -20,6 +20,9 @@ public class IssueServiceImp implements IssueService {
     @Autowired
     ProjectRepository projectRepository;
 
+    @Autowired
+    ProjectRepository projectRepository;
+
 
     public Issue findOne(Long id) {
         return issueRepository.findOne(id);
@@ -40,6 +43,8 @@ public class IssueServiceImp implements IssueService {
     @Transactional
     public Issue create(IssueDTO dto) {
         Issue issue = new Issue();
+        issue.setProject(projectRepository.findOne(dto.getProject()));
+        issue.setKey(dto.getKey());
         issue.setSummery(dto.getSummery());
         issue.setDescription(dto.getDescription());
         return issueRepository.save(issue);
