@@ -42,17 +42,25 @@ class ProjectForm extends Component {
     }
 
     validate() {
+        var validForm = true;
+        for(var name in this.refs) {
+            this.refs[name].parentElement.parentElement.className = 'form-group has-feedback';
+            this.refs[name].nextSibling.innerHTML = '';
+        }
+
         if (!/^[A-Za-z][A-Za-z\d\s]*[A-Za-z\d]$/.test(this.state.data.name)) {
             this.refs.name.parentElement.parentElement.className = 'has-error form-group has-feedback';
             this.refs.name.nextSibling.innerHTML = 'Name may contain only letters and numbers, should start with a letter, and should not end with a space!';
-            return;
+            validForm =false;
         }
-        if (!/^[A-Za-z][^]*[^\s]$/.test(this.state.data.key)) {
+        if (!/^[A-Z][A-Z\d]+$/.test(this.state.data.key)) {
             this.refs.key.parentElement.parentElement.className = 'has-error form-group has-feedback';
-            this.refs.key.nextSibling.innerHTML = 'Kye should start with a letter, and should not end with a space!';
-            return;
+            this.refs.key.nextSibling.innerHTML = 'Key may contain only letters and numbers, and should start with a letter!';
+            validForm =false;
         }
-        this.save();
+        if(validForm) {
+            this.save();
+        }
     }
 
     handleChange(e) {
@@ -79,7 +87,6 @@ class ProjectForm extends Component {
         }
         if(e.target.name == 'key'){
             this.state.data.key = e.target.value.toUpperCase();
-            console.log(this.state.data.key);
         }
         this.setState({data: this.state.data});
     }
@@ -102,7 +109,7 @@ class ProjectForm extends Component {
                     <div className="col-sm-10">
                         <input name="key" ref="key" type="text" className="form-control" classID="inputKey" placeholder="Key"
                                value={this.state.data.key} onChange={this.handleChange}/>
-                        <p className="help-block">This is a key of the project.</p>
+                        <p className="help-block"> </p>
                     </div>
                 </div>
                 <div className="form-group">
