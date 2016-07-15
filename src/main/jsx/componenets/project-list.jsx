@@ -35,34 +35,44 @@ class ProjectList extends Component {
     render() {
         const projects = (Array.isArray(this.state.data) && this.state.data.length > 0) ? this.state.data.map(project => {
             return (
-                <div className="col-sm-6 col-md-4" key={project.id}>
-                    <div className="thumbnail">
-                        <div className="caption">
-                            <h3>{project.name}</h3>
-                            <p>{project.description}</p>
-                            <div>
-                                <div className="btn-group btn-group-justified" role="group">
-                                    <Link to={'/projects/edit/'+project.id}
-                                          className="btn btn-default glyphicon glyphicon-pencil"
-                                          role="button"> Edit</Link>
-                                    <a className="btn btn-danger glyphicon glyphicon-trash" role="button"
-                                       onClick={this.deleteProject.bind(this,project.id)}> Delete</a>
-                                </div>
-                            </div>
+                <tr key={project.id}>
+                    <td><b>{project.name}</b></td>
+                    <td>{project.key}</td>
+                    <td>{project.description}</td>
+                    <td>
+                        <div className="btn-group pull-right" role="group" >
+                            <Link to={'/admin/projects/edit/'+project.id}
+                                  className="btn btn-sm btn-default glyphicon glyphicon-pencil"
+                                  role="button" title="Edit"/>
+                            <a className="btn btn-sm btn-danger glyphicon glyphicon-trash" role="button"
+                               onClick={this.deleteProject.bind(this,project.id)} title="Delete"/>
                         </div>
-                    </div>
-                </div>
+                    </td>
+                </tr>
             )
-        }) : (<h4>No project found.</h4>);
+        }) : (<tr><td colSpan="3"><h4>No project found.</h4></td></tr>);
+
         return (
             <div>
                 <div className="row">
-                    <div className="pull-right">
-                        <Link to={'/projects/create'} className="btn btn-sm btn-success glyphicon glyphicon-plus"/>
-                    </div>
+                    <h1>Project List:<Link to={'/admin/projects/create'} className="btn-lg pull-right btn btn-success glyphicon glyphicon-plus"/></h1>
                 </div>
                 <div className="row">
-                    {projects}
+                    <div className="table-responsive">
+                        <table className="table table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Key</th>
+                                <th>Description</th>
+                                <th className="text-right">Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {projects}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         )
