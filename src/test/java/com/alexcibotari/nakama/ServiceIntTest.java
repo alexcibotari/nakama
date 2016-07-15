@@ -23,8 +23,8 @@ public class ServiceIntTest {
 
     @Test
     public void testNextIssue() {
-        System.out.println(issueRepository.getNextIssueKeyByProjectId(1L));
-        System.out.println(issueRepository.getNextIssueKeyByProjectId(2L));
+        System.out.println(issueRepository.getNextInProjectIdByProjectId(1L));
+        System.out.println(issueRepository.getNextInProjectIdByProjectId(2L));
     }
 
     @Test
