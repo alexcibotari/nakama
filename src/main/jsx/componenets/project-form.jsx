@@ -36,7 +36,7 @@ class ProjectForm extends Component {
         } else {
             client({method: 'POST', path: this.state.url, entity: this.state.data}).then(response => {
                 if (response.status.code == 201) {
-                    this.props.history.push('admin//projects');
+                    this.props.history.push('admin/projects');
                 }
             });
         }
