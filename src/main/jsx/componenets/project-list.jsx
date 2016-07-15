@@ -23,7 +23,7 @@ class ProjectList extends Component {
     deleteProject(id) {
         client({method: 'DELETE', path: this.state.url + '/' + id}).then(response => {
             if (response.status.code == 200) {
-                var delIndex = this.state.data.findIndex(function (project) {
+                var delIndex = this.state.data.findIndex(project => {
                     return project.id === id;
                 });
                 this.state.data.splice(delIndex, 1);

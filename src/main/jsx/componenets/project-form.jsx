@@ -98,7 +98,7 @@ class ProjectForm extends Component {
                 <div className="form-group has-feedback">
                     <label htmlFor="inputName" className="col-sm-2 control-label">Name</label>
                     <div className="col-sm-10">
-                        <input name="name" ref="name" type="text" className="form-control" id="inputName"
+                        <input name="name" ref="name" type="text" className="form-control" classID="inputName"
                                placeholder="Name"
                                value={this.state.data.name} onChange={this.handleChange}/>
                         <p className="help-block"> </p>
