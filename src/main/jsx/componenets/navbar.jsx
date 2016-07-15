@@ -24,7 +24,7 @@ class NavBar extends Component {
         const projects = (Array.isArray(this.state.data) && this.state.data.length > 0) ? this.state.data.map(project => {
             return (
                 <li key={project.id}>
-                    <Link to={'/projects/'+project.key+'/issues'} role="button">{project.name}</Link>
+                    <Link to={'/projects/issues/' + project.key} role="button">{project.name}</Link>
                 </li>)
         }) : (<li><p>No project found.</p></li>);
         return (
@@ -52,9 +52,6 @@ class NavBar extends Component {
                                 <ul className="dropdown-menu">
                                     {projects}
                                 </ul>
-                            </li>
-                            <li>
-                                <Link to="/issues">Issues</Link>
                             </li>
                         </ul>
 

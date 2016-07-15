@@ -37,13 +37,13 @@ class IssueForm extends Component {
         if (this.state.edit) {
             client({method: 'PUT', path: this.state.url, entity: this.state.data}).then(response => {
                 if (response.status.code == 200) {
-                    this.props.history.push('/issues');
+                    this.props.history.push('/projects/issues/' + this.props.params.key);
                 }
             });
         } else {
             client({method: 'POST', path: this.state.url, entity: this.state.data}).then(response => {
                 if (response.status.code == 201) {
-                    this.props.history.push('/issues');
+                    this.props.history.push('/projects/issues/' + this.props.params.key);
                 }
             });
         }
