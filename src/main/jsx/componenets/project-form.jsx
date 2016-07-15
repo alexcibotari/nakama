@@ -19,7 +19,6 @@ class ProjectForm extends Component {
         if (this.props.params.id) {
             client({method: 'GET', path: this.state.url + '/' + this.props.params.id}).then(response => {
                 if (response.status.code == 200) {
-                    this.refs.key.setAttribute('readonly', null);
                     this.setState({data: response.entity, edit: true});
                 }
             });
