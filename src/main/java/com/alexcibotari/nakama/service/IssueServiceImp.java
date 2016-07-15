@@ -17,8 +17,6 @@ public class IssueServiceImp implements IssueService {
 
     @Autowired
     IssueRepository issueRepository;
-    @Autowired
-    ProjectRepository projectRepository;
 
     @Autowired
     ProjectRepository projectRepository;
