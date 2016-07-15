@@ -42,9 +42,14 @@ class ProjectForm extends Component {
     }
 
     validate() {
-        if (!/^[A-Za-z0-9\s]+$/.test(this.state.data.name)) {
+        if (!/^[A-Za-z][A-Za-z\d\s]*[A-Za-z\d]$/.test(this.state.data.name)) {
             this.refs.name.parentElement.parentElement.className = 'has-error form-group has-feedback';
-            console.log(this);
+            this.refs.name.nextSibling.innerHTML = 'Name may contain only letters and numbers, should start with a letter, and should not end with a space!';
+            return;
+        }
+        if (!/^[A-Za-z][^]*[^\s]$/.test(this.state.data.key)) {
+            this.refs.key.parentElement.parentElement.className = 'has-error form-group has-feedback';
+            this.refs.key.nextSibling.innerHTML = 'Kye should start with a letter, and should not end with a space!';
             return;
         }
         this.save();
@@ -52,7 +57,7 @@ class ProjectForm extends Component {
 
     handleChange(e) {
         this.state.data[e.target.name] = e.target.value;
-        var val = '';
+        var generatedVal = '';
         if (e.target.name == 'name') {
             var arr = e.target.value.split(" ");
             if (arr.length > 1) {
@@ -63,14 +68,18 @@ class ProjectForm extends Component {
                             uppercaseletters += arr[i].charAt(j);
                         }
                     }
-                    val += (arr[i].charAt(0).toUpperCase() + uppercaseletters);
+                    generatedVal += (arr[i].charAt(0).toUpperCase() + uppercaseletters);
                 }
             } else {
-                val = arr[0].toUpperCase();
+                generatedVal = arr[0].toUpperCase();
             }
-            if (val.indexOf(this.state.data.key) == 0 || this.state.data.key == '' || this.state.data.key == arr[0].toUpperCase()) {
-                this.state.data.key = val;
+            if (generatedVal.indexOf(this.state.data.key) == 0 || this.state.data.key == '' || this.state.data.key == arr[0].toUpperCase()) {
+                this.state.data.key = generatedVal;
             }
+        }
+        if(e.target.name == 'key'){
+            this.state.data.key = e.target.value.toUpperCase();
+            console.log(this.state.data.key);
         }
         this.setState({data: this.state.data});
     }
@@ -85,6 +94,7 @@ class ProjectForm extends Component {
                         <input name="name" ref="name" type="text" className="form-control" id="inputName"
                                placeholder="Name"
                                value={this.state.data.name} onChange={this.handleChange}/>
+                        <p className="help-block"> </p>
                     </div>
                 </div>
                 <div className="form-group">
