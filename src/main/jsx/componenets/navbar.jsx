@@ -19,7 +19,7 @@ class NavBar extends Component {
             }
         });
     }
-    
+
     render() {
         const projects = (Array.isArray(this.state.data) && this.state.data.length > 0) ? this.state.data.map(project => {
             return (
@@ -52,6 +52,9 @@ class NavBar extends Component {
                                 <ul className="dropdown-menu">
                                     {projects}
                                 </ul>
+                            </li>
+                            <li>
+                                <Link to="/issues">Issues</Link>
                             </li>
                         </ul>
 

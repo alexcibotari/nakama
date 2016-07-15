@@ -17,6 +17,7 @@ public class IssueServiceImp implements IssueService {
 
     @Autowired
     IssueRepository issueRepository;
+
     @Autowired
     ProjectRepository projectRepository;
 
@@ -40,6 +41,8 @@ public class IssueServiceImp implements IssueService {
     @Transactional
     public Issue create(IssueDTO dto) {
         Issue issue = new Issue();
+        issue.setProject(projectRepository.findOne(dto.getProject()));
+        issue.setKey(dto.getKey());
         issue.setSummery(dto.getSummery());
         issue.setDescription(dto.getDescription());
         return issueRepository.save(issue);
