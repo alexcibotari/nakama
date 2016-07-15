@@ -28,10 +28,16 @@ public class IssueResource {
         return new ResponseEntity<>(dtoList, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id:[0-9]+}", method = RequestMethod.GET)
     public ResponseEntity<IssueDTO> getOne(@PathVariable Long id) {
         return new ResponseEntity<>(new IssueDTO(issueService.findOne(id)), HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/{projectKey:[A-Z0-9]+}-{issueKey:[0-9]+}", method = RequestMethod.GET)
+    public ResponseEntity<IssueDTO> getOne(@PathVariable String projectKey, @PathVariable Long issueKey) {
+        return new ResponseEntity<>(new IssueDTO(issueService.findOneByKeys(projectKey, issueKey)), HttpStatus.OK);
+    }
+
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<IssueDTO> create(@RequestBody IssueDTO dto) {

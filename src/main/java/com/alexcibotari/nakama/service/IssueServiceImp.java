@@ -26,8 +26,8 @@ public class IssueServiceImp implements IssueService {
         return issueRepository.findOne(id);
     }
 
-    public Issue findOneByKey(String key) {
-        return issueRepository.findOneByKey(key);
+    public Issue findOneByKeys(String projectKey, Long issueKey){
+        return issueRepository.findOneByKeys(projectKey, issueKey);
     }
 
     public List<Issue> findAllByProjectId(Long id) {

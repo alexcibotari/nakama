@@ -9,7 +9,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface IssueRepository extends CrudRepository<Issue, Long> {
-    public Issue findOneByKey(String key);
 
     public List<Issue> findAllByProjectId(Long id);
 

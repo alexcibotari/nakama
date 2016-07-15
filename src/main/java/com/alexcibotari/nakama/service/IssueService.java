@@ -10,7 +10,7 @@ public interface IssueService {
 
     public Issue findOne(Long id);
 
-    public Issue findOneByKey(String key);
+    public Issue findOneByKeys(String projectKey, Long issueKey);
 
     public List<Issue> findAllByProjectId(Long id);
 
