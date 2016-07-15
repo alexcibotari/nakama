@@ -10,9 +10,11 @@ public interface IssueService {
 
     public Issue findOne(Long id);
 
-    public Issue findOneByKeys(String projectKey, Long issueKey);
+    public Issue findOne(String projectKey, Long idInProject);
 
     public List<Issue> findAllByProjectId(Long id);
+
+    public List<Issue> findAllByProjectKey(String key);
 
     public List<Issue> findAll();
 
@@ -21,4 +23,6 @@ public interface IssueService {
     public Issue update(IssueDTO dto);
 
     public void delete(Long id);
+
+    public void delete(String projectKey, Long idInProject);
 }

@@ -2,6 +2,7 @@ package com.alexcibotari.nakama.service;
 
 
 import com.alexcibotari.nakama.domain.Issue;
+import com.alexcibotari.nakama.domain.Project;
 import com.alexcibotari.nakama.repository.IssueRepository;
 import com.alexcibotari.nakama.repository.ProjectRepository;
 import com.alexcibotari.nakama.web.rest.dto.IssueDTO;
@@ -26,12 +27,20 @@ public class IssueServiceImp implements IssueService {
         return issueRepository.findOne(id);
     }
 
-    public Issue findOneByKeys(String projectKey, Long issueKey){
-        return issueRepository.findOneByKeys(projectKey, issueKey);
+    public Issue findOne(String key) {
+        return null;
+    }
+
+    public Issue findOne(String projectKey, Long idInProject) {
+        return issueRepository.findOneByKeys(projectKey, idInProject);
     }
 
     public List<Issue> findAllByProjectId(Long id) {
         return issueRepository.findAllByProjectId(id);
+    }
+
+    public List<Issue> findAllByProjectKey(String key) {
+        return issueRepository.findAllByProjectKey(key);
     }
 
     public List<Issue> findAll() {
@@ -41,8 +50,8 @@ public class IssueServiceImp implements IssueService {
     @Transactional
     public Issue create(IssueDTO dto) {
         Issue issue = new Issue();
-        issue.setProject(projectRepository.findOne(dto.getProject()));
-        issue.setKey(dto.getKey());
+        issue.setProject(projectRepository.findOneByKey(dto.getProject()));
+        issue.setIdInProject(issueRepository.getNextInProjectIdByProjectKey(dto.getProject()));
         issue.setSummery(dto.getSummery());
         issue.setDescription(dto.getDescription());
         return issueRepository.save(issue);
@@ -50,9 +59,7 @@ public class IssueServiceImp implements IssueService {
 
     @Transactional
     public Issue update(IssueDTO dto) {
-        Issue issue = issueRepository.findOne(dto.getId());
-        issue.setProject(projectRepository.findOne(dto.getProject()));
-        issue.setKey(dto.getKey());
+        Issue issue = findOne(dto.getProject(), dto.getIdInProject());
         issue.setSummery(dto.getSummery());
         issue.setDescription(dto.getDescription());
         return issueRepository.save(issue);
@@ -61,5 +68,11 @@ public class IssueServiceImp implements IssueService {
     @Transactional
     public void delete(Long id) {
         issueRepository.delete(id);
+    }
+
+    @Transactional
+    public void delete(String projectKey, Long idInProject) {
+        Issue issue = issueRepository.findOneByKeys(projectKey, idInProject);
+        issueRepository.delete(issue);
     }
 }

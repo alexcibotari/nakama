@@ -3,15 +3,15 @@ package com.alexcibotari.nakama.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"project_id", "pkey"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"project_id", "id_in_project"}))
 public class Issue extends AbstractAuditingEntity {
 
     @ManyToOne
-    @JoinColumn(name = "project_id", updatable = false, nullable = false)
+    @JoinColumn(name = "project_id", nullable = false, updatable = false)
     private Project project;
 
-    @Column(name = "pkey", nullable = false, updatable = false)
-    private Long key;
+    @Column(name = "id_in_project", nullable = false, updatable = false)
+    private Long idInProject;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reporter_user_id")
@@ -35,6 +35,11 @@ public class Issue extends AbstractAuditingEntity {
     @Column
     private Long timeestimate;
 
+
+    public String getKey() {
+        return getProject().getKey() + "-" + getIdInProject();
+    }
+
     public Project getProject() {
         return project;
     }
@@ -43,12 +48,12 @@ public class Issue extends AbstractAuditingEntity {
         this.project = project;
     }
 
-    public Long getKey() {
-        return key;
+    public Long getIdInProject() {
+        return idInProject;
     }
 
-    public void setKey(Long key) {
-        this.key = key;
+    public void setIdInProject(Long idInProject) {
+        this.idInProject = idInProject;
     }
 
     public User getReporter() {
@@ -103,7 +108,7 @@ public class Issue extends AbstractAuditingEntity {
     public String toString() {
         return "Issue{" +
                 "project=" + project +
-                ", key=" + key +
+                ", idInProject=" + idInProject +
                 ", reporter=" + reporter +
                 ", assigne=" + assigne +
                 ", summery='" + summery + '\'' +

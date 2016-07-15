@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/api/issues", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 public class IssueResource {
 
     private final Logger log = LoggerFactory.getLogger(IssueResource.class);
@@ -22,36 +22,36 @@ public class IssueResource {
     @Autowired
     private IssueService issueService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<IssueDTO>> getAll() {
-        List<IssueDTO> dtoList = issueService.findAll().stream().map(IssueDTO::new).collect(Collectors.toList());
+    @RequestMapping(path = {"/issues/byproject/{projectKey}", "/projects/{projectKey}/issues"}, method = RequestMethod.GET)
+    public ResponseEntity<List<IssueDTO>> getIssuesByProjectKey(@PathVariable String projectKey) {
+        List<IssueDTO> dtoList = issueService.findAllByProjectKey(projectKey).stream().map(IssueDTO::new).collect(Collectors.toList());
         return new ResponseEntity<>(dtoList, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id:[0-9]+}", method = RequestMethod.GET)
+/*    @RequestMapping(value = "/{id:[0-9]+}", method = RequestMethod.GET)
     public ResponseEntity<IssueDTO> getOne(@PathVariable Long id) {
         return new ResponseEntity<>(new IssueDTO(issueService.findOne(id)), HttpStatus.OK);
+    }*/
+
+    @RequestMapping(path = "/issues/{projectKey:[A-Z0-9]+}-{idInProject:[0-9]+}", method = RequestMethod.GET)
+    public ResponseEntity<IssueDTO> getOne(@PathVariable String projectKey, @PathVariable Long idInProject) {
+        return new ResponseEntity<>(new IssueDTO(issueService.findOne(projectKey, idInProject)), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{projectKey:[A-Z0-9]+}-{issueKey:[0-9]+}", method = RequestMethod.GET)
-    public ResponseEntity<IssueDTO> getOne(@PathVariable String projectKey, @PathVariable Long issueKey) {
-        return new ResponseEntity<>(new IssueDTO(issueService.findOneByKeys(projectKey, issueKey)), HttpStatus.OK);
-    }
 
-
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(path = "/issues", method = RequestMethod.POST)
     public ResponseEntity<IssueDTO> create(@RequestBody IssueDTO dto) {
         return new ResponseEntity<>(new IssueDTO(issueService.create(dto)), HttpStatus.CREATED);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(path = "/issues", method = RequestMethod.PUT)
     public ResponseEntity<IssueDTO> update(@RequestBody IssueDTO dto) {
         return new ResponseEntity<>(new IssueDTO(issueService.update(dto)), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        issueService.delete(id);
+    @RequestMapping(path = "/issues/{projectKey:[A-Z0-9]+}-{idInProject:[0-9]+}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable String projectKey, @PathVariable Long idInProject) {
+        issueService.delete(projectKey, idInProject);
         return ResponseEntity.ok().build();
     }
 
