@@ -8,7 +8,7 @@ public class Project extends AbstractAuditingEntity {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(name = "pkey", nullable = false, unique = true, updatable = false)
+    @Column(name = "pkey", nullable = false, unique = true)
     private String key;
 
     @ManyToOne(fetch = FetchType.LAZY)
