@@ -21,11 +21,11 @@ class App extends Component {
                 <Route path="/" component={MainLayout}>
                     <IndexRoute component={Home}/>
                     <Route path="admin/projects" component={ProjectLayout}>
-                        <IndexRoute component={ProjectList}/>
+                        <IndexRoute component={ProjectList} />
                         <Route path="create" component={ProjectForm}/>
                         <Route path="edit/:id" component={ProjectForm}/>
                     </Route>
-                    <Route path="issues" component={IssueLayout}>
+                    <Route path="projects/issues/:key" component={IssueLayout}>
                         <IndexRoute component={IssueList}/>
                         <Route path="create" component={IssueForm}/>
                         <Route path="edit/:id" component={IssueForm}/>

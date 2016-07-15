@@ -37,13 +37,13 @@ class IssueForm extends Component {
         if (this.state.edit) {
             client({method: 'PUT', path: this.state.url, entity: this.state.data}).then(response => {
                 if (response.status.code == 200) {
-                    this.props.history.push('/issues');
+                    this.props.history.push('/projects/issues/' + this.props.params.key);
                 }
             });
         } else {
             client({method: 'POST', path: this.state.url, entity: this.state.data}).then(response => {
                 if (response.status.code == 201) {
-                    this.props.history.push('/issues');
+                    this.props.history.push('/projects/issues/' + this.props.params.key);
                 }
             });
         }
@@ -100,7 +100,7 @@ class IssueForm extends Component {
                 <div className="form-group">
                     <div className="col-sm-offset-2 col-sm-10">
                         <a className="btn btn-primary" role="button" onClick={this.save}>Save</a>
-                        <Link to={'/issues/'} className="btn btn-danger" role="button">Cancel</Link>
+                        <Link to={'projects/issues/' + this.props.params.key} className="btn btn-danger" role="button">Cancel</Link>
                     </div>
                 </div>
             </form>
