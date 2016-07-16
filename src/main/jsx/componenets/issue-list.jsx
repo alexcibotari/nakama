@@ -7,24 +7,31 @@ class IssueList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: '/api/projects/',
             data: []
         }
     }
 
     componentDidMount() {
-        client({method: 'GET', path: this.state.url + this.props.params.key +'/issues'}).then(response => {
+        this.loadIssuesByProjectKey(this.props.params.key);
+    }
+
+    loadIssuesByProjectKey(projectKey) {
+        client({method: 'GET', path: this.props.apiUrl.project + '/' + projectKey + '/issues'}).then(response => {
             if (response.status.code === 200) {
                 this.setState({data: response.entity});
             }
         });
     }
 
-    delete(id) {
-        client({method: 'DELETE', path: this.state.url + '/' + id}).then(response => {
+    componentWillReceiveProps(nextProps) {
+        this.loadIssuesByProjectKey(nextProps.params.key);
+    }
+
+    deleteIssue(issueId) {
+        client({method: 'DELETE', path: this.props.apiUrl.issue + '/' + issueId}).then(response => {
             if (response.status.code == 200) {
                 var delIndex = this.state.data.findIndex(function (issue) {
-                    return issue.id === id;
+                    return issue.id === issueId;
                 });
                 this.state.data.splice(delIndex, 1);
                 this.forceUpdate();
@@ -36,24 +43,27 @@ class IssueList extends Component {
         const issues = (Array.isArray(this.state.data) && this.state.data.length > 0) ? this.state.data.map(issue => {
             return (
                 <tr key={issue.id}>
-                    <td><b>{issue.summery}</b></td>
+                    <td><b>{issue.id}</b></td>
+                    <td>{issue.summery}</td>
                     <td>{issue.description}</td>
                     <td>
                         <div className="btn-group pull-right" role="group">
-                            <Link to={'/projects/issues/'+ this.props.params.key +'/edit/' + issue.id}
+                            <Link to={this.props.apiUrl.issue + '/' + this.props.params.key +'/edit/' + issue.id}
                                   className="btn btn-sm btn-info glyphicon glyphicon-pencil"
                                   role="button"/>
                             <a className="btn btn-sm btn-danger glyphicon glyphicon-trash" role="button"
-                               onClick={this.delete.bind(this, issue.id)}/>
+                               onClick={this.deleteIssue.bind(this, issue.id)}/>
                         </div>
                     </td>
                 </tr>
             )
-        }) : (<tr><td colSpan="3"><h4>No issues found.</h4></td></tr>);
+        }) : (<tr>
+            <td colSpan="3"><h4>No issues found.</h4></td>
+        </tr>);
         return (
             <div>
                 <div className="row">
-                    <h1>Issue List:<Link to={'/projects/issues/'+ this.props.params.key +'/create'}
+                    <h1>Issue List:<Link to={'/issues/' + this.props.params.key +'/create'}
                                          className="pull-right btn btn-lg btn-success glyphicon glyphicon-plus"/></h1>
                 </div>
                 <div className="row">
@@ -61,6 +71,7 @@ class IssueList extends Component {
                         <table className="table table-striped table-condensed">
                             <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Summery</th>
                                 <th>Description</th>
                                 <th className="text-right">Options</th>
@@ -78,3 +89,4 @@ class IssueList extends Component {
 }
 
 export default IssueList;
+IssueList.defaultProps = {apiUrl: {project: '/api/projects', issue: '/api/issues'}};

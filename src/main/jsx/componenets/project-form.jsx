@@ -9,7 +9,6 @@ class ProjectForm extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.validate = this.validate.bind(this);
         this.state = {
-            url: '/api/projects',
             data: {name: "", key: "", description: ""},
             edit: false
         }
@@ -17,7 +16,7 @@ class ProjectForm extends Component {
 
     componentWillMount() {
         if (this.props.params.id) {
-            client({method: 'GET', path: this.state.url + '/' + this.props.params.id}).then(response => {
+            client({method: 'GET', path: this.props.apiUrl.project + '/' + this.props.params.id}).then(response => {
                 if (response.status.code == 200) {
                     this.setState({data: response.entity, edit: true});
                 }
@@ -27,13 +26,13 @@ class ProjectForm extends Component {
 
     save() {
         if (this.state.edit) {
-            client({method: 'PUT', path: this.state.url, entity: this.state.data}).then(response => {
+            client({method: 'PUT', path: this.props.apiUrl.project, entity: this.state.data}).then(response => {
                 if (response.status.code == 200) {
                     this.props.history.push('admin/projects');
                 }
             });
         } else {
-            client({method: 'POST', path: this.state.url, entity: this.state.data}).then(response => {
+            client({method: 'POST', path: this.props.apiUrl.project, entity: this.state.data}).then(response => {
                 if (response.status.code == 201) {
                     this.props.history.push('admin/projects');
                 }
@@ -132,3 +131,4 @@ class ProjectForm extends Component {
 }
 
 export default ProjectForm;
+ProjectForm.defaultProps = {apiUrl: {project: '/api/projects'}};

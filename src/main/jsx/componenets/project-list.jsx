@@ -7,13 +7,12 @@ class ProjectList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: '/api/projects',
             data: []
         }
     }
 
     componentWillMount() {
-        client({method: 'GET', path: this.state.url}).then(response => {
+        client({method: 'GET', path: this.props.apiUrl.project}).then(response => {
             if (response.status.code === 200) {
                 this.setState({data: response.entity});
             }
@@ -21,7 +20,7 @@ class ProjectList extends Component {
     }
 
     deleteProject(id) {
-        client({method: 'DELETE', path: this.state.url + '/' + id}).then(response => {
+        client({method: 'DELETE', path: this.props.apiUrl.project + '/' + id}).then(response => {
             if (response.status.code == 200) {
                 var delIndex = this.state.data.findIndex(project => {
                     return project.id === id;
@@ -40,7 +39,7 @@ class ProjectList extends Component {
                     <td>{project.key}</td>
                     <td>{project.description}</td>
                     <td>
-                        <div className="btn-group pull-right" role="group" >
+                        <div className="btn-group pull-right" role="group">
                             <Link to={'/admin/projects/edit/'+project.id}
                                   className="btn btn-sm btn-default glyphicon glyphicon-pencil"
                                   role="button" title="Edit"/>
@@ -50,12 +49,15 @@ class ProjectList extends Component {
                     </td>
                 </tr>
             )
-        }) : (<tr><td colSpan="3"><h4>No project found.</h4></td></tr>);
+        }) : (<tr>
+            <td colSpan="3"><h4>No project found.</h4></td>
+        </tr>);
 
         return (
             <div>
                 <div className="row">
-                    <h1>Project List:<Link to={'/admin/projects/create'} className="btn-lg pull-right btn btn-success glyphicon glyphicon-plus"/></h1>
+                    <h1>Project List:<Link to={'/admin/projects/create'}
+                                           className="btn-lg pull-right btn btn-success glyphicon glyphicon-plus"/></h1>
                 </div>
                 <div className="row">
                     <div className="table-responsive">
@@ -80,3 +82,4 @@ class ProjectList extends Component {
 }
 
 export default ProjectList;
+ProjectList.defaultProps = {apiUrl: {project: '/api/projects'}};
