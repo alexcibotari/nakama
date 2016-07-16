@@ -1,19 +1,18 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router';
+import {Link} from 'react-router';
 import client from '../client';
 
 class NavBar extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            url: '/api/projects',
             data: []
         }
     }
 
     componentWillMount() {
-        client({method: 'GET', path: this.state.url}).then(response => {
+        client({method: 'GET', path: this.props.apiUrl.project}).then(response => {
             if (response.status.code == 200) {
                 this.setState({data: response.entity});
             }
@@ -24,14 +23,15 @@ class NavBar extends Component {
         const projects = (Array.isArray(this.state.data) && this.state.data.length > 0) ? this.state.data.map(project => {
             return (
                 <li key={project.id}>
-                    <Link to={'/projects/issues/' + project.key} role="button">{project.name}</Link>
+                    <Link to={'/projects/' + project.key + '/issues'} role="button">{project.name}</Link>
                 </li>)
         }) : (<li><p>No project found.</p></li>);
         return (
             <nav className="navbar navbar-default navbar-fixed-top">
                 <div className="container">
                     <div className="navbar-header">
-                        <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        <button type="button" className="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#navbar"
                                 aria-expanded="false" aria-controls="navbar">
                             <span className="sr-only">Toggle navigation</span>
                             <span className="icon-bar"></span>
@@ -46,7 +46,8 @@ class NavBar extends Component {
                                 <Link to="/">Dashboard</Link>
                             </li>
                             <li className="dropdown">
-                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">
                                     Projects <span className="caret"></span>
                                 </a>
                                 <ul className="dropdown-menu">
@@ -57,8 +58,10 @@ class NavBar extends Component {
 
                         <ul className="nav navbar-nav navbar-right">
                             <li className="dropdown">
-                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <span className="glyphicon glyphicon-user" title={this.props.profile.userName}></span> <span className="caret"></span>
+                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    <span className="glyphicon glyphicon-user"
+                                          title={this.props.profile.userName}></span> <span className="caret"></span>
                                 </a>
                                 <ul className="dropdown-menu">
                                     <li><Link to="/profile">Profile</Link></li>
@@ -71,8 +74,10 @@ class NavBar extends Component {
 
                         <ul className="nav navbar-nav navbar-right">
                             <li className="dropdown">
-                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <span className="glyphicon glyphicon-cog" title="Administration"></span> <span className="caret"></span>
+                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    <span className="glyphicon glyphicon-cog" title="Administration"></span> <span
+                                    className="caret"></span>
                                 </a>
                                 <ul className="dropdown-menu">
                                     <li><Link to="/admin/projects">Projects</Link></li>
@@ -87,3 +92,4 @@ class NavBar extends Component {
 }
 
 export default NavBar;
+NavBar.defaultProps = {apiUrl: {project: '/api/projects'}};

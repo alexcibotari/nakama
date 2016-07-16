@@ -12,7 +12,7 @@ class IssueList extends Component {
     }
 
     componentDidMount() {
-        this.loadIssuesByProjectKey(this.props.params.key);
+        this.loadIssuesByProjectKey(this.props.params.projectKey);
     }
 
     loadIssuesByProjectKey(projectKey) {
@@ -24,7 +24,7 @@ class IssueList extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.loadIssuesByProjectKey(nextProps.params.key);
+        this.loadIssuesByProjectKey(nextProps.params.projectKey);
     }
 
     deleteIssue(issueId) {
@@ -48,7 +48,7 @@ class IssueList extends Component {
                     <td>{issue.description}</td>
                     <td>
                         <div className="btn-group pull-right" role="group">
-                            <Link to={this.props.apiUrl.issue + '/' + this.props.params.key +'/edit/' + issue.id}
+                            <Link to={'/issues/' + issue.id +'/edit'}
                                   className="btn btn-sm btn-info glyphicon glyphicon-pencil"
                                   role="button"/>
                             <a className="btn btn-sm btn-danger glyphicon glyphicon-trash" role="button"
@@ -63,7 +63,7 @@ class IssueList extends Component {
         return (
             <div>
                 <div className="row">
-                    <h1>Issue List:<Link to={'/issues/' + this.props.params.key +'/create'}
+                    <h1>Issue List:<Link to={'/issues/' + this.props.params.projectKey +'/create'}
                                          className="pull-right btn btn-lg btn-success glyphicon glyphicon-plus"/></h1>
                 </div>
                 <div className="row">
