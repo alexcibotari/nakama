@@ -2,6 +2,8 @@ package com.alexcibotari.nakama.web.rest.dto;
 
 import com.alexcibotari.nakama.domain.Issue;
 
+import java.time.ZonedDateTime;
+
 public class IssueDTO {
 
     //Composite key of Project Key and Issue IdInProject
@@ -21,6 +23,10 @@ public class IssueDTO {
 
     private IssueTypeDTO type;
 
+    private ZonedDateTime createdDate;
+
+    private ZonedDateTime lastModifiedDate;
+
     public IssueDTO() {
     }
 
@@ -37,6 +43,8 @@ public class IssueDTO {
         this.setPriority(new IssuePriorityDTO(issue.getPriority()));
         this.setStatus(new IssueStatusDTO(issue.getStatus()));
         this.setType(new IssueTypeDTO(issue.getType()));
+        this.setCreatedDate(issue.getCreatedDate());
+        this.setLastModifiedDate(issue.getLastModifiedDate());
     }
 
     public String getId() {
@@ -101,5 +109,21 @@ public class IssueDTO {
 
     public void setType(IssueTypeDTO type) {
         this.type = type;
+    }
+
+    public ZonedDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(ZonedDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public ZonedDateTime getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(ZonedDateTime lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 }
