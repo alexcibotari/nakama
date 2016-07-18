@@ -99,7 +99,7 @@ class IssueForm extends Component {
                         </div>
                     </div>
                     <div className="form-group">
-                        <div className="col-sm-offset-2 col-sm-10">
+                        <div className="col-sm-offset-2 col-sm-10 btn-group">
                             <a className="btn btn-primary" role="button" onClick={this.save}>Save</a>
                             <Link to={'/issues/'} className="btn btn-danger" role="button">Cancel</Link>
                         </div>

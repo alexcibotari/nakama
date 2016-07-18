@@ -94,37 +94,40 @@ class ProjectForm extends Component {
     render() {
         return (
             <form className="form-horizontal">
-                <div className="form-group has-feedback">
-                    <label htmlFor="inputName" className="col-sm-2 control-label">Name</label>
-                    <div className="col-sm-10">
-                        <input name="name" ref="name" type="text" className="form-control" classID="inputName"
-                               placeholder="Name"
-                               value={this.state.data.name} onChange={this.handleChange}/>
-                        <p className="help-block"> </p>
+                <div className="main-project-form col-md-8">
+                    <div className="form-group has-feedback">
+                        <label htmlFor="inputName" className="col-sm-2 control-label">Name</label>
+                        <div className="col-sm-10">
+                            <input name="name" ref="name" type="text" className="form-control" classID="inputName"
+                                   placeholder="Name"
+                                   value={this.state.data.name} onChange={this.handleChange}/>
+                            <p className="help-block"> </p>
+                        </div>
                     </div>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="inputKey" className="col-sm-2 control-label">Key</label>
-                    <div className="col-sm-10">
-                        <input name="key" ref="key" type="text" className="form-control" classID="inputKey" placeholder="Key"
-                               value={this.state.data.key} onChange={this.handleChange}/>
-                        <p className="help-block"> </p>
+                    <div className="form-group">
+                        <label htmlFor="inputKey" className="col-sm-2 control-label">Key</label>
+                        <div className="col-sm-10">
+                            <input name="key" ref="key" type="text" className="form-control" classID="inputKey" placeholder="Key"
+                                   value={this.state.data.key} onChange={this.handleChange}/>
+                            <p className="help-block"> </p>
+                        </div>
                     </div>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="inputDesc" className="col-sm-2 control-label">Description</label>
-                    <div className="col-sm-10">
+                    <div className="form-group">
+                        <label htmlFor="inputDesc" className="col-sm-2 control-label">Description</label>
+                        <div className="col-sm-10">
                         <textarea name="description" className="form-control" rows="3" classID="inputDesc"
                                   placeholder="Description" value={this.state.data.description}
                                   onChange={this.handleChange}/>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <div className="col-sm-offset-2 col-sm-10 btn-group">
+                            <a className="btn btn-primary" role="button" onClick={this.validate}>Save</a>
+                            <Link to={'admin/projects'} className="btn btn-danger" role="button">Cancel</Link>
+                        </div>
                     </div>
                 </div>
-                <div className="form-group">
-                    <div className="col-sm-offset-2 col-sm-10">
-                        <a className="btn btn-primary" role="button" onClick={this.validate}>Save</a>
-                        <Link to={'admin/projects'} className="btn btn-danger" role="button">Cancel</Link>
-                    </div>
-                </div>
+
             </form>
         )
     }
