@@ -40,7 +40,7 @@ public class UserServiceImp implements UserService {
         user.setPassword(passwordEncoder.encode(RandomUtil.generatePassword()));
 
         Set<Authority> authorities = new HashSet<>();
-        userDTO.getAuthorities().stream().forEach(authority -> authorities.add(authorityRepository.findOne(authority)));
+        userDTO.getAuthorities().stream().forEach(authority -> authorities.add(authorityRepository.findOneByName(authority)));
         user.setAuthorities(authorities);
 
         return userRepository.save(user);

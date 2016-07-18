@@ -27,6 +27,18 @@ public class Issue extends AbstractAuditingEntity {
     @Column(nullable = false)
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "priority_id", nullable = false)
+    private IssuePriority priority;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false)
+    private IssueStatus status;
+
+    @ManyToOne
+    @JoinColumn(name = "type_id", nullable = false)
+    private IssueType type;
+
     //In Minutes
     @Column
     private Long timespent;
@@ -88,6 +100,30 @@ public class Issue extends AbstractAuditingEntity {
         this.description = description;
     }
 
+    public IssuePriority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(IssuePriority priority) {
+        this.priority = priority;
+    }
+
+    public IssueStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(IssueStatus status) {
+        this.status = status;
+    }
+
+    public IssueType getType() {
+        return type;
+    }
+
+    public void setType(IssueType type) {
+        this.type = type;
+    }
+
     public Long getTimespent() {
         return timespent;
     }
@@ -107,14 +143,14 @@ public class Issue extends AbstractAuditingEntity {
     @Override
     public String toString() {
         return "Issue{" +
-                "project=" + project +
-                ", idInProject=" + idInProject +
-                ", reporter=" + reporter +
-                ", assigne=" + assigne +
-                ", summery='" + summery + '\'' +
-                ", description='" + description + '\'' +
-                ", timespent=" + timespent +
-                ", timeestimate=" + timeestimate +
-                '}';
+            "project=" + project +
+            ", idInProject=" + idInProject +
+            ", reporter=" + reporter +
+            ", assigne=" + assigne +
+            ", summery='" + summery + '\'' +
+            ", description='" + description + '\'' +
+            ", timespent=" + timespent +
+            ", timeestimate=" + timeestimate +
+            '}';
     }
 }

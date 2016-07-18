@@ -27,7 +27,7 @@ public class User extends AbstractAuditingEntity {
     @JoinTable(
             name = "authorities",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
+            inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
     private Set<Authority> authorities = new HashSet<>();
 
 

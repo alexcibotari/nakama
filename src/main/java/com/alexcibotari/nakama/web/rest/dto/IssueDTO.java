@@ -15,6 +15,12 @@ public class IssueDTO {
 
     private String description;
 
+    private IssuePriorityDTO priority;
+
+    private IssueStatusDTO status;
+
+    private IssueTypeDTO type;
+
     public IssueDTO() {
     }
 
@@ -28,6 +34,9 @@ public class IssueDTO {
 
     public IssueDTO(Issue issue) {
         this(issue.getIdInProject(), issue.getProject().getKey(), issue.getSummery(), issue.getDescription());
+        this.setPriority(new IssuePriorityDTO(issue.getPriority()));
+        this.setStatus(new IssueStatusDTO(issue.getStatus()));
+        this.setType(new IssueTypeDTO(issue.getType()));
     }
 
     public String getId() {
@@ -68,5 +77,29 @@ public class IssueDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public IssuePriorityDTO getPriority() {
+        return priority;
+    }
+
+    public void setPriority(IssuePriorityDTO priority) {
+        this.priority = priority;
+    }
+
+    public IssueStatusDTO getStatus() {
+        return status;
+    }
+
+    public void setStatus(IssueStatusDTO status) {
+        this.status = status;
+    }
+
+    public IssueTypeDTO getType() {
+        return type;
+    }
+
+    public void setType(IssueTypeDTO type) {
+        this.type = type;
     }
 }

@@ -13,7 +13,7 @@ public class Authority extends AbstractIdEntity implements GrantedAuthority {
      */
     private static final long serialVersionUID = 7190787175352450609L;
 
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(name = "pname", nullable = false, unique = true, length = 50)
     private String name;
 
     public String getName() {
