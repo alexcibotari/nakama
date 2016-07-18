@@ -56,7 +56,6 @@ public class UserServiceImp implements UserService {
 
     public User getUser() {
         User user = userRepository.findOneByUserName(SecurityUtils.getCurrentUserName()).get();
-        user.getAuthorities().size();
         return user;
     }
 
