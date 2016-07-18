@@ -9,7 +9,7 @@ class IssueForm extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.save = this.save.bind(this);
         this.state = {
-            data: {id: "", project: {}, key: "", summery: "", description: ""},
+            data: {id: '', project: '', key: '', summery: '', description: ''},
             edit: false,
         };
     }
@@ -80,7 +80,7 @@ class IssueForm extends Component {
                         <tbody>
                         <tr>
                             <td>Project:</td>
-                            <td>project name</td>
+                            <td>{this.state.data.project}</td>
                         </tr>
                         <tr>
                             <td>Assignees:</td>
