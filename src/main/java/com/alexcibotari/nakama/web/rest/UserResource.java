@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 public class UserResource {
 
     private final Logger log = LoggerFactory.getLogger(UserResource.class);
@@ -27,19 +29,9 @@ public class UserResource {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/users", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<?> createUser(@RequestBody UserDTO user, HttpServletRequest request) throws URISyntaxException {
-        log.debug("REST request to save User : {}", user);
-        if (userService.findOneByUserName(user.getUserName()).isPresent()) {
-            //User with this username already exist
-            return null;
-        } else if (userService.findOneByEmail(user.getEmail()).isPresent()) {
-            //User with this email already exist
-            return null;
-        } else {
-            return null;
-        }
-
+    public ResponseEntity<List<UserDTO>> getAll() {
+        return ResponseEntity.ok(userService.findAll().stream().map(UserDTO::new).collect(Collectors.toList()));
     }
 }
