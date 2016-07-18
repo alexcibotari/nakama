@@ -40,7 +40,7 @@ class IssueList extends Component {
     }
 
     render() {
-        const issues = (Array.isArray(this.state.data) && this.state.data.length > 0) ? this.state.data.map(issue => {
+        const issues = this.state.data.map(issue => {
             return (
                 <tr key={issue.id}>
                     <td><b>{issue.id}</b></td>
@@ -57,34 +57,48 @@ class IssueList extends Component {
                     </td>
                 </tr>
             )
-        }) : (<tr>
-            <td colSpan="3"><h4>No issues found.</h4></td>
-        </tr>);
-        return (
-            <div>
-                <div className="row">
-                    <h1>Issue List:<Link to={'/issues/' + this.props.params.projectKey +'/create'}
-                                         className="pull-right btn btn-lg btn-success glyphicon glyphicon-plus"/></h1>
-                </div>
-                <div className="row">
-                    <div className="table-responsive">
-                        <table className="table table-striped table-condensed">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Summery</th>
-                                <th>Description</th>
-                                <th className="text-right">Options</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {issues}
-                            </tbody>
-                        </table>
+        });
+
+        const IssueListHeading = (
+            <div className="row">
+                <h1>Issue List:<Link to={'/issues/' + this.props.params.projectKey +'/create'}
+                                     className="pull-right btn btn-lg btn-success glyphicon glyphicon-plus"/></h1>
+            </div>
+        );
+
+        if (Array.isArray(this.state.data) && this.state.data.length > 0) {
+            return (
+                <div className="container">
+                    <div>
+                        {IssueListHeading}
+                        <div className="row">
+                            <div className="table-responsive">
+                                <table className="table table-striped table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>User name</th>
+                                        <th>Email</th>
+                                        <th>enabled</th>
+                                        <th className="text-right">Options</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {issues}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        } else {
+            return (
+                <div className="container">
+                    {IssueListHeading}
+                    <h4>No issues found.</h4>
+                </div>
+            )
+        }
     }
 }
 
