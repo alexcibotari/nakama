@@ -29,15 +29,15 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth, UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) throws Exception {
         auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder);
+            .userDetailsService(userDetailsService)
+            .passwordEncoder(passwordEncoder);
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers("/scripts/**/*.{js,html}")
-                .antMatchers("/build/**");
+            .antMatchers("/scripts/**/*.{js,html}")
+            .antMatchers("/build/**");
         //.antMatchers("/i18n/**")
         //.antMatchers("/assets/**")
         //.antMatchers("/swagger-ui/index.html")
@@ -47,9 +47,13 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().anyRequest().fullyAuthenticated().and().formLogin()
-                .loginPage("/login").failureUrl("/login?error").permitAll().and()
-                .logout().permitAll();
+        http.
+            csrf().disable().
+            headers().
+                frameOptions().sameOrigin().and().
+            authorizeRequests().anyRequest().fullyAuthenticated().and().
+            formLogin().loginPage("/login").failureUrl("/login?error").permitAll().and().
+            logout().permitAll();
     }
 
 }

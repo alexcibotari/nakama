@@ -49,7 +49,7 @@ class IssueList extends Component {
                     <td>
                         <div className="btn-group pull-right" role="group">
                             <Link to={'/issues/' + issue.id +'/edit'}
-                                  className="btn btn-sm btn-info glyphicon glyphicon-pencil"
+                                  className="btn btn-sm btn-default glyphicon glyphicon-pencil"
                                   role="button"/>
                             <a className="btn btn-sm btn-danger glyphicon glyphicon-trash" role="button"
                                onClick={this.deleteIssue.bind(this, issue.id)}/>

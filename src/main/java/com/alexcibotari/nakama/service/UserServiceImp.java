@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -57,5 +58,9 @@ public class UserServiceImp implements UserService {
         User user = userRepository.findOneByUserName(SecurityUtils.getCurrentUserName()).get();
         user.getAuthorities().size();
         return user;
+    }
+
+    public List<User> findAll(){
+        return (List<User>) userRepository.findAll();
     }
 }

@@ -48,6 +48,7 @@ dependencies {
     //Database
     compile 'org.hibernate:hibernate-envers'
     compile 'mysql:mysql-connector-java'
+    compile 'com.h2database:h2'
 
     //Commons
     compile 'org.apache.commons:commons-lang3:3.4'
