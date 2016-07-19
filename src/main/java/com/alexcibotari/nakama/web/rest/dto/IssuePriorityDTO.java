@@ -1,6 +1,5 @@
 package com.alexcibotari.nakama.web.rest.dto;
 
-import com.alexcibotari.nakama.domain.Issue;
 import com.alexcibotari.nakama.domain.IssuePriority;
 
 public class IssuePriorityDTO {

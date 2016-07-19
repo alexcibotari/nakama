@@ -1,7 +1,13 @@
 package com.alexcibotari.nakama.web.rest;
 
+import com.alexcibotari.nakama.service.IssuePriorityService;
 import com.alexcibotari.nakama.service.IssueService;
+import com.alexcibotari.nakama.service.IssueStatusService;
+import com.alexcibotari.nakama.service.IssueTypeService;
 import com.alexcibotari.nakama.web.rest.dto.IssueDTO;
+import com.alexcibotari.nakama.web.rest.dto.IssuePriorityDTO;
+import com.alexcibotari.nakama.web.rest.dto.IssueStatusDTO;
+import com.alexcibotari.nakama.web.rest.dto.IssueTypeDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +27,15 @@ public class IssueResource {
 
     @Autowired
     private IssueService issueService;
+
+    @Autowired
+    private IssuePriorityService issuePriorityService;
+
+    @Autowired
+    private IssueStatusService issueStatusService;
+
+    @Autowired
+    private IssueTypeService issueTypeService;
 
     @RequestMapping(path = {"/issues/byproject/{projectKey}", "/projects/{projectKey}/issues"}, method = RequestMethod.GET)
     public ResponseEntity<List<IssueDTO>> getIssuesByProjectKey(@PathVariable String projectKey) {
@@ -53,6 +68,21 @@ public class IssueResource {
     public ResponseEntity<Void> delete(@PathVariable String projectKey, @PathVariable Long idInProject) {
         issueService.delete(projectKey, idInProject);
         return ResponseEntity.ok().build();
+    }
+
+    @RequestMapping(path = "/issues/priority", method = RequestMethod.GET)
+    public ResponseEntity<List<IssuePriorityDTO>> getAllPriority() {
+        return ResponseEntity.ok(issuePriorityService.findAll().stream().map(IssuePriorityDTO::new).collect(Collectors.toList()));
+    }
+
+    @RequestMapping(path = "/issues/status", method = RequestMethod.GET)
+    public ResponseEntity<List<IssueStatusDTO>> getAllStatus() {
+        return ResponseEntity.ok(issueStatusService.findAll().stream().map(IssueStatusDTO::new).collect(Collectors.toList()));
+    }
+
+    @RequestMapping(path = "/issues/type", method = RequestMethod.GET)
+    public ResponseEntity<List<IssueTypeDTO>> getAllType() {
+        return ResponseEntity.ok(issueTypeService.findAll().stream().map(IssueTypeDTO::new).collect(Collectors.toList()));
     }
 
 }
