@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -32,11 +31,11 @@ public class UserServiceImp implements UserService {
     PasswordEncoder passwordEncoder;
 
     @Transactional
-    public User createUser(UserDTO userDTO) {
+    public User create(UserDTO userDTO) {
         User user = new User();
         user.setUserName(userDTO.getUserName());
         user.setEmail(userDTO.getEmail());
-        user.setEnabled(true);
+        user.setEnabled(userDTO.getEnabled());
         user.setPassword(passwordEncoder.encode(RandomUtil.generatePassword()));
 
         Set<Authority> authorities = new HashSet<>();
@@ -46,20 +45,36 @@ public class UserServiceImp implements UserService {
         return userRepository.save(user);
     }
 
-    public Optional<User> findOneByUserName(String username) {
-        return userRepository.findOneByUserName(username);
+    @Transactional
+    public User update(UserDTO userDTO) {
+        User user = userRepository.findOneByUserName(userDTO.getUserName()).get();
+        user.setEmail(userDTO.getEmail());
+        user.setEnabled(userDTO.getEnabled());
+
+        Set<Authority> authorities = new HashSet<>();
+        userDTO.getAuthorities().stream().forEach(authority -> authorities.add(authorityRepository.findOneByName(authority)));
+        user.setAuthorities(authorities);
+
+        return userRepository.save(user);
     }
 
-    public Optional<User> findOneByEmail(String email) {
-        return userRepository.findOneByEmail(email);
+    public User findOneByUserName(String username) {
+        return userRepository.findOneByUserName(username).get();
+    }
+
+    public User findOneByEmail(String email) {
+        return userRepository.findOneByEmail(email).get();
     }
 
     public User getUser() {
-        User user = userRepository.findOneByUserName(SecurityUtils.getCurrentUserName()).get();
-        return user;
+        return userRepository.findOneByUserName(SecurityUtils.getCurrentUserName()).get();
     }
 
-    public List<User> findAll(){
+    public List<User> findAll() {
         return (List<User>) userRepository.findAll();
+    }
+
+    public void delete(String userName) {
+        userRepository.deleteByUserName(userName);
     }
 }

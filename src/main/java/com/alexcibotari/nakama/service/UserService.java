@@ -9,13 +9,17 @@ import java.util.Optional;
 
 public interface UserService {
 
-    public Optional<User> findOneByUserName(String username);
+    User findOneByUserName(String username);
 
-    public Optional<User> findOneByEmail(String email);
+    User findOneByEmail(String email);
 
-    public User createUser(UserDTO user);
+    User create(UserDTO user);
 
-    public User getUser();
+    User update(UserDTO userDTO);
 
-    public List<User> findAll();
+    User getUser();
+
+    List<User> findAll();
+
+    void delete(String userName);
 }

@@ -5,5 +5,5 @@ import com.alexcibotari.nakama.domain.Authority;
 import org.springframework.data.repository.CrudRepository;
 
 public interface AuthorityRepository extends CrudRepository<Authority, Long> {
-    public Authority findOneByName(String name);
+    Authority findOneByName(String name);
 }

@@ -25,12 +25,12 @@ public class ProjectResource {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<ProjectDTO>> getAll() {
         List<ProjectDTO> dtoList = projectService.findAll().stream().map(ProjectDTO::new).collect(Collectors.toList());
-        return new ResponseEntity<>(dtoList, HttpStatus.OK);
+        return ResponseEntity.ok(dtoList);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<ProjectDTO> getOne(@PathVariable Long id) {
-        return new ResponseEntity<>(new ProjectDTO(projectService.findOne(id)), HttpStatus.OK);
+        return ResponseEntity.ok(new ProjectDTO(projectService.findOne(id)));
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -40,7 +40,7 @@ public class ProjectResource {
 
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<ProjectDTO> update(@RequestBody ProjectDTO dto) {
-        return new ResponseEntity<>(new ProjectDTO(projectService.update(dto)), HttpStatus.OK);
+        return ResponseEntity.ok(new ProjectDTO(projectService.update(dto)));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
