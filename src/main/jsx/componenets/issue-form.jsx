@@ -9,7 +9,28 @@ class IssueForm extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.save = this.save.bind(this);
         this.state = {
-            data: {id: '', project: '', key: '', summery: '', description: ''},
+            data: {
+                id: '',
+                project: '',
+                key: '',
+                summery: '',
+                description: '',
+                priority: {
+                    id: "",
+                    name: "",
+                    description: ""
+                },
+                status: {
+                    id: "",
+                    name: "",
+                    description: ""
+                },
+                type: {
+                    id: "",
+                    name: "",
+                    description: ""
+                }
+            },
             edit: false,
         };
     }
@@ -75,32 +96,36 @@ class IssueForm extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="options-sidebar col-md-4">
+                <div className="options-sidebar col-md-4 table-responsive">
                     <table className="table table-striped">
                         <tbody>
                         <tr>
-                            <td>Project:</td>
+                            <th>Project:</th>
                             <td>{this.state.data.project}</td>
                         </tr>
                         <tr>
-                            <td>Assignees:</td>
+                            <th>Priority:</th>
+                            <td>{this.state.data.priority.name}</td>
+                        </tr>
+                        <tr>
+                            <th>Type:</th>
+                            <td>{this.state.data.type.name}</td>
+                        </tr>
+                        <tr>
+                            <th>Status:</th>
+                            <td>{this.state.data.status.name}</td>
+                        </tr>
+                        <tr>
+                            <th>Assignees:</th>
                             <td>me</td>
                         </tr>
                         <tr>
-                            <td>Type:</td>
-                            <td>bug</td>
-                        </tr>
-                        <tr>
-                            <td>Due date:</td>
+                            <th>Due date:</th>
                             <td>yesterday</td>
                         </tr>
                         <tr>
-                            <td>Labels:</td>
+                            <th>Labels:</th>
                             <td></td>
-                        </tr>
-                        <tr>
-                            <td>Priority:</td>
-                            <td>Do when you have time</td>
                         </tr>
                         </tbody>
 
