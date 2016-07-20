@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import client from '../client';
+import Modal from './modal';
 
 class IssueList extends Component {
 
@@ -51,8 +52,15 @@ class IssueList extends Component {
                             <Link to={'/issues/' + issue.id +'/edit'}
                                   className="btn btn-sm btn-default glyphicon glyphicon-pencil"
                                   role="button"/>
-                            <a className="btn btn-sm btn-danger glyphicon glyphicon-trash" role="button"
-                               onClick={this.deleteIssue.bind(this, issue.id)}/>
+                            <Modal title="Delete Issue."
+                                   bodyText="Are you sure you want to delete the issue?"
+                                   lunchModalBtnClasses="btn btn-sm btn-danger glyphicon glyphicon-trash"
+                                   lunchModalBtnText=""
+                                   issue={issue}
+                                   actionBtnAction={this.deleteIssue.bind(this, issue.id)}
+                                   lunchModalBtnStyles={{float: 'right'}}
+                                   modalContainerStyle={{marginLeft: 34+'px'}}
+                                   modalId={issue.id}/>
                         </div>
                     </td>
                 </tr>
