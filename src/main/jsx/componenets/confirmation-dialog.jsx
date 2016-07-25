@@ -34,5 +34,10 @@ export default class ConfirmationDialog extends React.Component{
 ConfirmationDialog.defaultProps = {
     title: "Dialog title.",
     bodyText: "Text of the dialog.",
-    lunchModalBtnText: ""
+    lunchModalBtnText: "",
+    lunchModalBtnClasses:"btn",
+    lunchModalBtnStyles:{},
+    actionBtnAction:{},
+    modalContainerStyle:{},
+    modalId:(new Date%9e6).toString(36)
 };
