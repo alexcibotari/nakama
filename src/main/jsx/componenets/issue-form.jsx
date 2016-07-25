@@ -35,26 +35,26 @@ class IssueForm extends Component {
                 }
             },
             edit: false,
-            priority: [],
-            status: [],
-            type: []
+            priorities: [],
+            statuses: [],
+            types: []
         };
     }
 
     componentWillMount() {
         client({method: 'GET', path: this.props.apiUrl.issue + '/priority'}).then(response => {
             if (response.status.code == 200) {
-                this.setState({priority: response.entity});
+                this.setState({priorities: response.entity});
             }
         });
         client({method: 'GET', path: this.props.apiUrl.issue + '/status'}).then(response => {
             if (response.status.code == 200) {
-                this.setState({status: response.entity});
+                this.setState({statuses: response.entity});
             }
         });
         client({method: 'GET', path: this.props.apiUrl.issue + '/type'}).then(response => {
             if (response.status.code == 200) {
-                this.setState({type: response.entity});
+                this.setState({types: response.entity});
             }
         });
         if (this.props.params.issueId) {
@@ -139,8 +139,8 @@ class IssueForm extends Component {
                                 <SelectForm
                                     onChange={this.handleSelectChange}
                                     name="priority"
-                                    options={this.state.priority}
-                                    selected={this.state.data.priority.name}/>
+                                    options={this.state.priorities}
+                                    selected={this.state.data.priority}/>
                             </td>
                         </tr>
                         <tr>
@@ -149,8 +149,8 @@ class IssueForm extends Component {
                                 <SelectForm
                                     onChange={this.handleSelectChange}
                                     name="type"
-                                    options={this.state.type}
-                                    selected={this.state.data.type.name}/>
+                                    options={this.state.types}
+                                    selected={this.state.data.type}/>
                             </td>
                         </tr>
                         <tr>
@@ -159,8 +159,8 @@ class IssueForm extends Component {
                                 <SelectForm
                                     onChange={this.handleSelectChange}
                                     name="status"
-                                    options={this.state.status}
-                                    selected={this.state.data.status.name}/>
+                                    options={this.state.statuses}
+                                    selected={this.state.data.status}/>
                             </td>
                         </tr>
                         <tr>

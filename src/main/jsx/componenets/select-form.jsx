@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import client from '../client';
 
 class SelectForm extends Component {
 
@@ -7,15 +6,15 @@ class SelectForm extends Component {
         super(props);
         this.state = {
             edit: false,
-            selected: -1
+            selected: 0
         };
     }
 
-    editProject() {
+    editSelect() {
         this.setState({edit: true});
     }
 
-    blurProject() {
+    blurSelect() {
         this.setState({edit: false});
     }
 
@@ -34,9 +33,9 @@ class SelectForm extends Component {
             <select
                 className="form-control"
                 name={this.props.name}
-                value={this.state.selected}
+                value={this.state.selected.id}
                 onChange={this.handleChange.bind(this)}
-                onBlur={this.blurProject.bind(this)}>
+                onBlur={this.blurSelect.bind(this)}>
                 <option value="">Please select a value</option>
                 {options}
             </select>
@@ -48,7 +47,7 @@ class SelectForm extends Component {
             return this.renderForm();
         } else if (this.props.selected) {
             return (
-                <p onClick={this.editProject.bind(this)}>{this.props.selected}</p>
+                <p onClick={this.editSelect.bind(this)} title={this.props.selected.description}>{this.props.selected.name}</p>
             )
         } else {
             return this.renderForm();
@@ -57,3 +56,4 @@ class SelectForm extends Component {
 }
 
 export default SelectForm;
+SelectForm.defaultProps = {name: (new Date%9e6).toString(36)};
