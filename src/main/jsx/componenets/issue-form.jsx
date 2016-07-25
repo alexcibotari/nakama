@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import client from '../client';
+import SelectForm from './select-form';
 
 class IssueForm extends Component {
 
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSelectChange = this.handleSelectChange.bind(this);
         this.save = this.save.bind(this);
         this.state = {
             data: {
                 id: '',
+                createdDate: '',
                 project: '',
                 key: '',
                 summery: '',
@@ -32,10 +35,28 @@ class IssueForm extends Component {
                 }
             },
             edit: false,
+            priority: [],
+            status: [],
+            type: []
         };
     }
 
     componentWillMount() {
+        client({method: 'GET', path: this.props.apiUrl.issue + '/priority'}).then(response => {
+            if (response.status.code == 200) {
+                this.setState({priority: response.entity});
+            }
+        });
+        client({method: 'GET', path: this.props.apiUrl.issue + '/status'}).then(response => {
+            if (response.status.code == 200) {
+                this.setState({status: response.entity});
+            }
+        });
+        client({method: 'GET', path: this.props.apiUrl.issue + '/type'}).then(response => {
+            if (response.status.code == 200) {
+                this.setState({type: response.entity});
+            }
+        });
         if (this.props.params.issueId) {
             client({method: 'GET', path: this.props.apiUrl.issue + '/' + this.props.params.issueId}).then(response => {
                 if (response.status.code == 200) {
@@ -65,6 +86,15 @@ class IssueForm extends Component {
 
     handleChange(e) {
         this.state.data[e.target.name] = e.target.value;
+        this.setState({data: this.state.data});
+    }
+
+    handleSelectChange(e) {
+        for (var i = 0; i < this.state[e.target.name].length; i++) {
+            if (this.state[e.target.name][i].id == e.target.value) {
+                this.state.data[e.target.name] = this.state[e.target.name][i];
+            }
+        }
         this.setState({data: this.state.data});
     }
 
@@ -100,32 +130,50 @@ class IssueForm extends Component {
                     <table className="table table-striped">
                         <tbody>
                         <tr>
-                            <th>Project:</th>
-                            <td>{this.state.data.project}</td>
+                            <th className="col-xs-2">Project:</th>
+                            <td className="col-xs-10">{this.state.data.project}</td>
                         </tr>
                         <tr>
-                            <th>Priority:</th>
-                            <td>{this.state.data.priority.name}</td>
+                            <th className="col-xs-2">Priority:</th>
+                            <td className="col-xs-10">
+                                <SelectForm
+                                    onChange={this.handleSelectChange}
+                                    name="priority"
+                                    options={this.state.priority}
+                                    selected={this.state.data.priority.name}/>
+                            </td>
                         </tr>
                         <tr>
-                            <th>Type:</th>
-                            <td>{this.state.data.type.name}</td>
+                            <th className="col-xs-2">Type:</th>
+                            <td className="col-xs-10">
+                                <SelectForm
+                                    onChange={this.handleSelectChange}
+                                    name="type"
+                                    options={this.state.type}
+                                    selected={this.state.data.type.name}/>
+                            </td>
                         </tr>
                         <tr>
-                            <th>Status:</th>
-                            <td>{this.state.data.status.name}</td>
+                            <th className="col-xs-2">Status:</th>
+                            <td className="col-xs-10">
+                                <SelectForm
+                                    onChange={this.handleSelectChange}
+                                    name="status"
+                                    options={this.state.status}
+                                    selected={this.state.data.status.name}/>
+                            </td>
                         </tr>
                         <tr>
-                            <th>Assignees:</th>
-                            <td>me</td>
+                            <th className="col-xs-2">Assignees:</th>
+                            <td className="col-xs-10">me</td>
                         </tr>
                         <tr>
-                            <th>Due date:</th>
-                            <td>yesterday</td>
+                            <th className="col-xs-2">Created date:</th>
+                            <td className="col-xs-10">get Date</td>
                         </tr>
                         <tr>
-                            <th>Labels:</th>
-                            <td></td>
+                            <th className="col-xs-2">Labels:</th>
+                            <td className="col-xs-10"></td>
                         </tr>
                         </tbody>
 
