@@ -1,10 +1,8 @@
 package com.alexcibotari.nakama.service;
 
 
-import com.alexcibotari.nakama.domain.Issue;
-import com.alexcibotari.nakama.domain.Project;
-import com.alexcibotari.nakama.repository.IssueRepository;
-import com.alexcibotari.nakama.repository.ProjectRepository;
+import com.alexcibotari.nakama.domain.*;
+import com.alexcibotari.nakama.repository.*;
 import com.alexcibotari.nakama.web.rest.dto.IssueDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +19,15 @@ public class IssueServiceImp implements IssueService {
 
     @Autowired
     ProjectRepository projectRepository;
+
+    @Autowired
+    private IssuePriorityRepository issuePriorityRepository;
+
+    @Autowired
+    private IssueStatusRepository issueStatusRepository;
+
+    @Autowired
+    private IssueTypeRepository issueTypeRepository;
 
 
     public Issue findOne(Long id) {
@@ -54,6 +61,22 @@ public class IssueServiceImp implements IssueService {
         issue.setIdInProject(issueRepository.getNextInProjectIdByProjectKey(dto.getProject()));
         issue.setSummery(dto.getSummery());
         issue.setDescription(dto.getDescription());
+
+        if(dto.getPriority() !=null && dto.getPriority().getId() !=null){
+            IssuePriority one = issuePriorityRepository.findOne(dto.getPriority().getId());
+            issue.setPriority(one);
+        }
+
+        if(dto.getStatus() !=null && dto.getStatus().getId() !=null){
+            IssueStatus one = issueStatusRepository.findOne(dto.getStatus().getId());
+            issue.setStatus(one);
+        }
+
+        if(dto.getType() !=null && dto.getType().getId() !=null){
+            IssueType one = issueTypeRepository.findOne(dto.getType().getId());
+            issue.setType(one);
+        }
+
         return issueRepository.save(issue);
     }
 
@@ -62,6 +85,22 @@ public class IssueServiceImp implements IssueService {
         Issue issue = findOne(dto.getProject(), dto.getIdInProject());
         issue.setSummery(dto.getSummery());
         issue.setDescription(dto.getDescription());
+
+        if(dto.getPriority() !=null && dto.getPriority().getId() !=null){
+            IssuePriority one = issuePriorityRepository.findOne(dto.getPriority().getId());
+            issue.setPriority(one);
+        }
+
+        if(dto.getStatus() !=null && dto.getStatus().getId() !=null){
+            IssueStatus one = issueStatusRepository.findOne(dto.getStatus().getId());
+            issue.setStatus(one);
+        }
+
+        if(dto.getType() !=null && dto.getType().getId() !=null){
+            IssueType one = issueTypeRepository.findOne(dto.getType().getId());
+            issue.setType(one);
+        }
+
         return issueRepository.save(issue);
     }
 
