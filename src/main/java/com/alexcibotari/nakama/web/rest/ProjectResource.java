@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,33 +23,30 @@ public class ProjectResource {
     private ProjectService projectService;
 
     @RequestMapping(method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
-    public List<ProjectDTO> getAll() {
-        return projectService.findAll().stream().map(ProjectDTO::new).collect(Collectors.toList());
+    public ResponseEntity<List<ProjectDTO>> getAll() {
+        List<ProjectDTO> dtoList = projectService.findAll().stream().map(ProjectDTO::new).collect(Collectors.toList());
+        return ResponseEntity.ok(dtoList);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
-    public ProjectDTO getOne(@PathVariable Long id) {
-        return new ProjectDTO(projectService.findOne(id));
+    public ResponseEntity<ProjectDTO> getOne(@PathVariable Long id) {
+        return ResponseEntity.ok(new ProjectDTO(projectService.findOne(id)));
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    public ProjectDTO create(@RequestBody ProjectDTO dto) {
-        return new ProjectDTO(projectService.create(dto));
+    public ResponseEntity<ProjectDTO> create(@RequestBody ProjectDTO dto) {
+        return new ResponseEntity<>(new ProjectDTO(projectService.create(dto)), HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.OK)
-    public ProjectDTO update(@RequestBody ProjectDTO dto) {
-        return new ProjectDTO(projectService.update(dto));
+    public ResponseEntity<ProjectDTO> update(@RequestBody ProjectDTO dto) {
+        return ResponseEntity.ok(new ProjectDTO(projectService.update(dto)));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         projectService.delete(id);
+        return ResponseEntity.ok().build();
     }
 
 }

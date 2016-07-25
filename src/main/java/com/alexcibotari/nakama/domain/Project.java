@@ -3,12 +3,12 @@ package com.alexcibotari.nakama.domain;
 import javax.persistence.*;
 
 @Entity
-public class Project extends AbstractAuditingEntity{
+public class Project extends AbstractAuditingEntity {
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "pname", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "pkey", nullable = false, unique = true, updatable = false)
+    @Column(name = "pkey", nullable = false, unique = true)
     private String key;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,20 +1,18 @@
 package com.alexcibotari.nakama.domain;
 
-import org.springframework.data.annotation.CreatedBy;
-
 import javax.persistence.*;
 
 @Entity
-public class Issue extends AbstractAuditingEntity{
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"project_id", "id_in_project"}))
+public class Issue extends AbstractAuditingEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id", updatable = false, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "project_id", nullable = false, updatable = false)
     private Project project;
 
-    @Column(name = "pkey", nullable = false, unique = true, updatable = false)
-    private String key;
+    @Column(name = "id_in_project", nullable = false, updatable = false)
+    private Long idInProject;
 
-    @CreatedBy
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reporter_user_id")
     private User reporter;
@@ -29,6 +27,18 @@ public class Issue extends AbstractAuditingEntity{
     @Column(nullable = false)
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "priority_id", nullable = false)
+    private IssuePriority priority;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false)
+    private IssueStatus status;
+
+    @ManyToOne
+    @JoinColumn(name = "type_id", nullable = false)
+    private IssueType type;
+
     //In Minutes
     @Column
     private Long timespent;
@@ -36,6 +46,11 @@ public class Issue extends AbstractAuditingEntity{
     //In Minutes
     @Column
     private Long timeestimate;
+
+
+    public String getKey() {
+        return getProject().getKey() + "-" + getIdInProject();
+    }
 
     public Project getProject() {
         return project;
@@ -45,12 +60,12 @@ public class Issue extends AbstractAuditingEntity{
         this.project = project;
     }
 
-    public String getKey() {
-        return key;
+    public Long getIdInProject() {
+        return idInProject;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setIdInProject(Long idInProject) {
+        this.idInProject = idInProject;
     }
 
     public User getReporter() {
@@ -85,6 +100,30 @@ public class Issue extends AbstractAuditingEntity{
         this.description = description;
     }
 
+    public IssuePriority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(IssuePriority priority) {
+        this.priority = priority;
+    }
+
+    public IssueStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(IssueStatus status) {
+        this.status = status;
+    }
+
+    public IssueType getType() {
+        return type;
+    }
+
+    public void setType(IssueType type) {
+        this.type = type;
+    }
+
     public Long getTimespent() {
         return timespent;
     }
@@ -104,12 +143,14 @@ public class Issue extends AbstractAuditingEntity{
     @Override
     public String toString() {
         return "Issue{" +
-                "project=" + project +
-                ", key='" + key + '\'' +
-                ", reporter=" + reporter +
-                ", assigne=" + assigne +
-                ", summery='" + summery + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+            "project=" + project +
+            ", idInProject=" + idInProject +
+            ", reporter=" + reporter +
+            ", assigne=" + assigne +
+            ", summery='" + summery + '\'' +
+            ", description='" + description + '\'' +
+            ", timespent=" + timespent +
+            ", timeestimate=" + timeestimate +
+            '}';
     }
 }
