@@ -9,24 +9,16 @@ class UserForm extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.save = this.save.bind(this);
         this.state = {
-            url: '/api/users',
             data: {userName: "", enabled: true, email: "", authorities: []},
-            edit: false,
-            users: []
+            edit: false
         }
     }
 
     componentWillMount() {
         if (this.props.params.userName) {
-            client({method: 'GET', path: this.state.url + '/' + this.props.params.userName}).then(response => {
+            client({method: 'GET', path: this.props.apiUrl.users + '/' + this.props.params.userName}).then(response => {
                 if (response.status.code == 200) {
                     this.setState({data: response.entity, edit: true});
-                }
-            });
-        } else {
-            client({method: 'GET', path: this.state.url}).then(response => {
-                if (response.status.code == 200) {
-                    this.setState({users: response.entity});
                 }
             });
         }
@@ -34,13 +26,13 @@ class UserForm extends React.Component {
 
     save() {
         if (this.state.edit) {
-            client({method: 'PUT', path: this.state.url, entity: this.state.data}).then(response => {
+            client({method: 'PUT', path: this.props.apiUrl.users, entity: this.state.data}).then(response => {
                 if (response.status.code == 200) {
                     this.props.history.push('/admin/users/');
                 }
             });
         } else {
-            client({method: 'POST', path: this.state.url, entity: this.state.data}).then(response => {
+            client({method: 'POST', path: this.props.apiUrl.users, entity: this.state.data}).then(response => {
                 if (response.status.code == 201) {
                     this.props.history.push('/admin/users/');
                 }
@@ -129,3 +121,5 @@ class UserForm extends React.Component {
 }
 
 export default UserForm;
+
+UserForm.defaultProps = {apiUrl: {users: '/api/users'}};
