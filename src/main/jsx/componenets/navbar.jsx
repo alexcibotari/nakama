@@ -60,14 +60,14 @@ class NavBar extends Component {
                             <li className="dropdown">
                                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true" aria-expanded="false">
-                                    <span className="glyphicon glyphicon-user"
+                                    <span className="glyphicon glyphicon-home"
                                           title={this.props.profile.userName}></span> <span className="caret"></span>
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li><Link to="/profile">Profile</Link></li>
-                                    <li><Link to="/settings">Settings</Link></li>
+                                    <li><Link to="/profile"><span className="glyphicon glyphicon-education"></span> Profile</Link></li>
+                                    <li><Link to="/settings"><span className="glyphicon glyphicon-wrench"></span> Settings</Link></li>
                                     <li role="separator" className="divider"></li>
-                                    <li><a href="/logout">Sign Out</a></li>
+                                    <li><a href="/logout"><span className="glyphicon glyphicon-log-out"></span> Sign Out</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -80,7 +80,8 @@ class NavBar extends Component {
                                     className="caret"></span>
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li><Link to="/admin/projects">Projects</Link></li>
+                                    <li><Link to="/admin/projects"><span className="glyphicon glyphicon-tasks"></span> Projects</Link></li>
+                                    <li><Link to="/admin/users"><span className="glyphicon glyphicon-user"></span> Users</Link></li>
                                 </ul>
                             </li>
                         </ul>

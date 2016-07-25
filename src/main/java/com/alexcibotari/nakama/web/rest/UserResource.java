@@ -3,7 +3,6 @@ package com.alexcibotari.nakama.web.rest;
 
 import com.alexcibotari.nakama.security.AuthoritiesConstants;
 import com.alexcibotari.nakama.service.UserService;
-import com.alexcibotari.nakama.web.rest.dto.ProjectDTO;
 import com.alexcibotari.nakama.web.rest.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,28 +25,28 @@ public class UserResource {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @RequestMapping(path = "/users", method = RequestMethod.GET)
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<List<UserDTO>> getAll() {
         return ResponseEntity.ok(userService.findAll().stream().map(UserDTO::new).collect(Collectors.toList()));
     }
 
-    @RequestMapping(value = "/{userName}", method = RequestMethod.GET)
+    @RequestMapping(path = "/users/{userName}", method = RequestMethod.GET)
     public ResponseEntity<UserDTO> getOne(@PathVariable String userName) {
         return ResponseEntity.ok(new UserDTO(userService.findOneByUserName(userName)));
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(path = "/users", method = RequestMethod.POST)
     public ResponseEntity<UserDTO> create(@RequestBody UserDTO dto) {
         return new ResponseEntity<>(new UserDTO(userService.create(dto)), HttpStatus.CREATED);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(path = "/users", method = RequestMethod.PUT)
     public ResponseEntity<UserDTO> update(@RequestBody UserDTO dto) {
         return ResponseEntity.ok(new UserDTO(userService.update(dto)));
     }
 
-    @RequestMapping(value = "/{userName}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/users/{userName}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable String userName) {
         userService.delete(userName);
         return ResponseEntity.ok().build();
