@@ -5,7 +5,6 @@ import com.alexcibotari.nakama.domain.Project;
 import com.alexcibotari.nakama.web.rest.dto.ProjectDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProjectService {
 

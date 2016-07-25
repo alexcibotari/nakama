@@ -2,6 +2,8 @@ package com.alexcibotari.nakama.web.rest.dto;
 
 import com.alexcibotari.nakama.domain.Project;
 
+import java.time.ZonedDateTime;
+
 public class ProjectDTO {
 
     private Long id;
@@ -11,6 +13,10 @@ public class ProjectDTO {
     private String key;
 
     private String description;
+
+    private ZonedDateTime createdDate;
+
+    private ZonedDateTime lastModifiedDate;
 
     public ProjectDTO() {
     }
@@ -23,10 +29,9 @@ public class ProjectDTO {
     }
 
     public ProjectDTO(Project project) {
-        this.setId(project.getId());
-        this.setName(project.getName());
-        this.setKey(project.getKey());
-        this.setDescription(project.getDescription());
+        this(project.getId(), project.getName(), project.getKey(), project.getDescription());
+        this.setCreatedDate(project.getCreatedDate());
+        this.setLastModifiedDate(project.getLastModifiedDate());
     }
 
     public Long getId() {
@@ -59,5 +64,21 @@ public class ProjectDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ZonedDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(ZonedDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public ZonedDateTime getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(ZonedDateTime lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 }

@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface ProjectRepository extends CrudRepository<Project, Long> {
-    public Project findOneByKey(String key);
-    public void deleteOneByKey(String key);
+    Project findOneByKey(String key);
+    void deleteOneByKey(String key);
 }

@@ -1,7 +1,7 @@
 buildscript {
 
     ext {
-        springBootVersion = '1.3.5.RELEASE'
+        springBootVersion = '1.3.6.RELEASE'
         springLoadedVersion = '1.2.5.RELEASE'
     }
     repositories {
@@ -48,9 +48,11 @@ dependencies {
     //Database
     compile 'org.hibernate:hibernate-envers'
     compile 'mysql:mysql-connector-java'
+    compile 'com.h2database:h2'
 
     //Commons
     compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
     //Test Artifacts -->
     testCompile 'org.springframework.boot:spring-boot-starter-test'
@@ -67,7 +69,15 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.14'
 }
 
-task copyNodeLibs(type: Copy) {
-    from 'node_modules/bootstrap/dist'
-    into 'src/main/webapp/build/bootstrap'
+task copyNodeLibs << {
+    copy {
+        from 'node_modules/bootstrap/dist'
+        into 'src/main/webapp/build/bootstrap'
+    }
+
+    copy {
+        from 'node_modules/jquery/dist'
+        into 'src/main/webapp/build/jquery'
+    }
+
 }

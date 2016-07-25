@@ -2,17 +2,13 @@ package com.alexcibotari.nakama.service;
 
 
 import com.alexcibotari.nakama.domain.Project;
-import com.alexcibotari.nakama.domain.User;
 import com.alexcibotari.nakama.repository.ProjectRepository;
-import com.alexcibotari.nakama.security.SecurityUtils;
 import com.alexcibotari.nakama.web.rest.dto.ProjectDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
