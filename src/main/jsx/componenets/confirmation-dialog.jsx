@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-export default class Modal extends React.Component{
+export default class ConfirmationDialog extends React.Component{
     render(){
         return(
             <div className="modal-container" style={this.props.modalContainerStyle}>
@@ -30,3 +30,9 @@ export default class Modal extends React.Component{
         )
     }
 }
+
+ConfirmationDialog.defaultProps = {
+    title: "Dialog title.",
+    bodyText: "Text of the dialog.",
+    lunchModalBtnText: ""
+};
