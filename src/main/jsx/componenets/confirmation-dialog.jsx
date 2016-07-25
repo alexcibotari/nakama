@@ -1,10 +1,18 @@
 import React, {Component} from 'react';
 
 export default class ConfirmationDialog extends React.Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            modalId: Math.random().toString(36).substr(2, 9)
+        }
+    }
+
     render(){
         return(
             <div className="modal-container" style={this.props.modalContainerStyle}>
-                <div className="modal fade" tabIndex="-1" role="dialog" id={this.props.modalId}>
+                <div className="modal fade" tabIndex="-1" role="dialog" id={this.state.modalId}>
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -24,7 +32,7 @@ export default class ConfirmationDialog extends React.Component{
                         type="button"
                         className={this.props.lunchModalBtnClasses}
                         data-toggle="modal"
-                        data-target={'#'+this.props.modalId}
+                        data-target={'#'+this.state.modalId}
                         style={this.props.lunchModalBtnStyles}>{this.props.lunchModalBtnText}</button>
             </div>
         )
@@ -38,6 +46,5 @@ ConfirmationDialog.defaultProps = {
     lunchModalBtnClasses:"btn",
     lunchModalBtnStyles:{},
     actionBtnAction:{},
-    modalContainerStyle:{},
-    modalId:(new Date%9e6).toString(36)
+    modalContainerStyle:{}
 };
