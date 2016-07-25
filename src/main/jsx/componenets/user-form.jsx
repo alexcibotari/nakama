@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 import client from '../client';
 
-class UserForm extends Component {
+class UserForm extends React.Component {
 
     constructor(props) {
         super(props);
@@ -10,7 +10,7 @@ class UserForm extends Component {
         this.save = this.save.bind(this);
         this.state = {
             url: '/api/users',
-            data: {userName: "", enabled: true, email: "", authorities: ""},
+            data: {userName: "", enabled: true, email: "", authorities: []},
             edit: false,
             users: []
         }

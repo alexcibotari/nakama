@@ -17,6 +17,8 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    public UserDTO() {
+    }
 
     public UserDTO(User user) {
         this(user.getUserName(), user.getEmail(), user.getEnabled(), user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
