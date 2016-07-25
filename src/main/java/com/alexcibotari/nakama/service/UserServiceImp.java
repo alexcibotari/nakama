@@ -74,6 +74,7 @@ public class UserServiceImp implements UserService {
         return (List<User>) userRepository.findAll();
     }
 
+    @Transactional
     public void delete(String userName) {
         userRepository.deleteByUserName(userName);
     }
