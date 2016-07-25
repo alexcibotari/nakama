@@ -42,7 +42,7 @@ class UserForm extends React.Component {
 
     handleChange(e){
         this.state.data[e.target.name] = e.target.value;
-        if(e.target.name == 'enabled'){
+        if(e.target.type == 'checkbox'){
             this.state.data[e.target.name] = e.target.checked;
         }
         this.setState({ data: this.state.data});
