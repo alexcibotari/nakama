@@ -44,15 +44,14 @@ class ProjectList extends Component {
                             <Link to={'/admin/projects/edit/'+project.id}
                                   className="btn btn-sm btn-default glyphicon glyphicon-pencil"
                                   role="button" title="Edit"/>
-                            <ConfirmationDialog 
+                            <ConfirmationDialog
                                 title="Delete Project."
                                bodyText="Are you sure you want to delete the project?"
                                lunchModalBtnClasses="btn btn-sm btn-danger glyphicon glyphicon-trash"
                                lunchModalBtnText=""
                                lunchModalBtnStyles={{float: 'right'}}
                                actionBtnAction={this.deleteProject.bind(this, project.id)}
-                               modalContainerStyle={{marginLeft: 34+'px'}}
-                               modalId={project.id}/>
+                               modalContainerStyle={{marginLeft: 34+'px'}}/>
                         </div>
                     </td>
                 </tr>
