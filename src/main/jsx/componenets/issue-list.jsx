@@ -83,9 +83,9 @@ class IssueList extends Component {
                                 <table className="table table-striped table-condensed">
                                     <thead>
                                     <tr>
-                                        <th>User name</th>
-                                        <th>Email</th>
-                                        <th>enabled</th>
+                                        <th>Issue ID</th>
+                                        <th>Summery</th>
+                                        <th>Description</th>
                                         <th className="text-right">Options</th>
                                     </tr>
                                     </thead>
