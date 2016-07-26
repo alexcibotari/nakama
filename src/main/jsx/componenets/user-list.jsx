@@ -64,7 +64,7 @@ class UserList extends Component {
         </div>);
         if (Array.isArray(this.state.data) && this.state.data.length > 0) {
             return (
-                <div className="container">
+                <div className="col-md-12">
                     <div>
                         {userListHeading}
                         <div className="row">
@@ -90,7 +90,7 @@ class UserList extends Component {
         }
         else {
             return (
-                <div className="container">
+                <div className="col-md-12">
                     {userListHeading}
                     <h4>No user found.</h4>
                 </div>
