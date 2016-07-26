@@ -111,14 +111,25 @@ class IssueForm extends Component {
         };
     }
 
-    dateTime (time) {
+    createdDate (time , timeModified) {
         var currentDate = moment();
         var createdDate = moment(time);
-        var diff = currentDate.diff(createdDate, 'days');
-        if(diff > 14) {
-            return createdDate.format("DD/MM/YYYY HH:mm:ss");
-        } else {
-            return createdDate.fromNow();
+        var lastModifiedDate = moment(timeModified);
+        if (timeModified == false) {
+            var diff = currentDate.diff(createdDate, 'days');
+            if(diff > 14) {
+                return createdDate.format("DD/MM/YYYY HH:mm:ss");
+            } else {
+                return createdDate.fromNow();
+            }
+        }
+        if (time == false) {
+            var diff = currentDate.diff(lastModifiedDate, 'days');
+            if(diff > 14) {
+                return lastModifiedDate.format("DD/MM/YYYY HH:mm:ss");
+            } else {
+                return lastModifiedDate.fromNow();
+            }
         }
     }
 
@@ -126,31 +137,11 @@ class IssueForm extends Component {
         return (
             <form className="form-horizontal">
                 <div className="main-issue-form col-md-8">
-                    <div className="form-group">
-                        <label htmlFor="inputSummery" className="col-sm-2 control-label">Summery</label>
-                        <div className="col-sm-10">
-                            <input name="summery" type="text" className="form-control" classID="inputSummery"
-                                   placeholder="Summery"
-                                   value={this.state.data.summery} onChange={this.handleChange}/>
-                        </div>
+                    <div className="col-md-12">
+                        <h4 className="pull-left">Details </h4>
+                        <hr/>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="inputDesc" className="col-sm-2 control-label">Description</label>
-                        <div className="col-sm-10">
-                        <textarea name="description" className="form-control" rows="3" classID="inputDesc"
-                                  placeholder="Description" value={this.state.data.description}
-                                  onChange={this.handleChange}/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="col-sm-offset-2 col-sm-10 btn-group">
-                            <a className="btn btn-primary" role="button" onClick={this.save}>Save</a>
-                            <Link to={'/projects/' + this.state.data.project + '/issues/'} className="btn btn-danger"
-                                  role="button">Cancel</Link>
-                        </div>
-                    </div>
-                </div>
-                <div className="options-sidebar col-md-4 table-responsive">
+                    <div className="clearfix"></div>
                     <table className="table table-striped">
                         <tbody>
                         <tr>
@@ -184,20 +175,71 @@ class IssueForm extends Component {
                                     selected={this.state.data.status}/>
                             </td>
                         </tr>
+                        </tbody>
+                    </table>
+                    <div className="col-md-12">
+                        <h4 className="pull-left">Description </h4>
+                        <hr/>
+                    </div>
+                    <div className="clearfix"></div>
+                    <div className="form-group">
+                        <label htmlFor="inputSummery" className="col-sm-2 control-label">Summery</label>
+                        <div className="col-sm-10">
+                            <input name="summery" type="text" className="form-control" classID="inputSummery"
+                                   placeholder="Summery"
+                                   value={this.state.data.summery} onChange={this.handleChange}/>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="inputDesc" className="col-sm-2 control-label">Description</label>
+                        <div className="col-sm-10">
+                        <textarea name="description" className="form-control" rows="3" classID="inputDesc"
+                                  placeholder="Description" value={this.state.data.description}
+                                  onChange={this.handleChange}/>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <div className="col-sm-offset-2 col-sm-10 btn-group">
+                            <a className="btn btn-primary" role="button" onClick={this.save}>Save</a>
+                            <Link to={'/projects/' + this.state.data.project + '/issues/'} className="btn btn-danger"
+                                  role="button">Cancel</Link>
+                        </div>
+                    </div>
+                </div>
+                <div className="options-sidebar col-md-4 table-responsive">
+                    <div className="col-md-12 clearfix">
+                        <h4 className="pull-left">People </h4>
+                        <hr/>
+                    </div>
+                    <div className="clearfix"></div>
+                    <table className="table table-striped">
+                        <tbody>
                         <tr>
                             <th className="col-xs-2">Assignees:</th>
                             <td className="col-xs-10">me</td>
                         </tr>
                         <tr>
-                            <th className="col-xs-2">Created date:</th>
-                            <td className="col-xs-10">{this.dateTime(this.state.data.createdDate)}</td>
-                        </tr>
-                        <tr>
-                            <th className="col-xs-2">Labels:</th>
+                            <th className="col-xs-2">Reporter:</th>
                             <td className="col-xs-10"></td>
                         </tr>
                         </tbody>
-
+                    </table>
+                    <div className="col-md-12 clearfix">
+                        <h4 className="pull-left">Dates </h4>
+                        <hr/>
+                    </div>
+                    <div className="clearfix"></div>
+                    <table className="table table-striped">
+                        <tbody>
+                        <tr>
+                            <th className="col-xs-2">Created:</th>
+                            <td className="col-xs-10">{this.createdDate(this.state.data.createdDate, false)}</td>
+                        </tr>
+                        <tr>
+                            <th className="col-xs-2">Updated:</th>
+                            <td className="col-xs-10">{this.createdDate(false, this.state.data.lastModifiedDate)}</td>
+                        </tr>
+                        </tbody>
                     </table>
                 </div>
             </form>
