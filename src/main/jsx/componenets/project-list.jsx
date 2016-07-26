@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import client from '../client';
+import ConfirmationDialog from './confirmation-dialog';
 
 class ProjectList extends Component {
 
@@ -32,7 +33,7 @@ class ProjectList extends Component {
     }
 
     render() {
-        const projects = (Array.isArray(this.state.data) && this.state.data.length > 0) ? this.state.data.map(project => {
+        const projects = this.state.data.map(project => {
             return (
                 <tr key={project.id}>
                     <td><b>{project.name}</b></td>
@@ -43,41 +44,58 @@ class ProjectList extends Component {
                             <Link to={'/admin/projects/edit/'+project.id}
                                   className="btn btn-sm btn-default glyphicon glyphicon-pencil"
                                   role="button" title="Edit"/>
-                            <a className="btn btn-sm btn-danger glyphicon glyphicon-trash" role="button"
-                               onClick={this.deleteProject.bind(this,project.id)} title="Delete"/>
+                            <ConfirmationDialog
+                                title="Delete Project."
+                               bodyText="Are you sure you want to delete the project?"
+                               lunchModalBtnClasses="btn btn-sm btn-danger glyphicon glyphicon-trash"
+                               lunchModalBtnText=""
+                               lunchModalBtnStyles={{float: 'right'}}
+                               actionBtnAction={this.deleteProject.bind(this, project.id)}
+                               modalContainerStyle={{marginLeft: 34+'px'}}/>
                         </div>
                     </td>
                 </tr>
             )
-        }) : (<tr>
-            <td colSpan="3"><h4>No project found.</h4></td>
-        </tr>);
+        });
 
-        return (
-            <div>
-                <div className="row">
-                    <h1>Project List:<Link to={'/admin/projects/create'}
-                                           className="btn-lg pull-right btn btn-success glyphicon glyphicon-plus"/></h1>
-                </div>
-                <div className="row">
-                    <div className="table-responsive">
-                        <table className="table table-striped table-condensed">
-                            <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Key</th>
-                                <th>Description</th>
-                                <th className="text-right">Options</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {projects}
-                            </tbody>
-                        </table>
+        const ProjectListHeading = (
+            <div className="row">
+                <h1>Project List:<Link to={'/admin/projects/create'}
+                                       className="btn-lg pull-right btn btn-success glyphicon glyphicon-plus"/></h1>
+            </div>
+        );
+
+        if (Array.isArray(this.state.data) && this.state.data.length > 0) {
+            return (
+                <div className="container">
+                    {ProjectListHeading}
+                    <div className="row">
+                        <div className="table-responsive">
+                            <table className="table table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Key</th>
+                                    <th>Description</th>
+                                    <th className="text-right">Options</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {projects}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }else{
+            return(
+                <div className="container">
+                    {ProjectListHeading}
+                    <h4>No project found.</h4>
+                </div>
+            )
+        }
     }
 }
 

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import client from '../client';
+import ConfirmationDialog from './confirmation-dialog';
 
 class IssueList extends Component {
 
@@ -51,8 +52,14 @@ class IssueList extends Component {
                             <Link to={'/issues/' + issue.id +'/edit'}
                                   className="btn btn-sm btn-default glyphicon glyphicon-pencil"
                                   role="button"/>
-                            <a className="btn btn-sm btn-danger glyphicon glyphicon-trash" role="button"
-                               onClick={this.deleteIssue.bind(this, issue.id)}/>
+                            <ConfirmationDialog
+                                title="Delete Issue."
+                                bodyText="Are you sure you want to delete the issue?"
+                                lunchModalBtnClasses="btn btn-sm btn-danger glyphicon glyphicon-trash"
+                                lunchModalBtnText=""
+                                lunchModalBtnStyles={{float: 'right'}}
+                                actionBtnAction={this.deleteIssue.bind(this, issue.id)}
+                                modalContainerStyle={{marginLeft: 34+'px'}}/>
                         </div>
                     </td>
                 </tr>
