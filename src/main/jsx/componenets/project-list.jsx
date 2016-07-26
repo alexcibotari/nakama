@@ -33,7 +33,7 @@ class ProjectList extends Component {
     }
 
     render() {
-        const projects = (Array.isArray(this.state.data) && this.state.data.length > 0) ? this.state.data.map(project => {
+        const projects = this.state.data.map(project => {
             return (
                 <tr key={project.id}>
                     <td><b>{project.name}</b></td>
@@ -56,35 +56,46 @@ class ProjectList extends Component {
                     </td>
                 </tr>
             )
-        }) : (<tr>
-            <td colSpan="3"><h4>No project found.</h4></td>
-        </tr>);
+        });
 
-        return (
-            <div>
-                <div className="row">
-                    <h1>Project List:<Link to={'/admin/projects/create'}
-                                           className="btn-lg pull-right btn btn-success glyphicon glyphicon-plus"/></h1>
-                </div>
-                <div className="row">
-                    <div className="table-responsive">
-                        <table className="table table-striped table-condensed">
-                            <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Key</th>
-                                <th>Description</th>
-                                <th className="text-right">Options</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {projects}
-                            </tbody>
-                        </table>
+        const ProjectListHeading = (
+            <div className="row">
+                <h1>Project List:<Link to={'/admin/projects/create'}
+                                       className="btn-lg pull-right btn btn-success glyphicon glyphicon-plus"/></h1>
+            </div>
+        );
+
+        if (Array.isArray(this.state.data) && this.state.data.length > 0) {
+            return (
+                <div className="container">
+                    {ProjectListHeading}
+                    <div className="row">
+                        <div className="table-responsive">
+                            <table className="table table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Key</th>
+                                    <th>Description</th>
+                                    <th className="text-right">Options</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {projects}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }else{
+            return(
+                <div className="container">
+                    {ProjectListHeading}
+                    <h4>No project found.</h4>
+                </div>
+            )
+        }
     }
 }
 
