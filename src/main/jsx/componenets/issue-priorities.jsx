@@ -3,69 +3,66 @@ import {Link} from 'react-router';
 import client from '../client';
 import ConfirmationDialog from './confirmation-dialog';
 
-export default class IssueTypes extends Component {
+export default class IssuePriorities extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            issueTypeList: []
+            issuePriorityList: []
         }
     }
 
     componentDidMount() {
-        client({method: 'GET', path: this.props.apiUrl.types}).then(response => {
+        client({method: 'GET', path: this.props.apiUrl.priorities}).then(response => {
             if (response.status.code === 200) {
-                this.setState({issueTypeList: response.entity});
+                this.setState({issuePriorityList: response.entity});
             }
         });
     }
 
-    deleteIssueType(id) {
-        client({method: 'DELETE', path: this.props.apiUrl.types + '/' + id}).then(response => {
+    deleteIssuePriority(id) {
+        client({method: 'DELETE', path: this.props.apiUrl.priorities + '/' + id}).then(response => {
             if (response.status.code == 200) {
-                var delIndex = this.state.issueTypeList.findIndex(function (type) {
-                    return type.id === id;
+                var delIndex = this.state.issuePriorityList.findIndex(function (priority) {
+                    return priority.id === id;
                 });
-                this.state.issueTypeList.splice(delIndex, 1);
+                this.state.issuePriorityList.splice(delIndex, 1);
                 this.forceUpdate();
             }
         });
     }
 
     render() {
-        const types = this.state.issueTypeList.map(type => {
+        const priorities = this.state.issuePriorityList.map(priority => {
             return (
-                <tr key={type.id}>
-                    <td><b>{type.name}</b></td>
-                    <td>{type.description}</td>
+                <tr key={priority.id}>
+                    <td><b>{priority.name}</b></td>
+                    <td>{priority.description}</td>
                     <td>
                         <div className="btn-group pull-right" role="group">
-                            <Link to={'admin/issues/types/edit/' + type.id}
-                                  className="btn btn-sm btn-default glyphicon glyphicon-pencil"
-                                  role="button"/>
                             <ConfirmationDialog
-                                title="Delete Issue Type."
-                                bodyText="Are you sure you want to delete the Issue Type?"
+                                title="Delete Issue Priority."
+                                bodyText="Are you sure you want to delete the Issue Priority?"
                                 lunchModalBtnClasses="btn btn-sm btn-danger glyphicon glyphicon-trash"
                                 lunchModalBtnText=""
                                 lunchModalBtnStyles={{float: 'right'}}
-                                actionBtnAction={this.deleteIssueType.bind(this, type.id)}
+                                actionBtnAction={this.deleteIssuePriority.bind(this, priority.id)}
                                 modalContainerStyle={{marginLeft: 34+'px'}}/>
                         </div>
                     </td>
                 </tr>
             )
         });
-        const IssueTypeListHeading = (<div className="row">
-            <h1>Issue Type List:<Link to={'admin/issues/types/create'}
-                                className="pull-right btn btn-lg btn-success glyphicon glyphicon-plus"/>
+        const tableHeading = (<div className="row">
+            <h1>Issue Priority List:<Link to={'admin/issues/types/create'}
+                                      className="pull-right btn btn-lg btn-success glyphicon glyphicon-plus"/>
             </h1>
         </div>);
-        if (Array.isArray(this.state.issueTypeList) && this.state.issueTypeList.length > 0) {
+        if (Array.isArray(this.state.issuePriorityList) && this.state.issuePriorityList.length > 0) {
             return (
                 <div className="col-md-12">
                     <div>
-                        {IssueTypeListHeading}
+                        {tableHeading}
                         <div className="row">
                             <div className="table-responsive">
                                 <table className="table table-striped table-condensed">
@@ -77,7 +74,7 @@ export default class IssueTypes extends Component {
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {types}
+                                    {priorities}
                                     </tbody>
                                 </table>
                             </div>
@@ -89,7 +86,7 @@ export default class IssueTypes extends Component {
         else {
             return (
                 <div className="col-md-12">
-                    {IssueTypeListHeading}
+                    {tableHeading}
                     <h4>No type found.</h4>
                 </div>
             )
@@ -97,4 +94,4 @@ export default class IssueTypes extends Component {
     }
 }
 
-IssueTypes.defaultProps = {apiUrl: {types: '/api/admin/issues/types'}};
+IssuePriorities.defaultProps = {apiUrl: {priorities: '/api/admin/issues/priorities'}};
