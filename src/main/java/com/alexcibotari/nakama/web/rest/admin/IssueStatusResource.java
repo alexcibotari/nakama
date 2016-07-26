@@ -1,5 +1,6 @@
 package com.alexcibotari.nakama.web.rest.admin;
 
+import com.alexcibotari.nakama.security.AuthoritiesConstants;
 import com.alexcibotari.nakama.service.IssueStatusService;
 import com.alexcibotari.nakama.web.rest.dto.IssueStatusDTO;
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,16 +35,19 @@ public class IssueStatusResource {
     }
 
     @RequestMapping(method = RequestMethod.POST)
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<IssueStatusDTO> create(@RequestBody IssueStatusDTO dto) {
         return new ResponseEntity<>(new IssueStatusDTO(issueStatusService.create(dto)), HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<IssueStatusDTO> update(@RequestBody IssueStatusDTO dto) {
         return ResponseEntity.ok(new IssueStatusDTO(issueStatusService.update(dto)));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         issueStatusService.delete(id);
         return ResponseEntity.ok().build();

@@ -1,5 +1,6 @@
 package com.alexcibotari.nakama.web.rest.admin;
 
+import com.alexcibotari.nakama.security.AuthoritiesConstants;
 import com.alexcibotari.nakama.service.IssuePriorityService;
 import com.alexcibotari.nakama.service.IssueService;
 import com.alexcibotari.nakama.service.IssueStatusService;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,16 +41,19 @@ public class IssuePriorityResource {
     }
 
     @RequestMapping(method = RequestMethod.POST)
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<IssuePriorityDTO> create(@RequestBody IssuePriorityDTO dto) {
         return new ResponseEntity<>(new IssuePriorityDTO(issuePriorityService.create(dto)), HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<IssuePriorityDTO> update(@RequestBody IssuePriorityDTO dto) {
         return ResponseEntity.ok(new IssuePriorityDTO(issuePriorityService.update(dto)));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         issuePriorityService.delete(id);
         return ResponseEntity.ok().build();
