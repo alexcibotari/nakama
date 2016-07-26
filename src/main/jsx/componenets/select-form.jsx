@@ -5,8 +5,7 @@ class SelectForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            edit: false,
-            selected: 0
+            edit: false
         };
     }
 
@@ -19,9 +18,12 @@ class SelectForm extends Component {
     }
 
     handleChange(e) {
-        this.setState({ selected: e.currentTarget.value });
         if (this.props.onChange) {
-            this.props.onChange(e);
+            for (var i = 0; i < this.props.options.length; i++) {
+                if (this.props.options[i].id == e.target.value) {
+                    this.props.onChange(this.props.options[i]);
+                }
+            }
         }
     }
 
@@ -31,12 +33,11 @@ class SelectForm extends Component {
         );
         return (
             <select
+                autoFocus={true}
                 className="form-control"
-                name={this.props.name}
-                value={this.state.selected.id}
+                defaultValue={this.props.selected.id}
                 onChange={this.handleChange.bind(this)}
                 onBlur={this.blurSelect.bind(this)}>
-                <option value="">Please select a value</option>
                 {options}
             </select>
         )
@@ -47,7 +48,7 @@ class SelectForm extends Component {
             return this.renderForm();
         } else if (this.props.selected) {
             return (
-                <p onClick={this.editSelect.bind(this)} title={this.props.selected.description}>{this.props.selected.name}</p>
+                <a onClick={this.editSelect.bind(this)} title={this.props.selected.description}>{this.props.selected.name} <span className="caret"></span></a>
             )
         } else {
             return this.renderForm();
@@ -56,4 +57,3 @@ class SelectForm extends Component {
 }
 
 export default SelectForm;
-SelectForm.defaultProps = {name: (new Date%9e6).toString(36)};

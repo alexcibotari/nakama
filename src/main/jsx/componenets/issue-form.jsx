@@ -42,21 +42,6 @@ class IssueForm extends Component {
     }
 
     componentWillMount() {
-        client({method: 'GET', path: this.props.apiUrl.issue + '/priority'}).then(response => {
-            if (response.status.code == 200) {
-                this.setState({priorities: response.entity});
-            }
-        });
-        client({method: 'GET', path: this.props.apiUrl.issue + '/status'}).then(response => {
-            if (response.status.code == 200) {
-                this.setState({statuses: response.entity});
-            }
-        });
-        client({method: 'GET', path: this.props.apiUrl.issue + '/type'}).then(response => {
-            if (response.status.code == 200) {
-                this.setState({types: response.entity});
-            }
-        });
         if (this.props.params.issueId) {
             client({method: 'GET', path: this.props.apiUrl.issue + '/' + this.props.params.issueId}).then(response => {
                 if (response.status.code == 200) {
@@ -66,6 +51,35 @@ class IssueForm extends Component {
         } else {
             this.state.data.project = this.props.params.projectKey;
         }
+
+        client({method: 'GET', path: this.props.apiUrl.issue + '/priority'}).then(response => {
+            if (response.status.code == 200) {
+                this.setState({priorities: response.entity});
+                if(!this.state.edit && this.state.priorities.length > 0) {
+                    this.state.data.priority = this.state.priorities[0];
+                    this.forceUpdate();
+                }
+
+            }
+        });
+        client({method: 'GET', path: this.props.apiUrl.issue + '/status'}).then(response => {
+            if (response.status.code == 200) {
+                this.setState({statuses: response.entity});
+                if(!this.state.edit && this.state.statuses.length > 0) {
+                    this.state.data.status = this.state.statuses[0];
+                    this.forceUpdate();
+                }
+            }
+        });
+        client({method: 'GET', path: this.props.apiUrl.issue + '/type'}).then(response => {
+            if (response.status.code == 200) {
+                this.setState({types: response.entity});
+                if(!this.state.edit && this.state.types.length > 0) {
+                    this.state.data.type = this.state.types[0];
+                    this.forceUpdate();
+                }
+            }
+        });
     }
 
     save() {
@@ -89,13 +103,12 @@ class IssueForm extends Component {
         this.setState({data: this.state.data});
     }
 
-    handleSelectChange(e) {
-        for (var i = 0; i < this.state[e.target.name].length; i++) {
-            if (this.state[e.target.name][i].id == e.target.value) {
-                this.state.data[e.target.name] = this.state[e.target.name][i];
-            }
-        }
-        this.setState({data: this.state.data});
+    handleSelectChange(name) {
+        var self = this;
+        return function(e) {
+            self.state.data[name] = e;
+            self.setState({data: self.state.data});
+        };
     }
 
     render() {
@@ -137,8 +150,7 @@ class IssueForm extends Component {
                             <th className="col-xs-2">Priority:</th>
                             <td className="col-xs-10">
                                 <SelectForm
-                                    onChange={this.handleSelectChange}
-                                    name="priority"
+                                    onChange={this.handleSelectChange('priority')}
                                     options={this.state.priorities}
                                     selected={this.state.data.priority}/>
                             </td>
@@ -147,8 +159,7 @@ class IssueForm extends Component {
                             <th className="col-xs-2">Type:</th>
                             <td className="col-xs-10">
                                 <SelectForm
-                                    onChange={this.handleSelectChange}
-                                    name="type"
+                                    onChange={this.handleSelectChange('type')}
                                     options={this.state.types}
                                     selected={this.state.data.type}/>
                             </td>
@@ -157,8 +168,7 @@ class IssueForm extends Component {
                             <th className="col-xs-2">Status:</th>
                             <td className="col-xs-10">
                                 <SelectForm
-                                    onChange={this.handleSelectChange}
-                                    name="status"
+                                    onChange={this.handleSelectChange('status')}
                                     options={this.state.statuses}
                                     selected={this.state.data.status}/>
                             </td>
