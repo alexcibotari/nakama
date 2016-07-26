@@ -75,7 +75,7 @@ class IssueList extends Component {
 
         if (Array.isArray(this.state.data) && this.state.data.length > 0) {
             return (
-                <div className="container">
+                <div className="col-md-12">
                     <div>
                         {IssueListHeading}
                         <div className="row">
@@ -100,7 +100,7 @@ class IssueList extends Component {
             )
         } else {
             return (
-                <div className="container">
+                <div className="col-md-12">
                     {IssueListHeading}
                     <h4>No issues found.</h4>
                 </div>

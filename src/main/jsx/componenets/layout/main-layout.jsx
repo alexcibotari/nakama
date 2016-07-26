@@ -21,7 +21,7 @@ class MainLayout extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container-fluid">
                 <NavBar brand="Nakama" profile={this.state.profile} />
                 {this.props.children}
             </div>
