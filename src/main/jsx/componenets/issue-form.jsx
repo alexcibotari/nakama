@@ -111,6 +111,17 @@ class IssueForm extends Component {
         };
     }
 
+    dateTime (time) {
+        var currentDate = moment();
+        var createdDate = moment(time);
+        var diff = currentDate.diff(createdDate, 'days');
+        if(diff > 14) {
+            return createdDate.format("DD/MM/YYYY HH:mm:ss");
+        } else {
+            return createdDate.fromNow();
+        }
+    }
+
     render() {
         return (
             <form className="form-horizontal">
@@ -179,7 +190,7 @@ class IssueForm extends Component {
                         </tr>
                         <tr>
                             <th className="col-xs-2">Created date:</th>
-                            <td className="col-xs-10">get Date</td>
+                            <td className="col-xs-10">{this.dateTime(this.state.data.createdDate)}</td>
                         </tr>
                         <tr>
                             <th className="col-xs-2">Labels:</th>

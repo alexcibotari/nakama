@@ -66,7 +66,7 @@ idea {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.14.1'
+    gradleVersion = '2.14'
 }
 
 task copyNodeLibs << {
@@ -78,6 +78,11 @@ task copyNodeLibs << {
     copy {
         from 'node_modules/jquery/dist'
         into 'src/main/webapp/build/jquery'
+    }
+
+    copy {
+        from 'node_modules/moment/min'
+        into 'src/main/webapp/build/moment'
     }
 
 }
