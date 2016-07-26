@@ -17,7 +17,10 @@ import Home from './componenets/home';
 import Profile from './componenets/profile';
 import Settings from './componenets/settings';
 import IssueTypes from './componenets/issue-types';
+import IssuePriorities from './componenets/issue-priorities';
+import IssueStatuses from './componenets/issue-statuses';
 import IssueSidebar from './componenets/issue-sidebar';
+import IssueTypesForm from './componenets/issue-types';
 
 class App extends Component {
     render() {
@@ -48,6 +51,10 @@ class App extends Component {
                         </Route>
                         <Route path="issues">
                             <Route path="types" components={{ main: IssueTypes, sidebar: IssueSidebar}}/>
+                            <Route path="types/create" components={{main: IssueTypesForm}}/>
+                            <Route path="types/edit/:id" components={{main: IssueTypesForm}}/>
+                            <Route path="priorities" components={{ main: IssuePriorities, sidebar: IssueSidebar}}/>
+                            <Route path="statuses" components={{ main: IssueStatuses, sidebar: IssueSidebar}}/>
                         </Route>
                     </Route>
                 </Route>
