@@ -28,7 +28,7 @@ class NavBar extends Component {
         }) : (<li><p>No project found.</p></li>);
         return (
             <nav className="navbar navbar-default navbar-fixed-top">
-                <div className="container">
+                <div className="container-fluid">
                     <div className="navbar-header">
                         <button type="button" className="navbar-toggle collapsed" data-toggle="collapse"
                                 data-target="#navbar"
@@ -81,6 +81,7 @@ class NavBar extends Component {
                                 </a>
                                 <ul className="dropdown-menu">
                                     <li><Link to="/admin/projects"><span className="glyphicon glyphicon-tasks"></span> Projects</Link></li>
+                                    <li><Link to="/admin/issues/types"><span className="glyphicon glyphicon-list-alt"></span> Issues</Link></li>
                                     <li><Link to="/admin/users"><span className="glyphicon glyphicon-user"></span> Users</Link></li>
                                 </ul>
                             </li>

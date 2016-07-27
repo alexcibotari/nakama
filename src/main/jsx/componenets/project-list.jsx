@@ -59,7 +59,7 @@ class ProjectList extends Component {
         });
 
         const ProjectListHeading = (
-            <div className="row">
+            <div>
                 <h1>Project List:<Link to={'/admin/projects/create'}
                                        className="btn-lg pull-right btn btn-success glyphicon glyphicon-plus"/></h1>
             </div>
@@ -67,7 +67,7 @@ class ProjectList extends Component {
 
         if (Array.isArray(this.state.data) && this.state.data.length > 0) {
             return (
-                <div className="container">
+                <div>
                     {ProjectListHeading}
                     <div className="row">
                         <div className="table-responsive">

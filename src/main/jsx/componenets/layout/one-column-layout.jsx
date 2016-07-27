@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class IssueLayout extends Component {
+export default class OneColumnLayout extends Component {
 
     constructor(props) {
         super(props);
@@ -8,11 +8,9 @@ class IssueLayout extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div>
                 {this.props.children}
             </div>
         )
     }
 }
-
-export default IssueLayout;

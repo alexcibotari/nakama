@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router';
+import {Link, withRouter} from 'react-router';
 import client from '../client';
 import SelectForm from './select-form';
 
@@ -86,13 +86,13 @@ class IssueForm extends Component {
         if (this.state.edit) {
             client({method: 'PUT', path: this.props.apiUrl.issue, entity: this.state.data}).then(response => {
                 if (response.status.code == 200) {
-                    this.props.history.push('/projects/' + this.state.data.project + '/issues/');
+                    this.props.router.push('/projects/' + this.state.data.project + '/issues/');
                 }
             });
         } else {
             client({method: 'POST', path: this.props.apiUrl.issue, entity: this.state.data}).then(response => {
                 if (response.status.code == 201) {
-                    this.props.history.push('/projects/' + this.state.data.project + '/issues/');
+                    this.props.router.push('/projects/' + this.state.data.project + '/issues/');
                 }
             });
         }
@@ -209,5 +209,5 @@ class IssueForm extends Component {
     }
 }
 
-export default IssueForm;
+export default withRouter(IssueForm)
 IssueForm.defaultProps = {apiUrl: {issue: '/api/issues'}};

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router';
+import {Link, withRouter} from 'react-router';
 import client from '../client';
 
 class ProjectForm extends Component {
@@ -28,13 +28,13 @@ class ProjectForm extends Component {
         if (this.state.edit) {
             client({method: 'PUT', path: this.props.apiUrl.project, entity: this.state.data}).then(response => {
                 if (response.status.code == 200) {
-                    this.props.history.push('admin/projects');
+                    this.props.router.push('admin/projects');
                 }
             });
         } else {
             client({method: 'POST', path: this.props.apiUrl.project, entity: this.state.data}).then(response => {
                 if (response.status.code == 201) {
-                    this.props.history.push('admin/projects');
+                    this.props.router.push('admin/projects');
                 }
             });
         }
@@ -133,5 +133,5 @@ class ProjectForm extends Component {
     }
 }
 
-export default ProjectForm;
+export default withRouter(ProjectForm)
 ProjectForm.defaultProps = {apiUrl: {project: '/api/projects'}};
