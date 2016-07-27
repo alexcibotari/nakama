@@ -32,21 +32,25 @@ public class UserResource {
     }
 
     @RequestMapping(path = "/users/{userName}", method = RequestMethod.GET)
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<UserDTO> getOne(@PathVariable String userName) {
         return ResponseEntity.ok(new UserDTO(userService.findOneByUserName(userName)));
     }
 
     @RequestMapping(path = "/users", method = RequestMethod.POST)
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<UserDTO> create(@RequestBody UserDTO dto) {
         return new ResponseEntity<>(new UserDTO(userService.create(dto)), HttpStatus.CREATED);
     }
 
     @RequestMapping(path = "/users", method = RequestMethod.PUT)
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<UserDTO> update(@RequestBody UserDTO dto) {
         return ResponseEntity.ok(new UserDTO(userService.update(dto)));
     }
 
     @RequestMapping(path = "/users/{userName}", method = RequestMethod.DELETE)
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> delete(@PathVariable String userName) {
         userService.delete(userName);
         return ResponseEntity.ok().build();

@@ -1,14 +1,9 @@
-package com.alexcibotari.nakama;
+package com.alexcibotari.nakama.web.rest.constraint;
 
-import com.alexcibotari.nakama.web.rest.constraint.ConstraintDefinition;
 import com.alexcibotari.nakama.web.rest.constraint.definition.MaxDefinition;
 import com.alexcibotari.nakama.web.rest.constraint.definition.MinDefinition;
 import com.alexcibotari.nakama.web.rest.constraint.definition.NotNullDefinition;
 import com.alexcibotari.nakama.web.rest.constraint.definition.SizeDefinition;
-import com.alexcibotari.nakama.web.rest.dto.UserDTO;
-import org.junit.Test;
-import org.springframework.boot.test.IntegrationTest;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -21,18 +16,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+public class Validator {
 
-@WebAppConfiguration
-@IntegrationTest
-public class ReflectionTest {
-
-
-    @Test
-    public void getAnnotations() {
-
+    public static Map<String, List<ConstraintDefinition>> extractRule(Class clazz) {
         Map<String, List<ConstraintDefinition>> params = new HashMap<>();
-        System.out.println(UserDTO.class.getSimpleName());
-        for (Field f : UserDTO.class.getDeclaredFields()) {
+        for (Field f : clazz.getDeclaredFields()) {
             List<ConstraintDefinition> definitionList = new ArrayList<>();
             for (Annotation annotation : f.getAnnotations()) {
                 if (annotation instanceof NotNull) {
@@ -47,8 +35,6 @@ public class ReflectionTest {
             }
             params.put(f.getName(), definitionList);
         }
-
-        System.out.println(params);
+        return params;
     }
-
 }
