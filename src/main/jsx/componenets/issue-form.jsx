@@ -111,25 +111,14 @@ class IssueForm extends Component {
         };
     }
 
-    createdDate (time , timeModified) {
-        var currentDate = moment();
-        var createdDate = moment(time);
-        var lastModifiedDate = moment(timeModified);
-        if (timeModified == false) {
-            var diff = currentDate.diff(createdDate, 'days');
-            if(diff > 14) {
-                return createdDate.format("DD/MM/YYYY HH:mm:ss");
-            } else {
-                return createdDate.fromNow();
-            }
-        }
-        if (time == false) {
-            var diff = currentDate.diff(lastModifiedDate, 'days');
-            if(diff > 14) {
-                return lastModifiedDate.format("DD/MM/YYYY HH:mm:ss");
-            } else {
-                return lastModifiedDate.fromNow();
-            }
+    timeDifference(time) {
+        var initialTime = moment(time);
+
+        var diff = moment().diff(initialTime, 'days');
+        if(diff > 14) {
+            return initialTime.format("DD/MM/YYYY HH:mm:ss");
+        } else {
+            return initialTime.fromNow();
         }
     }
 
@@ -233,11 +222,11 @@ class IssueForm extends Component {
                         <tbody>
                         <tr>
                             <th className="col-xs-2">Created:</th>
-                            <td className="col-xs-10">{this.createdDate(this.state.data.createdDate, false)}</td>
+                            <td className="col-xs-10">{this.timeDifference(this.state.data.createdDate)}</td>
                         </tr>
                         <tr>
                             <th className="col-xs-2">Updated:</th>
-                            <td className="col-xs-10">{this.createdDate(false, this.state.data.lastModifiedDate)}</td>
+                            <td className="col-xs-10">{this.timeDifference(this.state.data.lastModifiedDate)}</td>
                         </tr>
                         </tbody>
                     </table>
