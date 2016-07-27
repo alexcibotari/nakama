@@ -67,7 +67,7 @@ class ProjectList extends Component {
 
         if (Array.isArray(this.state.data) && this.state.data.length > 0) {
             return (
-                <div className="container">
+                <div>
                     {ProjectListHeading}
                     <div className="row">
                         <div className="table-responsive">

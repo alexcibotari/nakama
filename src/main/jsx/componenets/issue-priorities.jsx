@@ -40,6 +40,9 @@ export default class IssuePriorities extends Component {
                     <td>{priority.description}</td>
                     <td>
                         <div className="btn-group pull-right" role="group">
+                            <Link to={'admin/issues/priorities/edit/' + priority.id}
+                                  className="btn btn-sm btn-default glyphicon glyphicon-pencil"
+                                  role="button"/>
                             <ConfirmationDialog
                                 title="Delete Issue Priority."
                                 bodyText="Are you sure you want to delete the Issue Priority?"
@@ -54,7 +57,7 @@ export default class IssuePriorities extends Component {
             )
         });
         const tableHeading = (<div className="row">
-            <h1>Issue Priority List:<Link to={'admin/issues/types/create'}
+            <h1>Issue Priority List:<Link to={'admin/issues/priorities/create'}
                                       className="pull-right btn btn-lg btn-success glyphicon glyphicon-plus"/>
             </h1>
         </div>);

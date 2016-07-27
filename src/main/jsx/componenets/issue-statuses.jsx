@@ -40,6 +40,9 @@ export default class IssueStatuses extends Component {
                     <td>{status.description}</td>
                     <td>
                         <div className="btn-group pull-right" role="group">
+                            <Link to={'admin/issues/statuses/edit/' + status.id}
+                                  className="btn btn-sm btn-default glyphicon glyphicon-pencil"
+                                  role="button"/>
                             <ConfirmationDialog
                                 title="Delete Issue Status."
                                 bodyText="Are you sure you want to delete the Issue Status?"
@@ -55,7 +58,7 @@ export default class IssueStatuses extends Component {
         });
         const tableHeading = (<div className="row">
             <h1>Issue Status List:
-                <Link to={'admin/issues/types/create'} className="pull-right btn btn-lg btn-success glyphicon glyphicon-plus"/>
+                <Link to={'admin/issues/statuses/create'} className="pull-right btn btn-lg btn-success glyphicon glyphicon-plus"/>
             </h1>
         </div>);
         if (Array.isArray(this.state.data) && this.state.data.length > 0) {
