@@ -55,8 +55,8 @@ class App extends Component {
                         <Route path="issues">
                             <Route path="types">
                                 <IndexRoute components={{ main: IssueTypes, sidebar: IssueSidebar}}/>
-                                <Route path="types/create" components={{main: IssueTypesForm, sidebar: IssueSidebar}}/>
-                                <Route path="types/edit/:id" components={{main: IssueTypesForm, sidebar: IssueSidebar}}/>
+                                <Route path="create" components={{main: IssueTypesForm, sidebar: IssueSidebar}}/>
+                                <Route path="edit/:id" components={{main: IssueTypesForm, sidebar: IssueSidebar}}/>
                             </Route>
                             <Route path="priorities">
                                 <IndexRoute components={{ main: IssuePriorities, sidebar: IssueSidebar}}/>
