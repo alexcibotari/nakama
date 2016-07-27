@@ -1,15 +1,11 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import client from '../client';
-import SelectForm from './select-form';
 
-class IssueForm extends Component {
+class IssueView extends Component {
 
     constructor(props) {
         super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSelectChange = this.handleSelectChange.bind(this);
-        this.save = this.save.bind(this);
         this.state = {
             data: {
                 id: '',
@@ -82,33 +78,15 @@ class IssueForm extends Component {
         });
     }
 
-    save() {
-        if (this.state.edit) {
-            client({method: 'PUT', path: this.props.apiUrl.issue, entity: this.state.data}).then(response => {
-                if (response.status.code == 200) {
-                    this.props.history.push('/projects/' + this.state.data.project + '/issues/');
-                }
-            });
+    timeDifference(time) {
+        var initialTime = moment(time);
+
+        var diff = moment().diff(initialTime, 'days');
+        if(diff > 14) {
+            return initialTime.format("DD/MM/YYYY HH:mm:ss");
         } else {
-            client({method: 'POST', path: this.props.apiUrl.issue, entity: this.state.data}).then(response => {
-                if (response.status.code == 201) {
-                    this.props.history.push('/projects/' + this.state.data.project + '/issues/');
-                }
-            });
+            return initialTime.fromNow();
         }
-    }
-
-    handleChange(e) {
-        this.state.data[e.target.name] = e.target.value;
-        this.setState({data: this.state.data});
-    }
-
-    handleSelectChange(name) {
-        var self = this;
-        return function(e) {
-            self.state.data[name] = e;
-            self.setState({data: self.state.data});
-        };
     }
 
     render() {
@@ -128,30 +106,15 @@ class IssueForm extends Component {
                         </tr>
                         <tr>
                             <th className="col-xs-2">Priority:</th>
-                            <td className="col-xs-10">
-                                <SelectForm
-                                    onChange={this.handleSelectChange('priority')}
-                                    options={this.state.priorities}
-                                    selected={this.state.data.priority}/>
-                            </td>
+                            <td className="col-xs-10">{this.state.data.priority.name}</td>
                         </tr>
                         <tr>
                             <th className="col-xs-2">Type:</th>
-                            <td className="col-xs-10">
-                                <SelectForm
-                                    onChange={this.handleSelectChange('type')}
-                                    options={this.state.types}
-                                    selected={this.state.data.type}/>
-                            </td>
+                            <td className="col-xs-10">{this.state.data.type.name}</td>
                         </tr>
                         <tr>
                             <th className="col-xs-2">Status:</th>
-                            <td className="col-xs-10">
-                                <SelectForm
-                                    onChange={this.handleSelectChange('status')}
-                                    options={this.state.statuses}
-                                    selected={this.state.data.status}/>
-                            </td>
+                            <td className="col-xs-10">{this.state.data.status.name}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -163,24 +126,19 @@ class IssueForm extends Component {
                     <div className="form-group">
                         <label htmlFor="inputSummery" className="col-sm-2 control-label">Summery</label>
                         <div className="col-sm-10">
-                            <input name="summery" type="text" className="form-control" classID="inputSummery"
-                                   placeholder="Summery"
-                                   value={this.state.data.summery} onChange={this.handleChange}/>
+                            <h4>{this.state.data.summery}</h4>
                         </div>
                     </div>
                     <div className="form-group">
                         <label htmlFor="inputDesc" className="col-sm-2 control-label">Description</label>
                         <div className="col-sm-10">
-                        <textarea name="description" className="form-control" rows="3" classID="inputDesc"
-                                  placeholder="Description" value={this.state.data.description}
-                                  onChange={this.handleChange}/>
+                            <p>{this.state.data.description}</p>
                         </div>
                     </div>
                     <div className="form-group">
-                        <div className="col-sm-offset-2 col-sm-10 btn-group">
-                            <a className="btn btn-primary" role="button" onClick={this.save}>Save</a>
-                            <Link to={'/projects/' + this.state.data.project + '/issues/'} className="btn btn-danger"
-                                  role="button">Cancel</Link>
+                        <div className="col-sm-12">
+                            <Link to={'/projects/' + this.state.data.project + '/issues/'} className="btn btn-primary"
+                                  role="button">Back</Link>
                         </div>
                     </div>
                 </div>
@@ -202,6 +160,23 @@ class IssueForm extends Component {
                         </tr>
                         </tbody>
                     </table>
+                    <div className="col-md-12 clearfix">
+                        <h4 className="pull-left">Dates </h4>
+                        <hr/>
+                    </div>
+                    <div className="clearfix"></div>
+                    <table className="table table-striped">
+                        <tbody>
+                        <tr>
+                            <th className="col-xs-2">Created:</th>
+                            <td className="col-xs-10">{this.timeDifference(this.state.data.createdDate)}</td>
+                        </tr>
+                        <tr>
+                            <th className="col-xs-2">Updated:</th>
+                            <td className="col-xs-10">{this.timeDifference(this.state.data.lastModifiedDate)}</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </form>
         )
@@ -209,5 +184,5 @@ class IssueForm extends Component {
     }
 }
 
-export default IssueForm;
-IssueForm.defaultProps = {apiUrl: {issue: '/api/issues'}};
+export default IssueView;
+IssueView.defaultProps = {apiUrl: {issue: '/api/issues'}};
