@@ -102,19 +102,27 @@ class IssueView extends Component {
                         <tbody>
                         <tr>
                             <th className="col-xs-2">Project:</th>
-                            <td className="col-xs-10">{this.state.data.project}</td>
+                            <td className="col-xs-10">
+                                <p title={this.state.data.description}>{this.state.data.project}</p>
+                            </td>
                         </tr>
                         <tr>
                             <th className="col-xs-2">Priority:</th>
-                            <td className="col-xs-10">{this.state.data.priority.name}</td>
+                            <td className="col-xs-10">
+                                <p title={this.state.data.priority.description}>{this.state.data.priority.name}</p>
+                            </td>
                         </tr>
                         <tr>
                             <th className="col-xs-2">Type:</th>
-                            <td className="col-xs-10">{this.state.data.type.name}</td>
+                            <td className="col-xs-10">
+                                <p title={this.state.data.type.description}>{this.state.data.type.name}</p>
+                            </td>
                         </tr>
                         <tr>
                             <th className="col-xs-2">Status:</th>
-                            <td className="col-xs-10">{this.state.data.status.name}</td>
+                            <td className="col-xs-10">
+                                <p title={this.state.data.status.description}>{this.state.data.status.name}</p>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
