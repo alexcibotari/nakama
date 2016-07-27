@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router';
+import {Link, withRouter} from 'react-router';
 import client from '../client';
 
 class IssuePrioritiesForm extends React.Component {
@@ -28,13 +28,13 @@ class IssuePrioritiesForm extends React.Component {
         if (this.state.edit) {
             client({method: 'PUT', path: this.props.apiUrl.priorities, entity: this.state.data}).then(response => {
                 if (response.status.code == 200) {
-                    this.props.history.push('/admin/issues/priorities');
+                    this.props.router.push('/admin/issues/priorities');
                 }
             });
         } else {
             client({method: 'POST', path: this.props.apiUrl.priorities, entity: this.state.data}).then(response => {
                 if (response.status.code == 201) {
-                    this.props.history.push('/admin/issues/priorities');
+                    this.props.router.push('/admin/issues/priorities');
                 }
             });
         }
@@ -78,6 +78,6 @@ class IssuePrioritiesForm extends React.Component {
     }
 }
 
-export default IssuePrioritiesForm;
+export default withRouter(IssuePrioritiesForm)
 
 IssuePrioritiesForm.defaultProps = {apiUrl: {priorities: '/api/admin/issues/priorities'}};

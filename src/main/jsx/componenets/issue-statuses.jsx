@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router';
+import {Link } from 'react-router';
 import client from '../client';
 import ConfirmationDialog from './confirmation-dialog';
 
-export default class IssueStatuses extends Component {
+class IssueStatuses extends Component {
 
     constructor(props) {
         super(props);
@@ -96,5 +96,7 @@ export default class IssueStatuses extends Component {
         }
     }
 }
+
+export default IssueStatuses;
 
 IssueStatuses.defaultProps = {apiUrl: {statuses: '/api/admin/issues/statuses'}};

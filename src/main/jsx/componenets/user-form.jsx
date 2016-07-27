@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router';
+import {Link, withRouter} from 'react-router';
 import client from '../client';
 
 class UserForm extends React.Component {
@@ -28,13 +28,13 @@ class UserForm extends React.Component {
         if (this.state.edit) {
             client({method: 'PUT', path: this.props.apiUrl.users, entity: this.state.data}).then(response => {
                 if (response.status.code == 200) {
-                    this.props.history.push('/admin/users/');
+                    this.props.router.push('/admin/users/');
                 }
             });
         } else {
             client({method: 'POST', path: this.props.apiUrl.users, entity: this.state.data}).then(response => {
                 if (response.status.code == 201) {
-                    this.props.history.push('/admin/users/');
+                    this.props.router.push('/admin/users/');
                 }
             });
         }
@@ -122,6 +122,6 @@ class UserForm extends React.Component {
     }
 }
 
-export default UserForm;
+export default withRouter(UserForm)
 
 UserForm.defaultProps = {apiUrl: {users: '/api/users'}};

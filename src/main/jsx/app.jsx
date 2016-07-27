@@ -17,10 +17,13 @@ import Home from './componenets/home';
 import Profile from './componenets/profile';
 import Settings from './componenets/settings';
 import IssueTypes from './componenets/issue-types';
-import IssuePriorities from './componenets/issue-priorities';
-import IssueStatuses from './componenets/issue-statuses';
-import IssueSidebar from './componenets/issue-sidebar';
-import IssueTypesForm from './componenets/issue-types';
+import IssuePriorities from "./componenets/issue-priorities";
+import IssueStatuses from "./componenets/issue-statuses";
+import IssueSidebar from "./componenets/issue-sidebar";
+import UserSidebar from "./componenets/user-sidebar";
+import IssueTypesForm from "./componenets/issue-types-form";
+import IssuePrioritiesForm from "./componenets/issue-priorities-form";
+import IssueStatusesForm from "./componenets/issue-statuses-form";
 
 class App extends Component {
     render() {
@@ -45,16 +48,26 @@ class App extends Component {
                             <Route path="edit/:projectId" components={{main:ProjectForm}}/>
                         </Route>
                         <Route path="users">
-                            <IndexRoute components={{main:UserList}}/>
-                            <Route path="create" components={{main:UserForm}}/>
-                            <Route path="edit/:userName" components={{main:UserForm}}/>
+                            <IndexRoute components={{main:UserList, sidebar: UserSidebar}}/>
+                            <Route path="create" components={{main:UserForm, sidebar: UserSidebar}}/>
+                            <Route path="edit/:userName" components={{main:UserForm, sidebar: UserSidebar}}/>
                         </Route>
                         <Route path="issues">
-                            <Route path="types" components={{ main: IssueTypes, sidebar: IssueSidebar}}/>
-                            <Route path="types/create" components={{main: IssueTypesForm}}/>
-                            <Route path="types/edit/:id" components={{main: IssueTypesForm}}/>
-                            <Route path="priorities" components={{ main: IssuePriorities, sidebar: IssueSidebar}}/>
-                            <Route path="statuses" components={{ main: IssueStatuses, sidebar: IssueSidebar}}/>
+                            <Route path="types">
+                                <IndexRoute components={{ main: IssueTypes, sidebar: IssueSidebar}}/>
+                                <Route path="types/create" components={{main: IssueTypesForm, sidebar: IssueSidebar}}/>
+                                <Route path="types/edit/:id" components={{main: IssueTypesForm, sidebar: IssueSidebar}}/>
+                            </Route>
+                            <Route path="priorities">
+                                <IndexRoute components={{ main: IssuePriorities, sidebar: IssueSidebar}}/>
+                                <Route path="create" components={{main: IssuePrioritiesForm, sidebar: IssueSidebar}}/>
+                                <Route path="edit/:id" components={{main: IssuePrioritiesForm, sidebar: IssueSidebar}}/>
+                            </Route>
+                            <Route path="statuses">
+                                <IndexRoute components={{ main: IssueStatuses, sidebar: IssueSidebar}}/>
+                                <Route path="create" components={{main: IssueStatusesForm, sidebar: IssueSidebar}}/>
+                                <Route path="edit/:id" components={{main: IssueStatusesForm, sidebar: IssueSidebar}}/>
+                            </Route>
                         </Route>
                     </Route>
                 </Route>
