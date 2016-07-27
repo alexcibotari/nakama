@@ -10,6 +10,7 @@ import ProjectList from './componenets/project-list';
 import ProjectForm from './componenets/project-form';
 import IssueList from './componenets/issue-list';
 import IssueForm from './componenets/issue-form';
+import IssueView from './componenets/issue-view';
 import UserList from './componenets/user-list';
 import UserForm from './componenets/user-form';
 import Home from './componenets/home';
@@ -28,6 +29,7 @@ class App extends Component {
                     <Route path="issues" component={IssueLayout}>
                         <Route path=":projectKey/create" component={IssueForm}/>
                         <Route path=":issueId/edit" component={IssueForm}/>
+                        <Route path=":issueId" component={IssueView}/>
                     </Route>
                     <Route path="profile" component={Profile}/>
                     <Route path="settings" component={Settings}/>

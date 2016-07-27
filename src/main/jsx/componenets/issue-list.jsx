@@ -44,7 +44,7 @@ class IssueList extends Component {
         const issues = this.state.data.map(issue => {
             return (
                 <tr key={issue.id}>
-                    <td><b>{issue.id}</b></td>
+                    <th><Link to={'/issues/' + issue.id}>{issue.id}</Link></th>
                     <td>{issue.summery}</td>
                     <td>{issue.description}</td>
                     <td>
