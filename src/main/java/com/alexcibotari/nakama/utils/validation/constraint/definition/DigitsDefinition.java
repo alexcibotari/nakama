@@ -21,7 +21,7 @@ public class DigitsDefinition extends ConstraintDefinition<DigitsDefinition, Dig
     }
 
     public DigitsDefinition fraction(int fraction) {
-        addParameter("integer", fraction);
+        addParameter("fraction", fraction);
         return this;
     }
 }
