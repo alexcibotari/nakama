@@ -1,10 +1,10 @@
 package com.alexcibotari.nakama;
 
-import com.alexcibotari.nakama.web.rest.constraint.ConstraintDefinition;
-import com.alexcibotari.nakama.web.rest.constraint.definition.MaxDefinition;
-import com.alexcibotari.nakama.web.rest.constraint.definition.MinDefinition;
-import com.alexcibotari.nakama.web.rest.constraint.definition.NotNullDefinition;
-import com.alexcibotari.nakama.web.rest.constraint.definition.SizeDefinition;
+import com.alexcibotari.nakama.utils.validation.constraint.ConstraintDefinition;
+import com.alexcibotari.nakama.utils.validation.constraint.definition.MaxDefinition;
+import com.alexcibotari.nakama.utils.validation.constraint.definition.MinDefinition;
+import com.alexcibotari.nakama.utils.validation.constraint.definition.NotNullDefinition;
+import com.alexcibotari.nakama.utils.validation.constraint.definition.SizeDefinition;
 import com.alexcibotari.nakama.web.rest.dto.UserDTO;
 import org.junit.Test;
 import org.springframework.boot.test.IntegrationTest;

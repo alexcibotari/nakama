@@ -1,6 +1,6 @@
-package com.alexcibotari.nakama.web.rest.constraint.definition;
+package com.alexcibotari.nakama.utils.validation.constraint.definition;
 
-import com.alexcibotari.nakama.web.rest.constraint.ConstraintDefinition;
+import com.alexcibotari.nakama.utils.validation.constraint.ConstraintDefinition;
 
 import javax.validation.constraints.NotNull;
 

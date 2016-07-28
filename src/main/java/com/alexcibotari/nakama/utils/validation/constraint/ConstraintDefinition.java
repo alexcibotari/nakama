@@ -1,4 +1,4 @@
-package com.alexcibotari.nakama.web.rest.constraint;
+package com.alexcibotari.nakama.utils.validation.constraint;
 
 import java.lang.annotation.Annotation;
 import java.util.HashMap;

@@ -1,5 +1,7 @@
-package com.alexcibotari.nakama.web.rest.constraint;
+package com.alexcibotari.nakama.web.rest;
 
+import com.alexcibotari.nakama.utils.validation.Validator;
+import com.alexcibotari.nakama.utils.validation.constraint.ConstraintDefinition;
 import com.alexcibotari.nakama.web.rest.dto.TestDTO;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,6 @@ public class ConstraintResource {
 
     @RequestMapping(path = "test", method = RequestMethod.GET)
     public ResponseEntity<Map<String, List<ConstraintDefinition>>> getTest() {
-        return ResponseEntity.ok(Validator.extractRule(TestDTO.class));
+        return ResponseEntity.ok(Validator.extractConstraint(TestDTO.class));
     }
 }
