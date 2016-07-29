@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router';
-import client from '../client';
+import client from '../services/client';
 
 class UserForm extends React.Component {
 
@@ -71,7 +71,7 @@ class UserForm extends React.Component {
                                     <input name="enabled" classID="enableControll" value={this.state.data.enabled} checked={this.state.data.enabled} type="checkbox"
                                            onChange={this.handleChange}/>
                                 </div>
-    
+
                             </div>
                         </div>
                         <div className="form-group">
@@ -109,7 +109,7 @@ class UserForm extends React.Component {
                                 <td></td>
                             </tr>
                             </tbody>
-    
+
                         </table>
                     </div>
                 </form>

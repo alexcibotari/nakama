@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
-import client from '../client';
+import client from '../services/client';
+import ValidationForm from '../services/validation-form';
 
 class Profile extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-            constraints:[],
-            data:{
-                Pattern:""
-            }
+            constraints:[]
         }
     }
 
@@ -17,129 +15,12 @@ class Profile extends Component {
         client({method: 'GET', path: this.props.apiUrl}).then(response => {
             if (response.status.code == 200) {
                 this.setState({constraints: response.entity});
-                }
+            }
         });
     }
 
     validate() {
-        'use strict';
-        var formValid = true;
-        for (var fieldName in this.state.constraints) {
-            var error = false;
-            if (this.refs[fieldName]) {
-                this.refs[fieldName].parentElement.parentElement.className = 'form-group has-feedback';
-                this.refs[fieldName].nextSibling.innerHTML = '';
-                switch (this.state.constraints[fieldName][0].constraintType) {
-                    case 'AssertFalse' :
-                        if (this.refs[fieldName].checked) {
-                            formValid = false;
-                            error = true;
-                        }
-                        break;
-                    case 'AssertTrue' :
-                        if (!this.refs[fieldName].checked) {
-                            formValid = false;
-                            error = true;
-                        }
-                        break;
-                    case 'DecimalMax':
-                        var valueIsNumber = parseFloat(this.refs[fieldName].value);
-                        if (isNaN(valueIsNumber)) {
-                            formValid = false;
-                            error = true;
-                        } else {
-                            if (this.state.constraints[fieldName][0].parameters.inclusive) {
-                                if (valueIsNumber > parseInt(this.state.constraints[fieldName][0].parameters.value, 10)) {
-                                    formValid = false;
-                                    error = true;
-                                }
-                            } else {
-                                if (valueIsNumber >= parseInt(this.state.constraints[fieldName][0].parameters.value, 10)) {
-                                    formValid = false;
-                                    error = true;
-                                }
-                            }
-                        }
-                        break;
-                    case 'DecimalMin':
-                        var valueIsNumber = parseFloat(this.refs[fieldName].value);
-                        if (isNaN(valueIsNumber)) {
-                            formValid = false;
-                            error = true;
-                        } else {
-                            if (this.state.constraints[fieldName][0].parameters.inclusive) {
-                                if (valueIsNumber < parseInt(this.state.constraints[fieldName][0].parameters.value, 10)) {
-                                    formValid = false;
-                                    error = true;
-                                }
-                            } else {
-                                if (valueIsNumber <= parseInt(this.state.constraints[fieldName][0].parameters.value, 10)) {
-                                    formValid = false;
-                                    error = true;
-                                }
-                            }
-                        }
-                        break;
-                    case 'Digits':
-                        var valueIsNumber = parseFloat(this.refs[fieldName].value);
-                        var arrValue = this.refs[fieldName].value.split('.');
-                        if (isNaN(valueIsNumber)) {
-                            formValid = false;
-                            error = true;
-                        } else if (arrValue.length < 1 || arrValue.length > 2 ||
-                            arrValue[0].length > this.state.constraints[fieldName][0].parameters.integer) {
-                            formValid = false;
-                            error = true;
-                        } else if (arrValue.length == 2 &&
-                            arrValue[1].length > this.state.constraints[fieldName][0].parameters.fraction) {
-                            formValid = false;
-                            error = true;
-                        }
-                        break;
-                    case 'Max':
-                        var valueIsNumber = parseInt(this.refs[fieldName].value);
-                        if (isNaN(valueIsNumber)) {
-                            formValid = false;
-                            error = true;
-                        } else if (valueIsNumber > this.state.constraints[fieldName][0].parameters.value) {
-                            formValid = false;
-                            error = true;
-                        }
-                        break;
-                    case 'Min':
-                        var valueIsNumber = parseInt(this.refs[fieldName].value);
-                        if (isNaN(valueIsNumber)) {
-                            formValid = false;
-                            error = true;
-                        } else if (valueIsNumber < this.state.constraints[fieldName][0].parameters.value) {
-                            formValid = false;
-                            error = true;
-                        }
-                        break;
-                    case 'Size':
-                        if (this.refs[fieldName].value.length < this.state.constraints[fieldName][0].parameters.min ||
-                            this.refs[fieldName].value.length > this.state.constraints[fieldName][0].parameters.max) {
-                            formValid = false;
-                            error = true;
-                        }
-                        break;
-                    case 'Pattern':
-                        var regExpression = new RegExp(this.state.constraints[fieldName][0].parameters.regexp);
-                        if (!regExpression.test(this.refs[fieldName].value)) {
-                            formValid = false;
-                            error = true;
-                        }
-                        break;
-                }
-                if (error) {
-                    this.refs[fieldName].parentElement.parentElement.className = 'has-error form-group has-feedback';
-                    this.refs[fieldName].nextSibling.innerHTML = this.state.constraints[fieldName][0].parameters.message;
-                }
-            }
-        }
-        if (formValid === true) {
-            alert('validated');
-        }
+        console.log(ValidationForm.validate(this.state.constraints, this.refs));
     }
 
     render(){
