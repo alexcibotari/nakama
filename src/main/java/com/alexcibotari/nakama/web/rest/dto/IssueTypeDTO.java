@@ -2,12 +2,17 @@ package com.alexcibotari.nakama.web.rest.dto;
 
 import com.alexcibotari.nakama.domain.IssueType;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
+
 public class IssueTypeDTO {
 
     private Long id;
 
+    @Size(min = 3, max = 50)
     private String name;
 
+    @Max(250)
     private String description;
 
     public IssueTypeDTO() {

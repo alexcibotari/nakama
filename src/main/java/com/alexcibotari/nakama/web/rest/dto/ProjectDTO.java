@@ -2,12 +2,18 @@ package com.alexcibotari.nakama.web.rest.dto;
 
 import com.alexcibotari.nakama.domain.Project;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
+
 public class ProjectDTO extends AbstractAuditingDTO {
 
+    @Size(min = 2, max = 50)
     private String name;
 
+    @Size(min = 2, max = 50)
     private String key;
 
+    @Max(255)
     private String description;
 
     public ProjectDTO() {
