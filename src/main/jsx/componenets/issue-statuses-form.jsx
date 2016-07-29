@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router';
 import client from '../services/client';
+import ValidationForm from '../services/validation-form';
 
 class IssueStatusesForm extends React.Component {
 
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
-        this.save = this.save.bind(this);
+        this.validate = this.validate.bind(this);
         this.state = {
             data: {id: "", name: "", description: ""},
+            constraints: [],
             edit: false
         }
     }
@@ -22,6 +24,11 @@ class IssueStatusesForm extends React.Component {
                 }
             });
         }
+        client({method: 'GET', path: this.props.apiUrl.constraints}).then(response => {
+            if (response.status.code == 200) {
+                this.setState({constraints: response.entity});
+            }
+        });
     }
 
     save() {
@@ -40,6 +47,12 @@ class IssueStatusesForm extends React.Component {
         }
     }
 
+    validate() {
+        if(ValidationForm.validate(this.state.constraints, this.refs)){
+            this.save();
+        }
+    }
+
     handleChange(e){
         this.state.data[e.target.name] = e.target.value;
         this.setState({ data: this.state.data});
@@ -53,20 +66,22 @@ class IssueStatusesForm extends React.Component {
                         <div className="form-group">
                             <label htmlFor="inputIssueStatusName" className="col-sm-2 control-label">Name:</label>
                             <div className="col-sm-10 input-group">
-                                <input name="name" type="text" className="form-control" classID="inputIssueStatusName" placeholder="Issue status name"
+                                <input name="name" ref="name" type="text" className="form-control" classID="inputIssueStatusName" placeholder="Issue status name"
                                        value={this.state.data.name} onChange={this.handleChange}/>
+                                <p className="help-block"> </p>
                             </div>
                         </div>
                         <div className="form-group">
                             <label htmlFor="inputIssueStatusDescription" className="col-sm-2 control-label">Description:</label>
                             <div className="col-sm-10 input-group">
-                                <input name="description" type="text" className="form-control" classID="inputIssueStatusDescription" placeholder="Issue status description"
+                                <input name="description" ref="description" type="text" className="form-control" classID="inputIssueStatusDescription" placeholder="Issue status description"
                                        value={this.state.data.description} onChange={this.handleChange}/>
+                                <p className="help-block"> </p>
                             </div>
                         </div>
                         <div className="form-group">
                             <div className="col-sm-offset-2 col-sm-10 btn-group">
-                                <a className="btn btn-primary" role="button" onClick={this.save}>Save</a>
+                                <a className="btn btn-primary" role="button" onClick={this.validate}>Save</a>
                                 <Link to={'/admin/issues/statuses'} className="btn btn-danger" role="button">Cancel</Link>
                             </div>
                         </div>
@@ -80,4 +95,4 @@ class IssueStatusesForm extends React.Component {
 
 export default withRouter(IssueStatusesForm)
 
-IssueStatusesForm.defaultProps = {apiUrl: {statuses: '/api/admin/issues/statuses'}};
+IssueStatusesForm.defaultProps = {apiUrl: {statuses: '/api/admin/issues/statuses', constraints: '/api/constraints/issue/status'}};

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router';
 import client from '../services/client';
+import ValidationForm from '../services/validation-form';
 
 class ProjectForm extends Component {
 
@@ -10,6 +11,7 @@ class ProjectForm extends Component {
         this.validate = this.validate.bind(this);
         this.state = {
             data: {name: "", key: "", description: ""},
+            constraints: [],
             edit: false
         }
     }
@@ -22,6 +24,11 @@ class ProjectForm extends Component {
                 }
             });
         }
+        client({method: 'GET', path: this.props.apiUrl.constraints}).then(response => {
+            if (response.status.code == 200) {
+                this.setState({constraints: response.entity});
+            }
+        });
     }
 
     save() {
@@ -41,23 +48,7 @@ class ProjectForm extends Component {
     }
 
     validate() {
-        var validForm = true;
-        for(var name in this.refs) {
-            this.refs[name].parentElement.parentElement.className = 'form-group has-feedback';
-            this.refs[name].nextSibling.innerHTML = '';
-        }
-
-        if (!/^[A-Za-z][A-Za-z\d\s]*[A-Za-z\d]$/.test(this.state.data.name)) {
-            this.refs.name.parentElement.parentElement.className = 'has-error form-group has-feedback';
-            this.refs.name.nextSibling.innerHTML = 'Name may contain only letters and numbers, should start with a letter, and should not end with a space!';
-            validForm =false;
-        }
-        if (!/^[A-Z][A-Z\d]+$/.test(this.state.data.key)) {
-            this.refs.key.parentElement.parentElement.className = 'has-error form-group has-feedback';
-            this.refs.key.nextSibling.innerHTML = 'Key may contain only letters and numbers, and should start with a letter!';
-            validForm =false;
-        }
-        if(validForm) {
+        if(ValidationForm.validate(this.state.constraints, this.refs)){
             this.save();
         }
     }
@@ -90,7 +81,6 @@ class ProjectForm extends Component {
         this.setState({data: this.state.data});
     }
 
-
     render() {
         return (
             <form className="form-horizontal">
@@ -115,9 +105,10 @@ class ProjectForm extends Component {
                     <div className="form-group">
                         <label htmlFor="inputDesc" className="col-sm-2 control-label">Description</label>
                         <div className="col-sm-10">
-                        <textarea name="description" className="form-control" rows="3" classID="inputDesc"
+                            <textarea name="description" ref="description" className="form-control" rows="3" classID="inputDesc"
                                   placeholder="Description" value={this.state.data.description}
                                   onChange={this.handleChange}/>
+                            <p className="help-block"> </p>
                         </div>
                     </div>
                     <div className="form-group">
@@ -134,4 +125,4 @@ class ProjectForm extends Component {
 }
 
 export default withRouter(ProjectForm)
-ProjectForm.defaultProps = {apiUrl: {project: '/api/projects'}};
+ProjectForm.defaultProps = {apiUrl: {project: '/api/projects', constraints: '/api/constraints/project'}};
