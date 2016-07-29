@@ -38,3 +38,7 @@ INSERT INTO issue (id, id_in_project, project_id, summery, description, priority
 INSERT INTO issue (id, id_in_project, project_id, summery, description, priority_id, status_id, type_id, created_by, created_date) VALUES (3, 1, 2, 'summery3', 'description3', 1, 1, 1, 'system','2013-09-29 22:00:00');
 INSERT INTO issue (id, id_in_project, project_id, summery, description, priority_id, status_id, type_id, created_by, created_date) VALUES (4, 2, 2, 'summery4', 'description4', 1, 1, 1, 'system','2013-09-29 22:00:00');
 INSERT INTO issue (id, id_in_project, project_id, summery, description, priority_id, status_id, type_id, created_by, created_date) VALUES (5, 3, 2, 'summery5', 'description5', 1, 1, 1, 'system','2013-09-29 22:00:00');
+--Issues Comments
+INSERT INTO issue_comment (id, issue_id, content, created_by, created_date) VALUES (1, 1, 'comment 1', 'system','2013-09-29 22:00:00');
+INSERT INTO issue_comment (id, issue_id, content, created_by, created_date) VALUES (2, 1, 'comment 2', 'system','2013-09-29 22:00:30');
+INSERT INTO issue_comment (id, issue_id, content, created_by, created_date) VALUES (3, 1, 'comment 3', 'system','2013-09-29 22:00:45');

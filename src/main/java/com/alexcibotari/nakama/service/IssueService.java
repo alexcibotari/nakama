@@ -8,21 +8,23 @@ import java.util.List;
 
 public interface IssueService {
 
-    public Issue findOne(Long id);
+    Issue findOne(Long id);
 
-    public Issue findOne(String projectKey, Long idInProject);
+    Issue findOne(String projectKey, Long idInProject);
 
-    public List<Issue> findAllByProjectId(Long id);
+    Issue findOne(String key);
 
-    public List<Issue> findAllByProjectKey(String key);
+    List<Issue> findAllByProjectId(Long id);
 
-    public List<Issue> findAll();
+    List<Issue> findAllByProjectKey(String key);
 
-    public Issue create(IssueDTO dto);
+    List<Issue> findAll();
 
-    public Issue update(IssueDTO dto);
+    Issue create(IssueDTO dto);
 
-    public void delete(Long id);
+    Issue update(IssueDTO dto);
 
-    public void delete(String projectKey, Long idInProject);
+    void delete(Long id);
+
+    void delete(String projectKey, Long idInProject);
 }

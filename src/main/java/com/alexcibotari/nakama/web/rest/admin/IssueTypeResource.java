@@ -29,7 +29,7 @@ public class IssueTypeResource {
         return ResponseEntity.ok(issueTypeService.findAll().stream().map(IssueTypeDTO::new).collect(Collectors.toList()));
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<IssueTypeDTO> getOne(@PathVariable Long id) {
         return ResponseEntity.ok(new IssueTypeDTO(issueTypeService.findOne(id)));
     }
@@ -46,7 +46,7 @@ public class IssueTypeResource {
         return ResponseEntity.ok(new IssueTypeDTO(issueTypeService.update(dto)));
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         issueTypeService.delete(id);

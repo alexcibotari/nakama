@@ -43,13 +43,13 @@ class IssueList extends Component {
     render() {
         const issues = this.state.data.map(issue => {
             return (
-                <tr key={issue.id}>
-                    <th><Link to={'/issues/' + issue.id}>{issue.id}</Link></th>
+                <tr key={issue.key}>
+                    <th><Link to={'/issues/' + issue.key}>{issue.key}</Link></th>
                     <td>{issue.summery}</td>
                     <td>{issue.description}</td>
                     <td>
                         <div className="btn-group pull-right" role="group">
-                            <Link to={'/issues/' + issue.id +'/edit'}
+                            <Link to={'/issues/' + issue.key +'/edit'}
                                   className="btn btn-sm btn-default glyphicon glyphicon-pencil"
                                   role="button"/>
                             <ConfirmationDialog
@@ -58,7 +58,7 @@ class IssueList extends Component {
                                 lunchModalBtnClasses="btn btn-sm btn-danger glyphicon glyphicon-trash"
                                 lunchModalBtnText=""
                                 lunchModalBtnStyles={{float: 'right'}}
-                                actionBtnAction={this.deleteIssue.bind(this, issue.id)}
+                                actionBtnAction={this.deleteIssue.bind(this, issue.key)}
                                 modalContainerStyle={{marginLeft: 34+'px'}}/>
                         </div>
                     </td>

@@ -36,8 +36,8 @@ class App extends Component {
                     </Route>
                     <Route path="issues" component={OneColumnLayout}>
                         <Route path=":projectKey/create" component={IssueForm}/>
-                        <Route path=":issueId/edit" component={IssueForm}/>
-                        <Route path=":issueId" component={IssueView}/>
+                        <Route path=":issueKey/edit" component={IssueForm}/>
+                        <Route path=":issueKey" component={IssueView}/>
                     </Route>
                     <Route path="profile" component={Profile}/>
                     <Route path="settings" component={Settings}/>

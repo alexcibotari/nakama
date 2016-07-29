@@ -35,7 +35,7 @@ public class IssuePriorityResource {
         return ResponseEntity.ok(issuePriorityService.findAll().stream().map(IssuePriorityDTO::new).collect(Collectors.toList()));
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<IssuePriorityDTO> getOne(@PathVariable Long id) {
         return ResponseEntity.ok(new IssuePriorityDTO(issuePriorityService.findOne(id)));
     }
@@ -52,7 +52,7 @@ public class IssuePriorityResource {
         return ResponseEntity.ok(new IssuePriorityDTO(issuePriorityService.update(dto)));
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         issuePriorityService.delete(id);

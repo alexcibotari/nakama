@@ -1,13 +1,12 @@
 package com.alexcibotari.nakama.web.rest.dto;
 
 import com.alexcibotari.nakama.domain.Issue;
+import com.alexcibotari.nakama.service.util.key.KeyUtil;
 
-import java.time.ZonedDateTime;
-
-public class IssueDTO {
+public class IssueDTO extends AbstractAuditingDTO {
 
     //Composite key of Project Key and Issue IdInProject
-    private String id;
+    private String key;
 
     private Long idInProject;
 
@@ -23,15 +22,11 @@ public class IssueDTO {
 
     private IssueTypeDTO type;
 
-    private ZonedDateTime createdDate;
-
-    private ZonedDateTime lastModifiedDate;
-
     public IssueDTO() {
     }
 
     public IssueDTO(Long idInProject, String project, String summery, String description) {
-        this.setId(project + "-" + idInProject);
+        this.setKey(KeyUtil.getIssueKey(project, idInProject));
         this.setIdInProject(idInProject);
         this.setProject(project);
         this.setSummery(summery);
@@ -40,6 +35,7 @@ public class IssueDTO {
 
     public IssueDTO(Issue issue) {
         this(issue.getIdInProject(), issue.getProject().getKey(), issue.getSummery(), issue.getDescription());
+        this.setId(issue.getId());
         this.setPriority(new IssuePriorityDTO(issue.getPriority()));
         this.setStatus(new IssueStatusDTO(issue.getStatus()));
         this.setType(new IssueTypeDTO(issue.getType()));
@@ -47,12 +43,12 @@ public class IssueDTO {
         this.setLastModifiedDate(issue.getLastModifiedDate());
     }
 
-    public String getId() {
-        return id;
+    public String getKey() {
+        return key;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public Long getIdInProject() {
@@ -111,19 +107,17 @@ public class IssueDTO {
         this.type = type;
     }
 
-    public ZonedDateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(ZonedDateTime createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public ZonedDateTime getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(ZonedDateTime lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
+    @Override
+    public String toString() {
+        return "IssueDTO{" +
+            "key='" + key + '\'' +
+            ", idInProject=" + idInProject +
+            ", project='" + project + '\'' +
+            ", summery='" + summery + '\'' +
+            ", description='" + description + '\'' +
+            ", priority=" + priority +
+            ", status=" + status +
+            ", type=" + type +
+            '}';
     }
 }
