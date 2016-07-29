@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router';
-import client from '../client';
+import client from '../services/client';
 import SelectForm from './select-form';
 
 class IssueForm extends Component {

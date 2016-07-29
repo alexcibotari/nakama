@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import NavBar from '../navbar';
-import client from '../../client';
+import client from '../../services/client';
 
 class MainLayout extends Component {
     constructor(props) {
