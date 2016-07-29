@@ -20,7 +20,9 @@ class Profile extends Component {
     }
 
     validate() {
-        console.log(ValidationForm.validate(this.state.constraints, this.refs));
+        if(ValidationForm.validate(this.state.constraints, this.refs)){
+            alert('valid');
+        }
     }
 
     render(){
