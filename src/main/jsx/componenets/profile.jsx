@@ -21,107 +21,104 @@ class Profile extends Component {
         });
     }
 
-    validate(){
+    validate() {
         'use strict';
         var formValid = true;
-        for(var fieldName in this.state.constraints){
+        for (var fieldName in this.state.constraints) {
             var error = false;
-            if(this.refs[fieldName]){
+            if (this.refs[fieldName]) {
                 this.refs[fieldName].parentElement.parentElement.className = 'form-group has-feedback';
                 this.refs[fieldName].nextSibling.innerHTML = '';
-                switch (this.state.constraints[fieldName][0].constraintType){
+                switch (this.state.constraints[fieldName][0].constraintType) {
                     case 'AssertFalse' :
-                        if(this.refs[fieldName].checked){
+                        if (this.refs[fieldName].checked) {
                             formValid = false;
                             error = true;
                         }
                         break;
                     case 'AssertTrue' :
-                        if(!this.refs[fieldName].checked){
+                        if (!this.refs[fieldName].checked) {
                             formValid = false;
                             error = true;
                         }
                         break;
                     case 'DecimalMax':
-                        var valueIsNumber = parseFloat(this.refs[fieldName].value );
-                        if( isNaN(valueIsNumber) ){
+                        var valueIsNumber = parseFloat(this.refs[fieldName].value);
+                        if (isNaN(valueIsNumber)) {
                             formValid = false;
                             error = true;
-                        }else{
-                            switch (this.state.constraints[fieldName][0].parameters.inclusive){
-                                case true:
-                                    if(fieldValue > parseInt(this.state.constraints[fieldName][0].parameters.value, 10)){
-                                        formValid = false;
-                                        error = true;
-                                    }
-                                    break;
-                                case false:
-                                    if(fieldValue >= parseInt(this.state.constraints[fieldName][0].parameters.value, 10)){
-                                        formValid = false;
-                                        error = true;
-                                    }
-                                    break;
+                        } else {
+                            if (this.state.constraints[fieldName][0].parameters.inclusive) {
+                                if (valueIsNumber > parseInt(this.state.constraints[fieldName][0].parameters.value, 10)) {
+                                    formValid = false;
+                                    error = true;
+                                }
+                            } else {
+                                if (valueIsNumber >= parseInt(this.state.constraints[fieldName][0].parameters.value, 10)) {
+                                    formValid = false;
+                                    error = true;
+                                }
                             }
                         }
                         break;
                     case 'DecimalMin':
-                        var valueIsNumber = parseFloat(this.refs[fieldName].value );
-                        if( isNaN(valueIsNumber) ){
+                        var valueIsNumber = parseFloat(this.refs[fieldName].value);
+                        if (isNaN(valueIsNumber)) {
                             formValid = false;
                             error = true;
-                        }else{
-                            switch (this.state.constraints[fieldName][0].parameters.inclusive){
-                                case true:
-                                    if(fieldValue < parseInt(this.state.constraints[fieldName][0].parameters.value, 10)){
-                                        formValid = false;
-                                        error = true;
-                                    }
-                                    break;
-                                case false:
-                                    if(fieldValue <= parseInt(this.state.constraints[fieldName][0].parameters.value, 10)){
-                                        formValid = false;
-                                        error = true;
-                                    }
-                                    break;
+                        } else {
+                            if (this.state.constraints[fieldName][0].parameters.inclusive) {
+                                if (valueIsNumber < parseInt(this.state.constraints[fieldName][0].parameters.value, 10)) {
+                                    formValid = false;
+                                    error = true;
+                                }
+                            } else {
+                                if (valueIsNumber <= parseInt(this.state.constraints[fieldName][0].parameters.value, 10)) {
+                                    formValid = false;
+                                    error = true;
+                                }
                             }
                         }
                         break;
                     case 'Digits':
-                        var valueIsNumber = parseFloat(this.refs[fieldName].value );
+                        var valueIsNumber = parseFloat(this.refs[fieldName].value);
                         var arrValue = this.refs[fieldName].value.split('.');
-                        if( isNaN(valueIsNumber) ){
+                        if (isNaN(valueIsNumber)) {
                             formValid = false;
                             error = true;
-                        }else if(arrValue.length < 1 || arrValue.length > 2 ||
-                            arrValue[0].length > this.state.constraints[fieldName][0].parameters.integer){
+                        } else if (arrValue.length < 1 || arrValue.length > 2 ||
+                            arrValue[0].length > this.state.constraints[fieldName][0].parameters.integer) {
                             formValid = false;
                             error = true;
-                        }else if(arrValue.length == 2 &&
-                            arrValue[1].length > this.state.constraints[fieldName][0].parameters.fraction){
+                        } else if (arrValue.length == 2 &&
+                            arrValue[1].length > this.state.constraints[fieldName][0].parameters.fraction) {
                             formValid = false;
                             error = true;
                         }
                         break;
                     case 'Max':
-                        if( isNaN(valueIsNumber) ){
+                        var valueIsNumber = parseInt(this.refs[fieldName].value);
+                        if (isNaN(valueIsNumber)) {
                             formValid = false;
                             error = true;
-                        }else if(this.refs[fieldName].value > this.state.constraints[fieldName][0].parameters.value){
+                        } else if (valueIsNumber > this.state.constraints[fieldName][0].parameters.value) {
                             formValid = false;
                             error = true;
                         }
                         break;
                     case 'Min':
-                        if( isNaN(valueIsNumber) ){
+                        var valueIsNumber = parseInt(this.refs[fieldName].value);
+                        if (isNaN(valueIsNumber)) {
                             formValid = false;
-                        }else if(this.refs[fieldName].value < this.state.constraints[fieldName][0].parameters.value){
+                            error = true;
+                        } else if (valueIsNumber < this.state.constraints[fieldName][0].parameters.value) {
                             formValid = false;
                             error = true;
                         }
                         break;
                     case 'Size':
-                        if(this.refs[fieldName].value.length < this.state.constraints[fieldName][0].parameters.min ||
-                            this.refs[fieldName].value.length > this.state.constraints[fieldName][0].parameters.max){
+                        if (this.refs[fieldName].value.length < this.state.constraints[fieldName][0].parameters.min ||
+                            this.refs[fieldName].value.length > this.state.constraints[fieldName][0].parameters.max) {
                             formValid = false;
                             error = true;
                         }
@@ -134,13 +131,13 @@ class Profile extends Component {
                         }
                         break;
                 }
-                if(error){
+                if (error) {
                     this.refs[fieldName].parentElement.parentElement.className = 'has-error form-group has-feedback';
                     this.refs[fieldName].nextSibling.innerHTML = this.state.constraints[fieldName][0].parameters.message;
                 }
             }
         }
-        if(formValid === true) {
+        if (formValid === true) {
             alert('validated');
         }
     }
