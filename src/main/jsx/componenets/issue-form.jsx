@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router';
 import client from '../services/client';
 import SelectForm from './select-form';
+import ValidationForm from '../services/validation-form';
 
 class IssueForm extends Component {
 
@@ -9,7 +10,7 @@ class IssueForm extends Component {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.handleSelectChange = this.handleSelectChange.bind(this);
-        this.save = this.save.bind(this);
+        this.validate = this.validate.bind(this);
         this.state = {
             data: {
                 id: '',
@@ -37,7 +38,8 @@ class IssueForm extends Component {
             edit: false,
             priorities: [],
             statuses: [],
-            types: []
+            types: [],
+            constraints: []
         };
     }
 
@@ -51,6 +53,12 @@ class IssueForm extends Component {
         } else {
             this.state.data.project = this.props.params.projectKey;
         }
+
+        client({method: 'GET', path: this.props.apiUrl.constraints}).then(response => {
+            if (response.status.code == 200) {
+                this.setState({constraints: response.entity});
+            }
+        });
 
         client({method: 'GET', path: this.props.apiUrl.issue + '/priority'}).then(response => {
             if (response.status.code == 200) {
@@ -95,6 +103,12 @@ class IssueForm extends Component {
                     this.props.router.push('/projects/' + this.state.data.project + '/issues/');
                 }
             });
+        }
+    }
+
+    validate() {
+        if(ValidationForm.validate(this.state.constraints, this.refs)){
+            this.save();
         }
     }
 
@@ -163,22 +177,24 @@ class IssueForm extends Component {
                     <div className="form-group">
                         <label htmlFor="inputSummery" className="col-sm-2 control-label">Summery</label>
                         <div className="col-sm-10">
-                            <input name="summery" type="text" className="form-control" classID="inputSummery"
+                            <input name="summery" ref="summery" type="text" className="form-control" classID="inputSummery"
                                    placeholder="Summery"
                                    value={this.state.data.summery} onChange={this.handleChange}/>
+                            <p className="help-block"> </p>
                         </div>
                     </div>
                     <div className="form-group">
                         <label htmlFor="inputDesc" className="col-sm-2 control-label">Description</label>
                         <div className="col-sm-10">
-                        <textarea name="description" className="form-control" rows="3" classID="inputDesc"
+                            <textarea name="description" ref="description" className="form-control" rows="3" classID="inputDesc"
                                   placeholder="Description" value={this.state.data.description}
                                   onChange={this.handleChange}/>
+                            <p className="help-block"> </p>
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-sm-offset-2 col-sm-10 btn-group">
-                            <a className="btn btn-primary" role="button" onClick={this.save}>Save</a>
+                            <a className="btn btn-primary" role="button" onClick={this.validate}>Save</a>
                             <Link to={'/projects/' + this.state.data.project + '/issues/'} className="btn btn-danger"
                                   role="button">Cancel</Link>
                         </div>
@@ -210,4 +226,4 @@ class IssueForm extends Component {
 }
 
 export default withRouter(IssueForm)
-IssueForm.defaultProps = {apiUrl: {issue: '/api/issues'}};
+IssueForm.defaultProps = {apiUrl: {issue: '/api/issues', constraints: '/api/constraints/issue'}};

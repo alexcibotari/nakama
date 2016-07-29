@@ -105,6 +105,13 @@ class Profile extends Component {
                             </div>
                         </div>
                         <div className="form-group">
+                            <label htmlFor="checkOnRange" className="col-sm-2 control-label">checkOnRange:</label>
+                            <div className="col-sm-10">
+                                <input name="checkOnRange" ref="checkOnRange" type="number" className="form-control" classID="checkOnRange" placeholder="checkOnRange"/>
+                                <p className="help-block"> </p>
+                            </div>
+                        </div>
+                        <div className="form-group">
                             <div className="col-sm-offset-2 col-sm-10">
                                 <a className="btn btn-primary" role="button" onClick={this.validate.bind(this)}>Save</a>
                             </div>
