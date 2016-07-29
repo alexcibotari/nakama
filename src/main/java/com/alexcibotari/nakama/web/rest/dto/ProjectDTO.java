@@ -13,7 +13,7 @@ public class ProjectDTO extends AbstractAuditingDTO {
     @Size(min = 2, max = 50)
     private String key;
 
-    @Max(255)
+    @Size(max = 250)
     private String description;
 
     public ProjectDTO() {

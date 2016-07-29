@@ -19,7 +19,7 @@ public class IssueDTO extends AbstractAuditingDTO {
     @Size(min = 5, max = 100)
     private String summery;
 
-    @Max(250)
+    @Size(max = 250)
     private String description;
 
     @NotNull

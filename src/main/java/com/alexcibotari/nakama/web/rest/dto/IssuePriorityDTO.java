@@ -12,7 +12,7 @@ public class IssuePriorityDTO {
     @Size(min = 3, max = 50)
     private String name;
 
-    @Max(250)
+    @Size(max = 250)
     private String description;
 
     public IssuePriorityDTO() {
