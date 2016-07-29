@@ -2,7 +2,6 @@ package com.alexcibotari.nakama.web.rest.dto;
 
 import com.alexcibotari.nakama.domain.Project;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
 
 public class ProjectDTO extends AbstractAuditingDTO {

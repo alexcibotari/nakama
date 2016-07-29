@@ -3,7 +3,6 @@ package com.alexcibotari.nakama.web.rest.dto;
 import com.alexcibotari.nakama.domain.Issue;
 import com.alexcibotari.nakama.service.util.key.KeyUtil;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 

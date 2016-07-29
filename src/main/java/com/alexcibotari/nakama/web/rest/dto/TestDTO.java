@@ -29,6 +29,10 @@ public class TestDTO {
     @Min(value = 20, message = "The annotated element must be a number whose value must be lower or equal to the specified maximum.  Note that float is not supported due to rounding errors (some providers might provide some approximative support).")
     private Long checkOnMin;
 
+    @Max(20)
+    @Min(10)
+    private Long checkOnRange;
+
     @Pattern(regexp = "^[A-Za-z]+$", message = "The annotated CharSequence must match the specified regular expression")
     private String checkOnPattern;
 
@@ -119,6 +123,15 @@ public class TestDTO {
         this.checkOnSize = checkOnSize;
     }
 
+
+    public Long getCheckOnRange() {
+        return checkOnRange;
+    }
+
+    public void setCheckOnRange(Long checkOnRange) {
+        this.checkOnRange = checkOnRange;
+    }
+
     @Override
     public String toString() {
         return "TestDTO{" +
@@ -130,6 +143,7 @@ public class TestDTO {
             ", intWithoutFraction=" + intWithoutFraction +
             ", checkOnMax=" + checkOnMax +
             ", checkOnMin=" + checkOnMin +
+            ", checkOnRange=" + checkOnRange +
             ", checkOnPattern='" + checkOnPattern + '\'' +
             ", checkOnSize='" + checkOnSize + '\'' +
             '}';
