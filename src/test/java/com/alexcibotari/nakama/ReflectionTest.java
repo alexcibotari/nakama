@@ -5,9 +5,10 @@ import com.alexcibotari.nakama.utils.validation.constraint.definition.MaxDefinit
 import com.alexcibotari.nakama.utils.validation.constraint.definition.MinDefinition;
 import com.alexcibotari.nakama.utils.validation.constraint.definition.NotNullDefinition;
 import com.alexcibotari.nakama.utils.validation.constraint.definition.SizeDefinition;
+import com.alexcibotari.nakama.web.rest.dto.TestDTO;
 import com.alexcibotari.nakama.web.rest.dto.UserDTO;
 import org.junit.Test;
-import org.springframework.boot.test.IntegrationTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.validation.constraints.Max;
@@ -23,7 +24,7 @@ import java.util.Map;
 
 
 @WebAppConfiguration
-@IntegrationTest
+@SpringBootTest
 public class ReflectionTest {
 
 
@@ -32,7 +33,7 @@ public class ReflectionTest {
 
         Map<String, List<ConstraintDefinition>> params = new HashMap<>();
         System.out.println(UserDTO.class.getSimpleName());
-        for (Field f : UserDTO.class.getDeclaredFields()) {
+        for (Field f : TestDTO.class.getDeclaredFields()) {
             List<ConstraintDefinition> definitionList = new ArrayList<>();
             for (Annotation annotation : f.getAnnotations()) {
                 if (annotation instanceof NotNull) {
