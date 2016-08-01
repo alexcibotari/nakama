@@ -15,6 +15,15 @@ public class Validator {
 
     public static Map<String, List<ConstraintDefinition>> extractConstraint(Class clazz) {
         Map<String, List<ConstraintDefinition>> params = new HashMap<>();
+        Class<?> currentClass = clazz;
+        while (currentClass.getSuperclass() != null) {
+            params = getClassConstraints(params, currentClass);
+            currentClass = currentClass.getSuperclass();
+        }
+        return params;
+    }
+
+    private static Map<String, List<ConstraintDefinition>> getClassConstraints(Map<String, List<ConstraintDefinition>> params, Class clazz) {
         for (Field f : clazz.getDeclaredFields()) {
             List<ConstraintDefinition> definitionList = new ArrayList<>();
             for (Annotation annotation : f.getAnnotations()) {
@@ -46,7 +55,9 @@ public class Validator {
                     definitionList.add(new SizeDefinition((Size) annotation));
                 }
             }
-            params.put(f.getName(), definitionList);
+            if (!definitionList.isEmpty()) {
+                params.put(f.getName(), definitionList);
+            }
         }
         return params;
     }
