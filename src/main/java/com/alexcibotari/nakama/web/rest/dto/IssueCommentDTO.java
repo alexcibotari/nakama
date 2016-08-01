@@ -2,12 +2,13 @@ package com.alexcibotari.nakama.web.rest.dto;
 
 import com.alexcibotari.nakama.domain.IssueComment;
 
-public class IssueCommentDTO extends AbstractAuditingDTO {
+import javax.validation.constraints.Size;
 
-    private Long id;
+public class IssueCommentDTO extends AbstractAuditingDTO {
 
     private String issue;
 
+    @Size(max = 250)
     private String content;
 
 
@@ -26,14 +27,6 @@ public class IssueCommentDTO extends AbstractAuditingDTO {
         this.setLastModifiedDate(comment.getLastModifiedDate());
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getIssue() {
         return issue;
     }
@@ -50,10 +43,11 @@ public class IssueCommentDTO extends AbstractAuditingDTO {
         this.content = content;
     }
 
+
     @Override
     public String toString() {
         return "IssueCommentDTO{" +
-            "id=" + id +
+            "id='"+getId() + '\''+
             ", issue='" + issue + '\'' +
             ", content='" + content + '\'' +
             '}';

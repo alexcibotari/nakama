@@ -4,9 +4,7 @@ import com.alexcibotari.nakama.domain.IssuePriority;
 
 import javax.validation.constraints.Size;
 
-public class IssuePriorityDTO {
-
-    private Long id;
+public class IssuePriorityDTO extends AbstractAuditingDTO {
 
     @Size(min = 3, max = 50)
     private String name;
@@ -25,14 +23,8 @@ public class IssuePriorityDTO {
 
     public IssuePriorityDTO(IssuePriority priority) {
         this(priority.getId(), priority.getName(), priority.getDescription());
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.setCreatedDate(priority.getCreatedDate());
+        this.setLastModifiedDate(priority.getLastModifiedDate());
     }
 
     public String getName() {
@@ -49,5 +41,14 @@ public class IssuePriorityDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "IssuePriorityDTO{" +
+            "id='"+getId() + '\''+
+            ", name='" + name + '\'' +
+            ", description='" + description + '\'' +
+            '}';
     }
 }
