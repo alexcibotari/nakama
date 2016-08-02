@@ -13,7 +13,6 @@ class SelectForm extends Component {
     }
 
     render() {
-        console.log("default:" + this.props.selected.id);
         const options = this.props.options.map(option =>
             <option key={option.id} value={option.id}>{option.name}</option>
         );
