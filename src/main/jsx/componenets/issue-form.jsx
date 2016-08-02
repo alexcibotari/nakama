@@ -107,7 +107,6 @@ class IssueForm extends Component {
     }
 
     validate() {
-        console.log(this.state.data);
         if(ValidationForm.validate(this.state.constraints, this.refs)){
             this.save();
         }
