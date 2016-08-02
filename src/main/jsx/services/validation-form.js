@@ -1,4 +1,6 @@
 'use strict';
+import ReactDOM from 'react-dom';
+import {Component} from 'react';
 
 class ValidationForm {
 
@@ -7,10 +9,15 @@ class ValidationForm {
         // console.log(refs);
         for (var fieldName in constraints) {
             var error = false;
-            console.log(fieldName);
+
             if (refs[fieldName]) {
-                refs[fieldName].parentElement.parentElement.classList.remove('has-error');
-                refs[fieldName].nextSibling.innerHTML = '';
+                if (refs[fieldName] instanceof Component) {
+                    console.log(fieldName);
+                    console.log(ReactDOM.findDOMNode(refs[fieldName]))
+
+                    /*refs[fieldName].parentElement.parentElement.classList.remove('has-error');
+                    refs[fieldName].nextSibling.innerHTML = '';*/
+                }
                 for (var i = 0; i < constraints[fieldName].length; i++) {
                     switch (constraints[fieldName][i].constraintType) {
                         case 'AssertFalse' :
