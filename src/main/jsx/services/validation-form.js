@@ -117,6 +117,13 @@ class ValidationForm {
                                 error = true;
                             }
                             break;
+                        case 'NotNull':
+                            if(!formField.value) {
+                                console.log(3);
+                                formValid = false;
+                                error = true;
+                            }
+                            break;
                     }
                     if (error) {
                         formField.parentElement.parentElement.classList.add('has-error');

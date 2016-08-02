@@ -27,13 +27,12 @@ class SelectForm extends Component {
         }
     }
 
-    renderForm() {
+    render() {
         const options = this.props.options.map(option =>
             <option key={option.id} value={option.id}>{option.name}</option>
         );
         return (
             <select
-                autoFocus={true}
                 className="form-control"
                 defaultValue={this.props.selected.id}
                 onChange={this.handleChange.bind(this)}
@@ -41,18 +40,6 @@ class SelectForm extends Component {
                 {options}
             </select>
         )
-    }
-
-    render() {
-        if (this.state.edit) {
-            return this.renderForm();
-        } else if (this.props.selected) {
-            return (
-                <a onClick={this.editSelect.bind(this)} title={this.props.selected.description}>{this.props.selected.name } <span className="caret"></span></a>
-            )
-        } else {
-            return this.renderForm();
-        }
     }
 }
 
