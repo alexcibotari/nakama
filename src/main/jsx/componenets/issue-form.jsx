@@ -107,6 +107,7 @@ class IssueForm extends Component {
     }
 
     validate() {
+        console.log(this.state.data);
         if(ValidationForm.validate(this.state.constraints, this.refs)){
             this.save();
         }
@@ -127,7 +128,6 @@ class IssueForm extends Component {
 
     render() {
         return (
-            <div>
                 <form className="form-horizontal">
                     <div className="main-issue-form col-md-8">
                         <div className="col-md-12">
@@ -138,14 +138,15 @@ class IssueForm extends Component {
                         <table className="table table-striped">
                             <tbody>
                             <tr>
-                                <th className="col-xs-2">Project:</th>
+                                <th className="col-xs-2 control-label">Project:</th>
                                 <td className="col-xs-10 project-title">{this.state.data.project}</td>
                             </tr>
                             <tr>
-                                <th className="col-xs-2">Priority:</th>
+                                <th className="col-xs-2 control-label">Priority:</th>
                                 <td className="col-xs-10 form-group">
                                     <div>
                                         <SelectForm
+                                            ref="priority"
                                             onChange={this.handleSelectChange('priority')}
                                             options={this.state.priorities}
                                             selected={this.state.data.priority}/>
@@ -154,7 +155,7 @@ class IssueForm extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <th className="col-xs-2">Type:</th>
+                                <th className="col-xs-2 control-label">Type:</th>
                                 <td className="col-xs-10  form-group">
                                     <div>
                                         <SelectForm
@@ -167,7 +168,7 @@ class IssueForm extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <th className="col-xs-2">Status:</th>
+                                <th className="col-xs-2 control-label">Status:</th>
                                 <td className="col-xs-10  form-group">
                                     <div>
                                         <SelectForm
@@ -187,7 +188,7 @@ class IssueForm extends Component {
                         </div>
                         <div className="clearfix"></div>
                         <div className="form-group">
-                            <label htmlFor="inputSummery" className="col-sm-2 control-label">Summery</label>
+                            <label htmlFor="inputSummery" className="col-sm-2 control-label">Summery:</label>
                             <div className="col-sm-10">
                                 <input name="summery" ref="summery" type="text" className="form-control" classID="inputSummery"
                                        placeholder="Summery"
@@ -196,19 +197,12 @@ class IssueForm extends Component {
                             </div>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="inputDesc" className="col-sm-2 control-label">Description</label>
+                            <label htmlFor="inputDesc" className="col-sm-2 control-label">Description:</label>
                             <div className="col-sm-10">
                             <textarea name="description" ref="description" className="form-control" rows="3" classID="inputDesc"
                                       placeholder="Description" value={this.state.data.description}
                                       onChange={this.handleChange}/>
                                 <p className="help-block"> </p>
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <div className="col-sm-offset-2 col-sm-10 btn-group">
-                                <a className="btn btn-primary" role="button" onClick={this.validate}>Save</a>
-                                <Link to={'/projects/' + this.state.data.project + '/issues/'} className="btn btn-danger"
-                                      role="button">Cancel</Link>
                             </div>
                         </div>
                     </div>
@@ -231,8 +225,13 @@ class IssueForm extends Component {
                             </tbody>
                         </table>
                     </div>
+                    <div ref="formMessages" className="clearfix  col-md-12"></div>
+                    <div className="btn-group col-md-12">
+                        <a className="btn btn-primary" role="button" onClick={this.validate}>Save</a>
+                        <Link to={'/projects/' + this.state.data.project + '/issues/'} className="btn btn-danger"
+                              role="button">Cancel</Link>
+                    </div>
                 </form>
-            </div>
         )
 
     }

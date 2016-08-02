@@ -36,7 +36,8 @@ class SelectForm extends Component {
                 className="form-control"
                 defaultValue={this.props.selected.id}
                 onChange={this.handleChange.bind(this)}
-                onBlur={this.blurSelect.bind(this)}>
+                onBlur={this.blurSelect.bind(this)}
+                title={this.props.selected.description}>
                 {options}
             </select>
         )

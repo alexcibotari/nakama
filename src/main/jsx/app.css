@@ -1,6 +1,6 @@
 /** My Custome CSS **/
 
-.form-control {
+select.form-control {
     border: none;
     box-shadow: none;
     cursor: pointer;
@@ -8,7 +8,7 @@
     color: #337ab7;
 }
 
-.form-control:focus {
+select.form-control:focus {
     border: 1px solid #ccc;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
     cursor: default;
@@ -16,6 +16,6 @@
     color: rgb(85, 85, 85);
 }
 
-.project-title {
-    padding: 16px 22px !important;
+.table > tbody > tr > td.project-title {
+    padding: 16px 22px;
 }
