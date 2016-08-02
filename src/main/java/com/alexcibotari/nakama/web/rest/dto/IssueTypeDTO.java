@@ -4,9 +4,7 @@ import com.alexcibotari.nakama.domain.IssueType;
 
 import javax.validation.constraints.Size;
 
-public class IssueTypeDTO {
-
-    private Long id;
+public class IssueTypeDTO extends AbstractAuditingDTO {
 
     @Size(min = 3, max = 50)
     private String name;
@@ -23,16 +21,10 @@ public class IssueTypeDTO {
         this.setDescription(description);
     }
 
-    public IssueTypeDTO(IssueType priority) {
-        this(priority.getId(), priority.getName(), priority.getDescription());
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public IssueTypeDTO(IssueType type) {
+        this(type.getId(), type.getName(), type.getDescription());
+        this.setCreatedDate(type.getCreatedDate());
+        this.setLastModifiedDate(type.getLastModifiedDate());
     }
 
     public String getName() {
@@ -49,5 +41,14 @@ public class IssueTypeDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "IssueTypeDTO{" +
+            "id='"+getId() + '\''+
+            ", name='" + name + '\'' +
+            ", description='" + description + '\'' +
+            '}';
     }
 }
