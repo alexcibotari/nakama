@@ -67,7 +67,6 @@ public class IssueServiceImp implements IssueService {
     public Issue create(IssueDTO dto) {
         Issue issue = new Issue();
         issue.setProject(projectRepository.findOneByKey(dto.getProject()));
-        issue.setIdInProject(issueRepository.getNextInProjectIdByProjectKey(dto.getProject()));
         issue.setSummery(dto.getSummery());
         issue.setDescription(dto.getDescription());
 
@@ -85,7 +84,7 @@ public class IssueServiceImp implements IssueService {
             IssueType one = issueTypeRepository.findOne(dto.getType().getId());
             issue.setType(one);
         }
-
+        issue.setIdInProject(issueRepository.getNextIdInProjectByProjectKey(dto.getProject()));
         return issueRepository.save(issue);
     }
 

@@ -1,6 +1,7 @@
 package com.alexcibotari.nakama.service;
 
 
+import com.alexcibotari.nakama.domain.Issue;
 import com.alexcibotari.nakama.domain.IssueComment;
 import com.alexcibotari.nakama.repository.IssueCommentRepository;
 import com.alexcibotari.nakama.service.util.key.IssueKey;
@@ -46,9 +47,11 @@ public class IssueCommentServiceImp implements IssueCommentService {
 
     @Transactional
     public IssueComment create(IssueCommentDTO dto) {
+        Issue issue = issueService.findOne(dto.getIssue());
         IssueComment issueComment = new IssueComment();
-        issueComment.setIssue(issueService.findOne(dto.getIssue()));
+        issueComment.setIssue(issue);
         issueComment.setContent(dto.getContent());
+        issueComment.setIdInIssue(issueCommentRepository.getNextIdInIssueByIssueId(issue.getId()));
         return issueCommentRepository.save(issueComment);
     }
 

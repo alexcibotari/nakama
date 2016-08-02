@@ -1,5 +1,7 @@
 package com.alexcibotari.nakama.domain;
 
+import com.alexcibotari.nakama.service.util.key.KeyUtil;
+
 import javax.persistence.*;
 
 @Entity
@@ -49,7 +51,7 @@ public class Issue extends AbstractAuditingEntity {
 
 
     public String getKey() {
-        return getProject().getKey() + "-" + getIdInProject();
+        return KeyUtil.getIssueKey(getProject().getKey(), getIdInProject());
     }
 
     public Project getProject() {
@@ -149,6 +151,9 @@ public class Issue extends AbstractAuditingEntity {
             ", assigne=" + assigne +
             ", summery='" + summery + '\'' +
             ", description='" + description + '\'' +
+            ", priority=" + priority +
+            ", status=" + status +
+            ", type=" + type +
             ", timespent=" + timespent +
             ", timeestimate=" + timeestimate +
             '}';

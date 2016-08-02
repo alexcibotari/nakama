@@ -19,9 +19,9 @@ public class ServiceIntTest {
 
     @Test
     public void testNextIssue() {
-        System.out.println(issueRepository.getNextInProjectIdByProjectId(1L));
-        System.out.println(issueRepository.getNextInProjectIdByProjectId(2L));
-        System.out.println(issueRepository.getNextInProjectIdByProjectId(3L));
+        System.out.println(issueRepository.getNextIdInProjectByProjectId(1L));
+        System.out.println(issueRepository.getNextIdInProjectByProjectId(2L));
+        System.out.println(issueRepository.getNextIdInProjectByProjectId(3L));
     }
 
     @Test

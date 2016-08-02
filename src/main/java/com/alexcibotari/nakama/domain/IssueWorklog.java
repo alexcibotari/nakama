@@ -4,21 +4,25 @@ import javax.persistence.*;
 import java.time.ZonedDateTime;
 
 @Entity
-public class Worklog extends AbstractAuditingEntity {
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"issue_id", "id_in_issue"}))
+public class IssueWorklog extends AbstractAuditingEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "issue_id", nullable = false, updatable = false)
     private Issue issue;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "id_in_issue", nullable = false, updatable = false)
+    private Long idInIssue;
+
+    @ManyToOne
     @JoinColumn(name = "author_user_id", nullable = false, updatable = false)
     private User author;
 
     @Column
-    private String body;
+    private String content;
 
     //In Minutes
-    @Column(name = "timewrked", nullable = false)
+    @Column(nullable = false)
     private Long timeWorked;
 
     @Column(nullable = false)
@@ -32,12 +36,20 @@ public class Worklog extends AbstractAuditingEntity {
         this.issue = issue;
     }
 
-    public String getBody() {
-        return body;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Long getTimeWorked() {
@@ -59,10 +71,10 @@ public class Worklog extends AbstractAuditingEntity {
     @Override
     public String toString() {
         return "Worklog{" +
-                "issue=" + issue +
-                ", body='" + body + '\'' +
-                ", timeWorked=" + timeWorked +
-                ", startDate=" + startDate +
-                '}';
+            "issue=" + issue +
+            ", content='" + content + '\'' +
+            ", timeWorked=" + timeWorked +
+            ", startDate=" + startDate +
+            '}';
     }
 }

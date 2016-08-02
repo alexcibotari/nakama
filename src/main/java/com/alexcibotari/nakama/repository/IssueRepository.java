@@ -15,10 +15,10 @@ public interface IssueRepository extends CrudRepository<Issue, Long> {
     List<Issue> findAllByProjectKey(String key);
 
     @Query("SELECT IFNULL(MAX(idInProject),0)+1 FROM Issue WHERE project.id = :projectId")
-    Long getNextInProjectIdByProjectId(@Param("projectId") Long projectId);
+    Long getNextIdInProjectByProjectId(@Param("projectId") Long projectId);
 
     @Query("SELECT IFNULL(MAX(idInProject),0)+1 FROM Issue WHERE project.key = :projectKey")
-    Long getNextInProjectIdByProjectKey(@Param("projectKey") String projectId);
+    Long getNextIdInProjectByProjectKey(@Param("projectKey") String projectKey);
 
     @Query("SELECT i FROM Issue i WHERE i.project.key = :projectKey AND i.idInProject = :idInProject")
     Issue findOneByKeys(@Param("projectKey") String projectKey, @Param("idInProject") Long idInProject);
