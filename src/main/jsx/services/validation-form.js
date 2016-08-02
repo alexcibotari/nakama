@@ -4,10 +4,12 @@ class ValidationForm {
 
     static validate(constraints, refs) {
         var formValid = true;
+        // console.log(refs);
         for (var fieldName in constraints) {
             var error = false;
+            console.log(fieldName);
             if (refs[fieldName]) {
-                refs[fieldName].parentElement.parentElement.className = 'form-group has-feedback';
+                refs[fieldName].parentElement.parentElement.classList.remove('has-error');
                 refs[fieldName].nextSibling.innerHTML = '';
                 for (var i = 0; i < constraints[fieldName].length; i++) {
                     switch (constraints[fieldName][i].constraintType) {
@@ -113,12 +115,15 @@ class ValidationForm {
                             break;
                     }
                     if (error) {
-                        refs[fieldName].parentElement.parentElement.className = 'has-error form-group has-feedback';
+                        refs[fieldName].parentElement.parentElement.classList.add('has-error');
                         refs[fieldName].nextSibling.innerHTML = constraints[fieldName][i].parameters.message;
                         break;
                     }
                 }
 
+            }if(constraints[fieldName] === 'NotNull' && !refs[fieldName]){
+                formValid = false;
+                alert(refs[fieldName] + " should be NotNull");
             }
         }
         return formValid;
