@@ -5,6 +5,7 @@ import {Component} from 'react';
 class ValidationForm {
 
     static validate(constraints, refs) {
+        refs.formMessages.innerHTML = '';
         var formValid = true;
         for (var fieldName in constraints) {
             var error = false;
@@ -14,7 +15,7 @@ class ValidationForm {
                     if (formField instanceof Component) {
                         formField = ReactDOM.findDOMNode(formField);
                     }
-                    formField.parentElement.parentElement.classList.remove('has-error');
+                    formField.parentElement.classList.remove('has-error');
                     formField.nextSibling.innerHTML = '';
                     switch (constraints[fieldName][i].constraintType) {
                         case 'AssertFalse' :
@@ -126,17 +127,16 @@ class ValidationForm {
                             break;
                     }
                     if (error) {
-                        formField.parentElement.parentElement.classList.add('has-error');
+                        formField.parentElement.classList.add('has-error');
                         formField.nextSibling.innerHTML = constraints[fieldName][i].parameters.message;
                         break;
                     }
                 }else if(constraints[fieldName][i].constraintType === 'NotNull'){
                     formValid = false;
-                    var section = document.querySelector("form");
                     var errorMessage = document.createElement("div");
-                    errorMessage.innerHTML = "<p class='help-block'>"+[fieldName] + " should exist</p>";
-                    section.insertBefore( errorMessage, section.firstChild );
                     errorMessage.classList.add('has-error');
+                    errorMessage.innerHTML = "<p class='help-block'>"+[fieldName] + " should exist</p>";
+                    refs.formMessages.appendChild( errorMessage);
                 }
             }
         }
