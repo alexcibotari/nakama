@@ -48,7 +48,7 @@ public class IssueServiceImp implements IssueService {
     }
 
     public Issue findOne(String projectKey, Long idInProject) {
-        return issueRepository.findOneByKeys(projectKey, idInProject);
+        return issueRepository.findOne(projectKey, idInProject);
     }
 
     public List<Issue> findAllByProjectId(Long id) {
@@ -84,7 +84,7 @@ public class IssueServiceImp implements IssueService {
             IssueType one = issueTypeRepository.findOne(dto.getType().getId());
             issue.setType(one);
         }
-        issue.setIdInProject(issueRepository.getNextIdInProjectByProjectKey(dto.getProject()));
+        issue.setIdInProject(issueRepository.getNextIdInProject(dto.getProject()));
         return issueRepository.save(issue);
     }
 
@@ -119,7 +119,7 @@ public class IssueServiceImp implements IssueService {
 
     @Transactional
     public void delete(String projectKey, Long idInProject) {
-        Issue issue = issueRepository.findOneByKeys(projectKey, idInProject);
+        Issue issue = issueRepository.findOne(projectKey, idInProject);
         issueRepository.delete(issue);
     }
 }

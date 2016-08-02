@@ -34,7 +34,7 @@ public class IssueCommentServiceImp implements IssueCommentService {
     }
 
     public List<IssueComment> findAllInIssue(String projectKey, Long idInProject) {
-        return issueCommentRepository.findAllByIssueKey(projectKey, idInProject);
+        return issueCommentRepository.findAll(projectKey, idInProject);
     }
 
     public List<IssueComment> findAllInIssue(String key) {
@@ -51,7 +51,7 @@ public class IssueCommentServiceImp implements IssueCommentService {
         IssueComment issueComment = new IssueComment();
         issueComment.setIssue(issue);
         issueComment.setContent(dto.getContent());
-        issueComment.setIdInIssue(issueCommentRepository.getNextIdInIssueByIssueId(issue.getId()));
+        issueComment.setIdInIssue(issueCommentRepository.getNextIdInIssue(issue.getId()));
         return issueCommentRepository.save(issueComment);
     }
 
