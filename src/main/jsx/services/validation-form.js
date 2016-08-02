@@ -6,19 +6,15 @@ class ValidationForm {
 
     static validate(constraints, refs) {
         var formValid = true;
-        // console.log(refs);
         for (var fieldName in constraints) {
             var error = false;
-
-            if (refs[fieldName]) {
-                if (refs[fieldName] instanceof Component) {
-                    console.log(fieldName);
-                    console.log(ReactDOM.findDOMNode(refs[fieldName]))
-
-                    /*refs[fieldName].parentElement.parentElement.classList.remove('has-error');
-                    refs[fieldName].nextSibling.innerHTML = '';*/
-                }
-                for (var i = 0; i < constraints[fieldName].length; i++) {
+            for (var i = 0; i < constraints[fieldName].length; i++) {
+                if (refs[fieldName]) {
+                    if (refs[fieldName] instanceof Component) {
+                        refs[fieldName] = ReactDOM.findDOMNode(refs[fieldName]);
+                    }
+                    refs[fieldName].parentElement.parentElement.classList.remove('has-error');
+                    refs[fieldName].nextSibling.innerHTML = '';
                     switch (constraints[fieldName][i].constraintType) {
                         case 'AssertFalse' :
                             if (refs[fieldName].checked) {
@@ -126,16 +122,14 @@ class ValidationForm {
                         refs[fieldName].nextSibling.innerHTML = constraints[fieldName][i].parameters.message;
                         break;
                     }
+                }else if(constraints[fieldName][i].constraintType === 'NotNull'){
+                    formValid = false;
+                    alert([fieldName] + " should be NotNull");
                 }
-
-            }if(constraints[fieldName] === 'NotNull' && !refs[fieldName]){
-                formValid = false;
-                alert(refs[fieldName] + " should be NotNull");
             }
         }
         return formValid;
     }
-
 }
 
 export default ValidationForm;
