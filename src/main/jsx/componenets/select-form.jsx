@@ -48,7 +48,7 @@ class SelectForm extends Component {
             return this.renderForm();
         } else if (this.props.selected) {
             return (
-                <a onClick={this.editSelect.bind(this)} title={this.props.selected.description}>{this.props.selected.name} <span className="caret"></span></a>
+                <a onClick={this.editSelect.bind(this)} title={this.props.selected.description}>{this.props.selected.name } <span className="caret"></span></a>
             )
         } else {
             return this.renderForm();

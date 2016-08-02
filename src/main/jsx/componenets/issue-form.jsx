@@ -142,29 +142,41 @@ class IssueForm extends Component {
                         </tr>
                         <tr>
                             <th className="col-xs-2">Priority:</th>
-                            <td className="col-xs-10">
-                                <SelectForm
-                                    onChange={this.handleSelectChange('priority')}
-                                    options={this.state.priorities}
-                                    selected={this.state.data.priority}/>
+                            <td className="col-xs-10 form-group">
+                                <div className="col-xs-12">
+                                    <SelectForm
+                                        ref="priority"
+                                        onChange={this.handleSelectChange('priority')}
+                                        options={this.state.priorities}
+                                        selected={this.state.data.priority}/>
+                                    <p className="help-block"> </p>
+                                </div>
                             </td>
                         </tr>
                         <tr>
                             <th className="col-xs-2">Type:</th>
-                            <td className="col-xs-10">
-                                <SelectForm
-                                    onChange={this.handleSelectChange('type')}
-                                    options={this.state.types}
-                                    selected={this.state.data.type}/>
+                            <td className="col-xs-10  form-group">
+                                <div className="col-xs-12">
+                                    <SelectForm
+                                        ref="type"
+                                        onChange={this.handleSelectChange('type')}
+                                        options={this.state.types}
+                                        selected={this.state.data.type}/>
+                                    <p className="help-block"> </p>
+                                </div>
                             </td>
                         </tr>
                         <tr>
                             <th className="col-xs-2">Status:</th>
-                            <td className="col-xs-10">
-                                <SelectForm
-                                    onChange={this.handleSelectChange('status')}
-                                    options={this.state.statuses}
-                                    selected={this.state.data.status}/>
+                            <td className="col-xs-10  form-group">
+                                <div className="col-xs-12">
+                                    <SelectForm
+                                        ref="status"
+                                        onChange={this.handleSelectChange('status')}
+                                        options={this.state.statuses}
+                                        selected={this.state.data.status}/>
+                                    <p className="help-block"> </p>
+                                </div>
                             </td>
                         </tr>
                         </tbody>
@@ -219,6 +231,7 @@ class IssueForm extends Component {
                         </tbody>
                     </table>
                 </div>
+
             </form>
         )
 
