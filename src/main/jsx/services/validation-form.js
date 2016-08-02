@@ -9,27 +9,28 @@ class ValidationForm {
         for (var fieldName in constraints) {
             var error = false;
             for (var i = 0; i < constraints[fieldName].length; i++) {
-                if (refs[fieldName]) {
-                    if (refs[fieldName] instanceof Component) {
-                        refs[fieldName] = ReactDOM.findDOMNode(refs[fieldName]);
+                var formField = refs[fieldName];
+                if (formField) {
+                    if (formField instanceof Component) {
+                        formField = ReactDOM.findDOMNode(formField);
                     }
-                    refs[fieldName].parentElement.parentElement.classList.remove('has-error');
-                    refs[fieldName].nextSibling.innerHTML = '';
+                    formField.parentElement.parentElement.classList.remove('has-error');
+                    formField.nextSibling.innerHTML = '';
                     switch (constraints[fieldName][i].constraintType) {
                         case 'AssertFalse' :
-                            if (refs[fieldName].checked) {
+                            if (formField.checked) {
                                 formValid = false;
                                 error = true;
                             }
                             break;
                         case 'AssertTrue' :
-                            if (!refs[fieldName].checked) {
+                            if (!formField.checked) {
                                 formValid = false;
                                 error = true;
                             }
                             break;
                         case 'DecimalMax':
-                            var valueIsNumber = parseFloat(refs[fieldName].value);
+                            var valueIsNumber = parseFloat(formField.value);
                             if (isNaN(valueIsNumber)) {
                                 formValid = false;
                                 error = true;
@@ -48,7 +49,7 @@ class ValidationForm {
                             }
                             break;
                         case 'DecimalMin':
-                            var valueIsNumber = parseFloat(refs[fieldName].value);
+                            var valueIsNumber = parseFloat(formField.value);
                             if (isNaN(valueIsNumber)) {
                                 formValid = false;
                                 error = true;
@@ -67,8 +68,8 @@ class ValidationForm {
                             }
                             break;
                         case 'Digits':
-                            var valueIsNumber = parseFloat(refs[fieldName].value);
-                            var arrValue = refs[fieldName].value.split('.');
+                            var valueIsNumber = parseFloat(formField.value);
+                            var arrValue = formField.value.split('.');
                             if (isNaN(valueIsNumber)) {
                                 formValid = false;
                                 error = true;
@@ -83,7 +84,7 @@ class ValidationForm {
                             }
                             break;
                         case 'Max':
-                            var valueIsNumber = parseInt(refs[fieldName].value);
+                            var valueIsNumber = parseInt(formField.value);
                             if (isNaN(valueIsNumber)) {
                                 formValid = false;
                                 error = true;
@@ -93,7 +94,7 @@ class ValidationForm {
                             }
                             break;
                         case 'Min':
-                            var valueIsNumber = parseInt(refs[fieldName].value);
+                            var valueIsNumber = parseInt(formField.value);
                             if (isNaN(valueIsNumber)) {
                                 formValid = false;
                                 error = true;
@@ -103,28 +104,32 @@ class ValidationForm {
                             }
                             break;
                         case 'Size':
-                            if (refs[fieldName].value.length < constraints[fieldName][i].parameters.min ||
-                                refs[fieldName].value.length > constraints[fieldName][i].parameters.max) {
+                            if (formField.value.length < constraints[fieldName][i].parameters.min ||
+                                formField.value.length > constraints[fieldName][i].parameters.max) {
                                 formValid = false;
                                 error = true;
                             }
                             break;
                         case 'Pattern':
                             var regExpression = new RegExp(constraints[fieldName][i].parameters.regexp);
-                            if (!regExpression.test(refs[fieldName].value)) {
+                            if (!regExpression.test(formField.value)) {
                                 formValid = false;
                                 error = true;
                             }
                             break;
                     }
                     if (error) {
-                        refs[fieldName].parentElement.parentElement.classList.add('has-error');
-                        refs[fieldName].nextSibling.innerHTML = constraints[fieldName][i].parameters.message;
+                        formField.parentElement.parentElement.classList.add('has-error');
+                        formField.nextSibling.innerHTML = constraints[fieldName][i].parameters.message;
                         break;
                     }
                 }else if(constraints[fieldName][i].constraintType === 'NotNull'){
                     formValid = false;
-                    alert([fieldName] + " should be NotNull");
+                    var section = document.querySelector("form");
+                    var errorMessage = document.createElement("div");
+                    errorMessage.innerHTML = "<p class='help-block'>"+[fieldName] + " should exist</p>";
+                    section.insertBefore( errorMessage, section.firstChild );
+                    errorMessage.classList.add('has-error');
                 }
             }
         }
