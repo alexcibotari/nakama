@@ -119,8 +119,7 @@ class ValidationForm {
                             }
                             break;
                         case 'NotNull':
-                            if(!formField.value) {
-                                console.log(3);
+                            if (!formField.value) {
                                 formValid = false;
                                 error = true;
                             }
@@ -131,12 +130,12 @@ class ValidationForm {
                         formField.nextSibling.innerHTML = constraints[fieldName][i].parameters.message;
                         break;
                     }
-                }else if(constraints[fieldName][i].constraintType === 'NotNull'){
+                } else if (constraints[fieldName][i].constraintType === 'NotNull') {
                     formValid = false;
                     var errorMessage = document.createElement("div");
                     errorMessage.classList.add('has-error');
-                    errorMessage.innerHTML = "<p class='help-block'>"+[fieldName] + " should exist</p>";
-                    refs.formMessages.appendChild( errorMessage);
+                    errorMessage.innerHTML = "<p class='help-block'>" + [fieldName] + " should exist</p>";
+                    refs.formMessages.appendChild(errorMessage);
                 }
             }
         }
