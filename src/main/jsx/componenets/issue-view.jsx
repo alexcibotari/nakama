@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import client from '../client';
+import client from '../services/client';
+import DateUtils from '../services/date-utils';
 
 class IssueView extends Component {
 
@@ -76,17 +77,6 @@ class IssueView extends Component {
                 }
             }
         });
-    }
-
-    timeDifference(time) {
-        var initialTime = moment(time);
-
-        var diff = moment().diff(initialTime, 'days');
-        if(diff > 14) {
-            return initialTime.format("DD/MM/YYYY HH:mm:ss");
-        } else {
-            return initialTime.fromNow();
-        }
     }
 
     render() {
@@ -177,11 +167,11 @@ class IssueView extends Component {
                         <tbody>
                         <tr>
                             <th className="col-xs-2">Created:</th>
-                            <td className="col-xs-10">{this.timeDifference(this.state.data.createdDate)}</td>
+                            <td className="col-xs-10">{DateUtils.timeDifference(this.state.data.createdDate)}</td>
                         </tr>
                         <tr>
                             <th className="col-xs-2">Updated:</th>
-                            <td className="col-xs-10">{this.timeDifference(this.state.data.lastModifiedDate)}</td>
+                            <td className="col-xs-10">{DateUtils.timeDifference(this.state.data.lastModifiedDate)}</td>
                         </tr>
                         </tbody>
                     </table>

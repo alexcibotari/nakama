@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import client from '../client';
+import client from '../services/client';
 import ConfirmationDialog from './confirmation-dialog';
 
 class ProjectList extends Component {

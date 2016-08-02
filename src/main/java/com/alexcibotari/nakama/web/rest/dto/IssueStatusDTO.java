@@ -2,12 +2,14 @@ package com.alexcibotari.nakama.web.rest.dto;
 
 import com.alexcibotari.nakama.domain.IssueStatus;
 
-public class IssueStatusDTO {
+import javax.validation.constraints.Size;
 
-    private Long id;
+public class IssueStatusDTO extends AbstractAuditingDTO{
 
+    @Size(min = 3, max = 50)
     private String name;
 
+    @Size(max = 250)
     private String description;
 
     public IssueStatusDTO() {
@@ -19,16 +21,10 @@ public class IssueStatusDTO {
         this.setDescription(description);
     }
 
-    public IssueStatusDTO(IssueStatus priority) {
-        this(priority.getId(), priority.getName(), priority.getDescription());
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public IssueStatusDTO(IssueStatus status) {
+        this(status.getId(), status.getName(), status.getDescription());
+        this.setCreatedDate(status.getCreatedDate());
+        this.setLastModifiedDate(status.getLastModifiedDate());
     }
 
     public String getName() {
@@ -45,5 +41,14 @@ public class IssueStatusDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "IssueStatusDTO{" +
+            "id='"+getId() + '\''+
+            ", name='" + name + '\'' +
+            ", description='" + description + '\'' +
+            '}';
     }
 }

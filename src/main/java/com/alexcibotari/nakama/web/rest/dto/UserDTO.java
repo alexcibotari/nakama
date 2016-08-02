@@ -4,13 +4,16 @@ package com.alexcibotari.nakama.web.rest.dto;
 import com.alexcibotari.nakama.domain.Authority;
 import com.alexcibotari.nakama.domain.User;
 
+import javax.validation.constraints.Size;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class UserDTO {
 
+    @Size(min = 3, max = 50)
     private String userName;
 
+    @Size(min = 5, max = 50)
     private String email;
 
     private Boolean enabled;
