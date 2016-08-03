@@ -25,31 +25,31 @@ public class UserResource {
     @Autowired
     UserService userService;
 
-    @RequestMapping(path = "/users", method = RequestMethod.GET)
+    @GetMapping(path = "/users")
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<List<UserDTO>> getAll() {
         return ResponseEntity.ok(userService.findAll().stream().map(UserDTO::new).collect(Collectors.toList()));
     }
 
-    @RequestMapping(path = "/users/{userName}", method = RequestMethod.GET)
+    @GetMapping(path = "/users/{userName}")
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<UserDTO> getOne(@PathVariable String userName) {
         return ResponseEntity.ok(new UserDTO(userService.findOneByUserName(userName)));
     }
 
-    @RequestMapping(path = "/users", method = RequestMethod.POST)
+    @PostMapping(path = "/users")
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<UserDTO> create(@RequestBody UserDTO dto) {
         return new ResponseEntity<>(new UserDTO(userService.create(dto)), HttpStatus.CREATED);
     }
 
-    @RequestMapping(path = "/users", method = RequestMethod.PUT)
+    @PutMapping(path = "/users")
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<UserDTO> update(@RequestBody UserDTO dto) {
         return ResponseEntity.ok(new UserDTO(userService.update(dto)));
     }
 
-    @RequestMapping(path = "/users/{userName}", method = RequestMethod.DELETE)
+    @DeleteMapping(path = "/users/{userName}")
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> delete(@PathVariable String userName) {
         userService.delete(userName);

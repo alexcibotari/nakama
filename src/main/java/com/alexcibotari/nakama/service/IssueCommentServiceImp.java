@@ -29,6 +29,11 @@ public class IssueCommentServiceImp implements IssueCommentService {
         return issueCommentRepository.findOne(id);
     }
 
+    @Override
+    public IssueComment findOne(String projectKey, Long idInProject, Long idInIssue) {
+        return issueCommentRepository.findOne(projectKey, idInProject, idInIssue);
+    }
+
     public List<IssueComment> findAll() {
         return (List<IssueComment>) issueCommentRepository.findAll();
     }
@@ -66,6 +71,11 @@ public class IssueCommentServiceImp implements IssueCommentService {
     @Transactional
     public void delete(Long id) {
         issueCommentRepository.delete(id);
+    }
+
+    @Transactional
+    public void delete(String projectKey, Long idInProject, Long idInIssue) {
+        issueCommentRepository.delete(projectKey, idInProject, idInIssue);
     }
 
 }

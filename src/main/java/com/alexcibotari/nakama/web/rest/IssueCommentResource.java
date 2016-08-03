@@ -5,18 +5,16 @@ import com.alexcibotari.nakama.web.rest.dto.IssueCommentDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api/issues/{projectKey:[A-Z0-9]+}-{idInProject:[0-9]+}/comments", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 
 public class IssueCommentResource {
 
@@ -25,8 +23,29 @@ public class IssueCommentResource {
     @Autowired
     private IssueCommentService issueCommentService;
 
-    @RequestMapping(path = "/issues/{projectKey:[A-Z0-9]+}-{idInProject:[0-9]+}/comments", method = RequestMethod.GET)
+    @GetMapping
     public ResponseEntity<List<IssueCommentDTO>> getCommentsByIssue(@PathVariable String projectKey, @PathVariable Long idInProject) {
         return ResponseEntity.ok(issueCommentService.findAllInIssue(projectKey, idInProject).stream().map(IssueCommentDTO::new).collect(Collectors.toList()));
+    }
+
+    @GetMapping(path = "/{idInIssue}")
+    public ResponseEntity<IssueCommentDTO> getWorklogById(@PathVariable String projectKey, @PathVariable Long idInProject, @PathVariable Long idInIssue) {
+        return ResponseEntity.ok(new IssueCommentDTO(issueCommentService.findOne(projectKey, idInProject, idInIssue)));
+    }
+
+    @PostMapping
+    public ResponseEntity<IssueCommentDTO> create(@RequestBody IssueCommentDTO dto) {
+        return new ResponseEntity<>(new IssueCommentDTO(issueCommentService.create(dto)), HttpStatus.CREATED);
+    }
+
+    @PutMapping
+    public ResponseEntity<IssueCommentDTO> update(@RequestBody IssueCommentDTO dto) {
+        return ResponseEntity.ok(new IssueCommentDTO(issueCommentService.update(dto)));
+    }
+
+    @DeleteMapping(path = "/{idInIssue}")
+    public ResponseEntity<Void> delete(@PathVariable String projectKey, @PathVariable Long idInProject, @PathVariable Long idInIssue) {
+        issueCommentService.delete(projectKey, idInProject, idInIssue);
+        return ResponseEntity.ok().build();
     }
 }

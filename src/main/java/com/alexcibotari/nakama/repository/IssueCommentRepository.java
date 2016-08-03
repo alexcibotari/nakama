@@ -28,12 +28,21 @@ public interface IssueCommentRepository extends CrudRepository<IssueComment, Lon
     @Query("SELECT IFNULL(MAX(idInIssue),0)+1 FROM IssueComment WHERE CONCAT(issue.project.key, '-', issue.idInProject) = :issueKey")
     Long getNextIdInIssue(@Param("issueKey") String issueKey);
 
-    @Query("SELECT ic FROM IssueComment ic WHERE ic.issue.project.key = :projectKey AND ic.issue.idInProject = :idInProject AND ic.idInIssue = :idInIssue ORDER BY ic.createdDate")
+    @Query("SELECT ic FROM IssueComment ic WHERE ic.issue.project.key = :projectKey AND ic.issue.idInProject = :idInProject AND ic.idInIssue = :idInIssue")
     IssueComment findOne(@Param("projectKey") String projectKey, @Param("idInProject") Long idInProject, @Param("idInIssue") Long idInIssue);
 
-    @Query("SELECT ic FROM IssueComment ic WHERE ic.issue.project.id = :projectId AND ic.issue.idInProject = :idInProject AND ic.idInIssue = :idInIssue ORDER BY ic.createdDate")
+    @Query("SELECT ic FROM IssueComment ic WHERE ic.issue.project.id = :projectId AND ic.issue.idInProject = :idInProject AND ic.idInIssue = :idInIssue")
     IssueComment findOne(@Param("projectId") Long projectId, @Param("idInProject") Long idInProject, @Param("idInIssue") Long idInIssue);
 
-    @Query("SELECT ic FROM IssueComment ic WHERE CONCAT(ic.issue.project.key, '-', ic.issue.idInProject) = :issueKey AND ic.idInIssue = :idInIssue ORDER BY ic.createdDate")
+    @Query("SELECT ic FROM IssueComment ic WHERE CONCAT(ic.issue.project.key, '-', ic.issue.idInProject) = :issueKey AND ic.idInIssue = :idInIssue")
     IssueComment findOne(@Param("issueKey") String issueKey, @Param("idInIssue") Long idInIssue);
+
+    @Query("DELETE FROM IssueComment WHERE issue.project.key = :projectKey AND issue.idInProject = :idInProject AND idInIssue = :idInIssue")
+    void delete(@Param("projectKey") String projectKey, @Param("idInProject") Long idInProject, @Param("idInIssue") Long idInIssue);
+
+    @Query("DELETE FROM IssueComment WHERE issue.project.id = :projectId AND issue.idInProject = :idInProject AND idInIssue = :idInIssue")
+    void delete(@Param("projectId") Long projectId, @Param("idInProject") Long idInProject, @Param("idInIssue") Long idInIssue);
+
+    @Query("DELETE FROM IssueComment ic WHERE CONCAT(issue.project.key, '-', issue.idInProject) = :issueKey AND idInIssue = :idInIssue")
+    void delete(@Param("issueKey") String issueKey, @Param("idInIssue") Long idInIssue);
 }

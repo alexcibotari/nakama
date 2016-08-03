@@ -22,28 +22,28 @@ public class ProjectResource {
     @Autowired
     private ProjectService projectService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public ResponseEntity<List<ProjectDTO>> getAll() {
         List<ProjectDTO> dtoList = projectService.findAll().stream().map(ProjectDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok(dtoList);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     public ResponseEntity<ProjectDTO> getOne(@PathVariable Long id) {
         return ResponseEntity.ok(new ProjectDTO(projectService.findOne(id)));
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public ResponseEntity<ProjectDTO> create(@RequestBody ProjectDTO dto) {
         return new ResponseEntity<>(new ProjectDTO(projectService.create(dto)), HttpStatus.CREATED);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @PutMapping
     public ResponseEntity<ProjectDTO> update(@RequestBody ProjectDTO dto) {
         return ResponseEntity.ok(new ProjectDTO(projectService.update(dto)));
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         projectService.delete(id);
         return ResponseEntity.ok().build();

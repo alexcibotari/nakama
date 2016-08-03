@@ -119,7 +119,6 @@ public class IssueServiceImp implements IssueService {
 
     @Transactional
     public void delete(String projectKey, Long idInProject) {
-        Issue issue = issueRepository.findOne(projectKey, idInProject);
-        issueRepository.delete(issue);
+        issueRepository.delete(projectKey, idInProject);
     }
 }

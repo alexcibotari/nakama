@@ -10,6 +10,8 @@ public interface IssueCommentService {
 
     IssueComment findOne(Long id);
 
+    IssueComment findOne(String projectKey, Long idInProject, Long idInIssue);
+
     List<IssueComment> findAll();
 
     List<IssueComment> findAllInIssue(String projectKey, Long idInProject);
@@ -21,4 +23,6 @@ public interface IssueCommentService {
     IssueComment update(IssueCommentDTO dto);
 
     void delete(Long id);
+
+    void delete(String projectKey, Long idInProject, Long idInIssue);
 }

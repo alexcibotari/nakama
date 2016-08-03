@@ -37,7 +37,7 @@ public class IssueResource {
     @Autowired
     private IssueTypeService issueTypeService;
 
-    @RequestMapping(path = {"/issues/byproject/{projectKey}", "/projects/{projectKey}/issues"}, method = RequestMethod.GET)
+    @GetMapping(path = {"/issues/byproject/{projectKey}", "/projects/{projectKey}/issues"})
     public ResponseEntity<List<IssueDTO>> getIssuesByProjectKey(@PathVariable String projectKey) {
         List<IssueDTO> dtoList = issueService.findAllByProjectKey(projectKey).stream().map(IssueDTO::new).collect(Collectors.toList());
         return new ResponseEntity<>(dtoList, HttpStatus.OK);
@@ -48,39 +48,39 @@ public class IssueResource {
         return new ResponseEntity<>(new IssueDTO(issueService.findOne(id)), HttpStatus.OK);
     }*/
 
-    @RequestMapping(path = "/issues/{projectKey:[A-Z0-9]+}-{idInProject:[0-9]+}", method = RequestMethod.GET)
+    @GetMapping(path = "/issues/{projectKey:[A-Z0-9]+}-{idInProject:[0-9]+}")
     public ResponseEntity<IssueDTO> getOne(@PathVariable String projectKey, @PathVariable Long idInProject) {
         return new ResponseEntity<>(new IssueDTO(issueService.findOne(projectKey, idInProject)), HttpStatus.OK);
     }
 
 
-    @RequestMapping(path = "/issues", method = RequestMethod.POST)
+    @PostMapping(path = "/issues")
     public ResponseEntity<IssueDTO> create(@RequestBody IssueDTO dto) {
         return new ResponseEntity<>(new IssueDTO(issueService.create(dto)), HttpStatus.CREATED);
     }
 
-    @RequestMapping(path = "/issues", method = RequestMethod.PUT)
+    @PutMapping(path = "/issues")
     public ResponseEntity<IssueDTO> update(@RequestBody IssueDTO dto) {
         return new ResponseEntity<>(new IssueDTO(issueService.update(dto)), HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/issues/{projectKey:[A-Z0-9]+}-{idInProject:[0-9]+}", method = RequestMethod.DELETE)
+    @DeleteMapping(path = "/issues/{projectKey:[A-Z0-9]+}-{idInProject:[0-9]+}")
     public ResponseEntity<Void> delete(@PathVariable String projectKey, @PathVariable Long idInProject) {
         issueService.delete(projectKey, idInProject);
         return ResponseEntity.ok().build();
     }
 
-    @RequestMapping(path = "/issues/priority", method = RequestMethod.GET)
+    @GetMapping(path = "/issues/priority")
     public ResponseEntity<List<IssuePriorityDTO>> getAllPriority() {
         return ResponseEntity.ok(issuePriorityService.findAll().stream().map(IssuePriorityDTO::new).collect(Collectors.toList()));
     }
 
-    @RequestMapping(path = "/issues/status", method = RequestMethod.GET)
+    @GetMapping(path = "/issues/status")
     public ResponseEntity<List<IssueStatusDTO>> getAllStatus() {
         return ResponseEntity.ok(issueStatusService.findAll().stream().map(IssueStatusDTO::new).collect(Collectors.toList()));
     }
 
-    @RequestMapping(path = "/issues/type", method = RequestMethod.GET)
+    @GetMapping(path = "/issues/type")
     public ResponseEntity<List<IssueTypeDTO>> getAllType() {
         return ResponseEntity.ok(issueTypeService.findAll().stream().map(IssueTypeDTO::new).collect(Collectors.toList()));
     }
