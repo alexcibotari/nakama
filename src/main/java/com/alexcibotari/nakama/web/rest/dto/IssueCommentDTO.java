@@ -8,7 +8,7 @@ public class IssueCommentDTO extends AbstractAuditingDTO {
 
     private String issue;
 
-    @Size(max = 250)
+    @Size(min = 3, max = 250)
     private String content;
 
 
@@ -47,7 +47,7 @@ public class IssueCommentDTO extends AbstractAuditingDTO {
     @Override
     public String toString() {
         return "IssueCommentDTO{" +
-            "id='"+getId() + '\''+
+            "id='" + getId() + '\'' +
             ", issue='" + issue + '\'' +
             ", content='" + content + '\'' +
             '}';
