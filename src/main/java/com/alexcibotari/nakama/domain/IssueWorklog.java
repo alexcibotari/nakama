@@ -14,10 +14,6 @@ public class IssueWorklog extends AbstractAuditingEntity {
     @Column(name = "id_in_issue", nullable = false, updatable = false)
     private Long idInIssue;
 
-    @ManyToOne
-    @JoinColumn(name = "author_user_id", nullable = false, updatable = false)
-    private User author;
-
     @Column
     private String content;
 
@@ -34,14 +30,6 @@ public class IssueWorklog extends AbstractAuditingEntity {
 
     public void setIssue(Issue issue) {
         this.issue = issue;
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
     }
 
     public String getContent() {
@@ -70,8 +58,9 @@ public class IssueWorklog extends AbstractAuditingEntity {
 
     @Override
     public String toString() {
-        return "Worklog{" +
+        return "IssueWorklog{" +
             "issue=" + issue +
+            ", idInIssue=" + idInIssue +
             ", content='" + content + '\'' +
             ", timeWorked=" + timeWorked +
             ", startDate=" + startDate +

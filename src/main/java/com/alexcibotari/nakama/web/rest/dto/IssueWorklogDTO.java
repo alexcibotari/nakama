@@ -7,23 +7,20 @@ public class IssueWorklogDTO extends AbstractAuditingDTO {
 
     private String issue;
 
-    private String author;
-
     private String content;
 
 
     public IssueWorklogDTO() {
     }
 
-    public IssueWorklogDTO(Long id, String issue, String author, String content) {
+    public IssueWorklogDTO(Long id, String issue, String content) {
         this.setId(id);
         this.setIssue(issue);
-        this.setAuthor(author);
         this.setContent(content);
     }
 
     public IssueWorklogDTO(IssueWorklog worklog) {
-        this(worklog.getId(), worklog.getIssue().getKey(), worklog.getAuthor().getUserName(), worklog.getContent());
+        this(worklog.getId(), worklog.getIssue().getKey(), worklog.getContent());
         this.setCreatedDate(worklog.getCreatedDate());
         this.setLastModifiedDate(worklog.getLastModifiedDate());
     }
@@ -38,14 +35,6 @@ public class IssueWorklogDTO extends AbstractAuditingDTO {
 
     public void setIssue(String projectKey, Long idInProject) {
         this.issue = KeyUtil.getIssueKey(projectKey, idInProject);
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getContent() {
