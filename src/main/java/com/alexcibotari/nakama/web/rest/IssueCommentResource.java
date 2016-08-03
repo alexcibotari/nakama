@@ -34,12 +34,14 @@ public class IssueCommentResource {
     }
 
     @PostMapping
-    public ResponseEntity<IssueCommentDTO> create(@RequestBody IssueCommentDTO dto) {
+    public ResponseEntity<IssueCommentDTO> create(@PathVariable String projectKey, @PathVariable Long idInProject, @RequestBody IssueCommentDTO dto) {
+        dto.setIssue(projectKey, idInProject);
         return new ResponseEntity<>(new IssueCommentDTO(issueCommentService.create(dto)), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<IssueCommentDTO> update(@RequestBody IssueCommentDTO dto) {
+    public ResponseEntity<IssueCommentDTO> update(@PathVariable String projectKey, @PathVariable Long idInProject, @RequestBody IssueCommentDTO dto) {
+        dto.setIssue(projectKey, idInProject);
         return ResponseEntity.ok(new IssueCommentDTO(issueCommentService.update(dto)));
     }
 
