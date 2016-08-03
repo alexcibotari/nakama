@@ -10,6 +10,8 @@ public interface IssueWorklogService {
 
     IssueWorklog findOne(Long id);
 
+    IssueWorklog findOne(String projectKey, Long idInProject, Long idInIssue);
+
     List<IssueWorklog> findAll();
 
     List<IssueWorklog> findAllInIssue(String projectKey, Long idInProject);
@@ -21,4 +23,6 @@ public interface IssueWorklogService {
     IssueWorklog update(IssueWorklogDTO dto);
 
     void delete(Long id);
+
+    void delete(String projectKey, Long idInProject, Long idInIssue);
 }

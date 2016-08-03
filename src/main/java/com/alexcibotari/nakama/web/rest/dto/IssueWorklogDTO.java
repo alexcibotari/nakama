@@ -1,6 +1,7 @@
 package com.alexcibotari.nakama.web.rest.dto;
 
 import com.alexcibotari.nakama.domain.IssueWorklog;
+import com.alexcibotari.nakama.service.util.key.KeyUtil;
 
 public class IssueWorklogDTO extends AbstractAuditingDTO {
 
@@ -33,6 +34,10 @@ public class IssueWorklogDTO extends AbstractAuditingDTO {
 
     public void setIssue(String issue) {
         this.issue = issue;
+    }
+
+    public void setIssue(String projectKey, Long idInProject) {
+        this.issue = KeyUtil.getIssueKey(projectKey, idInProject);
     }
 
     public String getAuthor() {

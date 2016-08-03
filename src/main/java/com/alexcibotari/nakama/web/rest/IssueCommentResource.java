@@ -29,7 +29,7 @@ public class IssueCommentResource {
     }
 
     @GetMapping(path = "/{idInIssue}")
-    public ResponseEntity<IssueCommentDTO> getWorklogById(@PathVariable String projectKey, @PathVariable Long idInProject, @PathVariable Long idInIssue) {
+    public ResponseEntity<IssueCommentDTO> getCommentById(@PathVariable String projectKey, @PathVariable Long idInProject, @PathVariable Long idInIssue) {
         return ResponseEntity.ok(new IssueCommentDTO(issueCommentService.findOne(projectKey, idInProject, idInIssue)));
     }
 

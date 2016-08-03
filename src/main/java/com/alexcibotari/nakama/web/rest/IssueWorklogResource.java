@@ -27,24 +27,26 @@ public class IssueWorklogResource {
         return ResponseEntity.ok(issueWorklogService.findAllInIssue(projectKey, idInProject).stream().map(IssueWorklogDTO::new).collect(Collectors.toList()));
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<IssueWorklogDTO> getWorklogById(@PathVariable String projectKey, @PathVariable Long idInProject, @PathVariable Long id) {
-        return ResponseEntity.ok(new IssueWorklogDTO(issueWorklogService.findOne(id)));
+    @GetMapping(path = "/{idInIssue}")
+    public ResponseEntity<IssueWorklogDTO> getWorklogById(@PathVariable String projectKey, @PathVariable Long idInProject, @PathVariable Long idInIssue) {
+        return ResponseEntity.ok(new IssueWorklogDTO(issueWorklogService.findOne(projectKey, idInProject, idInIssue)));
     }
 
     @PostMapping
-    public ResponseEntity<IssueWorklogDTO> create(@RequestBody IssueWorklogDTO dto) {
+    public ResponseEntity<IssueWorklogDTO> create(@PathVariable String projectKey, @PathVariable Long idInProject, @RequestBody IssueWorklogDTO dto) {
+        dto.setIssue(projectKey, idInProject);
         return new ResponseEntity<>(new IssueWorklogDTO(issueWorklogService.create(dto)), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<IssueWorklogDTO> update(@RequestBody IssueWorklogDTO dto) {
+    public ResponseEntity<IssueWorklogDTO> update(@PathVariable String projectKey, @PathVariable Long idInProject, @RequestBody IssueWorklogDTO dto) {
+        dto.setIssue(projectKey, idInProject);
         return ResponseEntity.ok(new IssueWorklogDTO(issueWorklogService.update(dto)));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable String projectKey, @PathVariable Long idInProject, @PathVariable Long id) {
-        issueWorklogService.delete(id);
+    @DeleteMapping(path = "/{idInIssue}")
+    public ResponseEntity<Void> delete(@PathVariable String projectKey, @PathVariable Long idInProject, @PathVariable Long idInIssue) {
+        issueWorklogService.delete(projectKey, idInProject, idInIssue);
         return ResponseEntity.ok().build();
     }
 }

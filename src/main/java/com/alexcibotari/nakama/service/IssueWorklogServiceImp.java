@@ -28,12 +28,16 @@ public class IssueWorklogServiceImp implements IssueWorklogService {
         return issueWorklogRepository.findOne(id);
     }
 
+    public IssueWorklog findOne(String projectKey, Long idInProject, Long idInIssue) {
+        return issueWorklogRepository.findOne(projectKey, idInProject, idInIssue);
+    }
+
     public List<IssueWorklog> findAll() {
         return (List<IssueWorklog>) issueWorklogRepository.findAll();
     }
 
     public List<IssueWorklog> findAllInIssue(String projectKey, Long idInProject) {
-        return issueWorklogRepository.findAllByIssueKey(projectKey, idInProject);
+        return issueWorklogRepository.findAll(projectKey, idInProject);
     }
 
     public List<IssueWorklog> findAllInIssue(String key) {
@@ -63,6 +67,11 @@ public class IssueWorklogServiceImp implements IssueWorklogService {
     @Transactional
     public void delete(Long id) {
         issueWorklogRepository.delete(id);
+    }
+
+    @Transactional
+    public void delete(String projectKey, Long idInProject, Long idInIssue) {
+        issueWorklogRepository.delete(projectKey, idInProject, idInIssue);
     }
 
 }
