@@ -2,6 +2,7 @@ package com.alexcibotari.nakama.repository;
 
 
 import com.alexcibotari.nakama.domain.IssueComment;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -37,12 +38,15 @@ public interface IssueCommentRepository extends CrudRepository<IssueComment, Lon
     @Query("SELECT ic FROM IssueComment ic WHERE CONCAT(ic.issue.project.key, '-', ic.issue.idInProject) = :issueKey AND ic.idInIssue = :idInIssue")
     IssueComment findOne(@Param("issueKey") String issueKey, @Param("idInIssue") Long idInIssue);
 
+    @Modifying
     @Query("DELETE FROM IssueComment WHERE issue.project.key = :projectKey AND issue.idInProject = :idInProject AND idInIssue = :idInIssue")
     void delete(@Param("projectKey") String projectKey, @Param("idInProject") Long idInProject, @Param("idInIssue") Long idInIssue);
 
+    @Modifying
     @Query("DELETE FROM IssueComment WHERE issue.project.id = :projectId AND issue.idInProject = :idInProject AND idInIssue = :idInIssue")
     void delete(@Param("projectId") Long projectId, @Param("idInProject") Long idInProject, @Param("idInIssue") Long idInIssue);
 
+    @Modifying
     @Query("DELETE FROM IssueComment WHERE CONCAT(issue.project.key, '-', issue.idInProject) = :issueKey AND idInIssue = :idInIssue")
     void delete(@Param("issueKey") String issueKey, @Param("idInIssue") Long idInIssue);
 }

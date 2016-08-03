@@ -2,6 +2,7 @@ package com.alexcibotari.nakama.repository;
 
 
 import com.alexcibotari.nakama.domain.Issue;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -29,12 +30,15 @@ public interface IssueRepository extends CrudRepository<Issue, Long> {
     @Query("SELECT i FROM Issue i WHERE CONCAT(i.project.key, '-', i.idInProject) = :issueKey")
     Issue findOne(@Param("issueKey") String issueKey);
 
+    @Modifying
     @Query("DELETE FROM Issue WHERE project.key = :projectKey AND idInProject = :idInProject")
     void delete(@Param("projectKey") String projectKey, @Param("idInProject") Long idInProject);
 
+    @Modifying
     @Query("DELETE FROM Issue WHERE project.id = :projectId AND idInProject = :idInProject")
     void delete(@Param("projectId") Long projectId, @Param("idInProject") Long idInProject);
 
+    @Modifying
     @Query("DELETE FROM Issue WHERE CONCAT(project.key, '-', idInProject) = :issueKey")
     void delete(@Param("issueKey") String issueKey);
 }
