@@ -97,4 +97,4 @@ export default class IssueTypes extends Component {
     }
 }
 
-IssueTypes.defaultProps = {apiUrl: {types: '/api/admin/issues/types'}};
+IssueTypes.defaultProps = {apiUrl: {types: '/api/admin/issuetypes'}};

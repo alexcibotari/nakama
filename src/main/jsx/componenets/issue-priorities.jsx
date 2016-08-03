@@ -97,4 +97,4 @@ export default class IssuePriorities extends Component {
     }
 }
 
-IssuePriorities.defaultProps = {apiUrl: {priorities: '/api/admin/issues/priorities'}};
+IssuePriorities.defaultProps = {apiUrl: {priorities: '/api/admin/issuepriorities'}};

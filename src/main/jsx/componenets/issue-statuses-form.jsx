@@ -96,4 +96,4 @@ class IssueStatusesForm extends React.Component {
 
 export default withRouter(IssueStatusesForm)
 
-IssueStatusesForm.defaultProps = {apiUrl: {statuses: '/api/admin/issues/statuses', constraints: '/api/constraints/issue/status'}};
+IssueStatusesForm.defaultProps = {apiUrl: {statuses: '/api/admin/issuestatuses', constraints: '/api/constraints/issuestatus'}};

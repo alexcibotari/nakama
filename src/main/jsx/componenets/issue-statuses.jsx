@@ -99,4 +99,4 @@ class IssueStatuses extends Component {
 
 export default IssueStatuses;
 
-IssueStatuses.defaultProps = {apiUrl: {statuses: '/api/admin/issues/statuses'}};
+IssueStatuses.defaultProps = {apiUrl: {statuses: '/api/admin/issuestatuses'}};

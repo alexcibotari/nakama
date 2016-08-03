@@ -96,4 +96,4 @@ class IssuePrioritiesForm extends React.Component {
 
 export default withRouter(IssuePrioritiesForm)
 
-IssuePrioritiesForm.defaultProps = {apiUrl: {priorities: '/api/admin/issues/priorities', constraints: '/api/constraints/issue/priority'}};
+IssuePrioritiesForm.defaultProps = {apiUrl: {priorities: '/api/admin/issuepriorities', constraints: '/api/constraints/issuepriority'}};

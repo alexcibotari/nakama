@@ -96,4 +96,4 @@ class IssueTypesForm extends React.Component {
 
 export default withRouter(IssueTypesForm)
 
-IssueTypesForm.defaultProps = {apiUrl: {types: '/api/admin/issues/types', constraints: '/api/constraints/issue/type'}};
+IssueTypesForm.defaultProps = {apiUrl: {types: '/api/admin/issuetypes', constraints: '/api/constraints/issuetype'}};

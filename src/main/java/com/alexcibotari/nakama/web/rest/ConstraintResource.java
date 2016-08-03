@@ -41,17 +41,17 @@ public class ConstraintResource {
         return ResponseEntity.ok(Validator.extractConstraint(IssueWorklogDTO.class));
     }
 
-    @GetMapping(path = "issue/priority")
+    @GetMapping(path = "issuepriority")
     public ResponseEntity<Map<String, List<ConstraintDefinition>>> getIssuePriority() {
         return ResponseEntity.ok(Validator.extractConstraint(IssuePriorityDTO.class));
     }
 
-    @GetMapping(path = "issue/status")
+    @GetMapping(path = "issuestatus")
     public ResponseEntity<Map<String, List<ConstraintDefinition>>> getIssueStatus() {
         return ResponseEntity.ok(Validator.extractConstraint(IssueStatusDTO.class));
     }
 
-    @GetMapping(path = "issue/type")
+    @GetMapping(path = "issuetype")
     public ResponseEntity<Map<String, List<ConstraintDefinition>>> getIssueType() {
         return ResponseEntity.ok(Validator.extractConstraint(IssueTypeDTO.class));
     }
