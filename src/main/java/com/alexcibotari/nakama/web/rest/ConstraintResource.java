@@ -7,7 +7,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -35,6 +34,11 @@ public class ConstraintResource {
     @GetMapping(path = "issue/comment")
     public ResponseEntity<Map<String, List<ConstraintDefinition>>> getIssueComment() {
         return ResponseEntity.ok(Validator.extractConstraint(IssueCommentDTO.class));
+    }
+
+    @GetMapping(path = "issue/worklog")
+    public ResponseEntity<Map<String, List<ConstraintDefinition>>> getIssueWorklog() {
+        return ResponseEntity.ok(Validator.extractConstraint(IssueWorklogDTO.class));
     }
 
     @GetMapping(path = "issue/priority")
