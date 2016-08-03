@@ -43,6 +43,6 @@ public interface IssueCommentRepository extends CrudRepository<IssueComment, Lon
     @Query("DELETE FROM IssueComment WHERE issue.project.id = :projectId AND issue.idInProject = :idInProject AND idInIssue = :idInIssue")
     void delete(@Param("projectId") Long projectId, @Param("idInProject") Long idInProject, @Param("idInIssue") Long idInIssue);
 
-    @Query("DELETE FROM IssueComment ic WHERE CONCAT(issue.project.key, '-', issue.idInProject) = :issueKey AND idInIssue = :idInIssue")
+    @Query("DELETE FROM IssueComment WHERE CONCAT(issue.project.key, '-', issue.idInProject) = :issueKey AND idInIssue = :idInIssue")
     void delete(@Param("issueKey") String issueKey, @Param("idInIssue") Long idInIssue);
 }
