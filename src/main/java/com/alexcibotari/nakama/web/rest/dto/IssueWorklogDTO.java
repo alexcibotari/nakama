@@ -20,7 +20,7 @@ public class IssueWorklogDTO extends AbstractAuditingDTO {
     }
 
     public IssueWorklogDTO(IssueWorklog worklog) {
-        this(worklog.getId(), worklog.getIssue().getKey(), worklog.getContent());
+        this(worklog.getIdInIssue(), worklog.getIssue().getKey(), worklog.getContent());
         this.setCreatedDate(worklog.getCreatedDate());
         this.setLastModifiedDate(worklog.getLastModifiedDate());
     }

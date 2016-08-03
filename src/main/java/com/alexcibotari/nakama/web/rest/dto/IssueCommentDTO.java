@@ -23,7 +23,7 @@ public class IssueCommentDTO extends AbstractAuditingDTO {
     }
 
     public IssueCommentDTO(IssueComment comment) {
-        this(comment.getId(), comment.getIssue().getKey(), comment.getContent());
+        this(comment.getIdInIssue(), comment.getIssue().getKey(), comment.getContent());
         this.setCreatedDate(comment.getCreatedDate());
         this.setLastModifiedDate(comment.getLastModifiedDate());
     }

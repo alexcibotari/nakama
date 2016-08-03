@@ -32,6 +32,14 @@ public class IssueWorklog extends AbstractAuditingEntity {
         this.issue = issue;
     }
 
+    public Long getIdInIssue() {
+        return idInIssue;
+    }
+
+    public void setIdInIssue(Long idInIssue) {
+        this.idInIssue = idInIssue;
+    }
+
     public String getContent() {
         return content;
     }
