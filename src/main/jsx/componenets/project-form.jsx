@@ -111,6 +111,7 @@ class ProjectForm extends Component {
                             <p className="help-block"> </p>
                         </div>
                     </div>
+                    <div ref="formMessages" className="clearfix  col-md-12"></div>
                     <div className="form-group">
                         <div className="col-sm-offset-2 col-sm-10 btn-group">
                             <a className="btn btn-primary" role="button" onClick={this.validate}>Save</a>

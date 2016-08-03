@@ -90,12 +90,6 @@ class UserForm extends React.Component {
 
                             </div>
                         </div>
-                        <div className="form-group">
-                            <div className="col-sm-offset-2 col-sm-10 btn-group">
-                                <a className="btn btn-primary" role="button" onClick={this.validate}>Save</a>
-                                <Link to={'admin/users/'} className="btn btn-danger" role="button">Cancel</Link>
-                            </div>
-                        </div>
                     </div>
                     <div className="options-sidebar col-md-4">
                         <table className="table table-striped">
@@ -127,6 +121,13 @@ class UserForm extends React.Component {
                             </tbody>
 
                         </table>
+                    </div>
+                    <div ref="formMessages" className="clearfix  col-md-12"></div>
+                    <div className="form-group">
+                        <div className="col-sm-offset-2 col-sm-10 btn-group">
+                            <a className="btn btn-primary" role="button" onClick={this.validate}>Save</a>
+                            <Link to={'admin/users/'} className="btn btn-danger" role="button">Cancel</Link>
+                        </div>
                     </div>
                 </form>
             </div>
