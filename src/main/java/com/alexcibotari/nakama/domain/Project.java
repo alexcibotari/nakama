@@ -1,8 +1,13 @@
 package com.alexcibotari.nakama.domain;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 
 @Entity
+@SQLDelete(sql = "UPDATE Project SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
 public class Project extends AbstractAuditingEntity {
 
     @Column(name = "pname", nullable = false, unique = true)
@@ -17,6 +22,9 @@ public class Project extends AbstractAuditingEntity {
 
     @Column
     private String description;
+
+    @Column(nullable = false)
+    private Boolean deleted;
 
     public String getName() {
         return name;
@@ -50,13 +58,21 @@ public class Project extends AbstractAuditingEntity {
         this.description = description;
     }
 
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public String toString() {
         return "Project{" +
-                "name='" + name + '\'' +
-                ", key='" + key + '\'' +
-                ", lead=" + lead +
-                ", description='" + description + '\'' +
-                '}';
+            "name='" + name + '\'' +
+            ", key='" + key + '\'' +
+            ", lead=" + lead +
+            ", description='" + description + '\'' +
+            '}';
     }
 }

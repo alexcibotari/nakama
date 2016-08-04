@@ -27,11 +27,11 @@ INSERT INTO issue_type(id, pname, description, created_by, created_date) VALUES 
 INSERT INTO issue_type(id, pname, description, created_by, created_date) VALUES (3, 'Story', '', 'system', '2013-09-29 22:00:00');
 INSERT INTO issue_type(id, pname, description, created_by, created_date) VALUES (4, 'Task', 'A task that needs to be done.', 'system', '2013-09-29 22:00:00');
 --Projects
-INSERT INTO project (id, pkey, pname, description, lead_user_id, created_by, created_date) VALUES (1, 'TEST', 'Test', 'description', 1, 'system', '2013-09-29 22:00:00');
-INSERT INTO project (id, pkey, pname, description, lead_user_id, created_by, created_date) VALUES (2, 'BEST', 'Best', 'best desc', 1, 'system', '2013-09-29 22:00:00');
-INSERT INTO project (id, pkey, pname, description, lead_user_id, created_by, created_date) VALUES (3, 'BEST1', 'Best1', 'best desc1', 1, 'system', '2013-09-29 22:00:00');
-INSERT INTO project (id, pkey, pname, description, lead_user_id, created_by, created_date) VALUES (4, 'BEST2', 'Best2', 'best desc2', 1, 'system', '2013-09-29 22:00:00');
-INSERT INTO project (id, pkey, pname, description, lead_user_id, created_by, created_date) VALUES (5, 'BEST3', 'Best3', 'best desc3', 1, 'system', '2013-09-29 22:00:00');
+INSERT INTO project (id, pkey, pname, description, deleted, lead_user_id, created_by, created_date) VALUES (1, 'TEST', 'Test', 'description', false, 1, 'system', '2013-09-29 22:00:00');
+INSERT INTO project (id, pkey, pname, description, deleted, lead_user_id, created_by, created_date) VALUES (2, 'BEST', 'Best', 'best desc', false, 1, 'system', '2013-09-29 22:00:00');
+INSERT INTO project (id, pkey, pname, description, deleted, lead_user_id, created_by, created_date) VALUES (3, 'BEST1', 'Best1', 'best desc1', false, 1, 'system', '2013-09-29 22:00:00');
+INSERT INTO project (id, pkey, pname, description, deleted, lead_user_id, created_by, created_date) VALUES (4, 'BEST2', 'Best2', 'best desc2', false, 1, 'system', '2013-09-29 22:00:00');
+INSERT INTO project (id, pkey, pname, description, deleted, lead_user_id, created_by, created_date) VALUES (5, 'BEST3', 'Best3', 'best desc3', true, 1, 'system', '2013-09-29 22:00:00');
 --Issues
 INSERT INTO issue (id, id_in_project, project_id, summery, description, priority_id, status_id, type_id, created_by, created_date) VALUES (1, 1, 1, 'summery1', 'description1', 1, 1, 1, 'system', '2013-09-29 22:00:00');
 INSERT INTO issue (id, id_in_project, project_id, summery, description, priority_id, status_id, type_id, created_by, created_date) VALUES (2, 2, 1, 'summery2', 'description2', 1, 1, 1, 'system', '2013-09-29 22:00:00');
