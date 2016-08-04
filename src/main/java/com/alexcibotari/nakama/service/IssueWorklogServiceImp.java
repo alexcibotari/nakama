@@ -71,7 +71,8 @@ public class IssueWorklogServiceImp implements IssueWorklogService {
 
     @Transactional
     public void delete(String projectKey, Long idInProject, Long idInIssue) {
-        issueWorklogRepository.delete(projectKey, idInProject, idInIssue);
+        IssueWorklog issueWorklog = issueWorklogRepository.findOne(projectKey, idInProject, idInIssue);
+        issueWorklogRepository.delete(issueWorklog);
     }
 
 }

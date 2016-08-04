@@ -75,7 +75,8 @@ public class IssueCommentServiceImp implements IssueCommentService {
 
     @Transactional
     public void delete(String projectKey, Long idInProject, Long idInIssue) {
-        issueCommentRepository.delete(projectKey, idInProject, idInIssue);
+        IssueComment issueComment = issueCommentRepository.findOne(projectKey, idInProject, idInIssue);
+        issueCommentRepository.delete(issueComment);
     }
 
 }
