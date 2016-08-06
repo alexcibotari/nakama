@@ -11,16 +11,16 @@ import java.util.List;
 
 public interface IssueWorkLogRepository extends CrudRepository<IssueWorkLog, Long> {
 
-    @Query("SELECT iw FROM IssueWorkLog iw WHERE iw.issue.project.id = :projectId AND iw.issue.idInProject = :idInProject ORDER BY iw.createdDate")
+    @Query("SELECT iwl FROM IssueWorkLog iwl WHERE iwl.issue.project.id = :projectId AND iwl.issue.idInProject = :idInProject ORDER BY iwl.createdDate")
     List<IssueWorkLog> findAll(@Param("projectId") Long projectId, @Param("idInProject") Long idInProject);
 
-    @Query("SELECT iw FROM IssueWorkLog iw WHERE iw.issue.project.key = :projectKey AND iw.issue.idInProject = :idInProject ORDER BY iw.createdDate")
+    @Query("SELECT iwl FROM IssueWorkLog iwl WHERE iwl.issue.project.key = :projectKey AND iwl.issue.idInProject = :idInProject ORDER BY iwl.createdDate")
     List<IssueWorkLog> findAll(@Param("projectKey") String projectKey, @Param("idInProject") Long idInProject);
 
-    @Query("SELECT iw FROM IssueWorkLog iw WHERE iw.issue.id = :issueId ORDER BY iw.createdDate")
+    @Query("SELECT iwl FROM IssueWorkLog iwl WHERE iwl.issue.id = :issueId ORDER BY iwl.createdDate")
     List<IssueWorkLog> findAll(@Param("issueId") Long issueId);
 
-    @Query("SELECT iw FROM IssueWorkLog iw WHERE CONCAT(iw.issue.project.key, '-', iw.issue.idInProject) = :issueKey ORDER BY iw.createdDate")
+    @Query("SELECT iwl FROM IssueWorkLog iwl WHERE CONCAT(iwl.issue.project.key, '-', iwl.issue.idInProject) = :issueKey ORDER BY iwl.createdDate")
     List<IssueWorkLog> findAll(@Param("issueKey") String issueKey);
 
     @Query("SELECT IFNULL(MAX(idInIssue),0)+1 FROM IssueWorkLog WHERE issue.id = :issueId")
@@ -29,13 +29,13 @@ public interface IssueWorkLogRepository extends CrudRepository<IssueWorkLog, Lon
     @Query("SELECT IFNULL(MAX(idInIssue),0)+1 FROM IssueWorkLog WHERE CONCAT(issue.project.key, '-', issue.idInProject) = :issueKey")
     Long getNextIdInIssue(@Param("issueKey") String issueKey);
 
-    @Query("SELECT iw FROM IssueWorkLog iw WHERE iw.issue.project.key = :projectKey AND iw.issue.idInProject = :idInProject AND iw.idInIssue = :idInIssue")
+    @Query("SELECT iwl FROM IssueWorkLog iwl WHERE iwl.issue.project.key = :projectKey AND iwl.issue.idInProject = :idInProject AND iwl.idInIssue = :idInIssue")
     IssueWorkLog findOne(@Param("projectKey") String projectKey, @Param("idInProject") Long idInProject, @Param("idInIssue") Long idInIssue);
 
-    @Query("SELECT iw FROM IssueWorkLog iw WHERE iw.issue.project.id = :projectId AND iw.issue.idInProject = :idInProject AND iw.idInIssue = :idInIssue")
+    @Query("SELECT iwl FROM IssueWorkLog iwl WHERE iwl.issue.project.id = :projectId AND iwl.issue.idInProject = :idInProject AND iwl.idInIssue = :idInIssue")
     IssueWorkLog findOne(@Param("projectId") Long projectId, @Param("idInProject") Long idInProject, @Param("idInIssue") Long idInIssue);
 
-    @Query("SELECT iw FROM IssueWorkLog iw WHERE CONCAT(iw.issue.project.key, '-', iw.issue.idInProject) = :issueKey AND iw.idInIssue = :idInIssue")
+    @Query("SELECT iwl FROM IssueWorkLog iwl WHERE CONCAT(iwl.issue.project.key, '-', iwl.issue.idInProject) = :issueKey AND iwl.idInIssue = :idInIssue")
     IssueWorkLog findOne(@Param("issueKey") String issueKey, @Param("idInIssue") Long idInIssue);
 
     @Modifying
