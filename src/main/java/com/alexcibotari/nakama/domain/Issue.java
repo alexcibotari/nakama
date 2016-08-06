@@ -1,10 +1,14 @@
 package com.alexcibotari.nakama.domain;
 
 import com.alexcibotari.nakama.service.util.key.KeyUtil;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
 @Entity
+@SQLDelete(sql = "UPDATE Issue SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"project_id", "id_in_project"}))
 public class Issue extends AbstractAuditingEntity {
 
@@ -48,6 +52,9 @@ public class Issue extends AbstractAuditingEntity {
     //In Minutes
     @Column
     private Long timeestimate;
+
+    @Column(nullable = false)
+    private Boolean deleted = Boolean.FALSE;
 
 
     public String getKey() {
@@ -140,6 +147,14 @@ public class Issue extends AbstractAuditingEntity {
 
     public void setTimeestimate(Long timeestimate) {
         this.timeestimate = timeestimate;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 
     @Override

@@ -24,7 +24,7 @@ public class Project extends AbstractAuditingEntity {
     private String description;
 
     @Column(nullable = false)
-    private Boolean deleted;
+    private Boolean deleted  = Boolean.FALSE;;
 
     public String getName() {
         return name;

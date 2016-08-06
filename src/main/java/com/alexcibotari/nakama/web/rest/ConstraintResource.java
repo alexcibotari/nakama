@@ -38,7 +38,7 @@ public class ConstraintResource {
 
     @GetMapping(path = "issue/worklog")
     public ResponseEntity<Map<String, List<ConstraintDefinition>>> getIssueWorklog() {
-        return ResponseEntity.ok(Validator.extractConstraint(IssueWorklogDTO.class));
+        return ResponseEntity.ok(Validator.extractConstraint(IssueWorkLogDTO.class));
     }
 
     @GetMapping(path = "issuepriority")

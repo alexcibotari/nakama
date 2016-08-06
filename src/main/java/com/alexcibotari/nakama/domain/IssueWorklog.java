@@ -5,7 +5,7 @@ import java.time.ZonedDateTime;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"issue_id", "id_in_issue"}))
-public class IssueWorklog extends AbstractAuditingEntity {
+public class IssueWorkLog extends AbstractAuditingEntity {
 
     @ManyToOne
     @JoinColumn(name = "issue_id", nullable = false, updatable = false)

@@ -1,11 +1,11 @@
 package com.alexcibotari.nakama.service;
 
 
-import com.alexcibotari.nakama.domain.IssueWorklog;
-import com.alexcibotari.nakama.repository.IssueWorklogRepository;
+import com.alexcibotari.nakama.domain.IssueWorkLog;
+import com.alexcibotari.nakama.repository.IssueWorkLogRepository;
 import com.alexcibotari.nakama.service.util.key.IssueKey;
 import com.alexcibotari.nakama.service.util.key.KeyUtil;
-import com.alexcibotari.nakama.web.rest.dto.IssueWorklogDTO;
+import com.alexcibotari.nakama.web.rest.dto.IssueWorkLogDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,33 +14,33 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
-public class IssueWorklogServiceImp implements IssueWorklogService {
+public class IssueWorkLogServiceImp implements IssueWorkLogService {
 
 
     @Autowired
-    IssueWorklogRepository issueWorklogRepository;
+    IssueWorkLogRepository IssueWorkLogRepository;
 
     @Autowired
     IssueService issueService;
 
 
-    public IssueWorklog findOne(Long id) {
-        return issueWorklogRepository.findOne(id);
+    public IssueWorkLog findOne(Long id) {
+        return IssueWorkLogRepository.findOne(id);
     }
 
-    public IssueWorklog findOne(String projectKey, Long idInProject, Long idInIssue) {
-        return issueWorklogRepository.findOne(projectKey, idInProject, idInIssue);
+    public IssueWorkLog findOne(String projectKey, Long idInProject, Long idInIssue) {
+        return IssueWorkLogRepository.findOne(projectKey, idInProject, idInIssue);
     }
 
-    public List<IssueWorklog> findAll() {
-        return (List<IssueWorklog>) issueWorklogRepository.findAll();
+    public List<IssueWorkLog> findAll() {
+        return (List<IssueWorkLog>) IssueWorkLogRepository.findAll();
     }
 
-    public List<IssueWorklog> findAllInIssue(String projectKey, Long idInProject) {
-        return issueWorklogRepository.findAll(projectKey, idInProject);
+    public List<IssueWorkLog> findAllInIssue(String projectKey, Long idInProject) {
+        return IssueWorkLogRepository.findAll(projectKey, idInProject);
     }
 
-    public List<IssueWorklog> findAllInIssue(String key) {
+    public List<IssueWorkLog> findAllInIssue(String key) {
         IssueKey issueKey = KeyUtil.getIssueKey(key);
         if (issueKey != null && issueKey.isValid()) {
             return findAllInIssue(issueKey.getProjectKey(), issueKey.getIdInProject());
@@ -49,30 +49,30 @@ public class IssueWorklogServiceImp implements IssueWorklogService {
     }
 
     @Transactional
-    public IssueWorklog create(IssueWorklogDTO dto) {
-        IssueWorklog issueWorklog = new IssueWorklog();
-        issueWorklog.setIssue(issueService.findOne(dto.getIssue()));
-        issueWorklog.setContent(dto.getContent());
-        return issueWorklogRepository.save(issueWorklog);
+    public IssueWorkLog create(IssueWorkLogDTO dto) {
+        IssueWorkLog IssueWorkLog = new IssueWorkLog();
+        IssueWorkLog.setIssue(issueService.findOne(dto.getIssue()));
+        IssueWorkLog.setContent(dto.getContent());
+        return IssueWorkLogRepository.save(IssueWorkLog);
     }
 
 
     @Transactional
-    public IssueWorklog update(IssueWorklogDTO dto) {
-        IssueWorklog issueWorklog = findOne(dto.getId());
-        issueWorklog.setContent(dto.getContent());
-        return issueWorklogRepository.save(issueWorklog);
+    public IssueWorkLog update(IssueWorkLogDTO dto) {
+        IssueWorkLog IssueWorkLog = findOne(dto.getId());
+        IssueWorkLog.setContent(dto.getContent());
+        return IssueWorkLogRepository.save(IssueWorkLog);
     }
 
     @Transactional
     public void delete(Long id) {
-        issueWorklogRepository.delete(id);
+        IssueWorkLogRepository.delete(id);
     }
 
     @Transactional
     public void delete(String projectKey, Long idInProject, Long idInIssue) {
-        IssueWorklog issueWorklog = issueWorklogRepository.findOne(projectKey, idInProject, idInIssue);
-        issueWorklogRepository.delete(issueWorklog);
+        IssueWorkLog IssueWorkLog = IssueWorkLogRepository.findOne(projectKey, idInProject, idInIssue);
+        IssueWorkLogRepository.delete(IssueWorkLog);
     }
 
 }

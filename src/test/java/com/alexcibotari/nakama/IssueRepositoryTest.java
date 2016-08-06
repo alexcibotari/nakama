@@ -34,14 +34,14 @@ public class IssueRepositoryTest {
 
     @Test
     public void testFindAllProjectId() {
-        Assert.assertEquals(2, issueRepository.findAllByProjectId(1L).size());
+        Assert.assertEquals(1, issueRepository.findAllByProjectId(1L).size());
         Assert.assertEquals(3, issueRepository.findAllByProjectId(2L).size());
         Assert.assertEquals(0, issueRepository.findAllByProjectId(3L).size());
     }
 
     @Test
     public void testFindAllProjectKey() {
-        Assert.assertEquals(2, issueRepository.findAllByProjectKey("TEST").size());
+        Assert.assertEquals(1, issueRepository.findAllByProjectKey("TEST").size());
         Assert.assertEquals(3, issueRepository.findAllByProjectKey("BEST").size());
         Assert.assertEquals(0, issueRepository.findAllByProjectKey("BEST1").size());
     }
@@ -49,7 +49,7 @@ public class IssueRepositoryTest {
     @Test
     public void testFindOneByKey() {
         Assert.assertEquals("TEST-1", issueRepository.findOne("TEST-1").getKey());
-        Assert.assertEquals("TEST-2", issueRepository.findOne("TEST-2").getKey());
+        Assert.assertNull(issueRepository.findOne("TEST-2"));
         Assert.assertEquals("BEST-1", issueRepository.findOne("BEST-1").getKey());
         Assert.assertEquals("BEST-2", issueRepository.findOne("BEST-2").getKey());
         Assert.assertEquals("BEST-3", issueRepository.findOne("BEST-3").getKey());
@@ -58,7 +58,7 @@ public class IssueRepositoryTest {
     @Test
     public void testFindOneByProjectKeyAndIdInIssue() {
         Assert.assertEquals("TEST-1", issueRepository.findOne("TEST", 1L).getKey());
-        Assert.assertEquals("TEST-2", issueRepository.findOne("TEST", 2L).getKey());
+        Assert.assertNull(issueRepository.findOne("TEST", 2L));
         Assert.assertEquals("BEST-1", issueRepository.findOne("BEST", 1L).getKey());
         Assert.assertEquals("BEST-2", issueRepository.findOne("BEST", 2L).getKey());
         Assert.assertEquals("BEST-3", issueRepository.findOne("BEST", 3L).getKey());
@@ -67,7 +67,7 @@ public class IssueRepositoryTest {
     @Test
     public void testFindOneByProjectIdAndIdInIssue() {
         Assert.assertEquals("TEST-1", issueRepository.findOne(1L, 1L).getKey());
-        Assert.assertEquals("TEST-2", issueRepository.findOne(1L, 2L).getKey());
+        Assert.assertNull(issueRepository.findOne(1L, 2L));
         Assert.assertEquals("BEST-1", issueRepository.findOne(2L, 1L).getKey());
         Assert.assertEquals("BEST-2", issueRepository.findOne(2L, 2L).getKey());
         Assert.assertEquals("BEST-3", issueRepository.findOne(2L, 3L).getKey());

@@ -1,26 +1,26 @@
 package com.alexcibotari.nakama.service;
 
 
-import com.alexcibotari.nakama.domain.IssueWorklog;
-import com.alexcibotari.nakama.web.rest.dto.IssueWorklogDTO;
+import com.alexcibotari.nakama.domain.IssueWorkLog;
+import com.alexcibotari.nakama.web.rest.dto.IssueWorkLogDTO;
 
 import java.util.List;
 
-public interface IssueWorklogService {
+public interface IssueWorkLogService {
 
-    IssueWorklog findOne(Long id);
+    IssueWorkLog findOne(Long id);
 
-    IssueWorklog findOne(String projectKey, Long idInProject, Long idInIssue);
+    IssueWorkLog findOne(String projectKey, Long idInProject, Long idInIssue);
 
-    List<IssueWorklog> findAll();
+    List<IssueWorkLog> findAll();
 
-    List<IssueWorklog> findAllInIssue(String projectKey, Long idInProject);
+    List<IssueWorkLog> findAllInIssue(String projectKey, Long idInProject);
 
-    List<IssueWorklog> findAllInIssue(String key);
+    List<IssueWorkLog> findAllInIssue(String key);
 
-    IssueWorklog create(IssueWorklogDTO dto);
+    IssueWorkLog create(IssueWorkLogDTO dto);
 
-    IssueWorklog update(IssueWorklogDTO dto);
+    IssueWorkLog update(IssueWorkLogDTO dto);
 
     void delete(Long id);
 

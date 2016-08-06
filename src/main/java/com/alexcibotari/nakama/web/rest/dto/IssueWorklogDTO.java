@@ -1,28 +1,28 @@
 package com.alexcibotari.nakama.web.rest.dto;
 
-import com.alexcibotari.nakama.domain.IssueWorklog;
+import com.alexcibotari.nakama.domain.IssueWorkLog;
 import com.alexcibotari.nakama.service.util.key.KeyUtil;
 
-public class IssueWorklogDTO extends AbstractAuditingDTO {
+public class IssueWorkLogDTO extends AbstractAuditingDTO {
 
     private String issue;
 
     private String content;
 
 
-    public IssueWorklogDTO() {
+    public IssueWorkLogDTO() {
     }
 
-    public IssueWorklogDTO(Long id, String issue, String content) {
+    public IssueWorkLogDTO(Long id, String issue, String content) {
         this.setId(id);
         this.setIssue(issue);
         this.setContent(content);
     }
 
-    public IssueWorklogDTO(IssueWorklog worklog) {
-        this(worklog.getIdInIssue(), worklog.getIssue().getKey(), worklog.getContent());
-        this.setCreatedDate(worklog.getCreatedDate());
-        this.setLastModifiedDate(worklog.getLastModifiedDate());
+    public IssueWorkLogDTO(IssueWorkLog workLog) {
+        this(workLog.getIdInIssue(), workLog.getIssue().getKey(), workLog.getContent());
+        this.setCreatedDate(workLog.getCreatedDate());
+        this.setLastModifiedDate(workLog.getLastModifiedDate());
     }
 
     public String getIssue() {
