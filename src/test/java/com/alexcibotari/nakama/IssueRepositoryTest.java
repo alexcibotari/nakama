@@ -73,5 +73,19 @@ public class IssueRepositoryTest {
         Assert.assertEquals("BEST-3", issueRepository.findOne(2L, 3L).getKey());
     }
 
+    @Test
+    public void testDeleteByKey() {
+        Assert.assertNotNull(issueRepository.findOne("TEST-1"));
+        issueRepository.delete("TEST-1");
+        Assert.assertNull(issueRepository.findOne("TEST-1"));
+    }
+
+    @Test
+    public void testDeleteByIds() {
+        Assert.assertNotNull(issueRepository.findOne(1L, 1L));
+        issueRepository.delete(1L, 1L);
+        Assert.assertNull(issueRepository.findOne(1L, 1L));
+    }
+
 
 }
