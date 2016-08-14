@@ -4,7 +4,7 @@ import com.alexcibotari.nakama.domain.Project;
 
 import javax.validation.constraints.Size;
 
-public class ProjectDTO extends AbstractAuditingDTO {
+public class ProjectDTO extends AbstractAuditingDTO<Long> {
 
     @Size(min = 2, max = 50)
     private String name;
@@ -18,17 +18,18 @@ public class ProjectDTO extends AbstractAuditingDTO {
     public ProjectDTO() {
     }
 
-    public ProjectDTO(Long id, String name, String key, String description) {
-        this.setId(id);
-        this.setName(name);
-        this.setKey(key);
-        this.setDescription(description);
-    }
+//    public ProjectDTO(Long id, String name, String key, String description) {
+//        this.setId(id);
+//        this.setName(name);
+//        this.setKey(key);
+//        this.setDescription(description);
+//    }
 
-    public ProjectDTO(Project project) {
-        this(project.getId(), project.getName(), project.getKey(), project.getDescription());
-        this.setCreatedDate(project.getCreatedDate());
-        this.setLastModifiedDate(project.getLastModifiedDate());
+    public ProjectDTO(Project entity) {
+        super(entity);
+        this.setName(entity.getName());
+        this.setKey(entity.getKey());
+        this.setDescription(entity.getDescription());
     }
 
     public String getName() {

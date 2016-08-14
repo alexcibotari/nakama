@@ -4,7 +4,7 @@ import com.alexcibotari.nakama.domain.IssueStatus;
 
 import javax.validation.constraints.Size;
 
-public class IssueStatusDTO extends AbstractAuditingDTO{
+public class IssueStatusDTO extends AbstractAuditingDTO<Long> {
 
     @Size(min = 3, max = 50)
     private String name;
@@ -15,16 +15,16 @@ public class IssueStatusDTO extends AbstractAuditingDTO{
     public IssueStatusDTO() {
     }
 
-    public IssueStatusDTO(Long id, String name, String description) {
-        this.setId(id);
-        this.setName(name);
-        this.setDescription(description);
-    }
+//    public IssueStatusDTO(Long id, String name, String description) {
+//        this.setId(id);
+//        this.setName(name);
+//        this.setDescription(description);
+//    }
 
-    public IssueStatusDTO(IssueStatus status) {
-        this(status.getId(), status.getName(), status.getDescription());
-        this.setCreatedDate(status.getCreatedDate());
-        this.setLastModifiedDate(status.getLastModifiedDate());
+    public IssueStatusDTO(IssueStatus entity) {
+        super(entity);
+        this.setName(entity.getName());
+        this.setDescription(entity.getDescription());
     }
 
     public String getName() {
@@ -46,7 +46,7 @@ public class IssueStatusDTO extends AbstractAuditingDTO{
     @Override
     public String toString() {
         return "IssueStatusDTO{" +
-            "id='"+getId() + '\''+
+            "id='" + getId() + '\'' +
             ", name='" + name + '\'' +
             ", description='" + description + '\'' +
             '}';

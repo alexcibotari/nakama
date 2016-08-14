@@ -1,8 +1,19 @@
 package com.alexcibotari.nakama.web.rest.dto;
 
+import com.alexcibotari.nakama.domain.AbstractAuditingEntity;
+
 import java.time.ZonedDateTime;
 
-public abstract class AbstractAuditingDTO extends AbstractIdDTO {
+public abstract class AbstractAuditingDTO<T> extends AbstractIdDTO<T> {
+
+    AbstractAuditingDTO() {
+    }
+
+    AbstractAuditingDTO(AbstractAuditingEntity entity) {
+        super(entity);
+        this.setCreatedDate(entity.getCreatedDate());
+        this.setLastModifiedDate(entity.getLastModifiedDate());
+    }
 
     private String createdBy;
 

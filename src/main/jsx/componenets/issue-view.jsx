@@ -39,8 +39,8 @@ class IssueView extends Component {
     }
 
     componentWillMount() {
-        if (this.props.params.issueKey) {
-            client({method: 'GET', path: this.props.apiUrl.issue + '/' + this.props.params.issueKey}).then(response => {
+        if (this.props.params.issueId) {
+            client({method: 'GET', path: this.props.apiUrl.issue + '/' + this.props.params.issueId}).then(response => {
                 if (response.status.code == 200) {
                     this.setState({data: response.entity, edit: true});
                 }

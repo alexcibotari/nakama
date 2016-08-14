@@ -50,18 +50,22 @@ public class IssueWorkLogServiceImp implements IssueWorkLogService {
 
     @Transactional
     public IssueWorkLog create(IssueWorkLogDTO dto) {
-        IssueWorkLog IssueWorkLog = new IssueWorkLog();
-        IssueWorkLog.setIssue(issueService.findOne(dto.getIssue()));
-        IssueWorkLog.setContent(dto.getContent());
-        return IssueWorkLogRepository.save(IssueWorkLog);
+        IssueWorkLog issueWorkLog = new IssueWorkLog();
+        issueWorkLog.setIssue(issueService.findOne(dto.getIssue()));
+        issueWorkLog.setContent(dto.getContent());
+        issueWorkLog.setTimeWorked(dto.getTimeWorked());
+        issueWorkLog.setStartDate(dto.getStartDate());
+        return IssueWorkLogRepository.save(issueWorkLog);
     }
 
 
     @Transactional
     public IssueWorkLog update(IssueWorkLogDTO dto) {
-        IssueWorkLog IssueWorkLog = findOne(dto.getId());
-        IssueWorkLog.setContent(dto.getContent());
-        return IssueWorkLogRepository.save(IssueWorkLog);
+        IssueWorkLog issueWorkLog = findOne(dto.getId());
+        issueWorkLog.setContent(dto.getContent());
+        issueWorkLog.setTimeWorked(dto.getTimeWorked());
+        issueWorkLog.setStartDate(dto.getStartDate());
+        return IssueWorkLogRepository.save(issueWorkLog);
     }
 
     @Transactional
@@ -71,8 +75,8 @@ public class IssueWorkLogServiceImp implements IssueWorkLogService {
 
     @Transactional
     public void delete(String projectKey, Long idInProject, Long idInIssue) {
-        IssueWorkLog IssueWorkLog = IssueWorkLogRepository.findOne(projectKey, idInProject, idInIssue);
-        IssueWorkLogRepository.delete(IssueWorkLog);
+        IssueWorkLog issueWorkLog = IssueWorkLogRepository.findOne(projectKey, idInProject, idInIssue);
+        IssueWorkLogRepository.delete(issueWorkLog);
     }
 
 }

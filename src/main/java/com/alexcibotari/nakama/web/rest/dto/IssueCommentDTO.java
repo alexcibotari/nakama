@@ -5,7 +5,7 @@ import com.alexcibotari.nakama.service.util.key.KeyUtil;
 
 import javax.validation.constraints.Size;
 
-public class IssueCommentDTO extends AbstractAuditingDTO {
+public class IssueCommentDTO extends AbstractAuditingDTO<Long> {
 
     private String issue;
 
@@ -16,16 +16,18 @@ public class IssueCommentDTO extends AbstractAuditingDTO {
     public IssueCommentDTO() {
     }
 
-    public IssueCommentDTO(Long id, String issue, String content) {
-        this.setId(id);
-        this.setIssue(issue);
-        this.setContent(content);
-    }
+//    public IssueCommentDTO(Long id, String issue, String content) {
+//        this.setId(id);
+//        this.setIssue(issue);
+//        this.setContent(content);
+//    }
 
-    public IssueCommentDTO(IssueComment comment) {
-        this(comment.getIdInIssue(), comment.getIssue().getKey(), comment.getContent());
-        this.setCreatedDate(comment.getCreatedDate());
-        this.setLastModifiedDate(comment.getLastModifiedDate());
+    public IssueCommentDTO(IssueComment entity) {
+        super(entity);
+        this.setId(entity.getIdInIssue());//Override ID
+        this.setIssue(entity.getIssue().getKey());
+        this.setContent(entity.getContent());
+
     }
 
     public String getIssue() {

@@ -6,10 +6,7 @@ import com.alexcibotari.nakama.service.util.key.KeyUtil;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class IssueDTO extends AbstractAuditingDTO {
-
-    //Composite key of Project Key and Issue IdInProject
-    private String key;
+public class IssueDTO extends AbstractAuditingDTO<String> {
 
     private Long idInProject;
 
@@ -33,30 +30,24 @@ public class IssueDTO extends AbstractAuditingDTO {
     public IssueDTO() {
     }
 
-    public IssueDTO(Long idInProject, String project, String summery, String description) {
-        this.setKey(KeyUtil.getIssueKey(project, idInProject));
-        this.setIdInProject(idInProject);
-        this.setProject(project);
-        this.setSummery(summery);
-        this.setDescription(description);
-    }
+//    public IssueDTO(Long idInProject, String project, String summery, String description) {
+//        this.setKey(KeyUtil.getIssueKey(project, idInProject));
+//        this.setIdInProject(idInProject);
+//        this.setProject(project);
+//        this.setSummery(summery);
+//        this.setDescription(description);
+//    }
 
-    public IssueDTO(Issue issue) {
-        this(issue.getIdInProject(), issue.getProject().getKey(), issue.getSummery(), issue.getDescription());
-        this.setId(issue.getId());
-        this.setPriority(new IssuePriorityDTO(issue.getPriority()));
-        this.setStatus(new IssueStatusDTO(issue.getStatus()));
-        this.setType(new IssueTypeDTO(issue.getType()));
-        this.setCreatedDate(issue.getCreatedDate());
-        this.setLastModifiedDate(issue.getLastModifiedDate());
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
+    public IssueDTO(Issue entity) {
+        super(entity);
+        this.setId(entity.getKey());//Override Id with generated Key
+        this.setIdInProject(entity.getIdInProject());
+        this.setProject(entity.getProject().getKey());
+        this.setSummery(entity.getSummery());
+        this.setDescription(entity.getDescription());
+        this.setPriority(new IssuePriorityDTO(entity.getPriority()));
+        this.setStatus(new IssueStatusDTO(entity.getStatus()));
+        this.setType(new IssueTypeDTO(entity.getType()));
     }
 
     public Long getIdInProject() {
@@ -118,7 +109,7 @@ public class IssueDTO extends AbstractAuditingDTO {
     @Override
     public String toString() {
         return "IssueDTO{" +
-            "key='" + key + '\'' +
+            "id='" + getId() + '\'' +
             ", idInProject=" + idInProject +
             ", project='" + project + '\'' +
             ", summery='" + summery + '\'' +
