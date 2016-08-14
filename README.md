@@ -9,8 +9,7 @@
     npm install
     npm install webpack -g
     npm webpack
-    gradlew copyNodeLibs
-
+    ./gradlew copyNodeLibs
 
 ## Run
 ### Spring Boot
