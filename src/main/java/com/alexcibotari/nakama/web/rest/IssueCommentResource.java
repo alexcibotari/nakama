@@ -1,5 +1,6 @@
 package com.alexcibotari.nakama.web.rest;
 
+import com.alexcibotari.nakama.domain.IssueComment;
 import com.alexcibotari.nakama.service.IssueCommentService;
 import com.alexcibotari.nakama.web.rest.dto.IssueCommentDTO;
 import org.slf4j.Logger;
@@ -30,18 +31,23 @@ public class IssueCommentResource {
 
     @GetMapping(path = "/{idInIssue}")
     public ResponseEntity<IssueCommentDTO> getCommentById(@PathVariable String projectKey, @PathVariable Long idInProject, @PathVariable Long idInIssue) {
-        return ResponseEntity.ok(new IssueCommentDTO(issueCommentService.findOne(projectKey, idInProject, idInIssue)));
+        IssueComment issueComment = issueCommentService.findOne(projectKey, idInProject, idInIssue);
+        if (issueComment != null) {
+            return ResponseEntity.ok(new IssueCommentDTO(issueComment));
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping
     public ResponseEntity<IssueCommentDTO> create(@PathVariable String projectKey, @PathVariable Long idInProject, @RequestBody IssueCommentDTO dto) {
-        dto.setIssue(projectKey, idInProject);
+        dto.setIssue(projectKey, idInProject);//Override DTO with path values
         return new ResponseEntity<>(new IssueCommentDTO(issueCommentService.create(dto)), HttpStatus.CREATED);
     }
 
     @PutMapping
     public ResponseEntity<IssueCommentDTO> update(@PathVariable String projectKey, @PathVariable Long idInProject, @RequestBody IssueCommentDTO dto) {
-        dto.setIssue(projectKey, idInProject);
+        dto.setIssue(projectKey, idInProject);//Override DTO with path values
         return ResponseEntity.ok(new IssueCommentDTO(issueCommentService.update(dto)));
     }
 

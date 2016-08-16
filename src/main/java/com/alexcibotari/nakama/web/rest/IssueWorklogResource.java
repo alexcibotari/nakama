@@ -1,5 +1,6 @@
 package com.alexcibotari.nakama.web.rest;
 
+import com.alexcibotari.nakama.domain.IssueWorkLog;
 import com.alexcibotari.nakama.service.IssueWorkLogService;
 import com.alexcibotari.nakama.web.rest.dto.IssueWorkLogDTO;
 import org.slf4j.Logger;
@@ -29,18 +30,23 @@ public class IssueWorklogResource {
 
     @GetMapping(path = "/{idInIssue}")
     public ResponseEntity<IssueWorkLogDTO> getWorklogById(@PathVariable String projectKey, @PathVariable Long idInProject, @PathVariable Long idInIssue) {
-        return ResponseEntity.ok(new IssueWorkLogDTO(issueWorkLogService.findOne(projectKey, idInProject, idInIssue)));
+        IssueWorkLog issueWorkLog = issueWorkLogService.findOne(projectKey, idInProject, idInIssue);
+        if (issueWorkLog != null) {
+            return ResponseEntity.ok(new IssueWorkLogDTO(issueWorkLog));
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping
     public ResponseEntity<IssueWorkLogDTO> create(@PathVariable String projectKey, @PathVariable Long idInProject, @RequestBody IssueWorkLogDTO dto) {
-        dto.setIssue(projectKey, idInProject);
+        dto.setIssue(projectKey, idInProject);//Override DTO with path values
         return new ResponseEntity<>(new IssueWorkLogDTO(issueWorkLogService.create(dto)), HttpStatus.CREATED);
     }
 
     @PutMapping
     public ResponseEntity<IssueWorkLogDTO> update(@PathVariable String projectKey, @PathVariable Long idInProject, @RequestBody IssueWorkLogDTO dto) {
-        dto.setIssue(projectKey, idInProject);
+        dto.setIssue(projectKey, idInProject);//Override DTO with path values
         return ResponseEntity.ok(new IssueWorkLogDTO(issueWorkLogService.update(dto)));
     }
 

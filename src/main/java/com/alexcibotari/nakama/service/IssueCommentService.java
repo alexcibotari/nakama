@@ -12,6 +12,8 @@ public interface IssueCommentService {
 
     IssueComment findOne(String projectKey, Long idInProject, Long idInIssue);
 
+    IssueComment findOne(String issueKey, Long idInIssue);
+
     List<IssueComment> findAll();
 
     List<IssueComment> findAllInIssue(String projectKey, Long idInProject);

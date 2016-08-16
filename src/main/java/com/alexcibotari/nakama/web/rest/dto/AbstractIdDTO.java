@@ -2,22 +2,24 @@ package com.alexcibotari.nakama.web.rest.dto;
 
 import com.alexcibotari.nakama.domain.AbstractIdEntity;
 
-public abstract class AbstractIdDTO <T extends Object>{
+import java.io.Serializable;
+
+public abstract class AbstractIdDTO <ID extends Serializable>{
 
     AbstractIdDTO() {
     }
 
     AbstractIdDTO(AbstractIdEntity entity) {
-        this.setId((T)entity.getId());
+        this.setId((ID)entity.getId());
     }
 
-    private T id;
+    private ID id;
 
-    public T getId() {
+    public ID getId() {
         return this.id;
     }
 
-    public void setId(T id) {
+    public void setId(ID id) {
         this.id = id;
     }
 

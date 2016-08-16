@@ -2,9 +2,10 @@ package com.alexcibotari.nakama.web.rest.dto;
 
 import com.alexcibotari.nakama.domain.AbstractAuditingEntity;
 
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 
-public abstract class AbstractAuditingDTO<T> extends AbstractIdDTO<T> {
+public abstract class AbstractAuditingDTO<ID extends Serializable> extends AbstractIdDTO<ID> {
 
     AbstractAuditingDTO() {
     }

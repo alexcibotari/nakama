@@ -29,9 +29,12 @@ public class IssueCommentServiceImp implements IssueCommentService {
         return issueCommentRepository.findOne(id);
     }
 
-    @Override
     public IssueComment findOne(String projectKey, Long idInProject, Long idInIssue) {
         return issueCommentRepository.findOne(projectKey, idInProject, idInIssue);
+    }
+
+    public IssueComment findOne(String issueKey, Long idInIssue) {
+        return issueCommentRepository.findOne(issueKey, idInIssue);
     }
 
     public List<IssueComment> findAll() {
@@ -63,7 +66,7 @@ public class IssueCommentServiceImp implements IssueCommentService {
 
     @Transactional
     public IssueComment update(IssueCommentDTO dto) {
-        IssueComment issueComment = findOne(dto.getId());
+        IssueComment issueComment = findOne(dto.getIssue(), dto.getId());
         issueComment.setContent(dto.getContent());
         return issueCommentRepository.save(issueComment);
     }

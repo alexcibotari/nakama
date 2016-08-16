@@ -3,10 +3,12 @@ package com.alexcibotari.nakama.web.rest.dto;
 import com.alexcibotari.nakama.domain.IssueComment;
 import com.alexcibotari.nakama.service.util.key.KeyUtil;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class IssueCommentDTO extends AbstractAuditingDTO<Long> {
 
+    @NotNull
     private String issue;
 
     @Size(min = 3, max = 250)

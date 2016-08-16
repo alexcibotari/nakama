@@ -12,6 +12,8 @@ public interface IssueWorkLogService {
 
     IssueWorkLog findOne(String projectKey, Long idInProject, Long idInIssue);
 
+    IssueWorkLog findOne(String issueKey, Long idInIssue);
+
     List<IssueWorkLog> findAll();
 
     List<IssueWorkLog> findAllInIssue(String projectKey, Long idInProject);

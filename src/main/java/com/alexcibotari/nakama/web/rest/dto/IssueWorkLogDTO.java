@@ -9,6 +9,7 @@ import java.time.ZonedDateTime;
 
 public class IssueWorkLogDTO extends AbstractAuditingDTO<Long> {
 
+    @NotNull
     private String issue;
 
     private String content;
