@@ -84,6 +84,7 @@ public class IssueServiceImp implements IssueService {
             IssueType one = issueTypeRepository.findOne(dto.getType().getId());
             issue.setType(one);
         }
+        issue.setTimeSpent(0L);
         issue.setIdInProject(issueRepository.getNextIdInProject(dto.getProject()));
         return issueRepository.save(issue);
     }
@@ -121,5 +122,15 @@ public class IssueServiceImp implements IssueService {
     public void delete(String projectKey, Long idInProject) {
         Issue issue = issueRepository.findOne(projectKey, idInProject);
         issueRepository.delete(issue);
+    }
+
+    @Transactional
+    public Issue recalculateTimeSpent(Issue issue){
+        Long value = issueRepository.calculateWorkLog(issue.getId());
+        if(value == null || value == 0){
+            return issue;
+        }
+        issue.setTimeSpent(value);
+        return issueRepository.save(issue);
     }
 }

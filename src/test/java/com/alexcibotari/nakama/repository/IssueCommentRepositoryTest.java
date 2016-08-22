@@ -1,5 +1,6 @@
-package com.alexcibotari.nakama;
+package com.alexcibotari.nakama.repository;
 
+import com.alexcibotari.nakama.Application;
 import com.alexcibotari.nakama.repository.IssueCommentRepository;
 import org.junit.Assert;
 import org.junit.Test;

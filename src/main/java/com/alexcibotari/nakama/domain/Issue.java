@@ -5,6 +5,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.time.ZonedDateTime;
 
 @Entity
 @SQLDelete(sql = "UPDATE Issue SET deleted = true WHERE id = ?")
@@ -47,11 +48,14 @@ public class Issue extends AbstractAuditingEntity {
 
     //In Minutes
     @Column
-    private Long timespent;
+    private Long timeSpent;
 
     //In Minutes
     @Column
-    private Long timeestimate;
+    private Long timeEstimate;
+
+    @Column
+    private ZonedDateTime dueDate;
 
     @Column(nullable = false)
     private Boolean deleted = Boolean.FALSE;
@@ -133,20 +137,28 @@ public class Issue extends AbstractAuditingEntity {
         this.type = type;
     }
 
-    public Long getTimespent() {
-        return timespent;
+    public Long getTimeSpent() {
+        return timeSpent;
     }
 
-    public void setTimespent(Long timespent) {
-        this.timespent = timespent;
+    public void setTimeSpent(Long timeSpent) {
+        this.timeSpent = timeSpent;
     }
 
-    public Long getTimeestimate() {
-        return timeestimate;
+    public Long getTimeEstimate() {
+        return timeEstimate;
     }
 
-    public void setTimeestimate(Long timeestimate) {
-        this.timeestimate = timeestimate;
+    public void setTimeEstimate(Long timeEstimate) {
+        this.timeEstimate = timeEstimate;
+    }
+
+    public ZonedDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(ZonedDateTime dueDate) {
+        this.dueDate = dueDate;
     }
 
     public Boolean getDeleted() {
@@ -169,8 +181,8 @@ public class Issue extends AbstractAuditingEntity {
             ", priority=" + priority +
             ", status=" + status +
             ", type=" + type +
-            ", timespent=" + timespent +
-            ", timeestimate=" + timeestimate +
+            ", timespent=" + timeSpent +
+            ", timeestimate=" + timeEstimate +
             '}';
     }
 }

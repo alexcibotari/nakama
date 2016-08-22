@@ -1,5 +1,6 @@
-package com.alexcibotari.nakama;
+package com.alexcibotari.nakama.repository;
 
+import com.alexcibotari.nakama.Application;
 import com.alexcibotari.nakama.repository.ProjectRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,8 +23,8 @@ public class ProjectRepositoryTest {
         Assert.assertEquals("TEST", projectRepository.findOneByKey("TEST").getKey());
         Assert.assertEquals("BEST", projectRepository.findOneByKey("BEST").getKey());
         Assert.assertEquals("BEST1", projectRepository.findOneByKey("BEST1").getKey());
-        Assert.assertEquals("BEST2", projectRepository.findOneByKey("BEST2").getKey());
-        Assert.assertNull(projectRepository.findOneByKey("BEST3"));
+        Assert.assertEquals("ESTIMATION", projectRepository.findOneByKey("ESTIMATION").getKey());
+        Assert.assertNull(projectRepository.findOneByKey("DEL"));
     }
 
     @Test

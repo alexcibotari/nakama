@@ -1,10 +1,12 @@
 package com.alexcibotari.nakama.web.rest.dto;
 
 import com.alexcibotari.nakama.domain.Issue;
-import com.alexcibotari.nakama.service.util.key.KeyUtil;
+import org.springframework.data.annotation.ReadOnlyProperty;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.ZonedDateTime;
 
 public class IssueDTO extends AbstractAuditingDTO<String> {
 
@@ -27,6 +29,13 @@ public class IssueDTO extends AbstractAuditingDTO<String> {
     @NotNull
     private IssueTypeDTO type;
 
+    private Long timeSpent;
+
+    @Min(0)
+    private Long timeEstimate;
+
+    private ZonedDateTime dueDate;
+
     public IssueDTO() {
     }
 
@@ -48,6 +57,9 @@ public class IssueDTO extends AbstractAuditingDTO<String> {
         this.setPriority(new IssuePriorityDTO(entity.getPriority()));
         this.setStatus(new IssueStatusDTO(entity.getStatus()));
         this.setType(new IssueTypeDTO(entity.getType()));
+        this.setTimeSpent(entity.getTimeSpent());
+        this.setTimeEstimate(entity.getTimeEstimate());
+        this.setDueDate(entity.getDueDate());
     }
 
     public Long getIdInProject() {
@@ -106,17 +118,43 @@ public class IssueDTO extends AbstractAuditingDTO<String> {
         this.type = type;
     }
 
+    public Long getTimeSpent() {
+        return timeSpent;
+    }
+
+    public void setTimeSpent(Long timeSpent) {
+        this.timeSpent = timeSpent;
+    }
+
+    public Long getTimeEstimate() {
+        return timeEstimate;
+    }
+
+    public void setTimeEstimate(Long timeEstimate) {
+        this.timeEstimate = timeEstimate;
+    }
+
+    public ZonedDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(ZonedDateTime dueDate) {
+        this.dueDate = dueDate;
+    }
+
     @Override
     public String toString() {
         return "IssueDTO{" +
-            "id='" + getId() + '\'' +
-            ", idInProject=" + idInProject +
+            "idInProject=" + idInProject +
             ", project='" + project + '\'' +
             ", summery='" + summery + '\'' +
             ", description='" + description + '\'' +
             ", priority=" + priority +
             ", status=" + status +
             ", type=" + type +
+            ", timeSpent=" + timeSpent +
+            ", timeEstimate=" + timeEstimate +
+            ", dueDate=" + dueDate +
             '}';
     }
 }

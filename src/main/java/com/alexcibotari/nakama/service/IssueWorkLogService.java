@@ -26,5 +26,9 @@ public interface IssueWorkLogService {
 
     void delete(Long id);
 
+    void delete(IssueWorkLog issueWorkLog);
+
+    void delete(String issueKey, Long idInIssue);
+
     void delete(String projectKey, Long idInProject, Long idInIssue);
 }

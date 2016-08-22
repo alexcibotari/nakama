@@ -27,4 +27,6 @@ public interface IssueService {
     void delete(Long id);
 
     void delete(String projectKey, Long idInProject);
+
+    Issue recalculateTimeSpent(Issue issue);
 }

@@ -62,7 +62,12 @@ public class IssueWorkLogServiceImp implements IssueWorkLogService {
         issueWorkLog.setTimeWorked(dto.getTimeWorked());
         issueWorkLog.setStartDate(dto.getStartDate());
         issueWorkLog.setIdInIssue(issueWorkLogRepository.getNextIdInIssue(issue.getId()));
-        return issueWorkLogRepository.save(issueWorkLog);
+
+        issueWorkLog = issueWorkLogRepository.save(issueWorkLog);
+        //Recalculate time spent
+        issueService.recalculateTimeSpent(issue);
+
+        return issueWorkLog;
     }
 
 
@@ -72,18 +77,39 @@ public class IssueWorkLogServiceImp implements IssueWorkLogService {
         issueWorkLog.setContent(dto.getContent());
         issueWorkLog.setTimeWorked(dto.getTimeWorked());
         issueWorkLog.setStartDate(dto.getStartDate());
-        return issueWorkLogRepository.save(issueWorkLog);
+
+        issueWorkLog = issueWorkLogRepository.save(issueWorkLog);
+        //Recalculate time spent
+        issueService.recalculateTimeSpent(issueWorkLog.getIssue());
+
+        return issueWorkLog;
     }
 
     @Transactional
     public void delete(Long id) {
+        IssueWorkLog issueWorkLog = issueWorkLogRepository.findOne(id);
         issueWorkLogRepository.delete(id);
+        issueService.recalculateTimeSpent(issueWorkLog.getIssue());
+    }
+
+    @Transactional
+    public void delete(IssueWorkLog issueWorkLog){
+        issueWorkLogRepository.delete(issueWorkLog);
+        issueService.recalculateTimeSpent(issueWorkLog.getIssue());
+    }
+
+    @Transactional
+    public void delete(String issueKey, Long idInIssue){
+        IssueWorkLog issueWorkLog = issueWorkLogRepository.findOne(issueKey,idInIssue);
+        issueWorkLogRepository.delete(issueWorkLog);
+        issueService.recalculateTimeSpent(issueWorkLog.getIssue());
     }
 
     @Transactional
     public void delete(String projectKey, Long idInProject, Long idInIssue) {
         IssueWorkLog issueWorkLog = issueWorkLogRepository.findOne(projectKey, idInProject, idInIssue);
         issueWorkLogRepository.delete(issueWorkLog);
+        issueService.recalculateTimeSpent(issueWorkLog.getIssue());
     }
 
 }
