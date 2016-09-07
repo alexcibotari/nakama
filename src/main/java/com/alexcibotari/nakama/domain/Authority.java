@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class Authority extends AbstractIdEntity implements GrantedAuthority {
+public class Authority extends AbstractEntity implements GrantedAuthority {
 
     /**
      *

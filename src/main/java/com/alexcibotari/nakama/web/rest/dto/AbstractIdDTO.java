@@ -1,6 +1,6 @@
 package com.alexcibotari.nakama.web.rest.dto;
 
-import com.alexcibotari.nakama.domain.AbstractIdEntity;
+import com.alexcibotari.nakama.domain.AbstractEntity;
 
 import java.io.Serializable;
 
@@ -9,7 +9,7 @@ public abstract class AbstractIdDTO <ID extends Serializable>{
     AbstractIdDTO() {
     }
 
-    AbstractIdDTO(AbstractIdEntity entity) {
+    AbstractIdDTO(AbstractEntity entity) {
         this.setId((ID)entity.getId());
     }
 
