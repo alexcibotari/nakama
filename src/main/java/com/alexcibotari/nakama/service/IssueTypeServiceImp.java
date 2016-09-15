@@ -3,7 +3,7 @@ package com.alexcibotari.nakama.service;
 
 import com.alexcibotari.nakama.domain.IssueType;
 import com.alexcibotari.nakama.repository.IssueTypeRepository;
-import com.alexcibotari.nakama.web.rest.dto.IssueTypeDTO;
+import com.alexcibotari.nakama.web.rest.resource.IssueTypeResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,18 +29,18 @@ public class IssueTypeServiceImp implements IssueTypeService {
     }
 
     @Transactional
-    public IssueType create(IssueTypeDTO dto) {
+    public IssueType create(IssueTypeResource resource) {
         IssueType issueType = new IssueType();
-        issueType.setName(dto.getName());
-        issueType.setDescription(dto.getDescription());
+        issueType.setName(resource.getName());
+        issueType.setDescription(resource.getDescription());
         return issueTypeRepository.save(issueType);
     }
 
     @Transactional
-    public IssueType update(IssueTypeDTO dto) {
-        IssueType issueType = findOne(dto.getId());
-        issueType.setName(dto.getName());
-        issueType.setDescription(dto.getDescription());
+    public IssueType update(Long id, IssueTypeResource resource) {
+        IssueType issueType = findOne(id);
+        issueType.setName(resource.getName());
+        issueType.setDescription(resource.getDescription());
         return issueTypeRepository.save(issueType);
     }
 

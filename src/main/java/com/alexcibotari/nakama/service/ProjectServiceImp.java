@@ -3,7 +3,7 @@ package com.alexcibotari.nakama.service;
 
 import com.alexcibotari.nakama.domain.Project;
 import com.alexcibotari.nakama.repository.ProjectRepository;
-import com.alexcibotari.nakama.web.rest.dto.ProjectDTO;
+import com.alexcibotari.nakama.web.rest.resource.ProjectResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,20 +30,20 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Transactional
-    public Project create(ProjectDTO dto) {
+    public Project create(ProjectResource resource) {
         Project project = new Project();
-        project.setKey(dto.getKey());
-        project.setName(dto.getName());
-        project.setDescription(dto.getDescription());
+        project.setKey(resource.getKey());
+        project.setName(resource.getName());
+        project.setDescription(resource.getDescription());
         return projectRepository.save(project);
     }
 
     @Transactional
-    public Project update(ProjectDTO dto) {
-        Project project = projectRepository.findOne(dto.getId());
-        project.setKey(dto.getKey());
-        project.setName(dto.getName());
-        project.setDescription(dto.getDescription());
+    public Project update(Long id, ProjectResource resource) {
+        Project project = projectRepository.findOne(id);
+        project.setKey(resource.getKey());
+        project.setName(resource.getName());
+        project.setDescription(resource.getDescription());
         return projectRepository.save(project);
     }
 

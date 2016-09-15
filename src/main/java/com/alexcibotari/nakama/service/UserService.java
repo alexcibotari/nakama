@@ -2,10 +2,9 @@ package com.alexcibotari.nakama.service;
 
 
 import com.alexcibotari.nakama.domain.User;
-import com.alexcibotari.nakama.web.rest.dto.UserDTO;
+import com.alexcibotari.nakama.web.rest.resource.UserResource;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
 
@@ -13,9 +12,9 @@ public interface UserService {
 
     User findOneByEmail(String email);
 
-    User create(UserDTO user);
+    User create(UserResource resource);
 
-    User update(UserDTO userDTO);
+    User update(String userName, UserResource resource);
 
     User getUser();
 

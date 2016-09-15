@@ -2,7 +2,7 @@ package com.alexcibotari.nakama.service;
 
 
 import com.alexcibotari.nakama.domain.IssueStatus;
-import com.alexcibotari.nakama.web.rest.dto.IssueStatusDTO;
+import com.alexcibotari.nakama.web.rest.resource.IssueStatusResource;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ public interface IssueStatusService {
 
     List<IssueStatus> findAll();
 
-    IssueStatus create(IssueStatusDTO dto);
+    IssueStatus create(IssueStatusResource resource);
 
-    IssueStatus update(IssueStatusDTO dto);
+    IssueStatus update(Long id, IssueStatusResource resource);
 
     void delete(Long id);
 }

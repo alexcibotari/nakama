@@ -7,13 +7,13 @@ INSERT INTO authority (id, pname) VALUES (2, 'ROLE_USER');
 --Authorities
 INSERT INTO authorities (user_id, authority_id) VALUES (1, 1);
 INSERT INTO authorities (user_id, authority_id) VALUES (2, 2);
---IssuePriority
+--Priority
 INSERT INTO issue_priority(id, pname, description, created_by, created_date) VALUES (1, 'Highest', 'This problem will block progress.', 'system', '2013-09-29 22:00:00');
 INSERT INTO issue_priority(id, pname, description, created_by, created_date) VALUES (2, 'High', 'Serious problem that could block progress.', 'system', '2013-09-29 22:00:00');
 INSERT INTO issue_priority(id, pname, description, created_by, created_date) VALUES (3, 'Medium', 'Has the potential to affect progress.', 'system', '2013-09-29 22:00:00');
 INSERT INTO issue_priority(id, pname, description, created_by, created_date) VALUES (4, 'Low', 'Minor problem or easily worked around.', 'system', '2013-09-29 22:00:00');
 INSERT INTO issue_priority(id, pname, description, created_by, created_date) VALUES (5, 'Lowest', 'Trivial problem with little or no impact on progress.', 'system', '2013-09-29 22:00:00');
---IssueStatus
+--Status
 INSERT INTO issue_status(id, pname, description, created_by, created_date) VALUES (1, 'Open', 'The issue is open and ready for the assignee to start work on it.', 'system', '2013-09-29 22:00:00');
 INSERT INTO issue_status(id, pname, description, created_by, created_date) VALUES (2, 'In Progress', 'This issue is being actively worked on at the moment by the assignee.', 'system', '2013-09-29 22:00:00');
 INSERT INTO issue_status(id, pname, description, created_by, created_date) VALUES (3, 'Reopened', 'This issue was once resolved, but the resolution was deemed incorrect. From here issues are either marked assigned or resolved.', 'system', '2013-09-29 22:00:00');
@@ -40,18 +40,18 @@ INSERT INTO issue (id, id_in_project, project_id, summery, description, priority
 INSERT INTO issue (id, id_in_project, project_id, summery, description, priority_id, status_id, type_id, deleted, created_by, created_date) VALUES (5, 3, 2, 'summery5', 'description5', 1, 1, 1, false, 'system', '2013-09-29 22:00:00');
 INSERT INTO issue (id, id_in_project, project_id, summery, description, priority_id, status_id, type_id, deleted, created_by, created_date, time_spent, time_estimate) VALUES (6, 1, 4, 'estimation task', 'estimation description', 1, 1, 1, false, 'system', '2013-09-29 22:00:00', 60, 120);
 INSERT INTO issue (id, id_in_project, project_id, summery, description, priority_id, status_id, type_id, deleted, created_by, created_date, time_spent, time_estimate) VALUES (7, 2, 4, 'estimation task', 'estimation description', 1, 1, 1, false, 'system', '2013-09-29 22:00:00', 0, 120);
---Issues Comments
-INSERT INTO issue_comment (id, id_in_issue, issue_id, content, created_by, created_date) VALUES (1, 1, 1, 'comment 1', 'system', '2013-09-29 22:00:00');
-INSERT INTO issue_comment (id, id_in_issue, issue_id, content, created_by, created_date) VALUES (2, 2, 1, 'comment 2', 'system', '2013-09-29 22:00:30');
-INSERT INTO issue_comment (id, id_in_issue, issue_id, content, created_by, created_date) VALUES (3, 3, 1, 'comment 3', 'system', '2013-09-29 22:00:45');
-INSERT INTO issue_comment (id, id_in_issue, issue_id, content, created_by, created_date) VALUES (4, 1, 2, 'comment 4', 'system', '2013-09-29 22:00:00');
-INSERT INTO issue_comment (id, id_in_issue, issue_id, content, created_by, created_date) VALUES (5, 2, 2, 'comment 5', 'system', '2013-09-29 22:00:30');
-INSERT INTO issue_comment (id, id_in_issue, issue_id, content, created_by, created_date) VALUES (6, 1, 3, 'comment 6', 'system', '2013-09-29 22:00:00');
---Issues WorkLog
-INSERT INTO issue_work_log (id, id_in_issue, issue_id, time_worked, content, start_date, created_by, created_date) VALUES (1, 1, 1, 20, 'worklog 1', '2013-09-29 22:00:00', 'system', '2013-09-29 22:00:00');
-INSERT INTO issue_work_log (id, id_in_issue, issue_id, time_worked, content, start_date, created_by, created_date) VALUES (2, 2, 1, 30, 'worklog 2', '2013-09-29 22:00:00', 'system', '2013-09-29 22:00:30');
-INSERT INTO issue_work_log (id, id_in_issue, issue_id, time_worked, content, start_date, created_by, created_date) VALUES (3, 3, 1, 40, 'worklog 3', '2013-09-29 22:00:00', 'system', '2013-09-29 22:00:45');
-INSERT INTO issue_work_log (id, id_in_issue, issue_id, time_worked, content, start_date, created_by, created_date) VALUES (4, 1, 2, 5, 'worklog 4', '2013-09-29 22:00:00', 'system', '2013-09-29 22:00:00');
-INSERT INTO issue_work_log (id, id_in_issue, issue_id, time_worked, content, start_date, created_by, created_date) VALUES (5, 2, 2, 15, 'worklog 5', '2013-09-29 22:00:00', 'system', '2013-09-29 22:00:30');
-INSERT INTO issue_work_log (id, id_in_issue, issue_id, time_worked, content, start_date, created_by, created_date) VALUES (6, 1, 6, 30, 'estimation worklog 1', '2013-09-29 22:00:00', 'system', '2013-09-29 22:00:00');
-INSERT INTO issue_work_log (id, id_in_issue, issue_id, time_worked, content, start_date, created_by, created_date) VALUES (7, 2, 6, 30, 'estimation worklog 1', '2013-09-29 22:00:00', 'system', '2013-09-29 22:00:00');
+--Comments
+INSERT INTO comment (id, issue_id, content, created_by, created_date) VALUES (1, 1, 'comment 1', 'system', '2013-09-29 22:00:00');
+INSERT INTO comment (id, issue_id, content, created_by, created_date) VALUES (2, 1, 'comment 2', 'system', '2013-09-29 22:00:30');
+INSERT INTO comment (id, issue_id, content, created_by, created_date) VALUES (3, 1, 'comment 3', 'system', '2013-09-29 22:00:45');
+INSERT INTO comment (id, issue_id, content, created_by, created_date) VALUES (4, 2, 'comment 4', 'system', '2013-09-29 22:00:00');
+INSERT INTO comment (id, issue_id, content, created_by, created_date) VALUES (5, 2, 'comment 5', 'system', '2013-09-29 22:00:30');
+INSERT INTO comment (id, issue_id, content, created_by, created_date) VALUES (6, 3, 'comment 6', 'system', '2013-09-29 22:00:00');
+--WorkLogs
+INSERT INTO work_log (id, issue_id, time_worked, content, start_date, created_by, created_date) VALUES (1, 1, 20, 'worklog 1', '2013-09-29 22:00:00', 'system', '2013-09-29 22:00:00');
+INSERT INTO work_log (id, issue_id, time_worked, content, start_date, created_by, created_date) VALUES (2, 1, 30, 'worklog 2', '2013-09-29 22:00:00', 'system', '2013-09-29 22:00:30');
+INSERT INTO work_log (id, issue_id, time_worked, content, start_date, created_by, created_date) VALUES (3, 1, 40, 'worklog 3', '2013-09-29 22:00:00', 'system', '2013-09-29 22:00:45');
+INSERT INTO work_log (id, issue_id, time_worked, content, start_date, created_by, created_date) VALUES (4, 2, 5, 'worklog 4', '2013-09-29 22:00:00', 'system', '2013-09-29 22:00:00');
+INSERT INTO work_log (id, issue_id, time_worked, content, start_date, created_by, created_date) VALUES (5, 2, 15, 'worklog 5', '2013-09-29 22:00:00', 'system', '2013-09-29 22:00:30');
+INSERT INTO work_log (id, issue_id, time_worked, content, start_date, created_by, created_date) VALUES (6, 6, 30, 'estimation worklog 1', '2013-09-29 22:00:00', 'system', '2013-09-29 22:00:00');
+INSERT INTO work_log (id, issue_id, time_worked, content, start_date, created_by, created_date) VALUES (7, 6, 30, 'estimation worklog 1', '2013-09-29 22:00:00', 'system', '2013-09-29 22:00:00');

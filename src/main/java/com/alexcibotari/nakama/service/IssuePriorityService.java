@@ -2,7 +2,7 @@ package com.alexcibotari.nakama.service;
 
 
 import com.alexcibotari.nakama.domain.IssuePriority;
-import com.alexcibotari.nakama.web.rest.dto.IssuePriorityDTO;
+import com.alexcibotari.nakama.web.rest.resource.IssuePriorityResource;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ public interface IssuePriorityService {
 
     List<IssuePriority> findAll();
 
-    IssuePriority create(IssuePriorityDTO dto);
+    IssuePriority create(IssuePriorityResource resource);
 
-    IssuePriority update(IssuePriorityDTO dto);
+    IssuePriority update(Long id, IssuePriorityResource resource);
 
     void delete(Long id);
 }

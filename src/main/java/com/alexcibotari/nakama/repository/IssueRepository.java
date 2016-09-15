@@ -42,6 +42,6 @@ public interface IssueRepository extends CrudRepository<Issue, Long> {
     @Query("DELETE FROM Issue WHERE CONCAT(project.key, '-', idInProject) = :issueKey")
     void delete(@Param("issueKey") String issueKey);
 
-    @Query("SELECT COALESCE(SUM(timeWorked),0) FROM IssueWorkLog WHERE issue.id = :issueId")
+    @Query("SELECT COALESCE(SUM(timeWorked),0) FROM WorkLog WHERE issue.id = :issueId")
     Long calculateWorkLog(@Param("issueId") Long issueId);
 }

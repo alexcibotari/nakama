@@ -44,7 +44,7 @@ public class IssueStatus extends AbstractAuditingEntity {
 
     @Override
     public String toString() {
-        return "IssueStatus{" +
+        return "Status{" +
             "name='" + name + '\'' +
             ", description='" + description + '\'' +
             ", sequence=" + sequence +

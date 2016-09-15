@@ -15,7 +15,6 @@ public class IssuePriority extends AbstractAuditingEntity {
     @Column
     private Long sequence;
 
-
     public IssuePriority() {
     }
 
@@ -45,7 +44,7 @@ public class IssuePriority extends AbstractAuditingEntity {
 
     @Override
     public String toString() {
-        return "IssuePriority{" +
+        return "Priority{" +
             "name='" + name + '\'' +
             ", description='" + description + '\'' +
             ", sequence=" + sequence +

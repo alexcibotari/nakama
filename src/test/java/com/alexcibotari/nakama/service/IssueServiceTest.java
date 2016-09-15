@@ -2,8 +2,9 @@ package com.alexcibotari.nakama.service;
 
 import com.alexcibotari.nakama.Application;
 import com.alexcibotari.nakama.domain.Issue;
-import com.alexcibotari.nakama.domain.IssueWorkLog;
-import com.alexcibotari.nakama.web.rest.dto.IssueWorkLogDTO;
+import com.alexcibotari.nakama.domain.WorkLog;
+import com.alexcibotari.nakama.web.rest.assembler.WorkLogResourceAssembler;
+import com.alexcibotari.nakama.web.rest.resource.WorkLogResource;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,16 +27,19 @@ public class IssueServiceTest {
     private IssueService issueService;
 
     @Autowired
-    private IssueWorkLogService issueWorkLogService;
+    private WorkLogService workLogService;
+
+    @Autowired
+    private WorkLogResourceAssembler workLogResourceAssembler;
 
     @Test
     public void testRecalculateTimeSpentOnWorkLogDelete() {
         Issue issue = issueService.findOne(ESTIMATION_1);
         Long timeSpent = issue.getTimeSpent();
 
-        IssueWorkLog issueWorkLog = issueWorkLogService.findOne(ESTIMATION_1, 1L);
-        timeSpent -= issueWorkLog.getTimeWorked();
-        issueWorkLogService.delete(issueWorkLog);
+        WorkLog workLog = workLogService.findAllByIssue(ESTIMATION_1).get(0);
+        timeSpent -= workLog.getTimeWorked();
+        workLogService.delete(workLog);
 
         issue = issueService.findOne(ESTIMATION_1);
         Assert.assertEquals(timeSpent, issue.getTimeSpent());
@@ -46,14 +50,14 @@ public class IssueServiceTest {
         Issue issue = issueService.findOne(ESTIMATION_1);
         Long timeSpent = issue.getTimeSpent();
 
-        IssueWorkLogDTO workLogDTO = new IssueWorkLogDTO();
+        WorkLogResource workLogDTO = new WorkLogResource();
         workLogDTO.setIssue(issue.getKey());
         workLogDTO.setContent("Test");
         workLogDTO.setStartDate(ZonedDateTime.now());
         workLogDTO.setTimeWorked(30L);
 
-        IssueWorkLog issueWorkLog = issueWorkLogService.create(workLogDTO);
-        timeSpent += issueWorkLog.getTimeWorked();
+        WorkLog workLog = workLogService.create(workLogDTO);
+        timeSpent += workLog.getTimeWorked();
 
         issue = issueService.findOne(ESTIMATION_1);
         Assert.assertEquals(timeSpent, issue.getTimeSpent());
@@ -64,11 +68,11 @@ public class IssueServiceTest {
         Issue issue = issueService.findOne(ESTIMATION_1);
         Long timeSpent = issue.getTimeSpent();
 
-        IssueWorkLog issueWorkLog = issueWorkLogService.findOne(ESTIMATION_1, 1L);
-        IssueWorkLogDTO workLogDTO = new IssueWorkLogDTO(issueWorkLog);
-        workLogDTO.setTimeWorked(workLogDTO.getTimeWorked()+30L);
+        WorkLog workLog = workLogService.findAllByIssue(ESTIMATION_1).get(0);
+        WorkLogResource workLogDTO = workLogResourceAssembler.toResource(workLog);
+        workLogDTO.setTimeWorked(workLogDTO.getTimeWorked() + 30L);
         timeSpent += 30L;
-        issueWorkLogService.update(workLogDTO);
+        workLogService.update(workLog.getId(), workLogDTO);
 
         issue = issueService.findOne(ESTIMATION_1);
         Assert.assertEquals(timeSpent, issue.getTimeSpent());
@@ -79,11 +83,11 @@ public class IssueServiceTest {
         Issue issue = issueService.findOne(ESTIMATION_1);
         Long timeSpent = issue.getTimeSpent();
 
-        IssueWorkLog issueWorkLog = issueWorkLogService.findOne(ESTIMATION_1, 1L);
-        IssueWorkLogDTO workLogDTO = new IssueWorkLogDTO(issueWorkLog);
-        workLogDTO.setTimeWorked(workLogDTO.getTimeWorked()-30L);
+        WorkLog workLog = workLogService.findAllByIssue(ESTIMATION_1).get(0);
+        WorkLogResource workLogDTO = workLogResourceAssembler.toResource(workLog);
+        workLogDTO.setTimeWorked(workLogDTO.getTimeWorked() - 30L);
         timeSpent -= 30L;
-        issueWorkLogService.update(workLogDTO);
+        workLogService.update(workLog.getId(), workLogDTO);
 
         issue = issueService.findOne(ESTIMATION_1);
         Assert.assertEquals(timeSpent, issue.getTimeSpent());

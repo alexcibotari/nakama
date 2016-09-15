@@ -7,7 +7,7 @@ import com.alexcibotari.nakama.repository.AuthorityRepository;
 import com.alexcibotari.nakama.repository.UserRepository;
 import com.alexcibotari.nakama.security.SecurityUtils;
 import com.alexcibotari.nakama.service.util.RandomUtil;
-import com.alexcibotari.nakama.web.rest.dto.UserDTO;
+import com.alexcibotari.nakama.web.rest.resource.UserResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,28 +31,28 @@ public class UserServiceImp implements UserService {
     PasswordEncoder passwordEncoder;
 
     @Transactional
-    public User create(UserDTO userDTO) {
+    public User create(UserResource resource) {
         User user = new User();
-        user.setUserName(userDTO.getUserName());
-        user.setEmail(userDTO.getEmail());
-        user.setEnabled(userDTO.getEnabled());
+        user.setUserName(resource.getUserName());
+        user.setEmail(resource.getEmail());
+        user.setEnabled(resource.getEnabled());
         user.setPassword(passwordEncoder.encode(RandomUtil.generatePassword()));
 
         Set<Authority> authorities = new HashSet<>();
-        userDTO.getAuthorities().stream().forEach(authority -> authorities.add(authorityRepository.findOneByName(authority)));
+        resource.getAuthorities().stream().forEach(authority -> authorities.add(authorityRepository.findOneByName(authority)));
         user.setAuthorities(authorities);
 
         return userRepository.save(user);
     }
 
     @Transactional
-    public User update(UserDTO userDTO) {
-        User user = userRepository.findOneByUserName(userDTO.getUserName()).get();
-        user.setEmail(userDTO.getEmail());
-        user.setEnabled(userDTO.getEnabled());
+    public User update(String userName, UserResource resource) {
+        User user = userRepository.findOneByUserName(userName).get();
+        user.setEmail(resource.getEmail());
+        user.setEnabled(resource.getEnabled());
 
         Set<Authority> authorities = new HashSet<>();
-        userDTO.getAuthorities().stream().forEach(authority -> authorities.add(authorityRepository.findOneByName(authority)));
+        resource.getAuthorities().stream().forEach(authority -> authorities.add(authorityRepository.findOneByName(authority)));
         user.setAuthorities(authorities);
 
         return userRepository.save(user);

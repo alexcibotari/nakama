@@ -3,7 +3,7 @@ package com.alexcibotari.nakama.service;
 
 import com.alexcibotari.nakama.domain.IssueStatus;
 import com.alexcibotari.nakama.repository.IssueStatusRepository;
-import com.alexcibotari.nakama.web.rest.dto.IssueStatusDTO;
+import com.alexcibotari.nakama.web.rest.resource.IssueStatusResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,36 +16,36 @@ public class IssueStatusServiceImp implements IssueStatusService {
 
 
     @Autowired
-    IssueStatusRepository issueStatusRepository;
+    IssueStatusRepository statusRepository;
 
 
     public IssueStatus findOne(Long id) {
-        return issueStatusRepository.findOne(id);
+        return statusRepository.findOne(id);
     }
 
 
     public List<IssueStatus> findAll() {
-        return (List<IssueStatus>) issueStatusRepository.findAll();
+        return (List<IssueStatus>) statusRepository.findAll();
     }
 
     @Transactional
-    public IssueStatus create(IssueStatusDTO dto) {
-        IssueStatus issueStatus = new IssueStatus();
-        issueStatus.setName(dto.getName());
-        issueStatus.setDescription(dto.getDescription());
-        return issueStatusRepository.save(issueStatus);
+    public IssueStatus create(IssueStatusResource resource) {
+        IssueStatus status = new IssueStatus();
+        status.setName(resource.getName());
+        status.setDescription(resource.getDescription());
+        return statusRepository.save(status);
     }
 
     @Transactional
-    public IssueStatus update(IssueStatusDTO dto) {
-        IssueStatus issueStatus = findOne(dto.getId());
-        issueStatus.setName(dto.getName());
-        issueStatus.setDescription(dto.getDescription());
-        return issueStatusRepository.save(issueStatus);
+    public IssueStatus update(Long id, IssueStatusResource resource) {
+        IssueStatus status = findOne(id);
+        status.setName(resource.getName());
+        status.setDescription(resource.getDescription());
+        return statusRepository.save(status);
     }
 
     @Transactional
     public void delete(Long id) {
-        issueStatusRepository.delete(id);
+        statusRepository.delete(id);
     }
 }

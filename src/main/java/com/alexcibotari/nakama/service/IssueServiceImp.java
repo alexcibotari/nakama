@@ -8,7 +8,7 @@ import com.alexcibotari.nakama.domain.IssueType;
 import com.alexcibotari.nakama.repository.*;
 import com.alexcibotari.nakama.service.util.key.IssueKey;
 import com.alexcibotari.nakama.service.util.key.KeyUtil;
-import com.alexcibotari.nakama.web.rest.dto.IssueDTO;
+import com.alexcibotari.nakama.web.rest.resource.IssueResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,10 +26,10 @@ public class IssueServiceImp implements IssueService {
     ProjectRepository projectRepository;
 
     @Autowired
-    private IssuePriorityRepository issuePriorityRepository;
+    private IssuePriorityRepository priorityRepository;
 
     @Autowired
-    private IssueStatusRepository issueStatusRepository;
+    private IssueStatusRepository statusRepository;
 
     @Autowired
     private IssueTypeRepository issueTypeRepository;
@@ -64,49 +64,49 @@ public class IssueServiceImp implements IssueService {
     }
 
     @Transactional
-    public Issue create(IssueDTO dto) {
+    public Issue create(IssueResource resource) {
         Issue issue = new Issue();
-        issue.setProject(projectRepository.findOneByKey(dto.getProject()));
-        issue.setSummery(dto.getSummery());
-        issue.setDescription(dto.getDescription());
+        issue.setProject(projectRepository.findOneByKey(resource.getProject()));
+        issue.setSummery(resource.getSummery());
+        issue.setDescription(resource.getDescription());
 
-        if (dto.getPriority() != null && dto.getPriority().getId() != null) {
-            IssuePriority one = issuePriorityRepository.findOne(dto.getPriority().getId());
+        if (resource.getPriority() != null && resource.getPriority().getId() != null) {
+            IssuePriority one = null;//issuePriorityRepository.findOne(resource.getPriority().getId());
             issue.setPriority(one);
         }
 
-        if (dto.getStatus() != null && dto.getStatus().getId() != null) {
-            IssueStatus one = issueStatusRepository.findOne(dto.getStatus().getId());
+        if (resource.getStatus() != null && resource.getStatus().getId() != null) {
+            IssueStatus one = null; //issueStatusRepository.findOne(resource.getStatus().getId());
             issue.setStatus(one);
         }
 
-        if (dto.getType() != null && dto.getType().getId() != null) {
-            IssueType one = issueTypeRepository.findOne(dto.getType().getId());
+        if (resource.getType() != null && resource.getType().getId() != null) {
+            IssueType one = null; //issueTypeRepository.findOne(resource.getType().getId());
             issue.setType(one);
         }
         issue.setTimeSpent(0L);
-        issue.setIdInProject(issueRepository.getNextIdInProject(dto.getProject()));
+        issue.setIdInProject(issueRepository.getNextIdInProject(resource.getProject()));
         return issueRepository.save(issue);
     }
 
     @Transactional
-    public Issue update(IssueDTO dto) {
-        Issue issue = findOne(dto.getProject(), dto.getIdInProject());
-        issue.setSummery(dto.getSummery());
-        issue.setDescription(dto.getDescription());
+    public Issue update(String key, IssueResource resource) {
+        Issue issue = findOne(key);
+        issue.setSummery(resource.getSummery());
+        issue.setDescription(resource.getDescription());
 
-        if (dto.getPriority() != null && dto.getPriority().getId() != null) {
-            IssuePriority one = issuePriorityRepository.findOne(dto.getPriority().getId());
+        if (resource.getPriority() != null && resource.getPriority().getId() != null) {
+            IssuePriority one = null;//issuePriorityRepository.findOne(resource.getPriority().getId());
             issue.setPriority(one);
         }
 
-        if (dto.getStatus() != null && dto.getStatus().getId() != null) {
-            IssueStatus one = issueStatusRepository.findOne(dto.getStatus().getId());
+        if (resource.getStatus() != null && resource.getStatus().getId() != null) {
+            IssueStatus one = null;//issueStatusRepository.findOne(resource.getStatus().getId());
             issue.setStatus(one);
         }
 
-        if (dto.getType() != null && dto.getType().getId() != null) {
-            IssueType one = issueTypeRepository.findOne(dto.getType().getId());
+        if (resource.getType() != null && resource.getType().getId() != null) {
+            IssueType one = null;//issueTypeRepository.findOne(resource.getType().getId());
             issue.setType(one);
         }
 
@@ -119,15 +119,21 @@ public class IssueServiceImp implements IssueService {
     }
 
     @Transactional
+    public void delete(String key) {
+        Issue issue = issueRepository.findOne(key);
+        issueRepository.delete(issue);
+    }
+
+    @Transactional
     public void delete(String projectKey, Long idInProject) {
         Issue issue = issueRepository.findOne(projectKey, idInProject);
         issueRepository.delete(issue);
     }
 
     @Transactional
-    public Issue recalculateTimeSpent(Issue issue){
+    public Issue recalculateTimeSpent(Issue issue) {
         Long value = issueRepository.calculateWorkLog(issue.getId());
-        if(value == null || value == 0){
+        if (value == null || value == 0) {
             return issue;
         }
         issue.setTimeSpent(value);

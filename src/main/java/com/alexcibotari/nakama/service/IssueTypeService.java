@@ -2,7 +2,7 @@ package com.alexcibotari.nakama.service;
 
 
 import com.alexcibotari.nakama.domain.IssueType;
-import com.alexcibotari.nakama.web.rest.dto.IssueTypeDTO;
+import com.alexcibotari.nakama.web.rest.resource.IssueTypeResource;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ public interface IssueTypeService {
 
     List<IssueType> findAll();
 
-    IssueType create(IssueTypeDTO dto);
+    IssueType create(IssueTypeResource resource);
 
-    IssueType update(IssueTypeDTO dto);
+    IssueType update(Long id, IssueTypeResource resource);
 
     void delete(Long id);
 }
