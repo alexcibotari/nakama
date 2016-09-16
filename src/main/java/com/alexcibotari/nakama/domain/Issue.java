@@ -20,11 +20,11 @@ public class Issue extends AbstractAuditingEntity {
     @Column(name = "id_in_project", nullable = false, updatable = false)
     private Long idInProject;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "reporter_user_id")
     private User reporter;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "assigne_user_id")
     private User assigne;
 
@@ -34,15 +34,15 @@ public class Issue extends AbstractAuditingEntity {
     @Column(nullable = false)
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "priority_id", nullable = false)
     private IssuePriority priority;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", nullable = false)
     private IssueStatus status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", nullable = false)
     private IssueType type;
 

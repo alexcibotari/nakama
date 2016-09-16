@@ -5,18 +5,19 @@ import com.alexcibotari.nakama.domain.Project;
 import com.alexcibotari.nakama.web.rest.resource.ProjectResource;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProjectService {
 
-    public Project findOne(Long id);
+    Project findOne(Long id);
 
-    public Project findOneByKey(String key);
+    Project findOneByKey(String key);
 
-    public List<Project> findAll();
+    List<Project> findAll();
 
-    public Project create(ProjectResource resource);
+    Project create(ProjectResource resource);
 
-    public Project update(Long id, ProjectResource resource);
+    Project update(Long id, ProjectResource resource);
 
-    public void delete(Long id);
+    void delete(Long id);
 }

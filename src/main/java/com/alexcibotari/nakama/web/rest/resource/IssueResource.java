@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 import java.time.ZonedDateTime;
 
 @Relation(value = "issue", collectionRelation = "issues")
-public class IssueResource extends AbstractAuditingResource{
+public class IssueResource extends AbstractAuditingResource {
 
     private Long idInProject;
 

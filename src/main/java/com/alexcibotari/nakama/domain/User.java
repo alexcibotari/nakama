@@ -23,7 +23,7 @@ public class User extends AbstractAuditingEntity {
     private Boolean enabled;
 
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(
             name = "authorities",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
