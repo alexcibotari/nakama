@@ -15,7 +15,7 @@ public class UserResource extends AbstractAuditingResource {
     @Size(min = 5, max = 50)
     private String email;
 
-    private Boolean enabled;
+    private Boolean enabled = Boolean.FALSE;
 
     private Set<String> authorities;
 

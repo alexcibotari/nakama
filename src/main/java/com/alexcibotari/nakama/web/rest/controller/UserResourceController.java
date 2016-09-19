@@ -42,10 +42,10 @@ public class UserResourceController {
         return ResponseEntity.ok(resources);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("{userName}")
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<UserResource> user(@PathVariable String id) {
-        return ResponseEntity.ok(userResourceAssembler.toResource(userService.findOneByUserName(id)));
+    public ResponseEntity<UserResource> user(@PathVariable String userName) {
+        return ResponseEntity.ok(userResourceAssembler.toResource(userService.findOneByUserName(userName)));
     }
 
     @PostMapping
@@ -54,16 +54,23 @@ public class UserResourceController {
         return new ResponseEntity<>(userResourceAssembler.toResource(userService.create(resource)), HttpStatus.CREATED);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("{userName}")
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<UserResource> update(@PathVariable String id, @RequestBody UserResource resource) {
-        return ResponseEntity.ok(userResourceAssembler.toResource(userService.update(id, resource)));
+    public ResponseEntity<UserResource> update(@PathVariable String userName, @RequestBody UserResource resource) {
+        return ResponseEntity.ok(userResourceAssembler.toResource(userService.update(userName, resource)));
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("{userName}")
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<Void> delete(@PathVariable String id) {
-        userService.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable String userName) {
+        userService.delete(userName);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("{userName}/password/reset")
+    @Secured(AuthoritiesConstants.ADMIN)
+    public ResponseEntity<UserResource> passwordReset(@PathVariable String userName) {
+        //TODO reset logic
+        return null;
     }
 }

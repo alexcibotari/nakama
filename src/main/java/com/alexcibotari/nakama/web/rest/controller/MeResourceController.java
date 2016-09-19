@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-public class ProfileResourceController {
+public class MeResourceController {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
