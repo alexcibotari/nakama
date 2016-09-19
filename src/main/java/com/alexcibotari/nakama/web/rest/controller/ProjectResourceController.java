@@ -17,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 @RestController
 @RequestMapping(value = "/api/projects", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -48,9 +47,9 @@ public class ProjectResourceController {
         return ResponseEntity.ok(resources);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ProjectResource> project(@PathVariable Long id) {
-        return ResponseEntity.ok(projectResourceAssembler.toResource(projectService.findOne(id)));
+    @GetMapping("/{key}")
+    public ResponseEntity<ProjectResource> project(@PathVariable String key) {
+        return ResponseEntity.ok(projectResourceAssembler.toResource(projectService.findOneByKey(key)));
     }
 
     @PostMapping
@@ -58,22 +57,28 @@ public class ProjectResourceController {
         return new ResponseEntity<>(projectResourceAssembler.toResource(projectService.create(resource)), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ProjectResource> update(@PathVariable Long id, @RequestBody ProjectResource resource) {
-        return ResponseEntity.ok(projectResourceAssembler.toResource(projectService.update(id, resource)));
+    @PutMapping("/{key}")
+    public ResponseEntity<ProjectResource> update(@PathVariable String key, @RequestBody ProjectResource resource) {
+        return ResponseEntity.ok(projectResourceAssembler.toResource(projectService.update(key, resource)));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        projectService.delete(id);
+    @DeleteMapping("/{key}")
+    public ResponseEntity<Void> delete(@PathVariable String key) {
+        projectService.delete(key);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("{id}/issues")
-    public ResponseEntity<Resources<IssueResource>> issues(@PathVariable Long id) {
-        Link link = entityLinks.linkFor(ProjectResource.class).slash(id).slash("issues").withSelfRel();
-        Resources<IssueResource> resources = new Resources<>(issueResourceAssembler.toResources(issueService.findAllByProjectId(id)), link);
+    @GetMapping("{key}/issues")
+    public ResponseEntity<Resources<IssueResource>> issues(@PathVariable String key) {
+        Link link = entityLinks.linkFor(ProjectResource.class).slash(key).slash("issues").withSelfRel();
+        Resources<IssueResource> resources = new Resources<>(issueResourceAssembler.toResources(issueService.findAllByProject(key)), link);
         return ResponseEntity.ok(resources);
+    }
+
+    @PostMapping("{key}/issues")
+    public ResponseEntity<IssueResource> createIssue(@PathVariable String key, @RequestBody IssueResource resource) {
+        resource.setProject(key);//Set Project Key
+        return new ResponseEntity<>(issueResourceAssembler.toResource(issueService.create(resource)), HttpStatus.CREATED);
     }
 
 }

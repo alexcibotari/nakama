@@ -19,5 +19,9 @@ public interface ProjectService {
 
     Project update(Long id, ProjectResource resource);
 
+    Project update(String key, ProjectResource resource);
+
     void delete(Long id);
+
+    void delete(String key);
 }

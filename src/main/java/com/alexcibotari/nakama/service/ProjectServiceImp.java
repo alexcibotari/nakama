@@ -42,6 +42,16 @@ public class ProjectServiceImp implements ProjectService {
     @Transactional
     public Project update(Long id, ProjectResource resource) {
         Project project = projectRepository.findOne(id);
+        return update(project, resource);
+    }
+
+    @Transactional
+    public Project update(String key, ProjectResource resource) {
+        Project project = projectRepository.findOneByKey(key);
+        return update(project, resource);
+    }
+
+    private Project update(Project project, ProjectResource resource){
         project.setKey(resource.getKey());
         project.setName(resource.getName());
         project.setDescription(resource.getDescription());
@@ -51,6 +61,11 @@ public class ProjectServiceImp implements ProjectService {
     @Transactional
     public void delete(Long id) {
         projectRepository.delete(id);
+    }
+
+    @Transactional
+    public void delete(String key) {
+        projectRepository.deleteOneByKey(key);
     }
 
 }

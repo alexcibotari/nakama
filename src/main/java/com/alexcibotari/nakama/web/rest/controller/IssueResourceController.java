@@ -78,16 +78,28 @@ public class IssueResourceController {
     }
 
     @GetMapping("{key}/comments")
-    public ResponseEntity<Resources<CommentResource>> issueComments(@PathVariable String key) {
+    public ResponseEntity<Resources<CommentResource>> comments(@PathVariable String key) {
         Link link = entityLinks.linkFor(IssueResource.class).slash(key).slash("comments").withSelfRel();
         Resources<CommentResource> resources = new Resources<>(commentResourceAssembler.toResources(commentService.findAllByIssue(key)), link);
         return ResponseEntity.ok(resources);
     }
 
+    @PostMapping("{key}/comments")
+    public ResponseEntity<CommentResource> createComment(@PathVariable String key, @RequestBody CommentResource resource) {
+        resource.setIssue(key);//Set Issue Key
+        return new ResponseEntity<>(commentResourceAssembler.toResource(commentService.create(resource)), HttpStatus.CREATED);
+    }
+
     @GetMapping("{key}/worklogs")
-    public ResponseEntity<Resources<WorkLogResource>> issueWorkLogs(@PathVariable String key) {
+    public ResponseEntity<Resources<WorkLogResource>> workLogs(@PathVariable String key) {
         Link link = entityLinks.linkFor(IssueResource.class).slash(key).slash("worklogs").withSelfRel();
         Resources<WorkLogResource> resources = new Resources<>(workLogResourceAssembler.toResources(workLogService.findAllByIssue(key)), link);
         return ResponseEntity.ok(resources);
+    }
+
+    @PostMapping("{key}/worklogs")
+    public ResponseEntity<WorkLogResource> createWorkLog(@PathVariable String key, @RequestBody WorkLogResource resource) {
+        resource.setIssue(key);//Set Issue Key
+        return new ResponseEntity<>(workLogResourceAssembler.toResource(workLogService.create(resource)), HttpStatus.CREATED);
     }
 }

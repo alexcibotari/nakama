@@ -44,8 +44,8 @@ public class CommentResourceController {
     }
 
     @PostMapping
-    public ResponseEntity<CommentResource> create(@RequestBody CommentResource dto) {
-        return new ResponseEntity<>(commentResourceAssembler.toResource(commentService.create(dto)), HttpStatus.CREATED);
+    public ResponseEntity<CommentResource> create(@RequestBody CommentResource resource) {
+        return new ResponseEntity<>(commentResourceAssembler.toResource(commentService.create(resource)), HttpStatus.CREATED);
     }
 
     @PutMapping("{id}")

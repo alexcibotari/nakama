@@ -51,11 +51,11 @@ public class IssueServiceImp implements IssueService {
         return issueRepository.findOne(projectKey, idInProject);
     }
 
-    public List<Issue> findAllByProjectId(Long id) {
+    public List<Issue> findAllByProject(Long id) {
         return issueRepository.findAllByProjectId(id);
     }
 
-    public List<Issue> findAllByProjectKey(String key) {
+    public List<Issue> findAllByProject(String key) {
         return issueRepository.findAllByProjectKey(key);
     }
 

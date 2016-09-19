@@ -14,9 +14,9 @@ public interface IssueService {
 
     Issue findOne(String key);
 
-    List<Issue> findAllByProjectId(Long id);
+    List<Issue> findAllByProject(Long id);
 
-    List<Issue> findAllByProjectKey(String key);
+    List<Issue> findAllByProject(String key);
 
     List<Issue> findAll();
 
