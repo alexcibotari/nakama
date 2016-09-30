@@ -5,10 +5,11 @@ import com.alexcibotari.nakama.domain.WorkLog;
 import com.alexcibotari.nakama.web.rest.resource.WorkLogResource;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface WorkLogService {
 
-    WorkLog findOne(Long id);
+    Optional<WorkLog> findOne(Long id);
 
     List<WorkLog> findAll();
 
@@ -18,9 +19,7 @@ public interface WorkLogService {
 
     WorkLog create(WorkLogResource resource);
 
-    WorkLog update(Long id, WorkLogResource resource);
+    Optional<WorkLog> update(Long id, WorkLogResource resource);
 
-    void delete(Long id);
-
-    void delete(WorkLog workLog);
+    Optional<WorkLog> delete(Long id);
 }

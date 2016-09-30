@@ -1,5 +1,6 @@
 package com.alexcibotari.nakama.web.rest.controller;
 
+import com.alexcibotari.nakama.domain.WorkLog;
 import com.alexcibotari.nakama.service.WorkLogService;
 import com.alexcibotari.nakama.web.rest.assembler.WorkLogResourceAssembler;
 import com.alexcibotari.nakama.web.rest.resource.WorkLogResource;
@@ -15,6 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Optional;
+
 @RestController
 @RequestMapping(path = "/api/worklogs", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @ExposesResourceFor(WorkLogResource.class)
@@ -26,36 +31,42 @@ public class WorkLogResourceController {
     private EntityLinks entityLinks;
 
     @Autowired
-    private WorkLogService workLogService;
+    private WorkLogService service;
 
     @Autowired
-    private WorkLogResourceAssembler workLogResourceAssembler;
+    private WorkLogResourceAssembler resourceAssembler;
 
     @GetMapping
-    public ResponseEntity<Resources<WorkLogResource>> workLogs() {
+    public ResponseEntity<Resources<WorkLogResource>> list() {
         Link link = entityLinks.linkToCollectionResource(WorkLogResource.class);
-        Resources<WorkLogResource> resources = new Resources<>(workLogResourceAssembler.toResources(workLogService.findAll()), link);
+        Resources<WorkLogResource> resources = new Resources<>(resourceAssembler.toResources(service.findAll()), link);
         return ResponseEntity.ok(resources);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<WorkLogResource> workLog(@PathVariable Long id) {
-        return ResponseEntity.ok(workLogResourceAssembler.toResource(workLogService.findOne(id)));
+    public ResponseEntity<WorkLogResource> one(@PathVariable Long id) {
+        return toResourceResponse(service.findOne(id));
     }
 
     @PostMapping
-    public ResponseEntity<WorkLogResource> create(@RequestBody WorkLogResource resource) {
-        return new ResponseEntity<>(workLogResourceAssembler.toResource(workLogService.create(resource)), HttpStatus.CREATED);
+    public ResponseEntity<WorkLogResource> create(@RequestBody WorkLogResource resource) throws URISyntaxException {
+        resource = resourceAssembler.toResource(service.create(resource));
+        return ResponseEntity.created(new URI(resource.getId().getHref())).body(resource);
     }
 
     @PutMapping("{id}")
     public ResponseEntity<WorkLogResource> update(@PathVariable Long id, @RequestBody WorkLogResource resource) {
-        return ResponseEntity.ok(workLogResourceAssembler.toResource(workLogService.update(id, resource)));
+        return toResourceResponse(service.update(id, resource));
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        workLogService.delete(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<WorkLogResource> delete(@PathVariable Long id) {
+        return toResourceResponse(service.delete(id));
+
+    }
+
+    private ResponseEntity<WorkLogResource> toResourceResponse(Optional<WorkLog> entity) {
+        return entity.map(e -> ResponseEntity.ok(resourceAssembler.toResource(e)))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

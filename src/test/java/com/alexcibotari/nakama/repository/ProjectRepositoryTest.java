@@ -20,10 +20,10 @@ public class ProjectRepositoryTest {
 
     @Test
     public void testFindOneByKey() {
-        Assert.assertEquals("TEST", projectRepository.findOneByKey("TEST").getKey());
-        Assert.assertEquals("BEST", projectRepository.findOneByKey("BEST").getKey());
-        Assert.assertEquals("BEST1", projectRepository.findOneByKey("BEST1").getKey());
-        Assert.assertEquals("ESTIMATION", projectRepository.findOneByKey("ESTIMATION").getKey());
+        Assert.assertEquals("TEST", projectRepository.findOneByKey("TEST").get().getKey());
+        Assert.assertEquals("BEST", projectRepository.findOneByKey("BEST").get().getKey());
+        Assert.assertEquals("BEST1", projectRepository.findOneByKey("BEST1").get().getKey());
+        Assert.assertEquals("ESTIMATION", projectRepository.findOneByKey("ESTIMATION").get().getKey());
         Assert.assertNull(projectRepository.findOneByKey("DEL"));
     }
 

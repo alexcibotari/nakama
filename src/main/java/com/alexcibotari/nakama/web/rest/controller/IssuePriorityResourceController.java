@@ -1,5 +1,6 @@
 package com.alexcibotari.nakama.web.rest.controller;
 
+import com.alexcibotari.nakama.domain.IssuePriority;
 import com.alexcibotari.nakama.service.IssuePriorityService;
 import com.alexcibotari.nakama.web.rest.assembler.IssuePriorityResourceAssembler;
 import com.alexcibotari.nakama.web.rest.resource.IssuePriorityResource;
@@ -15,6 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Optional;
+
 @RestController
 @RequestMapping(path = "/api/issuepriorities", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @ExposesResourceFor(IssuePriorityResource.class)
@@ -26,37 +31,42 @@ public class IssuePriorityResourceController {
     private EntityLinks entityLinks;
 
     @Autowired
-    private IssuePriorityService issuePriorityService;
+    private IssuePriorityService service;
 
     @Autowired
-    private IssuePriorityResourceAssembler issuePriorityResourceAssembler;
+    private IssuePriorityResourceAssembler resourceAssembler;
 
     @GetMapping
-    public ResponseEntity<Resources<IssuePriorityResource>> issuePriorities() {
+    public ResponseEntity<Resources<IssuePriorityResource>> list() {
         Link link = entityLinks.linkToCollectionResource(IssuePriorityResource.class);
-        Resources<IssuePriorityResource> resources = new Resources<>(issuePriorityResourceAssembler.toResources(issuePriorityService.findAll()), link);
+        Resources<IssuePriorityResource> resources = new Resources<>(resourceAssembler.toResources(service.findAll()), link);
         return ResponseEntity.ok(resources);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<IssuePriorityResource> issuePriority(@PathVariable Long id) {
-        return ResponseEntity.ok(issuePriorityResourceAssembler.toResource(issuePriorityService.findOne(id)));
+    public ResponseEntity<IssuePriorityResource> one(@PathVariable Long id) {
+        return toResourceResponse(service.findOne(id));
     }
 
     @PostMapping
-    public ResponseEntity<IssuePriorityResource> create(@RequestBody IssuePriorityResource resource) {
-        return new ResponseEntity<>(issuePriorityResourceAssembler.toResource(issuePriorityService.create(resource)), HttpStatus.CREATED);
+    public ResponseEntity<IssuePriorityResource> create(@RequestBody IssuePriorityResource resource) throws URISyntaxException {
+        resource = resourceAssembler.toResource(service.create(resource));
+        return ResponseEntity.created(new URI(resource.getId().getHref())).body(resource);
     }
 
     @PutMapping("{id}")
     public ResponseEntity<IssuePriorityResource> update(@PathVariable Long id, @RequestBody IssuePriorityResource resource) {
-        return ResponseEntity.ok(issuePriorityResourceAssembler.toResource(issuePriorityService.update(id, resource)));
+        return toResourceResponse(service.update(id, resource));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        issuePriorityService.delete(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<IssuePriorityResource> delete(@PathVariable Long id) {
+        return toResourceResponse(service.delete(id));
+    }
+
+    private ResponseEntity<IssuePriorityResource> toResourceResponse(Optional<IssuePriority> entity) {
+        return entity.map(e -> ResponseEntity.ok(resourceAssembler.toResource(e)))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 }

@@ -63,7 +63,7 @@ public class UserResource extends AbstractAuditingResource {
 
     @Override
     public String toString() {
-        return "UserDTO{" +
+        return "UserResource{" +
             "userName='" + userName + '\'' +
             ", email='" + email + '\'' +
             ", enabled=" + enabled +

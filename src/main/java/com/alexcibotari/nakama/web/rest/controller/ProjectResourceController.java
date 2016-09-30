@@ -1,5 +1,6 @@
 package com.alexcibotari.nakama.web.rest.controller;
 
+import com.alexcibotari.nakama.domain.Project;
 import com.alexcibotari.nakama.service.IssueService;
 import com.alexcibotari.nakama.service.ProjectService;
 import com.alexcibotari.nakama.web.rest.assembler.IssueResourceAssembler;
@@ -18,6 +19,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Optional;
+
 @RestController
 @RequestMapping(value = "/api/projects", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @ExposesResourceFor(ProjectResource.class)
@@ -29,10 +34,10 @@ public class ProjectResourceController {
     private EntityLinks entityLinks;
 
     @Autowired
-    private ProjectService projectService;
+    private ProjectService service;
 
     @Autowired
-    private ProjectResourceAssembler projectResourceAssembler;
+    private ProjectResourceAssembler resourceAssembler;
 
     @Autowired
     private IssueService issueService;
@@ -41,31 +46,36 @@ public class ProjectResourceController {
     private IssueResourceAssembler issueResourceAssembler;
 
     @GetMapping
-    public ResponseEntity<Resources<ProjectResource>> projects() {
+    public ResponseEntity<Resources<ProjectResource>> list() {
         Link link = entityLinks.linkToCollectionResource(ProjectResource.class);
-        Resources<ProjectResource> resources = new Resources<>(projectResourceAssembler.toResources(projectService.findAll()), link);
+        Resources<ProjectResource> resources = new Resources<>(resourceAssembler.toResources(service.findAll()), link);
         return ResponseEntity.ok(resources);
     }
 
     @GetMapping("/{key}")
-    public ResponseEntity<ProjectResource> project(@PathVariable String key) {
-        return ResponseEntity.ok(projectResourceAssembler.toResource(projectService.findOneByKey(key)));
+    public ResponseEntity<ProjectResource> one(@PathVariable String key) {
+        return toResourceResponse(service.findOne(key));
     }
 
     @PostMapping
-    public ResponseEntity<ProjectResource> create(@RequestBody ProjectResource resource) {
-        return new ResponseEntity<>(projectResourceAssembler.toResource(projectService.create(resource)), HttpStatus.CREATED);
+    public ResponseEntity<ProjectResource> create(@RequestBody ProjectResource resource) throws URISyntaxException {
+        resource = resourceAssembler.toResource(service.create(resource));
+        return ResponseEntity.created(new URI(resource.getId().getHref())).body(resource);
     }
 
     @PutMapping("/{key}")
     public ResponseEntity<ProjectResource> update(@PathVariable String key, @RequestBody ProjectResource resource) {
-        return ResponseEntity.ok(projectResourceAssembler.toResource(projectService.update(key, resource)));
+        return toResourceResponse(service.update(key, resource));
     }
 
     @DeleteMapping("/{key}")
-    public ResponseEntity<Void> delete(@PathVariable String key) {
-        projectService.delete(key);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<ProjectResource> delete(@PathVariable String key) {
+        return toResourceResponse(service.delete(key));
+    }
+
+    private ResponseEntity<ProjectResource> toResourceResponse(Optional<Project> entity) {
+        return entity.map(e -> ResponseEntity.ok(resourceAssembler.toResource(e)))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("{key}/issues")
@@ -76,9 +86,9 @@ public class ProjectResourceController {
     }
 
     @PostMapping("{key}/issues")
-    public ResponseEntity<IssueResource> createIssue(@PathVariable String key, @RequestBody IssueResource resource) {
+    public ResponseEntity<IssueResource> createIssue(@PathVariable String key, @RequestBody IssueResource resource) throws URISyntaxException {
         resource.setProject(key);//Set Project Key
-        return new ResponseEntity<>(issueResourceAssembler.toResource(issueService.create(resource)), HttpStatus.CREATED);
+        resource = issueResourceAssembler.toResource(issueService.create(resource));
+        return ResponseEntity.created(new URI(resource.getId().getHref())).body(resource);
     }
-
 }

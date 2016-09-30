@@ -18,11 +18,11 @@ public class ProjectServiceImp implements ProjectService {
     @Autowired
     ProjectRepository projectRepository;
 
-    public Project findOne(Long id) {
-        return projectRepository.findOne(id);
+    public Optional<Project> findOne(Long id) {
+        return projectRepository.findOneById(id);
     }
 
-    public Project findOneByKey(String key) {
+    public Optional<Project> findOne(String key) {
         return projectRepository.findOneByKey(key);
     }
 
@@ -40,32 +40,28 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Transactional
-    public Project update(Long id, ProjectResource resource) {
-        Project project = projectRepository.findOne(id);
-        return update(project, resource);
+    public Optional<Project> update(Long id, ProjectResource resource) {
+        return update(findOne(id), resource);
     }
 
     @Transactional
-    public Project update(String key, ProjectResource resource) {
-        Project project = projectRepository.findOneByKey(key);
-        return update(project, resource);
+    public Optional<Project> update(String key, ProjectResource resource) {
+        return update(findOne(key), resource);
     }
 
-    private Project update(Project project, ProjectResource resource){
-        project.setKey(resource.getKey());
-        project.setName(resource.getName());
-        project.setDescription(resource.getDescription());
-        return projectRepository.save(project);
-    }
-
-    @Transactional
-    public void delete(Long id) {
-        projectRepository.delete(id);
+    private Optional<Project> update(Optional<Project> project, ProjectResource resource) {
+        return project
+            .map(entity -> {
+                entity.setKey(resource.getKey());
+                entity.setName(resource.getName());
+                entity.setDescription(resource.getDescription());
+                return projectRepository.save(entity);
+            });
     }
 
     @Transactional
-    public void delete(String key) {
-        projectRepository.deleteOneByKey(key);
+    public Optional<Project> delete(String key) {
+        return projectRepository.deleteOneByKey(key);
     }
 
 }

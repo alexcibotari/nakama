@@ -5,25 +5,27 @@ import com.alexcibotari.nakama.domain.Issue;
 import com.alexcibotari.nakama.domain.IssuePriority;
 import com.alexcibotari.nakama.domain.IssueStatus;
 import com.alexcibotari.nakama.domain.IssueType;
-import com.alexcibotari.nakama.repository.*;
-import com.alexcibotari.nakama.service.util.key.IssueKey;
-import com.alexcibotari.nakama.service.util.key.KeyUtil;
+import com.alexcibotari.nakama.repository.IssuePriorityRepository;
+import com.alexcibotari.nakama.repository.IssueRepository;
+import com.alexcibotari.nakama.repository.IssueStatusRepository;
+import com.alexcibotari.nakama.repository.IssueTypeRepository;
 import com.alexcibotari.nakama.web.rest.resource.IssueResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
 public class IssueServiceImp implements IssueService {
 
     @Autowired
-    IssueRepository issueRepository;
+    private IssueRepository issueRepository;
 
     @Autowired
-    ProjectRepository projectRepository;
+    private ProjectService projectService;
 
     @Autowired
     private IssuePriorityRepository priorityRepository;
@@ -35,19 +37,15 @@ public class IssueServiceImp implements IssueService {
     private IssueTypeRepository issueTypeRepository;
 
 
-    public Issue findOne(Long id) {
-        return issueRepository.findOne(id);
+    public Optional<Issue> findOne(Long id) {
+        return issueRepository.findOneById(id);
     }
 
-    public Issue findOne(String key) {
-        IssueKey issueKey = KeyUtil.getIssueKey(key);
-        if (issueKey != null && issueKey.isValid()) {
-            return findOne(issueKey.getProjectKey(), issueKey.getIdInProject());
-        }
-        return null;
+    public Optional<Issue> findOne(String key) {
+        return issueRepository.findOne(key);
     }
 
-    public Issue findOne(String projectKey, Long idInProject) {
+    public Optional<Issue> findOne(String projectKey, Long idInProject) {
         return issueRepository.findOne(projectKey, idInProject);
     }
 
@@ -66,7 +64,7 @@ public class IssueServiceImp implements IssueService {
     @Transactional
     public Issue create(IssueResource resource) {
         Issue issue = new Issue();
-        issue.setProject(projectRepository.findOneByKey(resource.getProject()));
+        issue.setProject(projectService.findOne(resource.getProject()).get());//TODO to Optional
         issue.setSummery(resource.getSummery());
         issue.setDescription(resource.getDescription());
 
@@ -90,44 +88,52 @@ public class IssueServiceImp implements IssueService {
     }
 
     @Transactional
-    public Issue update(String key, IssueResource resource) {
-        Issue issue = findOne(key);
-        issue.setSummery(resource.getSummery());
-        issue.setDescription(resource.getDescription());
+    public Optional<Issue> update(String key, IssueResource resource) {
+        return findOne(key).map(entity -> {
+            entity.setSummery(resource.getSummery());
+            entity.setDescription(resource.getDescription());
 
-        if (resource.getPriority() != null && resource.getPriority().getId() != null) {
-            IssuePriority one = null;//issuePriorityRepository.findOne(resource.getPriority().getId());
-            issue.setPriority(one);
-        }
+            if (resource.getPriority() != null && resource.getPriority().getId() != null) {
+                IssuePriority one = null;//issuePriorityRepository.findOne(resource.getPriority().getId());
+                entity.setPriority(one);
+            }
 
-        if (resource.getStatus() != null && resource.getStatus().getId() != null) {
-            IssueStatus one = null;//issueStatusRepository.findOne(resource.getStatus().getId());
-            issue.setStatus(one);
-        }
+            if (resource.getStatus() != null && resource.getStatus().getId() != null) {
+                IssueStatus one = null;//issueStatusRepository.findOne(resource.getStatus().getId());
+                entity.setStatus(one);
+            }
 
-        if (resource.getType() != null && resource.getType().getId() != null) {
-            IssueType one = null;//issueTypeRepository.findOne(resource.getType().getId());
-            issue.setType(one);
-        }
+            if (resource.getType() != null && resource.getType().getId() != null) {
+                IssueType one = null;//issueTypeRepository.findOne(resource.getType().getId());
+                entity.setType(one);
+            }
 
-        return issueRepository.save(issue);
+            return issueRepository.save(entity);
+        });
+
     }
 
     @Transactional
-    public void delete(Long id) {
-        issueRepository.delete(id);
+    public Optional<Issue> delete(Long id) {
+        return issueRepository.deleteOneById(id);
     }
 
     @Transactional
-    public void delete(String key) {
-        Issue issue = issueRepository.findOne(key);
-        issueRepository.delete(issue);
+    public Optional<Issue> delete(String key) {
+        return findOne(key)
+            .map(entity -> {
+                delete(entity.getId());
+                return entity;
+            });
     }
 
     @Transactional
-    public void delete(String projectKey, Long idInProject) {
-        Issue issue = issueRepository.findOne(projectKey, idInProject);
-        issueRepository.delete(issue);
+    public Optional<Issue> delete(String projectKey, Long idInProject) {
+        return findOne(projectKey, idInProject)
+            .map(entity -> {
+                delete(entity.getId());
+                return entity;
+            });
     }
 
     @Transactional

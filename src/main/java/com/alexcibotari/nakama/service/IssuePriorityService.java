@@ -5,16 +5,17 @@ import com.alexcibotari.nakama.domain.IssuePriority;
 import com.alexcibotari.nakama.web.rest.resource.IssuePriorityResource;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IssuePriorityService {
 
-    IssuePriority findOne(Long id);
+    Optional<IssuePriority> findOne(Long id);
 
     List<IssuePriority> findAll();
 
     IssuePriority create(IssuePriorityResource resource);
 
-    IssuePriority update(Long id, IssuePriorityResource resource);
+    Optional<IssuePriority> update(Long id, IssuePriorityResource resource);
 
-    void delete(Long id);
+    Optional<IssuePriority> delete(Long id);
 }

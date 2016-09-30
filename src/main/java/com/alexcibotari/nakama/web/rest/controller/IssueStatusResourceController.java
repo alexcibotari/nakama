@@ -1,5 +1,6 @@
 package com.alexcibotari.nakama.web.rest.controller;
 
+import com.alexcibotari.nakama.domain.IssueStatus;
 import com.alexcibotari.nakama.service.IssueStatusService;
 import com.alexcibotari.nakama.web.rest.assembler.IssueStatusResourceAssembler;
 import com.alexcibotari.nakama.web.rest.resource.IssueStatusResource;
@@ -15,6 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Optional;
+
 @RestController
 @RequestMapping(path = "/api/issuestatuses", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @ExposesResourceFor(IssueStatusResource.class)
@@ -26,37 +31,42 @@ public class IssueStatusResourceController {
     private EntityLinks entityLinks;
 
     @Autowired
-    private IssueStatusService issueStatusService;
+    private IssueStatusService service;
 
     @Autowired
-    private IssueStatusResourceAssembler issueStatusResourceAssembler;
+    private IssueStatusResourceAssembler resourceAssembler;
 
     @GetMapping
-    public ResponseEntity<Resources<IssueStatusResource>> issuePriorities() {
+    public ResponseEntity<Resources<IssueStatusResource>> list() {
         Link link = entityLinks.linkToCollectionResource(IssueStatusResource.class);
-        Resources<IssueStatusResource> resources = new Resources<>(issueStatusResourceAssembler.toResources(issueStatusService.findAll()), link);
+        Resources<IssueStatusResource> resources = new Resources<>(resourceAssembler.toResources(service.findAll()), link);
         return ResponseEntity.ok(resources);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<IssueStatusResource> issueStatus(@PathVariable Long id) {
-        return ResponseEntity.ok(issueStatusResourceAssembler.toResource(issueStatusService.findOne(id)));
+    public ResponseEntity<IssueStatusResource> one(@PathVariable Long id) {
+        return toResourceResponse(service.findOne(id));
     }
 
     @PostMapping
-    public ResponseEntity<IssueStatusResource> create(@RequestBody IssueStatusResource resource) {
-        return new ResponseEntity<>(issueStatusResourceAssembler.toResource(issueStatusService.create(resource)), HttpStatus.CREATED);
+    public ResponseEntity<IssueStatusResource> create(@RequestBody IssueStatusResource resource) throws URISyntaxException {
+        resource = resourceAssembler.toResource(service.create(resource));
+        return ResponseEntity.created(new URI(resource.getId().getHref())).body(resource);
     }
 
     @PutMapping("{id}")
     public ResponseEntity<IssueStatusResource> update(@PathVariable Long id, @RequestBody IssueStatusResource resource) {
-        return ResponseEntity.ok(issueStatusResourceAssembler.toResource(issueStatusService.update(id, resource)));
+        return toResourceResponse(service.update(id, resource));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        issueStatusService.delete(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<IssueStatusResource> delete(@PathVariable Long id) {
+        return toResourceResponse(service.delete(id));
+    }
+
+    private ResponseEntity<IssueStatusResource> toResourceResponse(Optional<IssueStatus> entity) {
+        return entity.map(e -> ResponseEntity.ok(resourceAssembler.toResource(e)))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 }

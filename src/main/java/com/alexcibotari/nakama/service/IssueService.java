@@ -5,14 +5,15 @@ import com.alexcibotari.nakama.domain.Issue;
 import com.alexcibotari.nakama.web.rest.resource.IssueResource;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IssueService {
 
-    Issue findOne(Long id);
+    Optional<Issue> findOne(Long id);
 
-    Issue findOne(String projectKey, Long idInProject);
+    Optional<Issue> findOne(String projectKey, Long idInProject);
 
-    Issue findOne(String key);
+    Optional<Issue> findOne(String key);
 
     List<Issue> findAllByProject(Long id);
 
@@ -22,13 +23,13 @@ public interface IssueService {
 
     Issue create(IssueResource resource);
 
-    Issue update(String key, IssueResource resource);
+    Optional<Issue> update(String key, IssueResource resource);
 
-    void delete(Long id);
+    Optional<Issue> delete(Long id);
 
-    void delete(String key);
+    Optional<Issue> delete(String key);
 
-    void delete(String projectKey, Long idInProject);
+    Optional<Issue> delete(String projectKey, Long idInProject);
 
     Issue recalculateTimeSpent(Issue issue);
 }

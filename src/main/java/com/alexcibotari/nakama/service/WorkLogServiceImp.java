@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -25,8 +26,8 @@ public class WorkLogServiceImp implements WorkLogService {
     IssueService issueService;
 
 
-    public WorkLog findOne(Long id) {
-        return workLogRepository.findOne(id);
+    public Optional<WorkLog> findOne(Long id) {
+        return workLogRepository.findOneById(id);
     }
 
     public List<WorkLog> findAll() {
@@ -47,7 +48,7 @@ public class WorkLogServiceImp implements WorkLogService {
 
     @Transactional
     public WorkLog create(WorkLogResource resource) {
-        Issue issue = issueService.findOne(resource.getIssue());
+        Issue issue = issueService.findOne(resource.getIssue()).get();//TODO to Optional
         WorkLog workLog = new WorkLog();
         workLog.setIssue(issue);
         workLog.setContent(resource.getContent());
@@ -62,29 +63,25 @@ public class WorkLogServiceImp implements WorkLogService {
 
 
     @Transactional
-    public WorkLog update(Long id, WorkLogResource resource) {
-        WorkLog workLog = findOne(id);
-        workLog.setContent(resource.getContent());
-        workLog.setTimeWorked(resource.getTimeWorked());
-        workLog.setStartDate(resource.getStartDate());
+    public Optional<WorkLog> update(Long id, WorkLogResource resource) {
+        return findOne(id)
+            .map(entity -> {
+                entity.setContent(resource.getContent());
+                entity.setTimeWorked(resource.getTimeWorked());
+                entity.setStartDate(resource.getStartDate());
 
-        workLog = workLogRepository.save(workLog);
-        //Recalculate time spent
-        issueService.recalculateTimeSpent(workLog.getIssue());
+                entity = workLogRepository.save(entity);
+                //Recalculate time spent
+                issueService.recalculateTimeSpent(entity.getIssue());
 
+                return entity;
+            });
+    }
+
+    @Transactional
+    public Optional<WorkLog> delete(Long id) {
+        Optional<WorkLog> workLog = workLogRepository.deleteOneById(id);
+        workLog.ifPresent(entity ->  issueService.recalculateTimeSpent(entity.getIssue()));
         return workLog;
-    }
-
-    @Transactional
-    public void delete(Long id) {
-        WorkLog workLog = workLogRepository.findOne(id);
-        workLogRepository.delete(id);
-        issueService.recalculateTimeSpent(workLog.getIssue());
-    }
-
-    @Transactional
-    public void delete(WorkLog workLog){
-        workLogRepository.delete(workLog);
-        issueService.recalculateTimeSpent(workLog.getIssue());
     }
 }

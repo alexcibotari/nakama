@@ -9,19 +9,17 @@ import java.util.Optional;
 
 public interface ProjectService {
 
-    Project findOne(Long id);
+    Optional<Project> findOne(Long id);
 
-    Project findOneByKey(String key);
+    Optional<Project> findOne(String key);
 
     List<Project> findAll();
 
     Project create(ProjectResource resource);
 
-    Project update(Long id, ProjectResource resource);
+    Optional<Project> update(Long id, ProjectResource resource);
 
-    Project update(String key, ProjectResource resource);
+    Optional<Project> update(String key, ProjectResource resource);
 
-    void delete(Long id);
-
-    void delete(String key);
+    Optional<Project> delete(String key);
 }

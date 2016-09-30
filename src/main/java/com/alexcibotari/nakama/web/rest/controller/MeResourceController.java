@@ -2,7 +2,6 @@
 package com.alexcibotari.nakama.web.rest.controller;
 
 
-import com.alexcibotari.nakama.domain.User;
 import com.alexcibotari.nakama.service.UserService;
 import com.alexcibotari.nakama.web.rest.assembler.UserResourceAssembler;
 import org.slf4j.Logger;
@@ -29,7 +28,6 @@ public class MeResourceController {
 
     @GetMapping(path = "me")
     public ResponseEntity<?> me() {
-        User user = userService.getUser();
-        return new ResponseEntity<>(userResourceAssembler.toResource(user), HttpStatus.OK);
+        return userService.getUser().map(user -> ResponseEntity.ok(userResourceAssembler.toResource(user))).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

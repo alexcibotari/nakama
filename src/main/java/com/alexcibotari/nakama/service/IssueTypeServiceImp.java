@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -19,8 +20,8 @@ public class IssueTypeServiceImp implements IssueTypeService {
     IssueTypeRepository issueTypeRepository;
 
 
-    public IssueType findOne(Long id) {
-        return issueTypeRepository.findOne(id);
+    public Optional<IssueType> findOne(Long id) {
+        return issueTypeRepository.findOneById(id);
     }
 
 
@@ -37,15 +38,17 @@ public class IssueTypeServiceImp implements IssueTypeService {
     }
 
     @Transactional
-    public IssueType update(Long id, IssueTypeResource resource) {
-        IssueType issueType = findOne(id);
-        issueType.setName(resource.getName());
-        issueType.setDescription(resource.getDescription());
-        return issueTypeRepository.save(issueType);
+    public Optional<IssueType> update(Long id, IssueTypeResource resource) {
+        return findOne(id)
+            .map(entity -> {
+                entity.setName(resource.getName());
+                entity.setDescription(resource.getDescription());
+                return issueTypeRepository.save(entity);
+            });
     }
 
     @Transactional
-    public void delete(Long id) {
-        issueTypeRepository.delete(id);
+    public Optional<IssueType> delete(Long id) {
+        return issueTypeRepository.deleteOneById(id);
     }
 }

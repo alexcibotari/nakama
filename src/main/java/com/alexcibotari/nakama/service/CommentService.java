@@ -5,10 +5,11 @@ import com.alexcibotari.nakama.domain.Comment;
 import com.alexcibotari.nakama.web.rest.resource.CommentResource;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CommentService {
 
-    Comment findOne(Long id);
+    Optional<Comment> findOne(Long id);
 
     List<Comment> findAll();
 
@@ -18,8 +19,8 @@ public interface CommentService {
 
     Comment create(CommentResource resource);
 
-    Comment update(Long id, CommentResource resource);
+    Optional<Comment> update(Long id, CommentResource resource);
 
-    void delete(Long id);
+    Optional<Comment> delete(Long id);
 
 }

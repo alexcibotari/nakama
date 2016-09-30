@@ -2,7 +2,6 @@ package com.alexcibotari.nakama.repository;
 
 import com.alexcibotari.nakama.Application;
 import com.alexcibotari.nakama.domain.Issue;
-import com.alexcibotari.nakama.repository.IssueRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,38 +49,38 @@ public class IssueRepositoryTest {
 
     @Test
     public void testFindOneByKey() {
-        Assert.assertEquals("TEST-1", issueRepository.findOne("TEST-1").getKey());
-        Assert.assertEquals("TEST-2", issueRepository.findOne("TEST-2").getKey());
-        Assert.assertEquals("BEST-1", issueRepository.findOne("BEST-1").getKey());
-        Assert.assertEquals("BEST-2", issueRepository.findOne("BEST-2").getKey());
-        Assert.assertEquals("BEST-3", issueRepository.findOne("BEST-3").getKey());
+        Assert.assertEquals("TEST-1", issueRepository.findOne("TEST-1").get().getKey());
+        Assert.assertEquals("TEST-2", issueRepository.findOne("TEST-2").get().getKey());
+        Assert.assertEquals("BEST-1", issueRepository.findOne("BEST-1").get().getKey());
+        Assert.assertEquals("BEST-2", issueRepository.findOne("BEST-2").get().getKey());
+        Assert.assertEquals("BEST-3", issueRepository.findOne("BEST-3").get().getKey());
     }
 
     @Test
     public void testFindOneByProjectKeyAndIdInIssue() {
-        Assert.assertEquals("TEST-1", issueRepository.findOne("TEST", 1L).getKey());
-        Assert.assertEquals("TEST-2", issueRepository.findOne("TEST", 2L).getKey());
-        Assert.assertEquals("BEST-1", issueRepository.findOne("BEST", 1L).getKey());
-        Assert.assertEquals("BEST-2", issueRepository.findOne("BEST", 2L).getKey());
-        Assert.assertEquals("BEST-3", issueRepository.findOne("BEST", 3L).getKey());
+        Assert.assertEquals("TEST-1", issueRepository.findOne("TEST", 1L).get().getKey());
+        Assert.assertEquals("TEST-2", issueRepository.findOne("TEST", 2L).get().getKey());
+        Assert.assertEquals("BEST-1", issueRepository.findOne("BEST", 1L).get().getKey());
+        Assert.assertEquals("BEST-2", issueRepository.findOne("BEST", 2L).get().getKey());
+        Assert.assertEquals("BEST-3", issueRepository.findOne("BEST", 3L).get().getKey());
     }
 
     @Test
     public void testFindOneByProjectIdAndIdInIssue() {
-        Assert.assertEquals("TEST-1", issueRepository.findOne(1L, 1L).getKey());
-        Assert.assertEquals("TEST-2", issueRepository.findOne(1L, 2L).getKey());
-        Assert.assertEquals("BEST-1", issueRepository.findOne(2L, 1L).getKey());
-        Assert.assertEquals("BEST-2", issueRepository.findOne(2L, 2L).getKey());
-        Assert.assertEquals("BEST-3", issueRepository.findOne(2L, 3L).getKey());
+        Assert.assertEquals("TEST-1", issueRepository.findOne(1L, 1L).get().getKey());
+        Assert.assertEquals("TEST-2", issueRepository.findOne(1L, 2L).get().getKey());
+        Assert.assertEquals("BEST-1", issueRepository.findOne(2L, 1L).get().getKey());
+        Assert.assertEquals("BEST-2", issueRepository.findOne(2L, 2L).get().getKey());
+        Assert.assertEquals("BEST-3", issueRepository.findOne(2L, 3L).get().getKey());
     }
 
     @Test
     public void testCalculateWorkLogByIssueId() {
-        Issue issueTimeSpent = issueRepository.findOne("ESTIMATION-1");
+        Issue issueTimeSpent = issueRepository.findOne("ESTIMATION-1").get();
         Assert.assertNotNull(issueTimeSpent);
         Assert.assertEquals(issueTimeSpent.getTimeSpent(), issueRepository.calculateWorkLog(issueTimeSpent.getId()));
 
-        Issue issueZero = issueRepository.findOne("ESTIMATION-2");
+        Issue issueZero = issueRepository.findOne("ESTIMATION-2").get();
         Assert.assertNotNull(issueZero);
         Assert.assertEquals(new Long(0L), issueRepository.calculateWorkLog(issueZero.getId()));
     }

@@ -1,5 +1,6 @@
 package com.alexcibotari.nakama.web.rest.controller;
 
+import com.alexcibotari.nakama.domain.IssueType;
 import com.alexcibotari.nakama.service.IssueTypeService;
 import com.alexcibotari.nakama.web.rest.assembler.IssueTypeResourceAssembler;
 import com.alexcibotari.nakama.web.rest.resource.IssueTypeResource;
@@ -15,6 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Optional;
+
 @RestController
 @RequestMapping(path = "/api/issuetypes", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @ExposesResourceFor(IssueTypeResource.class)
@@ -26,37 +31,42 @@ public class IssueTypeResourceController {
     private EntityLinks entityLinks;
 
     @Autowired
-    private IssueTypeService issueTypeService;
+    private IssueTypeService service;
 
     @Autowired
-    private IssueTypeResourceAssembler issueTypeResourceAssembler;
+    private IssueTypeResourceAssembler resourceAssembler;
 
     @GetMapping
-    public ResponseEntity<Resources<IssueTypeResource>> issuePriorities() {
+    public ResponseEntity<Resources<IssueTypeResource>> list() {
         Link link = entityLinks.linkToCollectionResource(IssueTypeResource.class);
-        Resources<IssueTypeResource> resources = new Resources<>(issueTypeResourceAssembler.toResources(issueTypeService.findAll()), link);
+        Resources<IssueTypeResource> resources = new Resources<>(resourceAssembler.toResources(service.findAll()), link);
         return ResponseEntity.ok(resources);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<IssueTypeResource> issueType(@PathVariable Long id) {
-        return ResponseEntity.ok(issueTypeResourceAssembler.toResource(issueTypeService.findOne(id)));
+    public ResponseEntity<IssueTypeResource> one(@PathVariable Long id) {
+        return toResourceResponse(service.findOne(id));
     }
 
     @PostMapping
-    public ResponseEntity<IssueTypeResource> create(@RequestBody IssueTypeResource resource) {
-        return new ResponseEntity<>(issueTypeResourceAssembler.toResource(issueTypeService.create(resource)), HttpStatus.CREATED);
+    public ResponseEntity<IssueTypeResource> create(@RequestBody IssueTypeResource resource) throws URISyntaxException {
+        resource = resourceAssembler.toResource(service.create(resource));
+        return ResponseEntity.created(new URI(resource.getId().getHref())).body(resource);
     }
 
     @PutMapping("{id}")
     public ResponseEntity<IssueTypeResource> update(@PathVariable Long id, @RequestBody IssueTypeResource resource) {
-        return ResponseEntity.ok(issueTypeResourceAssembler.toResource(issueTypeService.update(id, resource)));
+        return toResourceResponse(service.update(id, resource));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        issueTypeService.delete(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<IssueTypeResource> delete(@PathVariable Long id) {
+        return toResourceResponse(service.delete(id));
+    }
+
+    private ResponseEntity<IssueTypeResource> toResourceResponse(Optional<IssueType> entity) {
+        return entity.map(e -> ResponseEntity.ok(resourceAssembler.toResource(e)))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 }

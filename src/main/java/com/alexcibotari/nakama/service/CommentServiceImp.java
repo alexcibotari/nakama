@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -23,8 +24,8 @@ public class CommentServiceImp implements CommentService {
     @Autowired
     IssueService issueService;
 
-    public Comment findOne(Long id) {
-        return commentRepository.findOne(id);
+    public Optional<Comment> findOne(Long id) {
+        return commentRepository.findOneById(id);
     }
 
     public List<Comment> findAll() {
@@ -45,7 +46,7 @@ public class CommentServiceImp implements CommentService {
 
     @Transactional
     public Comment create(CommentResource resource) {
-        Issue issue = issueService.findOne(resource.getIssue());
+        Issue issue = issueService.findOne(resource.getIssue()).get();//TODO to Optional
         Comment comment = new Comment();
         comment.setIssue(issue);
         comment.setContent(resource.getContent());
@@ -54,15 +55,17 @@ public class CommentServiceImp implements CommentService {
 
 
     @Transactional
-    public Comment update(Long id, CommentResource resource) {
-        Comment comment = findOne(id);
-        comment.setContent(resource.getContent());
-        return commentRepository.save(comment);
+    public Optional<Comment> update(Long id, CommentResource resource) {
+        return findOne(id)
+            .map(entity -> {
+                entity.setContent(resource.getContent());
+                return commentRepository.save(entity);
+            });
     }
 
     @Transactional
-    public void delete(Long id) {
-        commentRepository.delete(id);
+    public Optional<Comment> delete(Long id) {
+        return commentRepository.deleteOneById(id);
     }
 
 }

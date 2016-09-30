@@ -6,7 +6,7 @@ class MainLayout extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: '/api/profile',
+            url: '/api/me',
             profile: { }
         }
     }

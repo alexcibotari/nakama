@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -19,8 +20,8 @@ public class IssuePriorityServiceImp implements IssuePriorityService {
     IssuePriorityRepository priorityRepository;
 
 
-    public IssuePriority findOne(Long id) {
-        return priorityRepository.findOne(id);
+    public Optional<IssuePriority> findOne(Long id) {
+        return priorityRepository.findOneById(id);
     }
 
     public List<IssuePriority> findAll() {
@@ -37,16 +38,18 @@ public class IssuePriorityServiceImp implements IssuePriorityService {
 
 
     @Transactional
-    public IssuePriority update(Long id, IssuePriorityResource resource) {
-        IssuePriority priority = findOne(id);
-        priority.setName(resource.getName());
-        priority.setDescription(resource.getDescription());
-        return priorityRepository.save(priority);
+    public Optional<IssuePriority> update(Long id, IssuePriorityResource resource) {
+        return findOne(id)
+            .map(entity -> {
+                entity.setName(resource.getName());
+                entity.setDescription(resource.getDescription());
+                return priorityRepository.save(entity);
+            });
     }
 
     @Transactional
-    public void delete(Long id) {
-        priorityRepository.delete(id);
+    public Optional<IssuePriority> delete(Long id) {
+        return priorityRepository.deleteOneById(id);
     }
 
 }

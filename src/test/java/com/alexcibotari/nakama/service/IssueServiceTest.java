@@ -34,20 +34,20 @@ public class IssueServiceTest {
 
     @Test
     public void testRecalculateTimeSpentOnWorkLogDelete() {
-        Issue issue = issueService.findOne(ESTIMATION_1);
+        Issue issue = issueService.findOne(ESTIMATION_1).get();
         Long timeSpent = issue.getTimeSpent();
 
         WorkLog workLog = workLogService.findAllByIssue(ESTIMATION_1).get(0);
         timeSpent -= workLog.getTimeWorked();
-        workLogService.delete(workLog);
+        workLogService.delete(workLog.getId());
 
-        issue = issueService.findOne(ESTIMATION_1);
+        issue = issueService.findOne(ESTIMATION_1).get();
         Assert.assertEquals(timeSpent, issue.getTimeSpent());
     }
 
     @Test
     public void testRecalculateTimeSpentOnWorkLogCreate() {
-        Issue issue = issueService.findOne(ESTIMATION_1);
+        Issue issue = issueService.findOne(ESTIMATION_1).get();
         Long timeSpent = issue.getTimeSpent();
 
         WorkLogResource workLogDTO = new WorkLogResource();
@@ -59,13 +59,13 @@ public class IssueServiceTest {
         WorkLog workLog = workLogService.create(workLogDTO);
         timeSpent += workLog.getTimeWorked();
 
-        issue = issueService.findOne(ESTIMATION_1);
+        issue = issueService.findOne(ESTIMATION_1).get();
         Assert.assertEquals(timeSpent, issue.getTimeSpent());
     }
 
     @Test
     public void testRecalculateTimeSpentOnWorkLogUpdateInPlus() {
-        Issue issue = issueService.findOne(ESTIMATION_1);
+        Issue issue = issueService.findOne(ESTIMATION_1).get();
         Long timeSpent = issue.getTimeSpent();
 
         WorkLog workLog = workLogService.findAllByIssue(ESTIMATION_1).get(0);
@@ -74,13 +74,13 @@ public class IssueServiceTest {
         timeSpent += 30L;
         workLogService.update(workLog.getId(), workLogDTO);
 
-        issue = issueService.findOne(ESTIMATION_1);
+        issue = issueService.findOne(ESTIMATION_1).get();
         Assert.assertEquals(timeSpent, issue.getTimeSpent());
     }
 
     @Test
     public void testRecalculateTimeSpentOnWorkLogUpdateInMinus() {
-        Issue issue = issueService.findOne(ESTIMATION_1);
+        Issue issue = issueService.findOne(ESTIMATION_1).get();
         Long timeSpent = issue.getTimeSpent();
 
         WorkLog workLog = workLogService.findAllByIssue(ESTIMATION_1).get(0);
@@ -89,7 +89,7 @@ public class IssueServiceTest {
         timeSpent -= 30L;
         workLogService.update(workLog.getId(), workLogDTO);
 
-        issue = issueService.findOne(ESTIMATION_1);
+        issue = issueService.findOne(ESTIMATION_1).get();
         Assert.assertEquals(timeSpent, issue.getTimeSpent());
     }
 
