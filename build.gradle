@@ -1,7 +1,7 @@
 buildscript {
 
     ext {
-        springBootVersion = '1.4.0.RELEASE'
+        springBootVersion = '1.4.1.RELEASE'
         springLoadedVersion = '1.2.5.RELEASE'
     }
     repositories {
@@ -24,7 +24,7 @@ springBoot {
 
 jar {
     baseName = 'nakama'
-    version =  '0.0.0'
+    version = '0.0.0'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -67,23 +67,5 @@ idea {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.14.1'
-}
-
-task copyNodeLibs << {
-    copy {
-        from 'node_modules/bootstrap/dist'
-        into 'src/main/webapp/build/bootstrap'
-    }
-
-    copy {
-        from 'node_modules/jquery/dist'
-        into 'src/main/webapp/build/jquery'
-    }
-
-    copy {
-        from 'node_modules/moment/min'
-        into 'src/main/webapp/build/moment'
-    }
-
+    gradleVersion = '3.1'
 }

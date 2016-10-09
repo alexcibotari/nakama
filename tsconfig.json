@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
-        "outDir" : "./src/main/webapp/",
+        "rootDir": "./src/main/typescript",
+        "outDir": "./src/main/webapp/app/",
         "target": "es5",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -9,5 +10,9 @@
         "experimentalDecorators": true,
         "removeComments": false,
         "noImplicitAny": false
-    }
+    },
+    "exclude": [
+        "node_modules",
+        "src/main/webapp/libs"
+    ]
 }

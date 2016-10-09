@@ -41,4 +41,5 @@ javadoc/
 typings
 
 #WebPack exclude
-src/main/webapp/build/
+src/main/webapp/app/
+src/main/webapp/libs/
