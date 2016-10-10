@@ -1,3 +1,3 @@
-export class Resource {
+export abstract class Resource {
     id:string;
 }
