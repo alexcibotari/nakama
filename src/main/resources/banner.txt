@@ -1,2 +1,0 @@
-${AnsiColor.BRIGHT_BLUE}:: Nakama :: Running Spring Boot ${spring-boot.version} ::
-${AnsiColor.DEFAULT}

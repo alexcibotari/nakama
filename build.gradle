@@ -1,7 +1,7 @@
 buildscript {
 
     ext {
-        springBootVersion = '1.3.5.RELEASE'
+        springBootVersion = '1.4.2.RELEASE'
         springLoadedVersion = '1.2.5.RELEASE'
     }
     repositories {
@@ -14,7 +14,7 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
 apply plugin: 'idea'
 
@@ -24,7 +24,17 @@ springBoot {
 
 jar {
     baseName = 'nakama'
-    version =  '0.0.0'
+    version = '0.0.1'
+    manifest {
+        attributes(
+            "Implementation-Title": "Nakama",
+            "Implementation-Version": version,
+            "Main-Class": "com.alexcibotari.nakame.Application"
+        )
+    }
+    /*from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }*/
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -40,6 +50,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile 'org.springframework.boot:spring-boot-starter-security'
     compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-hateoas'
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
     //DEV
@@ -48,9 +59,11 @@ dependencies {
     //Database
     compile 'org.hibernate:hibernate-envers'
     compile 'mysql:mysql-connector-java'
+    compile 'com.h2database:h2'
 
     //Commons
     compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
     //Test Artifacts -->
     testCompile 'org.springframework.boot:spring-boot-starter-test'
@@ -64,10 +77,5 @@ idea {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.14'
-}
-
-task copyNodeLibs(type: Copy) {
-    from 'node_modules/bootstrap/dist'
-    into 'src/main/webapp/build/bootstrap'
+    gradleVersion = '3.2'
 }

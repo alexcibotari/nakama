@@ -1,4 +1,4 @@
 /**
- * Spring MVC REST controllers.
+ * Spring REST.
  */
 package com.alexcibotari.nakama.web.rest;

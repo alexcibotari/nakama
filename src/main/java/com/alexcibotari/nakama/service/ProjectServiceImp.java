@@ -2,15 +2,12 @@ package com.alexcibotari.nakama.service;
 
 
 import com.alexcibotari.nakama.domain.Project;
-import com.alexcibotari.nakama.domain.User;
 import com.alexcibotari.nakama.repository.ProjectRepository;
-import com.alexcibotari.nakama.security.SecurityUtils;
-import com.alexcibotari.nakama.web.rest.dto.ProjectDTO;
+import com.alexcibotari.nakama.web.rest.resource.ProjectResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,11 +18,11 @@ public class ProjectServiceImp implements ProjectService {
     @Autowired
     ProjectRepository projectRepository;
 
-    public Project findOne(Long id) {
-        return projectRepository.findOne(id);
+    public Optional<Project> findOne(Long id) {
+        return projectRepository.findOneById(id);
     }
 
-    public Project findOneByKey(String key) {
+    public Optional<Project> findOne(String key) {
         return projectRepository.findOneByKey(key);
     }
 
@@ -34,26 +31,37 @@ public class ProjectServiceImp implements ProjectService {
     }
 
     @Transactional
-    public Project create(ProjectDTO dto) {
+    public Project create(ProjectResource resource) {
         Project project = new Project();
-        project.setKey(dto.getKey());
-        project.setName(dto.getName());
-        project.setDescription(dto.getDescription());
+        project.setKey(resource.getKey());
+        project.setName(resource.getName());
+        project.setDescription(resource.getDescription());
         return projectRepository.save(project);
     }
 
     @Transactional
-    public Project update(ProjectDTO dto) {
-        Project project = projectRepository.findOne(dto.getId());
-        project.setKey(dto.getKey());
-        project.setName(dto.getName());
-        project.setDescription(dto.getDescription());
-        return projectRepository.save(project);
+    public Optional<Project> update(Long id, ProjectResource resource) {
+        return update(findOne(id), resource);
     }
 
     @Transactional
-    public void delete(Long id) {
-        projectRepository.delete(id);
+    public Optional<Project> update(String key, ProjectResource resource) {
+        return update(findOne(key), resource);
+    }
+
+    private Optional<Project> update(Optional<Project> project, ProjectResource resource) {
+        return project
+            .map(entity -> {
+                entity.setKey(resource.getKey());
+                entity.setName(resource.getName());
+                entity.setDescription(resource.getDescription());
+                return projectRepository.save(entity);
+            });
+    }
+
+    @Transactional
+    public Optional<Project> delete(String key) {
+        return projectRepository.deleteOneByKey(key);
     }
 
 }

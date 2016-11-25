@@ -2,22 +2,24 @@ package com.alexcibotari.nakama.service;
 
 
 import com.alexcibotari.nakama.domain.Project;
-import com.alexcibotari.nakama.web.rest.dto.ProjectDTO;
+import com.alexcibotari.nakama.web.rest.resource.ProjectResource;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ProjectService {
 
-    public Project findOne(Long id);
+    Optional<Project> findOne(Long id);
 
-    public Project findOneByKey(String key);
+    Optional<Project> findOne(String key);
 
-    public List<Project> findAll();
+    List<Project> findAll();
 
-    public Project create(ProjectDTO dto);
+    Project create(ProjectResource resource);
 
-    public Project update(ProjectDTO dto);
+    Optional<Project> update(Long id, ProjectResource resource);
 
-    public void delete(Long id);
+    Optional<Project> update(String key, ProjectResource resource);
+
+    Optional<Project> delete(String key);
 }

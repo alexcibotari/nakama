@@ -1,25 +1,30 @@
 package com.alexcibotari.nakama.domain;
 
-import org.springframework.data.annotation.CreatedBy;
+import com.alexcibotari.nakama.service.util.key.KeyUtil;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.time.ZonedDateTime;
 
 @Entity
-public class Issue extends AbstractAuditingEntity{
+@SQLDelete(sql = "UPDATE Issue SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"project_id", "id_in_project"}))
+public class Issue extends AbstractAuditingEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id", updatable = false, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "project_id", nullable = false, updatable = false)
     private Project project;
 
-    @Column(name = "pkey", nullable = false, unique = true, updatable = false)
-    private String key;
+    @Column(name = "id_in_project", nullable = false, updatable = false)
+    private Long idInProject;
 
-    @CreatedBy
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "reporter_user_id")
     private User reporter;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "assigne_user_id")
     private User assigne;
 
@@ -29,13 +34,36 @@ public class Issue extends AbstractAuditingEntity{
     @Column(nullable = false)
     private String description;
 
-    //In Minutes
-    @Column
-    private Long timespent;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "priority_id", nullable = false)
+    private IssuePriority priority;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "status_id", nullable = false)
+    private IssueStatus status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_id", nullable = false)
+    private IssueType type;
 
     //In Minutes
     @Column
-    private Long timeestimate;
+    private Long timeSpent;
+
+    //In Minutes
+    @Column
+    private Long timeEstimate;
+
+    @Column
+    private ZonedDateTime dueDate;
+
+    @Column(nullable = false)
+    private Boolean deleted = Boolean.FALSE;
+
+
+    public String getKey() {
+        return KeyUtil.getIssueKey(getProject().getKey(), getIdInProject());
+    }
 
     public Project getProject() {
         return project;
@@ -45,12 +73,12 @@ public class Issue extends AbstractAuditingEntity{
         this.project = project;
     }
 
-    public String getKey() {
-        return key;
+    public Long getIdInProject() {
+        return idInProject;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setIdInProject(Long idInProject) {
+        this.idInProject = idInProject;
     }
 
     public User getReporter() {
@@ -85,31 +113,76 @@ public class Issue extends AbstractAuditingEntity{
         this.description = description;
     }
 
-    public Long getTimespent() {
-        return timespent;
+    public IssuePriority getPriority() {
+        return priority;
     }
 
-    public void setTimespent(Long timespent) {
-        this.timespent = timespent;
+    public void setPriority(IssuePriority priority) {
+        this.priority = priority;
     }
 
-    public Long getTimeestimate() {
-        return timeestimate;
+    public IssueStatus getStatus() {
+        return status;
     }
 
-    public void setTimeestimate(Long timeestimate) {
-        this.timeestimate = timeestimate;
+    public void setStatus(IssueStatus status) {
+        this.status = status;
+    }
+
+    public IssueType getType() {
+        return type;
+    }
+
+    public void setType(IssueType type) {
+        this.type = type;
+    }
+
+    public Long getTimeSpent() {
+        return timeSpent;
+    }
+
+    public void setTimeSpent(Long timeSpent) {
+        this.timeSpent = timeSpent;
+    }
+
+    public Long getTimeEstimate() {
+        return timeEstimate;
+    }
+
+    public void setTimeEstimate(Long timeEstimate) {
+        this.timeEstimate = timeEstimate;
+    }
+
+    public ZonedDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(ZonedDateTime dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 
     @Override
     public String toString() {
         return "Issue{" +
-                "project=" + project +
-                ", key='" + key + '\'' +
-                ", reporter=" + reporter +
-                ", assigne=" + assigne +
-                ", summery='" + summery + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+            "project=" + project +
+            ", idInProject=" + idInProject +
+            ", reporter=" + reporter +
+            ", assigne=" + assigne +
+            ", summery='" + summery + '\'' +
+            ", description='" + description + '\'' +
+            ", priority=" + priority +
+            ", status=" + status +
+            ", type=" + type +
+            ", timespent=" + timeSpent +
+            ", timeestimate=" + timeEstimate +
+            '}';
     }
 }

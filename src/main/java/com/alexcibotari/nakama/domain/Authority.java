@@ -6,14 +6,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class Authority extends AbstractIdEntity implements GrantedAuthority {
+public class Authority extends AbstractEntity implements GrantedAuthority {
 
     /**
      *
      */
     private static final long serialVersionUID = 7190787175352450609L;
 
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(name = "pname", nullable = false, unique = true, length = 50)
     private String name;
 
     public String getName() {

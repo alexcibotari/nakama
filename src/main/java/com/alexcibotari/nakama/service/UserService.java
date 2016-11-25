@@ -2,17 +2,24 @@ package com.alexcibotari.nakama.service;
 
 
 import com.alexcibotari.nakama.domain.User;
-import com.alexcibotari.nakama.web.rest.dto.UserDTO;
+import com.alexcibotari.nakama.web.rest.resource.UserResource;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
 
-    public Optional<User> findOneByUserName(String username);
+    Optional<User> findOneByUserName(String username);
 
-    public Optional<User> findOneByEmail(String email);
+    Optional<User> findOneByEmail(String email);
 
-    public User createUser(UserDTO user);
+    User create(UserResource resource);
 
+    Optional<User> update(String userName, UserResource resource);
 
+    Optional<User> getUser();
+
+    List<User> findAll();
+
+    Optional<User> delete(String userName);
 }
