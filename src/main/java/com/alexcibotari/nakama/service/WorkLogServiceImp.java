@@ -80,8 +80,11 @@ public class WorkLogServiceImp implements WorkLogService {
 
     @Transactional
     public Optional<WorkLog> delete(Long id) {
-        Optional<WorkLog> workLog = workLogRepository.deleteOneById(id);
-        workLog.ifPresent(entity ->  issueService.recalculateTimeSpent(entity.getIssue()));
+        Optional<WorkLog> workLog = workLogRepository.findOneById(id);
+        workLog.ifPresent(entity -> {
+            workLogRepository.delete(entity);
+            issueService.recalculateTimeSpent(entity.getIssue());
+        });
         return workLog;
     }
 }
