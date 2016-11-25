@@ -1,7 +1,7 @@
 buildscript {
 
     ext {
-        springBootVersion = '1.4.1.RELEASE'
+        springBootVersion = '1.4.2.RELEASE'
         springLoadedVersion = '1.2.5.RELEASE'
     }
     repositories {
@@ -14,7 +14,7 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
 apply plugin: 'idea'
 
@@ -24,7 +24,17 @@ springBoot {
 
 jar {
     baseName = 'nakama'
-    version = '0.0.0'
+    version = '0.0.1'
+    manifest {
+        attributes(
+            "Implementation-Title": "Nakama",
+            "Implementation-Version": version,
+            "Main-Class": "com.alexcibotari.nakame.Application"
+        )
+    }
+    /*from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }*/
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -67,5 +77,5 @@ idea {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.1'
+    gradleVersion = '3.2'
 }
