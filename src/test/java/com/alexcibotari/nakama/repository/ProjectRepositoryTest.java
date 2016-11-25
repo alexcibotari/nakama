@@ -1,7 +1,6 @@
 package com.alexcibotari.nakama.repository;
 
 import com.alexcibotari.nakama.Application;
-import com.alexcibotari.nakama.repository.ProjectRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,13 +23,13 @@ public class ProjectRepositoryTest {
         Assert.assertEquals("BEST", projectRepository.findOneByKey("BEST").get().getKey());
         Assert.assertEquals("BEST1", projectRepository.findOneByKey("BEST1").get().getKey());
         Assert.assertEquals("ESTIMATION", projectRepository.findOneByKey("ESTIMATION").get().getKey());
-        Assert.assertNull(projectRepository.findOneByKey("DEL"));
+        Assert.assertFalse(projectRepository.findOneByKey("DEL").isPresent());
     }
 
     @Test
-    public void testDeleteByKey(){
-        Assert.assertNotNull(projectRepository.findOneByKey("TEST"));
+    public void testDeleteByKey() {
+        Assert.assertNotNull(projectRepository.findOneByKey("TEST").get());
         projectRepository.deleteOneByKey("TEST");
-        Assert.assertNull(projectRepository.findOneByKey("TEST"));
+        Assert.assertFalse(projectRepository.findOneByKey("TEST").isPresent());
     }
 }

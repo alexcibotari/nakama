@@ -1,5 +1,7 @@
 # NAKAMA
 
+[![Build Status](https://travis-ci.org/alexcibotari/nakama.svg?branch=develop)](https://travis-ci.org/alexcibotari/nakama)
+
 ## 0. Pre-requirements
 + Java 8
 + NodeJS

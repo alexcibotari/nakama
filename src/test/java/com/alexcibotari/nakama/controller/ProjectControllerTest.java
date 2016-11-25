@@ -1,19 +1,12 @@
 package com.alexcibotari.nakama.controller;
 
 import com.alexcibotari.nakama.Application;
-import com.alexcibotari.nakama.domain.Project;
-import com.alexcibotari.nakama.web.rest.resource.ProjectResource;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.hateoas.Resources;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
-
-import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
@@ -21,6 +14,11 @@ import static org.junit.Assert.assertEquals;
 public class ProjectControllerTest {
 
     private static final String BASE_URI = "http://localhost:8080/api";
+
+    @Test
+    public void test() {
+        Assert.assertTrue(true);
+    }
 
 /*    @Test
     public void createNewProject() {
