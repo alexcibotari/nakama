@@ -6,11 +6,11 @@ var config = {
     "app": "./src/main/webapp/app/"
 };
 
-gulp.task('default', function () {
-    console.log("default");
-});
+gulp.task('default', ['copy']);
 
-gulp.task('copy', ['copy:html', 'copy:css']);
+gulp.task('copy', ['copy:libs', 'copy:src']);
+
+gulp.task('copy:src', ['copy:html', 'copy:css']);
 
 gulp.task('copy:html', function () {
     gulp.src(config.src + '**/*.html').pipe(gulp.dest(config.app));
@@ -32,6 +32,6 @@ gulp.task('copy:libs', function () {
 });
 
 
-gulp.task('watch:copy', function () {
-    gulp.watch([config.src + '**/*.html',config.src + '**/*.css'], ['copy']);
+gulp.task('watch:copy:src', function () {
+    gulp.watch([config.src + '**/*.html',config.src + '**/*.css'], ['copy:src']);
 });
