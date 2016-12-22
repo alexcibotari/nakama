@@ -32,6 +32,6 @@ gulp.task('copy:libs', function () {
 });
 
 
-gulp.task('watch:copy:src', function () {
+gulp.task('watch:src', function () {
     gulp.watch([config.src + '**/*.html',config.src + '**/*.css'], ['copy:src']);
 });
