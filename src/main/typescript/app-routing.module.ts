@@ -6,10 +6,10 @@ import {ProjectComponent} from "./projects/project.component";
 @NgModule({
     imports: [
         RouterModule.forRoot([
-            {path: 'dashboard', component: DashboardComponent},
-            {path: 'projects', component: ProjectComponent},
-            {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
-            {path: '**', component: ProjectComponent},
+            {path: "dashboard", component: DashboardComponent},
+            {path: "projects", component: ProjectComponent},
+            {path: "", redirectTo: "/dashboard", pathMatch: "full"},
+            {path: "**", component: ProjectComponent},
         ])
     ],
     exports: [

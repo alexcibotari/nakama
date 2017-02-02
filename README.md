@@ -16,15 +16,12 @@
 - run `git checkout develop`
 
 ## 2. Setup
-### Install Node Packages (see package.json)
-- Install Global packages `npm install webpack -g`
+### 2.1 Install Node Packages (see package.json)
+- Install Global packages `npm run install-global`
 - Install Local packages `npm install`
 
-### Copy Node dependencies to project
-- run `./gradlew copyNodeLibs`
-
-### Build project dependencies
-- run `npm webpack`
+### 2.2 Build FrontEnd
+- run `grunt`
 
 ## 3. Run
 ### Spring Boot

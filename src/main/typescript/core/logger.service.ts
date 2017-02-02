@@ -2,11 +2,11 @@ import {Injectable} from "@angular/core";
 
 @Injectable()
 export class LoggerService {
-    log(msg:string) {
+    log(msg: string) {
         console.log(msg);
     }
 
-    error(msg:string) {
+    error(msg: string) {
         console.error(msg);
     }
 }
