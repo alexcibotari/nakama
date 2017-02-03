@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "rootDir": "./src/main/typescript",
-        "outDir": "./src/main/webapp/app/",
+        "outDir": "./src/main/resources/public/app/",
         "target": "es5",
         "module": "commonjs",
         "moduleResolution": "node",

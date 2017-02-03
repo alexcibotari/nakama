@@ -4,12 +4,12 @@ var tsProject = ts.createProject("tsconfig.json");
 
 var config = {
     "node": "./node_modules/",
-    "libs": "./src/main/webapp/libs/",
+    "libs": "./src/main/resources/public/libs/",
     "src": "./src/main/typescript/",
-    "app": "./src/main/webapp/app/"
+    "app": "./src/main/resources/public/app/"
 };
 
-gulp.task('default', ['copy', 'tsc']);
+gulp.task('default', ['copy', 'compile']);
 
 gulp.task('copy', ['copy:libs', 'copy:src']);
 
@@ -34,7 +34,9 @@ gulp.task('copy:libs', function () {
     gulp.src(config.node + 'systemjs/dist/**').pipe(gulp.dest(config.libs + 'systemjs'));
 });
 
-gulp.task('tsc', function () {
+gulp.task('compile', ['compile:tsc']);
+
+gulp.task('compile:tsc', function () {
     return tsProject.src()
         .pipe(tsProject())
         .js.pipe(gulp.dest(tsProject.options.outDir));

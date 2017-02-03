@@ -35,10 +35,10 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-            .antMatchers("/*.{css,js,html}")
-            .antMatchers("/libs/**")
-            .antMatchers("/app/**");
+        //web.ignoring()
+        //  .antMatchers("/*.{css,js,html}")
+        //.antMatchers("/libs/**")
+        //.antMatchers("/app/**");
         //.antMatchers("/i18n/**")
         //.antMatchers("/assets/**")
         //.antMatchers("/swagger-ui/index.html")
@@ -51,7 +51,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.
             csrf().disable().
             headers().
-                frameOptions().sameOrigin().and().
+            frameOptions().sameOrigin().and().
             authorizeRequests().anyRequest().fullyAuthenticated().and().
             formLogin().loginPage("/login").failureUrl("/login?error").permitAll().and().
             logout().permitAll();
