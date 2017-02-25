@@ -1,4 +1,4 @@
-package com.alexcibotari.nakama.web.rest.errors;
+package com.alexcibotari.nakama.web.rest.error;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;

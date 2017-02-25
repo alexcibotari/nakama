@@ -5,7 +5,7 @@ import com.alexcibotari.nakama.domain.User;
 import com.alexcibotari.nakama.security.AuthoritiesConstants;
 import com.alexcibotari.nakama.service.UserService;
 import com.alexcibotari.nakama.web.rest.assembler.UserResourceAssembler;
-import com.alexcibotari.nakama.web.rest.errors.ResourceError;
+import com.alexcibotari.nakama.web.rest.error.ResourceError;
 import com.alexcibotari.nakama.web.rest.resource.UserResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,58 +48,46 @@ public class UserResourceController {
         return ResponseEntity.ok(resources);
     }
 
-    @GetMapping("{userName}")
+    @GetMapping("{login}")
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<UserResource> one(@PathVariable String userName) {
-        return toResourceResponse(service.findOneByUserName(userName));
-          /*  .map(user -> ResponseEntity.ok(resourceAssembler.toResource(user)))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));*/
+    public ResponseEntity<UserResource> one(@PathVariable String login) {
+        return toResourceResponse(service.findOneByLogin(login));
     }
 
     @PostMapping
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<?> create(@RequestBody UserResource resource) throws URISyntaxException {
-        if (service.findOneByUserName(resource.getUserName()).isPresent()) {
-            return new ResponseEntity<>(new ResourceError("UserName already in use"), HttpStatus.CONFLICT);
-        } else if (service.findOneByEmail(resource.getEmail()).isPresent()) {
-            return new ResponseEntity<>(new ResourceError("E-mail address already in use"), HttpStatus.CONFLICT);
-        } else {
             resource = resourceAssembler.toResource(service.create(resource));
             return ResponseEntity.created(new URI(resource.getId().getHref())).body(resource);
-        }
     }
 
-    @PutMapping("{userName}")
+    @PutMapping("{login}")
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<UserResource> update(@PathVariable String userName, @RequestBody UserResource resource) {
-        return toResourceResponse(service.update(userName, resource));
-            /*.map(user -> ResponseEntity.ok(resourceAssembler.toResource(user)))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));*/
+    public ResponseEntity<UserResource> update(@PathVariable String login, @RequestBody UserResource resource) {
+        return toResourceResponse(service.update(login, resource));
     }
 
-    @DeleteMapping("{userName}")
+    @DeleteMapping("{login}")
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<UserResource> delete(@PathVariable String userName) {
-        return toResourceResponse(service.delete(userName));
-    /*        .map(user -> ResponseEntity.ok(resourceAssembler.toResource(user)))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));*/
+    public ResponseEntity<UserResource> delete(@PathVariable String login) {
+        return toResourceResponse(service.delete(login));
     }
 
-    private ResponseEntity<UserResource> toResourceResponse(Optional<User> entity){
+    private ResponseEntity<UserResource> toResourceResponse(Optional<User> entity) {
         return entity.map(e -> ResponseEntity.ok(resourceAssembler.toResource(e)))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+            .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("{userName}/password")
+    @PutMapping("{login}/password")
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<UserResource> password(@PathVariable String userName) {
+    public ResponseEntity<UserResource> password(@PathVariable String login) {
         //TODO change logic
         return null;
     }
 
-    @PutMapping("{userName}/password/reset")
+    @PutMapping("{login}/password/reset")
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<UserResource> passwordReset(@PathVariable String userName) {
+    public ResponseEntity<UserResource> passwordReset(@PathVariable String login) {
         //TODO reset logic
         return null;
     }

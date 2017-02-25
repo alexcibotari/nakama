@@ -10,7 +10,7 @@ import java.util.Set;
 public class User extends AbstractAuditingEntity {
 
     @Column(nullable = false, unique = true)
-    private String userName;
+    private String login;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -34,12 +34,12 @@ public class User extends AbstractAuditingEntity {
     public User() {
     }
 
-    public String getUserName() {
-        return userName;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
@@ -82,7 +82,7 @@ public class User extends AbstractAuditingEntity {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
         sb.append("Id: ").append(getId()).append(", ");
-        sb.append("UserName: ").append(getUserName()).append(", ");
+        sb.append("Login: ").append(getLogin()).append(", ");
         sb.append("Email: ").append(getEmail()).append(", ");
         sb.append("Enabled : ").append(getEnabled());
         sb.append("}");

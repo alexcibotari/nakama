@@ -3,6 +3,8 @@ package com.alexcibotari.nakama.service;
 
 import com.alexcibotari.nakama.domain.Authority;
 import com.alexcibotari.nakama.domain.User;
+import com.alexcibotari.nakama.exception.UserEmailAlreadyInUseException;
+import com.alexcibotari.nakama.exception.UserLoginAlreadyInUseException;
 import com.alexcibotari.nakama.repository.AuthorityRepository;
 import com.alexcibotari.nakama.repository.UserRepository;
 import com.alexcibotari.nakama.security.SecurityUtils;
@@ -33,14 +35,16 @@ public class UserServiceImp implements UserService {
 
     @Transactional
     public User create(UserResource resource) {
+        checkLoginAndEmail(resource.getLogin(), resource.getEmail());
+
         User user = new User();
-        user.setUserName(resource.getUserName());
+        user.setLogin(resource.getLogin());
         user.setEmail(resource.getEmail());
         user.setEnabled(resource.getEnabled());
         user.setPassword(passwordEncoder.encode(RandomUtil.generatePassword()));
 
         Set<Authority> authorities = new HashSet<>();
-        resource.getAuthorities().stream().forEach(authority -> authorityRepository.findOneByName(authority).map(authorities::add));
+        resource.getAuthorities().forEach(authority -> authorityRepository.findOneByName(authority).map(authorities::add));
         user.setAuthorities(authorities);
 
         return userRepository.save(user);
@@ -48,19 +52,36 @@ public class UserServiceImp implements UserService {
 
     @Transactional
     public Optional<User> update(String userName, UserResource resource) {
-        return userRepository.findOneByUserName(userName)
+        return findOneByLogin(userName)
             .map(entity -> {
                 entity.setEmail(resource.getEmail());
                 entity.setEnabled(resource.getEnabled());
                 Set<Authority> authorities = new HashSet<>();
-                resource.getAuthorities().stream().forEach(authority -> authorityRepository.findOneByName(authority).map(authorities::add));
+                resource.getAuthorities().forEach(authority -> authorityRepository.findOneByName(authority).map(authorities::add));
                 entity.setAuthorities(authorities);
                 return userRepository.save(entity);
             });
     }
 
-    public Optional<User> findOneByUserName(String username) {
-        return userRepository.findOneByUserName(username);
+    private void checkLoginAndEmail(String login, String email) {
+        checkLogin(login);
+        checkEmail(email);
+    }
+
+    private void checkLogin(String login) {
+        findOneByLogin(login.toLowerCase()).ifPresent(user -> {
+            throw new UserLoginAlreadyInUseException();
+        });
+    }
+
+    private void checkEmail(String email) {
+        findOneByEmail(email.toLowerCase()).ifPresent(user -> {
+            throw new UserEmailAlreadyInUseException();
+        });
+    }
+
+    public Optional<User> findOneByLogin(String login) {
+        return userRepository.findOneByLogin(login);
     }
 
     public Optional<User> findOneByEmail(String email) {
@@ -68,7 +89,7 @@ public class UserServiceImp implements UserService {
     }
 
     public Optional<User> getUser() {
-        return userRepository.findOneByUserName(SecurityUtils.getCurrentUserName());
+        return findOneByLogin(SecurityUtils.getCurrentUserName());
     }
 
     public List<User> findAll() {
@@ -76,7 +97,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Transactional
-    public Optional<User> delete(String userName) {
-        return userRepository.deleteByUserName(userName);
+    public Optional<User> delete(String login) {
+        return userRepository.deleteByLogin(login);
     }
 }
