@@ -1,6 +1,6 @@
-package com.alexcibotari.nakama.web.rest.error;
+package com.alexcibotari.nakama.web.rest.resource.exception;
 
-public class ResourceFieldError {
+public class FieldExceptionResource {
 
     private String resource;
     private String field;

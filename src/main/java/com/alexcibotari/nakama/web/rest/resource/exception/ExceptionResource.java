@@ -1,11 +1,11 @@
-package com.alexcibotari.nakama.web.rest.error;
+package com.alexcibotari.nakama.web.rest.resource.exception;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ResourceError {
+public class ExceptionResource {
 
     private ZonedDateTime timestapm;
     private Integer status;
@@ -14,35 +14,35 @@ public class ResourceError {
     private String message;
     private String description;
 
-    private List<ResourceFieldError> fields;
+    private List<FieldExceptionResource> fields;
 
-    public ResourceError(String message) {
+    public ExceptionResource(String message) {
         this(message, null);
     }
 
-    public ResourceError(String message, String description) {
+    public ExceptionResource(String message, String description) {
         this(message, description, null);
     }
 
-    public ResourceError(String message, String description, List<ResourceFieldError> fields) {
+    public ExceptionResource(String message, String description, List<FieldExceptionResource> fields) {
         this.timestapm = ZonedDateTime.now();
         this.message = message;
         this.description = description;
         this.fields = fields;
     }
 
-    public void add(ResourceFieldError field) {
+    public void add(FieldExceptionResource field) {
         if (this.fields == null) {
             this.fields = new ArrayList<>();
         }
         this.fields.add(field);
     }
 
-    public void add(Iterable<ResourceFieldError> fieldErrors) {
+    public void add(Iterable<FieldExceptionResource> fieldErrors) {
         fieldErrors.forEach(this::add);
     }
 
-    public void add(ResourceFieldError... fieldErrors) {
+    public void add(FieldExceptionResource... fieldErrors) {
         add(Arrays.asList(fieldErrors));
     }
 
@@ -58,7 +58,7 @@ public class ResourceError {
         return description;
     }
 
-    public List<ResourceFieldError> getFields() {
+    public List<FieldExceptionResource> getFields() {
         return fields;
     }
 }
