@@ -9,8 +9,9 @@ public class Product extends AbstractAuditingEntity {
 
     private String sku;
     private String name;
-    private String description;
+    private String title;
     private String subtitle;
+    private String description;
     @Embedded
     private Price price;
     private boolean enabled;
@@ -24,10 +25,10 @@ public class Product extends AbstractAuditingEntity {
 
     @ManyToMany
     @JoinTable(
-        name = "product_gallery_images",
+        name = "product_images",
         joinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "id")},
         inverseJoinColumns = {@JoinColumn(name = "image_id", referencedColumnName = "id")})
-    private Set<Image> galleryImages = new HashSet<>();
+    private Set<Image> images = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "primary_image_id")

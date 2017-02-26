@@ -5,7 +5,6 @@ import com.alexcibotari.nakama.domain.User;
 import com.alexcibotari.nakama.security.AuthoritiesConstants;
 import com.alexcibotari.nakama.service.UserService;
 import com.alexcibotari.nakama.web.rest.assembler.UserResourceAssembler;
-import com.alexcibotari.nakama.web.rest.error.ResourceError;
 import com.alexcibotari.nakama.web.rest.resource.UserResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +13,6 @@ import org.springframework.hateoas.EntityLinks;
 import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resources;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -57,8 +55,8 @@ public class UserResourceController {
     @PostMapping
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<?> create(@RequestBody UserResource resource) throws URISyntaxException {
-            resource = resourceAssembler.toResource(service.create(resource));
-            return ResponseEntity.created(new URI(resource.getId().getHref())).body(resource);
+        resource = resourceAssembler.toResource(service.create(resource));
+        return ResponseEntity.created(new URI(resource.getId().getHref())).body(resource);
     }
 
     @PutMapping("{login}")
