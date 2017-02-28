@@ -9,7 +9,8 @@ public class Price {
 
     @Column(name = "price_currency_iso")
     private String currencyIso;
-
     @Column(name = "price_value")
     private BigDecimal value;
+    @Column(name = "price_discount")
+    private BigDecimal discount;
 }

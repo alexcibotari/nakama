@@ -2,7 +2,7 @@ package com.alexcibotari.nakama.service;
 
 
 import com.alexcibotari.nakama.domain.User;
-import com.alexcibotari.nakama.web.rest.resource.UserResource;
+import com.alexcibotari.nakama.web.resource.UserResource;
 
 import java.util.List;
 import java.util.Optional;

@@ -9,7 +9,7 @@ import com.alexcibotari.nakama.repository.AuthorityRepository;
 import com.alexcibotari.nakama.repository.UserRepository;
 import com.alexcibotari.nakama.security.SecurityUtils;
 import com.alexcibotari.nakama.service.util.RandomUtil;
-import com.alexcibotari.nakama.web.rest.resource.UserResource;
+import com.alexcibotari.nakama.web.resource.UserResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

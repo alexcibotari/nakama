@@ -2,7 +2,7 @@ package com.alexcibotari.nakama.service;
 
 
 import com.alexcibotari.nakama.domain.Comment;
-import com.alexcibotari.nakama.web.rest.resource.CommentResource;
+import com.alexcibotari.nakama.web.resource.CommentResource;
 
 import java.util.List;
 import java.util.Optional;

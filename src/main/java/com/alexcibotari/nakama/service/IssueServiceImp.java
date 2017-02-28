@@ -9,7 +9,7 @@ import com.alexcibotari.nakama.repository.IssuePriorityRepository;
 import com.alexcibotari.nakama.repository.IssueRepository;
 import com.alexcibotari.nakama.repository.IssueStatusRepository;
 import com.alexcibotari.nakama.repository.IssueTypeRepository;
-import com.alexcibotari.nakama.web.rest.resource.IssueResource;
+import com.alexcibotari.nakama.web.resource.IssueResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -2,7 +2,7 @@ package com.alexcibotari.nakama.service;
 
 
 import com.alexcibotari.nakama.domain.Issue;
-import com.alexcibotari.nakama.web.rest.resource.IssueResource;
+import com.alexcibotari.nakama.web.resource.IssueResource;
 
 import java.util.List;
 import java.util.Optional;
