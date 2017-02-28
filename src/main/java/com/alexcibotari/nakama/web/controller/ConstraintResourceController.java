@@ -3,7 +3,6 @@ package com.alexcibotari.nakama.web.controller;
 import com.alexcibotari.nakama.utils.validation.Validator;
 import com.alexcibotari.nakama.utils.validation.constraint.ConstraintDefinition;
 import com.alexcibotari.nakama.web.resource.*;
-import com.alexcibotari.nakama.web.rest.resource.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
