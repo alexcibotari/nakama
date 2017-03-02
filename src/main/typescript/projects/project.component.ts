@@ -1,11 +1,11 @@
-import {Component, OnInit} from "@angular/core";
-import {ProjectService} from "./project.service";
-import {Project} from "./project.model";
+import {Component, OnInit} from '@angular/core';
+import {ProjectService} from './shared/project.service';
+import {Project} from './shared/project.model';
 
 @Component({
     moduleId: module.id,
-    templateUrl: "project.component.html",
-    styleUrls: ["project.component.css"],
+    templateUrl: 'project.component.html',
+    styleUrls: ['project.component.css'],
     providers: [ProjectService]
 })
 export class ProjectComponent implements OnInit {

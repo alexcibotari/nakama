@@ -1,4 +1,4 @@
-import {AuditingResource} from "../shared/auditing-resource.model";
+import {AuditingResource} from '../../shared/auditing-resource.model';
 
 export class Project extends AuditingResource {
     name: string;

@@ -1,4 +1,4 @@
-import {Resource} from "./resource.model";
+import {Resource} from './resource.model';
 
 export abstract class AuditingResource extends Resource {
     createdBy: string;
