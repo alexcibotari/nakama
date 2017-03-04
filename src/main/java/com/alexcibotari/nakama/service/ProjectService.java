@@ -2,7 +2,7 @@ package com.alexcibotari.nakama.service;
 
 
 import com.alexcibotari.nakama.domain.Project;
-import com.alexcibotari.nakama.web.rest.resource.ProjectResource;
+import com.alexcibotari.nakama.web.resource.ProjectResource;
 
 import java.util.List;
 import java.util.Optional;

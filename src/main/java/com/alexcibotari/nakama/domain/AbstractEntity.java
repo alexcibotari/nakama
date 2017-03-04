@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @MappedSuperclass
-public abstract class AbstractEntity implements Serializable, IdEntity {
+public abstract class AbstractEntity implements IdEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

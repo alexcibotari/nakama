@@ -29,7 +29,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.debug("Authenticating {}", username);
         String lowercaseUsername = username.toLowerCase();
-        Optional<User> userFromDatabase = userRepository.findOneByUserName(lowercaseUsername);
+        Optional<User> userFromDatabase = userRepository.findOneByLogin(lowercaseUsername);
 
         return userFromDatabase.map(user -> {
             if (!user.getEnabled()) {

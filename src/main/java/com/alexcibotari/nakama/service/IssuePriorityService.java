@@ -2,7 +2,7 @@ package com.alexcibotari.nakama.service;
 
 
 import com.alexcibotari.nakama.domain.IssuePriority;
-import com.alexcibotari.nakama.web.rest.resource.IssuePriorityResource;
+import com.alexcibotari.nakama.web.resource.IssuePriorityResource;
 
 import java.util.List;
 import java.util.Optional;

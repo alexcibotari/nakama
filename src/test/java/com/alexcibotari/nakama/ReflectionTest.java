@@ -1,7 +1,7 @@
 package com.alexcibotari.nakama;
 
 import com.alexcibotari.nakama.utils.validation.Validator;
-import com.alexcibotari.nakama.web.rest.resource.CommentResource;
+import com.alexcibotari.nakama.web.resource.CommentResource;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;

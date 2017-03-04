@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 
 public class EntityUtil {
-    public static Collection<Long> getIds(Collection<? extends IdEntity> idEntity) {
+    public static Collection<Long> getIds(Collection<? extends IdEntity<Long>> idEntity) {
         if (null == idEntity || idEntity.isEmpty()) {
             return null;
         }
@@ -16,7 +16,7 @@ public class EntityUtil {
         return rs;
     }
 
-    public static Long getId(IdEntity idEntity) {
+    public static Long getId(IdEntity<Long> idEntity) {
         return null == idEntity ? null : idEntity.getId();
     }
 }

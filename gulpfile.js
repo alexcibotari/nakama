@@ -1,16 +1,19 @@
 var gulp = require('gulp');
+var ts = require("gulp-typescript");
+var tsProject = ts.createProject("tsconfig.json");
+
 var config = {
     "node": "./node_modules/",
-    "libs": "./src/main/webapp/libs/",
+    "libs": "./src/main/resources/public/libs/",
     "src": "./src/main/typescript/",
-    "app": "./src/main/webapp/app/"
+    "app": "./src/main/resources/public/app/"
 };
 
-gulp.task('default', function () {
-    console.log("default");
-});
+gulp.task('default', ['copy', 'compile']);
 
-gulp.task('copy', ['copy:html', 'copy:css']);
+gulp.task('copy', ['copy:libs', 'copy:src']);
+
+gulp.task('copy:src', ['copy:html', 'copy:css']);
 
 gulp.task('copy:html', function () {
     gulp.src(config.src + '**/*.html').pipe(gulp.dest(config.app));
@@ -31,7 +34,14 @@ gulp.task('copy:libs', function () {
     gulp.src(config.node + 'systemjs/dist/**').pipe(gulp.dest(config.libs + 'systemjs'));
 });
 
+gulp.task('compile', ['compile:tsc']);
 
-gulp.task('watch:copy', function () {
-    gulp.watch([config.src + '**/*.html',config.src + '**/*.css'], ['copy']);
+gulp.task('compile:tsc', function () {
+    return tsProject.src()
+        .pipe(tsProject())
+        .js.pipe(gulp.dest(tsProject.options.outDir));
+});
+
+gulp.task('watch:src', function () {
+    gulp.watch([config.src + '**/*.html', config.src + '**/*.css'], ['copy:src']);
 });

@@ -1,7 +1,6 @@
-import {Component, OnInit} from "@angular/core";
-import {ProjectService} from "./project.service";
-import {Project} from "./project.model";
-import {Observable} from "rxjs";
+import {Component, OnInit} from '@angular/core';
+import {ProjectService} from './shared/project.service';
+import {Project} from './shared/project.model';
 
 @Component({
     moduleId: module.id,
@@ -9,12 +8,14 @@ import {Observable} from "rxjs";
     styleUrls: ['project.component.css'],
     providers: [ProjectService]
 })
-export class ProjectComponent implements OnInit{
-    projects:Project[];
+export class ProjectComponent implements OnInit {
+    projects: Project[];
+
     ngOnInit(): void {
         this.projectService.getAll().subscribe(projects => this.projects = projects);
     }
-    constructor(private projectService:ProjectService){
+
+    constructor(private projectService: ProjectService) {
 
     }
 }

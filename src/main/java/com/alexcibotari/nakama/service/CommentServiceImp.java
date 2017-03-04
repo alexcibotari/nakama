@@ -6,7 +6,7 @@ import com.alexcibotari.nakama.domain.Issue;
 import com.alexcibotari.nakama.repository.CommentRepository;
 import com.alexcibotari.nakama.service.util.key.IssueKey;
 import com.alexcibotari.nakama.service.util.key.KeyUtil;
-import com.alexcibotari.nakama.web.rest.resource.CommentResource;
+import com.alexcibotari.nakama.web.resource.CommentResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,8 @@
 package com.alexcibotari.nakama.domain;
 
-public interface IdEntity {
+import java.io.Serializable;
 
-    public Long getId();
+public interface IdEntity<PK> extends Serializable {
+
+    PK getId();
 }

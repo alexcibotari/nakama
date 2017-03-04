@@ -2,7 +2,7 @@ package com.alexcibotari.nakama.service;
 
 
 import com.alexcibotari.nakama.domain.WorkLog;
-import com.alexcibotari.nakama.web.rest.resource.WorkLogResource;
+import com.alexcibotari.nakama.web.resource.WorkLogResource;
 
 import java.util.List;
 import java.util.Optional;
