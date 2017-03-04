@@ -21,7 +21,7 @@
 - Install Local packages `npm install`
 
 ### 2.2 Build FrontEnd
-- run `grunt`
+- run `gulp`
 
 ## 3. Run
 ### Spring Boot
