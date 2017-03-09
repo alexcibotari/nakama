@@ -1,18 +1,18 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, Headers, RequestOptions} from '@angular/http';
+import {Http, Response, RequestOptions} from '@angular/http';
 import {Project} from './project.model';
 import 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import {HttpHeadersService} from '../../core/http-headers.service';
 
 @Injectable()
 export class ProjectService {
 
-    headers = new Headers({'Accept': 'application/json', 'Content-Type': 'application/json;charset=UTF-8'});
-    options = new RequestOptions({headers: this.headers});
+    options = new RequestOptions({headers: this.httpHeadersService.getHeaders()});
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private httpHeadersService: HttpHeadersService) {
     }
 
     getAll(): Observable<Project[]> {

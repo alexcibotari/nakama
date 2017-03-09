@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from './shared/user.model';
 import {UserService} from './shared/user.service';
+import {User} from '../shared/model/user.model';
+
 @Component({
     moduleId: module.id,
     templateUrl: 'users.component.html',

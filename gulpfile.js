@@ -42,6 +42,7 @@ gulp.task('compile:tsc', function () {
         .js.pipe(gulp.dest(tsProject.options.outDir));
 });
 
-gulp.task('watch:src', function () {
+gulp.task('watch', function () {
     gulp.watch([config.src + '**/*.html', config.src + '**/*.css'], ['copy:src']);
+    gulp.watch([config.src + '**/*.ts'], ['compile:tsc']);
 });

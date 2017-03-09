@@ -3,7 +3,7 @@ import './rxjs-operators';
 
 @Component({
     moduleId: module.id,
-    selector: 'my-app',
+    selector: 'nakama-app',
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.css']
 })

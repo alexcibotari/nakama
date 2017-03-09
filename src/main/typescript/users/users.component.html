@@ -1,6 +1,26 @@
 <div>
-    Users
-    <ul>
-        <li *ngFor="let u of users">{{u.login}}</li>
-    </ul>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Login</td>
+                <td>Email</td>
+                <td>Enabled</td>
+                <td>Created By</td>
+                <td>Created Date</td>
+                <td>Last Modified By</td>
+                <td>Last Modified Date</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{user.login}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.enabled}}</td>
+                <td>{{user.createdBy}}</td>
+                <td>{{user.createdDate}}</td>
+                <td>{{user.lastModifiedBy}}</td>
+                <td>{{user.lastModifiedDate}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

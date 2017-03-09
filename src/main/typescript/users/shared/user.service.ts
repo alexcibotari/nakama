@@ -1,20 +1,27 @@
 import {Injectable} from '@angular/core';
-import {Headers, RequestOptions, Http} from '@angular/http';
+import {RequestOptions, Http} from '@angular/http';
+import {HttpHeadersService} from '../../core/http-headers.service';
+import {User} from '../../shared/model/user.model';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class UserService {
 
-    headers = new Headers({'Accept': 'application/json', 'Content-Type': 'application/json;charset=UTF-8'});
-    options = new RequestOptions({headers: this.headers});
+    private _url = '/api/users'
+    private _options = new RequestOptions({headers: this.httpHeadersService.getHeaders()});
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private httpHeadersService: HttpHeadersService) {
     }
 
-    getUsers() {
-        return this.http.get('/api/users', this.options).map(res => res.json()._embedded.users);
+    public getUsers(): Observable<Array<User>> {
+        return this.http.get(this._url, this._options).map(res => res.json()._embedded.users);
     }
 
-    getMe(){
-        return this.http.get('/api/me', this.options).map(res => res.json());
+    public getUser(login: string): Observable<User> {
+        return this.http.get(this._url, this._options).map(res => res.json());
+    }
+
+    public getMe(): Observable<User> {
+        return this.http.get('/api/me', this._options).map(res => res.json());
     }
 }
