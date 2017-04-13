@@ -1,17 +1,22 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {ProjectComponent} from './projects/project.component';
-import {UsersComponent} from './users/users.component';
+import {MainComponent} from './main/main.component';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
-            {path: 'dashboard', component: DashboardComponent},
-            {path: 'projects', component: ProjectComponent},
-            {path: 'users', component: UsersComponent},
-            {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
-            {path: '**', component: ProjectComponent},
+            {
+                path: '', component: MainComponent,
+                children: [
+                    {
+                        path: '', component: DashboardComponent
+                    },
+                    {
+                        path: 'users', loadChildren:  './app/users/users.module'
+                    }
+                ]
+            }
         ])
     ],
     exports: [

@@ -1,0 +1,12 @@
+<pre>{{ model | json }}</pre>
+
+<form>
+    <md-input-container floatPlaceholder="always">
+        <input type="text" mdInput placeholder="Login" name="login" required [(ngModel)]="model.login">
+    </md-input-container>
+    <md-input-container floatPlaceholder="always">
+        <input mdInput placeholder="Email" name="email" required [(ngModel)]="model.email">
+    </md-input-container>
+    <md-checkbox [(ngModel)]="model.enabled" name="enabled">Enabled</md-checkbox>
+    <button md-raised-button color="primary">Save</button>
+</form>

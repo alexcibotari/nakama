@@ -31,6 +31,7 @@ public class UserResourceAssembler extends ResourceAssemblerSupport<User, UserRe
         UserResource resource = new UserResource();
         resource.setLogin(entity.getLogin());
         resource.setEmail(entity.getEmail());
+        resource.setEnabled(entity.getEnabled());
         resource.setCreatedDate(entity.getCreatedDate());
         resource.setLastModifiedDate(entity.getLastModifiedDate());
         return resource;

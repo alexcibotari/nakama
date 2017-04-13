@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, RequestOptions} from '@angular/http';
-import {Project} from './project.model';
-import 'rxjs/Observable';
+import {Http, RequestOptions, Response} from '@angular/http';
 import 'rxjs/add/observable/throw';
-import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/Observable';
 import {HttpHeadersService} from '../../core/http-headers.service';
+import {Project} from './project.model';
 
 @Injectable()
 export class ProjectService {

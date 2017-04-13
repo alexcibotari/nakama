@@ -1,14 +1,13 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {LoggerService} from './logger.service';
+import {NgModule} from '@angular/core';
 import {HttpHeadersService} from './http-headers.service';
+import {LoggerService} from './logger.service';
 
 @NgModule({
     imports: [
         CommonModule
     ],
     exports: [],
-    //declarations: [],
     providers: [HttpHeadersService, LoggerService]
 })
 export class CoreModule {
