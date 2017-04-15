@@ -1,7 +1,0 @@
-@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
-@import 'libs/@angular/material/prebuilt-themes/indigo-pink.css';
-@import 'libs/@covalent/core/common/platform.css';
-body {
-    margin: 0;
-    font-family: Roboto, sans-serif;
-}

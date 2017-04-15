@@ -13,7 +13,7 @@ import {MainComponent} from './main/main.component';
                         path: '', component: DashboardComponent
                     },
                     {
-                        path: 'users', loadChildren:  './app/users/users.module'
+                        path: 'users', loadChildren:  './users/users.module'
                     }
                 ]
             }

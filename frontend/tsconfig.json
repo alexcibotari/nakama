@@ -1,0 +1,28 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "baseUrl": "src",
+        "outDir": "./dist/out-tsc",
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "target": "es5",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+
+
+        "module": "commonjs",
+        "lib": [
+            "es2016",
+            "dom"
+        ],
+        "noImplicitAny": true,
+        "suppressImplicitAnyIndexErrors": true
+    },
+    "exclude": [
+        "node_modules",
+        "src/main/resources/public/libs",
+        "classes",
+        "build"
+    ]
+}
