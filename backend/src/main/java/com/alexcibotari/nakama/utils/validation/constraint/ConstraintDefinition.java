@@ -13,6 +13,7 @@ public abstract class ConstraintDefinition<C extends ConstraintDefinition<C, A>,
         this.parameters = new HashMap<>();
     }
 
+    @SuppressWarnings("unchecked")
     private C getThis() {
         return (C) this;
     }
