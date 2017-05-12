@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../shared/service/user.service';
+import {UserService} from '../shared/service/user-rest.service';
 
 @Component({
     moduleId: module.id,
@@ -19,7 +19,7 @@ export class UserDetailComponent implements OnInit {
         this.route.params.subscribe(params => {
             let userId: string = params['id'];
             if (userId) {
-                this.userService.findOneById(userId).subscribe(user => this.model = user);
+                this.userService.get(userId).subscribe(user => this.model = user);
             }
         });
     }

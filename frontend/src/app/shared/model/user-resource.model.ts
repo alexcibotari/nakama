@@ -1,6 +1,6 @@
 import {AuditingResource} from './auditing-resource.model';
 
-export class User extends AuditingResource {
+export class UserResource extends AuditingResource {
     login: string;
     email: string;
     enabled: boolean;

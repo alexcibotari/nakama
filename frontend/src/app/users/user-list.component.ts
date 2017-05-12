@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {User} from '../shared/model/user.model';
-import {UserService} from '../shared/service/user.service';
+import {User} from '../shared/model/user-resource.model';
+import {UserService} from '../shared/service/user-rest.service';
 
 @Component({
     moduleId: module.id,
@@ -17,7 +17,7 @@ export class UserListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.userService.findAll().subscribe(users => this.users = users);
+        this.userService.query().subscribe(users => this.users = users);
     }
 
     edit(user: User) {
