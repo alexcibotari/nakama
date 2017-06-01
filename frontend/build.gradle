@@ -32,8 +32,8 @@ task assemble {}
 assemble.dependsOn(build)
 
 // check task for npm
-task check {}
-check.dependsOn(npm_run_test)
+//task check {}
+//check.dependsOn(npm_run_test)
 
 // run all task
 task runAll{}
