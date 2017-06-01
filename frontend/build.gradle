@@ -19,22 +19,22 @@ task npmClean(type: Delete) {
 }
 
 // clean task for npm
-task clean {}
-clean.dependsOn(npmClean)
+//task clean {}
+//clean.dependsOn(npmClean)
 
 // build task for npm
-task build {}
-build.dependsOn(npm_install)
-build.dependsOn(npm_run_build)
+//task build {}
+//build.dependsOn(npm_install)
+//build.dependsOn(npm_run_build)
 
 // assemble task for npm
-task assemble {}
-assemble.dependsOn(build)
+//task assemble {}
+//assemble.dependsOn(build)
 
 // check task for npm
 //task check {}
 //check.dependsOn(npm_run_test)
 
 // run all task
-task runAll{}
-runAll.dependsOn(npm_run_start)
+//task runAll{}
+//runAll.dependsOn(npm_run_start)
