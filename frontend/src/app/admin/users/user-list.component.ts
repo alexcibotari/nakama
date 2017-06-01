@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {User} from '../shared/model/user-resource.model';
-import {UserService} from '../shared/service/user-rest.service';
+import {Resources} from '../../core/http/hal/resources.model';
+import {UserResource} from '../../shared/model/user-resource.model';
+import {UserService} from '../../shared/service/user-rest.service';
 
 @Component({
     moduleId: module.id,
@@ -11,7 +12,7 @@ import {UserService} from '../shared/service/user-rest.service';
     providers: [UserService]
 })
 export class UserListComponent implements OnInit {
-    users: User[] = [];
+    users: Resources<UserResource>;
 
     constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) {
     }
@@ -20,11 +21,11 @@ export class UserListComponent implements OnInit {
         this.userService.query().subscribe(users => this.users = users);
     }
 
-    edit(user: User) {
+    edit(user: UserResource) {
         this.router.navigate([user.login], {relativeTo: this.route});
     }
 
-    delete(user: User) {
+    delete(user: UserResource) {
         this.router.navigate([user.login], {relativeTo: this.route});
     }
 }

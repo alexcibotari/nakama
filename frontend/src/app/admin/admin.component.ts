@@ -1,22 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import './rxjs-operators';
+import './../rxjs-operators';
 
 @Component({
     moduleId: module.id,
-    selector: 'app-root',
-    templateUrl: 'app.component.html',
-    styleUrls: ['app.component.css']
+    selector: 'admin-root',
+    templateUrl: 'admin.component.html',
+    styleUrls: ['admin.component.css']
 })
-export class AppComponent implements OnInit {
-
+export class AdminComponent implements OnInit {
     routes: Object[] = [
         {
-            title: 'Dashboard',
+            title: 'aaaaa',
             route: '/',
             icon: 'dashboard',
         }, {
-            title: 'Administration',
+            title: 'bbbbbb',
             route: '/admin',
             icon: 'supervisor_account'
         }

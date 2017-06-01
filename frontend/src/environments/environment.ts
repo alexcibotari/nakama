@@ -5,5 +5,14 @@
 
 export const environment = {
     production: false,
-    apiBaseUrl: 'localhost:8080/api'
+    api: {
+        url: 'http://localhost:8080/api'
+    },
+    oauth: {
+        url: 'http://localhost:8080/oauth',
+        basic: 'd2ViYXBwOnRvcHNlY3JldA==',
+        client: 'webapp',
+        grant: 'password',
+        key: 'oauth_token_key'
+    }
 };

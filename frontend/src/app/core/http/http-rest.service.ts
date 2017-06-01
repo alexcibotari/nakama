@@ -1,5 +1,8 @@
 import {Headers, Request, RequestOptionsArgs, Response} from '@angular/http';
+import {Router} from '@angular/router';
+import {OAuthService} from 'app/shared/service/oauth.service';
 import {Observable} from 'rxjs/Observable';
+import {EmptyObservable} from 'rxjs/observable/EmptyObservable';
 import {Subscriber} from 'rxjs/Subscriber';
 import {Resource} from './hal/resource.model';
 import {Resources} from './hal/resources.model';
@@ -16,8 +19,8 @@ export interface RestConfig {
     transform?: RestTransform;
 }
 
-export interface RestQuery {
-    [key: string]: any;
+export interface URLParams {
+    [key: string]: any | any[];
 }
 
 export interface Http {
@@ -32,29 +35,28 @@ export interface Http {
 
 export abstract class RESTService<T extends Resource> {
 
-    constructor(protected http: Http, private config: RestConfig) {
+    constructor(protected http: Http, protected config: RestConfig, protected router: Router, protected oAuthService: OAuthService) {
         this.config.baseUrl = config.baseUrl.replace(/\/$/, '');
         this.config.path = config.path.replace(/^\//, '');
-        this.config.baseHeaders = config.baseHeaders ? this.config.baseHeaders : new Headers();
+        this.config.baseHeaders = config.baseHeaders ? this.config.baseHeaders : new Headers({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Access-Control-Allow-Origin': '*',
+            'Authorization': 'Bearer ' + oAuthService.getToken()
+        });
         this.config.dynamicHeaders = config.dynamicHeaders ? this.config.dynamicHeaders : () => new Headers();
         this.config.transform = config.transform ? this.config.transform : (response: Response): any => response.json();
     }
 
-    public query(query?: RestQuery, transform?: RestTransform): Observable<Resources<T>> {
-        let request: Observable<Response> = this.http.get(this.buildUrl(undefined, query), this.buildRequestOptions());
+    public query(params?: URLParams | URLSearchParams, transform?: RestTransform): Observable<Resources<T>> {
+        let request: Observable<Response> = this.http.get(this.buildUrl(undefined), this.buildRequestOptions(params));
         return request.map((res: Response) => {
             if (transform) {
                 return transform(res);
             }
             return this.config.transform(res);
         }).catch((error: Response) => {
-            return new Observable<any>((subscriber: Subscriber<any>) => {
-                try {
-                    subscriber.error(this.config.transform(error));
-                } catch (err) {
-                    subscriber.error(error);
-                }
-            });
+            return this.errorInterceptor(error);
         });
     }
 
@@ -66,19 +68,12 @@ export abstract class RESTService<T extends Resource> {
             }
             return this.config.transform(res);
         }).catch((error: Response) => {
-            return new Observable<any>((subscriber: Subscriber<any>) => {
-                try {
-                    subscriber.error(this.config.transform(error));
-                } catch (err) {
-                    subscriber.error(error);
-                }
-            });
+            return this.errorInterceptor(error);
         });
     }
 
     public create(obj: T, transform?: RestTransform): Observable<T> {
-        let requestOptions: RequestOptionsArgs = this.buildRequestOptions();
-        let request: Observable<Response> = this.http.post(this.buildUrl(), obj, requestOptions);
+        let request: Observable<Response> = this.http.post(this.buildUrl(), obj, this.buildRequestOptions());
         return request.map((res: Response) => {
             if (res.status === 201) {
                 if (transform) {
@@ -89,13 +84,7 @@ export abstract class RESTService<T extends Resource> {
                 return res;
             }
         }).catch((error: Response) => {
-            return new Observable<any>((subscriber: Subscriber<any>) => {
-                try {
-                    subscriber.error(this.config.transform(error));
-                } catch (err) {
-                    subscriber.error(error);
-                }
-            });
+            return this.errorInterceptor(error);
         });
     }
 
@@ -112,13 +101,7 @@ export abstract class RESTService<T extends Resource> {
                 return res;
             }
         }).catch((error: Response) => {
-            return new Observable<any>((subscriber: Subscriber<any>) => {
-                try {
-                    subscriber.error(this.config.transform(error));
-                } catch (err) {
-                    subscriber.error(error);
-                }
-            });
+            return this.errorInterceptor(error);
         });
     }
 
@@ -134,6 +117,15 @@ export abstract class RESTService<T extends Resource> {
                 return res;
             }
         }).catch((error: Response) => {
+            return this.errorInterceptor(error);
+        });
+    }
+
+    protected errorInterceptor(error: Response): Observable<T> {
+        if (error.status === 401 || error.status === 0) {
+            this.router.navigate(['/login']);
+            return new EmptyObservable<T>();
+        } else {
             return new Observable<any>((subscriber: Subscriber<any>) => {
                 try {
                     subscriber.error(this.config.transform(error));
@@ -141,10 +133,10 @@ export abstract class RESTService<T extends Resource> {
                     subscriber.error(error);
                 }
             });
-        });
+        }
     }
 
-    protected buildRequestOptions(): RequestOptionsArgs {
+    protected buildRequestOptions(params?: URLParams | URLSearchParams): RequestOptionsArgs {
         let requestHeaders: Headers = new Headers();
         this.config.baseHeaders.forEach((value: string[], key: string) => {
             requestHeaders.set(key, value);
@@ -154,35 +146,17 @@ export abstract class RESTService<T extends Resource> {
         });
         let requestOptions: RequestOptionsArgs = {
             headers: requestHeaders,
+            params: params
         };
         return requestOptions;
     }
 
-    protected buildUrl(id?: string | number, query?: RestQuery): string {
+    protected buildUrl(id?: string | number): string {
         let url: string = this.config.path ? this.config.path : '';
         if (id) {
             url += `/${id}`;
         }
-        if (query) {
-            url += this.buildQuery(query);
-        }
         url = `${this.config.baseUrl}/${url}`;
-        return url;
-    }
-
-    protected buildQuery(query: RestQuery): string {
-        let url: string = '';
-        if (query) {
-            url += '?';
-            let params: string[] = [];
-            for (let key in query) {
-                let value: string | number | boolean = query[key];
-                if (value !== undefined) {
-                    params.push(`${key}=${value}`);
-                }
-            }
-            url += params.join('&');
-        }
         return url;
     }
 }

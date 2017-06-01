@@ -1,40 +1,22 @@
-<!--
-<md-sidenav-container>
-    <md-divider></md-divider>
-    <md-sidenav #sidenav>
-        <md-toolbar color="primary">
-            <span>Nakama</span>
-        </md-toolbar>
-        <md-nav-list>
-            <a md-list-item routerLink="/dashboard" (click)="sidenav.close()">Dashboard</a>
-            <a md-list-item routerLink="/projects" (click)="sidenav.close()">Projects</a>
-            <a md-list-item routerLink="/users" (click)="sidenav.close()">Users</a>
-            <md-divider></md-divider>
-        </md-nav-list>
-    </md-sidenav>
+<div fxLayout="column" fxFlex>
+
     <md-toolbar color="primary">
-        <button md-icon-button (click)="sidenav.open()">
+        <button md-icon-button (click)="sidenav.toggle()">
             <md-icon>menu</md-icon>
         </button>
         <span>Nakama</span>
-        <span flex></span>
-        <button md-icon-button [mdMenuTriggerFor]="toolbarMenu1">
-            <md-icon>more_vert</md-icon>
-        </button>
-        <md-menu #toolbarMenu1="mdMenu">
-            <button md-menu-item>
-                <md-icon>settings</md-icon>
-                <span>Settings</span>
-            </button>
-            <button md-menu-item>
-                <md-icon>exit_to_app</md-icon>
-                <span>Sign out</span>
-            </button>
-        </md-menu>
     </md-toolbar>
-    <div class="main-content">
+
+    <md-sidenav-container fxLayout="column" fxFlex>
+        <md-sidenav #sidenav>
+            <md-nav-list>
+                <md-list-item *ngFor="let route of routes" (click)="sidenav.toggle()" routerLink="{{route.route}}">
+                    <md-icon>{{route.icon}}</md-icon>
+                    <span>{{route.title}}</span>
+                </md-list-item>
+            </md-nav-list>
+        </md-sidenav>
+
         <router-outlet></router-outlet>
-    </div>
-</md-sidenav-container>
--->
-<router-outlet></router-outlet>
+    </md-sidenav-container>
+</div>

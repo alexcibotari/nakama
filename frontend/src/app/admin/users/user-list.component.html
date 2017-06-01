@@ -1,10 +1,8 @@
 <div fxLayout>
     <md-card fxFlex>
         <md-card-content>
-            <td-search-box class="push-left push-right" placeholder="search" [alwaysVisible]="true" (searchDebounce)="filterUsers($event)"></td-search-box>
-            <md-divider></md-divider>
-            <md-list>
-                <ng-template let-user let-last="last" ngFor [ngForOf]="users">
+            <md-list *ngIf="users?._embedded?.users">
+                <ng-template let-user let-last="last" ngFor [ngForOf]="users?._embedded?.users">
                     <md-list-item>
                         <md-icon md-list-avatar>person</md-icon>
                         <h4 md-line>{{user.login}}</h4>
@@ -18,9 +16,12 @@
                     <md-divider *ngIf="!last" md-inset></md-divider>
                 </ng-template>
             </md-list>
+            <div *ngIf="!users?._embedded?.users" fxLayoutAlign="center center">
+                no data
+            </div>
         </md-card-content>
     </md-card>
 </div>
-<a md-fab color="accent" class="mat-fab-bottom-right" [routerLink]="['add']">
+<button md-fab class="fab-bottom-right">
     <md-icon>add</md-icon>
-</a>
+</button>

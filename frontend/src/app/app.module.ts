@@ -7,13 +7,13 @@ import {MaterialModule} from '@angular/material';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule} from '@angular/router';
-import {CovalentCoreModule} from '@covalent/core';
+import 'hammerjs';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {CoreModule} from './core/core.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {MainComponent} from './main/main.component';
-import {ProjectComponent} from './projects/project.component';
+import {LoginComponent} from './login/login.component';
+import {OAuthService} from './shared/service/oauth.service';
 
 @NgModule({
     imports: [
@@ -25,13 +25,12 @@ import {ProjectComponent} from './projects/project.component';
         JsonpModule,
         MaterialModule,
         FlexLayoutModule,
-        CovalentCoreModule,
         CoreModule,
         AppRoutingModule,
         RouterModule
     ],
-    declarations: [AppComponent, MainComponent, DashboardComponent, ProjectComponent],
-    providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+    declarations: [AppComponent, DashboardComponent, LoginComponent],
+    providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, OAuthService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,0 +1,11 @@
+<md-sidenav-container fxLayout="column" fxFlex fullscreen>
+    <md-sidenav mode="side" opened>
+        <md-nav-list>
+            <md-list-item *ngFor="let route of routes" routerLink="{{route.route}}">
+                <md-icon>{{route.icon}}</md-icon>
+                <span>{{route.title}}</span>
+            </md-list-item>
+        </md-nav-list>
+    </md-sidenav>
+    <router-outlet></router-outlet>
+</md-sidenav-container>
