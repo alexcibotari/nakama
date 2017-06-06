@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Resources} from '../../core/http/hal/resources.model';
-import {UserResource} from '../../shared/model/user-resource.model';
-import {UserService} from '../../shared/service/user-rest.service';
+import {UserService} from '../../../shared/service/user-rest.service';
+import {Resources} from '../../../core/http/hal/resources.model';
+import {UserResource} from '../../../shared/model/user-resource.model';
 
 @Component({
     moduleId: module.id,

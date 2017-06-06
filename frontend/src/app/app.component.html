@@ -11,8 +11,8 @@
         <md-sidenav #sidenav>
             <md-nav-list>
                 <md-list-item *ngFor="let route of routes" (click)="sidenav.toggle()" routerLink="{{route.route}}">
-                    <md-icon>{{route.icon}}</md-icon>
-                    <span>{{route.title}}</span>
+                    <md-icon md-list-icon>{{route.icon}}</md-icon>
+                    <h4>{{route.title}}</h4>
                 </md-list-item>
             </md-nav-list>
         </md-sidenav>

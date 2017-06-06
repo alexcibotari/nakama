@@ -1,5 +1,14 @@
 <div fxLayout>
     <md-card fxFlex>
+        <md-card-header>
+            <md-input-container>
+                <input mdInput type="text" id="search" name="search"/>
+                <md-placeholder>
+                    <md-icon>search</md-icon>
+                    Search
+                </md-placeholder>
+            </md-input-container>
+        </md-card-header>
         <md-card-content>
             <md-list *ngIf="users?._embedded?.users">
                 <ng-template let-user let-last="last" ngFor [ngForOf]="users?._embedded?.users">

@@ -7,8 +7,8 @@ import {RouterModule} from '@angular/router';
 import {UserService} from '../shared/service/user-rest.service';
 import {AdminRoutingModule} from './admin-routing.module';
 import {AdminComponent} from './admin.component';
-import {UserDetailComponent} from './users/user-detail.component';
-import {UserListComponent} from './users/user-list.component';
+import {UserDetailComponent} from './users/user-detail/user-detail.component';
+import {UserListComponent} from './users/user-list/user-list.component';
 import {UsersComponent} from './users/users.component';
 
 @NgModule({

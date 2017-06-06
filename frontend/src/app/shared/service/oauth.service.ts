@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, RequestOptionsArgs, Response} from '@angular/http';
+import {Router} from '@angular/router';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
 import {environment} from '../../../environments/environment';
@@ -22,12 +23,18 @@ interface OAuthTokenResponse {
 @Injectable()
 export class OAuthService {
 
-    private readonly headers = new Headers({
+    private readonly headers: Headers = new Headers({
         'Authorization': `Basic ${environment.oauth.basic}`,
         'Content-Type': 'application/x-www-form-urlencoded'
     });
 
-    constructor(private http: Http) {
+    private urlRedirectTo: string;
+
+    constructor(private http: Http, private router: Router) {
+    }
+
+    public setURLRedirectTo(urlRedirectTo: string): void {
+        this.urlRedirectTo = urlRedirectTo;
     }
 
     public login(username: string, password: string): Observable<boolean> {
@@ -45,6 +52,11 @@ export class OAuthService {
                         username: username,
                         token: resp.access_token
                     }));
+                    if (this.urlRedirectTo) {
+                        this.router.navigate([this.urlRedirectTo]);
+                    } else {
+                        this.router.navigate(['/'])
+                    }
                     return true;
                 } else {
                     return false;

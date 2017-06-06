@@ -1,22 +1,32 @@
 <md-sidenav-container fxLayout="column" fxFlex fullscreen fxLayoutAlign="center center">
 
 
-    <form role="form" (submit)="login()"><br>
+    <form role="form" (submit)="login()" #loginForm="ngForm">
+        <br/>
         <md-input-container>
-            <input mdInput type="text" required [(ngModel)]="user.login" id="login" name="login"/>
+            <input mdInput type="text" required [(ngModel)]="model.login" id="login" name="login"/>
             <md-placeholder>
-                <md-icon>person</md-icon>Username
+                <md-icon>person</md-icon>
+                Username
             </md-placeholder>
-        </md-input-container><br><br>
+        </md-input-container>
+        <br/>
+        <br/>
         <md-input-container>
-            <input mdInput type="password" required [(ngModel)]="user.password" id="password" name="password"/>
+            <input mdInput type="password" required [(ngModel)]="model.password" id="password" name="password"/>
             <md-placeholder>
                 <md-icon>lock_open</md-icon>
                 Password
             </md-placeholder>
-        </md-input-container><br><br>
-        <button md-raised-button color="warn" type="submit" name="action">LOGIN</button><br><br>
+        </md-input-container>
+        <br/>
+        <br/>
+        <button md-raised-button color="warn" type="submit" name="action" [disabled]="!loginForm.form.valid">LOGIN</button>
+        <br/>
+        <br/>
         <span id="err"><small>{{errorMsg}}</small></span>
-        <md-slide-toggle color="primary"><small>Remember me!</small></md-slide-toggle>
-    </form >
+        <md-slide-toggle color="primary">
+            <small>Remember me!</small>
+        </md-slide-toggle>
+    </form>
 </md-sidenav-container>

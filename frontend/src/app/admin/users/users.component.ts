@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 @Component({
     moduleId: module.id,
-    selector: 'users',
+    selector: 'users-component',
     templateUrl: 'users.component.html',
     styleUrls: ['users.component.css']
 })

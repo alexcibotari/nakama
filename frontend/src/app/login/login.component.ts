@@ -4,12 +4,12 @@ import {LoginModel} from './login.model';
 import {Router} from '@angular/router';
 
 @Component({
-    selector: 'app-login',
+    selector: 'login-component',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    user: LoginModel = new LoginModel('admin', 'admin');
+    model: LoginModel = new LoginModel('admin', 'admin');
 
     constructor(private router: Router, private oAuthService: OAuthService) {
     }
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        this.oAuthService.login(this.user.login, this.user.password)
+        this.oAuthService.login(this.model.login, this.model.password)
             .subscribe(result => {
                 if(result){
                     this.router.navigate(['/']);
