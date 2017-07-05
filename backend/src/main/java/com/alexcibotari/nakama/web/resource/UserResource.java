@@ -17,6 +17,8 @@ public class UserResource extends AbstractAuditingResource {
 
     private Boolean enabled = Boolean.FALSE;
 
+    private PersonalResource personal;
+
     private Set<String> authorities;
 
     public UserResource() {
@@ -59,6 +61,14 @@ public class UserResource extends AbstractAuditingResource {
 
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public PersonalResource getPersonal() {
+        return personal;
+    }
+
+    public void setPersonal(PersonalResource personal) {
+        this.personal = personal;
     }
 
     @Override

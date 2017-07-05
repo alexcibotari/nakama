@@ -14,6 +14,7 @@ import {CoreModule} from './core/core.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {LoginComponent} from './login/login.component';
 import {OAuthService} from './shared/service/oauth.service';
+import { ConfirmationDialogComponent } from './shared/component/dialog/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import {OAuthService} from './shared/service/oauth.service';
         AppRoutingModule,
         RouterModule
     ],
-    declarations: [AppComponent, DashboardComponent, LoginComponent],
+    declarations: [AppComponent, DashboardComponent, LoginComponent, ConfirmationDialogComponent],
+    entryComponents: [ConfirmationDialogComponent],
     providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, OAuthService],
     bootstrap: [AppComponent]
 })

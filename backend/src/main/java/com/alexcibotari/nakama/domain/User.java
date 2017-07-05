@@ -15,6 +15,9 @@ public class User extends AbstractAuditingEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Embedded
+    private Personal personal;
+
     @Column(name = "password_hash", nullable = false, length = 255)
     @JsonIgnore
     private String password;
@@ -72,6 +75,14 @@ public class User extends AbstractAuditingEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Personal getPersonal() {
+        return personal;
+    }
+
+    public void setPersonal(Personal personal) {
+        this.personal = personal;
     }
 
     public int hashCode() {

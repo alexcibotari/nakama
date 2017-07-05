@@ -2,6 +2,7 @@ package com.alexcibotari.nakama.web.assembler;
 
 import com.alexcibotari.nakama.domain.User;
 import com.alexcibotari.nakama.web.controller.UserResourceController;
+import com.alexcibotari.nakama.web.resource.PersonalResource;
 import com.alexcibotari.nakama.web.resource.UserResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
@@ -34,6 +35,15 @@ public class UserResourceAssembler extends ResourceAssemblerSupport<User, UserRe
         resource.setEnabled(entity.getEnabled());
         resource.setCreatedDate(entity.getCreatedDate());
         resource.setLastModifiedDate(entity.getLastModifiedDate());
+
+        if(entity.getPersonal() != null) {
+            PersonalResource personal = new PersonalResource();
+            personal.setGivenName(entity.getPersonal().getGivenName());
+            personal.setFamilyName(entity.getPersonal().getFamilyName());
+            personal.setBirthDate(entity.getPersonal().getBirthDate());
+            resource.setPersonal(personal);
+        }
+
         return resource;
     }
 }

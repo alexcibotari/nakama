@@ -1,35 +1,29 @@
-<div fxLayout>
-    <md-card fxFlex>
-        <md-card-header>
-            <md-input-container>
-                <input mdInput type="text" id="search" name="search"/>
-                <md-placeholder>
-                    <md-icon>search</md-icon>
-                    Search
-                </md-placeholder>
-            </md-input-container>
-        </md-card-header>
-        <md-card-content>
-            <md-list *ngIf="users?._embedded?.users">
-                <ng-template let-user let-last="last" ngFor [ngForOf]="users?._embedded?.users">
-                    <md-list-item>
-                        <md-icon md-list-avatar>person</md-icon>
-                        <h4 md-line>{{user.login}}</h4>
-                        <p md-line>{{user.email}}</p>
-                        <span fxFlex></span>
-                        <span fxLayout fxFlex="60">
-                        <div fxFlex="50">created</div>
-                        <div fxFlex="50">last access</div>
-                    </span>
-                    </md-list-item>
-                    <md-divider *ngIf="!last" md-inset></md-divider>
-                </ng-template>
-            </md-list>
-            <div *ngIf="!users?._embedded?.users" fxLayoutAlign="center center">
-                no data
-            </div>
-        </md-card-content>
-    </md-card>
+<div fxLayout="column" fxLayoutAlign="space-between none">
+    <div fxFlex>
+        <md-nav-list *ngIf="users?._embedded?.users">
+            <md-divider></md-divider>
+            <md-list-item *ngFor="let user of users?._embedded?.users" fxLayout="column">
+                <div fxFlex fxLayoutAlign="start center" (click)="toDetail(user)">
+                    <md-icon md-list-avatar fxLayoutAlign="start center">person</md-icon>
+                    <h4 fxFlex fxLayoutAlign="start center">{{user.personal.fullName}}</h4>
+                    <div fxFlex fxLayoutAlign="start center">{{user.login}}</div>
+                    <div fxFlex fxLayoutAlign="start center">{{user.email}}</div>
+                </div>
+                <div fxLayoutAlign="end center">
+                    <button md-icon-button (click)="toEdit(user)">
+                        <md-icon>edit</md-icon>
+                    </button>
+                    <button md-icon-button (click)="toDelete(user)">
+                        <md-icon>delete</md-icon>
+                    </button>
+                </div>
+            </md-list-item>
+            <md-divider></md-divider>
+        </md-nav-list>
+        <div *ngIf="!users?._embedded?.users" fxLayoutAlign="center center">
+            no data
+        </div>
+    </div>
 </div>
 <button md-fab class="fab-bottom-right">
     <md-icon>add</md-icon>

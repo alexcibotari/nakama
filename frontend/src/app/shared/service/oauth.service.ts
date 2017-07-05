@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {Headers, Http, RequestOptionsArgs, Response} from '@angular/http';
-import {Router} from '@angular/router';
-import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs/Observable';
-import {environment} from '../../../environments/environment';
-import {URLParams} from '../../core/http/http-rest.service';
+import {Injectable} from "@angular/core";
+import {Headers, Http, RequestOptionsArgs, Response} from "@angular/http";
+import {Router} from "@angular/router";
+import "rxjs/add/operator/map";
+import {Observable} from "rxjs/Observable";
+import {environment} from "../../../environments/environment";
+import {URLParams} from "../../core/web/http/http-rest.service";
 
 interface OAuthTokenRequest {
     client_id: string;
@@ -70,8 +70,10 @@ export class OAuthService {
         return token ? token : '';
     }
 
-    public logout(): void {
+    public logout(urlRedirectTo?: string): void {
         localStorage.removeItem(environment.oauth.key);
+        this.setURLRedirectTo(urlRedirectTo);
+        this.router.navigate(['/login']);
     }
 
     isLoggedIn(): boolean {

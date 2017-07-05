@@ -1,6 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../shared/service/user-rest.service';
+import {UserResource} from "../../../shared/model/user-resource.model";
+import {MD_DIALOG_DATA} from "@angular/material";
 
 @Component({
     moduleId: module.id,
@@ -10,21 +12,13 @@ import {UserService} from '../../../shared/service/user-rest.service';
     providers: [UserService]
 })
 export class UserDetailComponent implements OnInit {
-    public model: any = {};
+    public model: UserResource;
 
-    constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) {
+    constructor(@Inject(MD_DIALOG_DATA) private data: UserResource, private userService: UserService) {
+        this.model = data;
     }
 
     ngOnInit() {
-        this.route.params.subscribe(params => {
-            let userId: string = params['id'];
-            if (userId) {
-                this.userService.get(userId).subscribe(user => this.model = user);
-            }
-        });
     }
 
-    onSubmit() {
-
-    }
 }

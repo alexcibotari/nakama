@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@mixin user-detail-theme($theme) {
+
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    [md-dialog-title] {
+    }
+
+}

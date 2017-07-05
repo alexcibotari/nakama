@@ -123,7 +123,7 @@ export abstract class RESTService<T extends Resource> {
 
     protected errorInterceptor(error: Response): Observable<T> {
         if (error.status === 401 || error.status === 0) {
-            this.router.navigate(['/login']);
+            this.oAuthService.logout(this.router.url);
             return new EmptyObservable<T>();
         } else {
             return new Observable<any>((subscriber: Subscriber<any>) => {

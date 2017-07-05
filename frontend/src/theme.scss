@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+@import 'app/admin/admin-theme';
 
 @include mat-core();
 
@@ -8,6 +9,7 @@ $accent: mat-palette($mat-blue);
 $theme: mat-light-theme($primary, $accent);
 
 @include angular-material-theme($theme);
+@include admin-theme($theme);
 
 .dark-theme {
     $dark-primary: mat-palette($mat-light-blue);
@@ -16,4 +18,5 @@ $theme: mat-light-theme($primary, $accent);
     $dark-theme: mat-dark-theme($dark-primary, $dark-accent);
 
     @include angular-material-theme($dark-theme);
+    @include admin-theme($theme);
 }

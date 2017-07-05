@@ -3,7 +3,7 @@ import {Http} from '@angular/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
-import {RESTService} from '../../core/http/http-rest.service';
+import {RESTService} from '../../core/web/http/http-rest.service';
 import {UserResource} from '../model/user-resource.model';
 import {OAuthService} from './oauth.service';
 

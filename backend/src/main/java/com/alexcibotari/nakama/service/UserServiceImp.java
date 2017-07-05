@@ -98,6 +98,10 @@ public class UserServiceImp implements UserService {
 
     @Transactional
     public Optional<User> delete(String login) {
-        return userRepository.deleteByLogin(login);
+        Optional<User> user = this.userRepository.findOneByLogin(login);
+        user.ifPresent(entity -> {
+            this.userRepository.delete(entity);
+        });
+        return user;
     }
 }

@@ -1,12 +1,39 @@
-<pre>{{ model | json }}</pre>
+<div md-dialog-title fxLayout="row">
+    <div fxFlex fxLayoutAlign="start center">
+        <md-icon md-list-avatar fxLayoutAlign="start center">person</md-icon>
+        <div fxFlex fxLayoutAlign="start center">{{model.personal.fullName}}</div>
+    </div>
+    <div fxLayoutAlign="end center">
+        <button md-icon-button>
+            <md-icon>edit</md-icon>
+        </button>
+        <button md-icon-button md-dialog-close>
+            <md-icon>close</md-icon>
+        </button>
+    </div>
+</div>
 
-<form>
-    <md-input-container floatPlaceholder="always">
-        <input type="text" mdInput placeholder="Login" name="login" required [(ngModel)]="model.login">
-    </md-input-container>
-    <md-input-container floatPlaceholder="always">
-        <input mdInput placeholder="Email" name="email" required [(ngModel)]="model.email">
-    </md-input-container>
-    <md-checkbox [(ngModel)]="model.enabled" name="enabled">Enabled</md-checkbox>
-    <button md-raised-button color="primary">Save</button>
-</form>
+<md-divider></md-divider>
+
+<md-dialog-content>
+    <md-list>
+        <h3 md-subheader>Personal</h3>
+        <md-list-item>
+            <md-icon md-list-icon>person</md-icon>
+            <p md-line> {{model.personal.givenName}} </p>
+        </md-list-item>
+        <md-list-item>
+            <md-icon md-list-icon>person</md-icon>
+            <p md-line> {{model.personal.familyName}} </p>
+        </md-list-item>
+        <md-divider></md-divider>
+        <h3 md-subheader>Notes</h3>
+        <md-list-item>
+            <md-icon md-list-icon>note</md-icon>
+            <h4 md-line>dsfsfd</h4>
+            <p md-line> sdfsdf </p>
+        </md-list-item>
+    </md-list>
+
+    {{ model | json }}
+</md-dialog-content>

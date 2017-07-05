@@ -1,4 +1,4 @@
-<div fxLayout="column" fxFlex>
+<md-sidenav-container fxLayout="column" fxFlex fullscreen>
 
     <md-toolbar color="primary">
         <button md-icon-button (click)="sidenav.toggle()">
@@ -7,16 +7,15 @@
         <span>Nakama</span>
     </md-toolbar>
 
-    <md-sidenav-container fxLayout="column" fxFlex>
-        <md-sidenav #sidenav>
-            <md-nav-list>
-                <md-list-item *ngFor="let route of routes" (click)="sidenav.toggle()" routerLink="{{route.route}}">
-                    <md-icon md-list-icon>{{route.icon}}</md-icon>
-                    <h4>{{route.title}}</h4>
-                </md-list-item>
-            </md-nav-list>
-        </md-sidenav>
+    <md-sidenav #sidenav>
+        <md-nav-list>
+            <md-list-item *ngFor="let route of routes" (click)="sidenav.toggle()" routerLink="{{route.route}}">
+                <md-icon md-list-icon>{{route.icon}}</md-icon>
+                <h4>{{route.title}}</h4>
+            </md-list-item>
+        </md-nav-list>
+    </md-sidenav>
 
-        <router-outlet></router-outlet>
-    </md-sidenav-container>
-</div>
+    <router-outlet></router-outlet>
+
+</md-sidenav-container>

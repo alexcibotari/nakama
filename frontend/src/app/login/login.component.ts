@@ -15,17 +15,10 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.oAuthService.logout();
     }
 
     login() {
-        this.oAuthService.login(this.model.login, this.model.password)
-            .subscribe(result => {
-                if(result){
-                    this.router.navigate(['/']);
-                }else {
-                }
-            });
+        this.oAuthService.login(this.model.login, this.model.password).subscribe();
     }
 
 }

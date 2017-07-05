@@ -1,0 +1,7 @@
+<h2 md-dialog-title *ngIf="data.title" color="primary">{{data.title}}</h2>
+<md-dialog-content>{{data.content}}</md-dialog-content>
+<md-dialog-actions fxLayoutAlign="end center">
+    <button md-button [md-dialog-close]="false" color="accent">No</button>
+    <!-- Can optionally provide a result for the closing dialog. -->
+    <button md-button [md-dialog-close]="true" color="accent">Yes</button>
+</md-dialog-actions>
