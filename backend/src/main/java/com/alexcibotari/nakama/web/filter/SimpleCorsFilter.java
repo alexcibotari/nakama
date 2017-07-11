@@ -1,5 +1,6 @@
 package com.alexcibotari.nakama.web.filter;
 
+import com.alexcibotari.nakama.config.ConfigurationConstants;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -10,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Profile("dev")
-@Component
-@Order(Ordered.HIGHEST_PRECEDENCE)
+//@Profile(ConfigurationConstants.PROFILE_DEV)
+//@Component
+//@Order(Ordered.HIGHEST_PRECEDENCE)
 public class SimpleCorsFilter implements Filter {
 
     public SimpleCorsFilter() {

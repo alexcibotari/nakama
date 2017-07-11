@@ -17,13 +17,4 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/").setViewName("index");
     }
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-            .allowedOrigins("*")
-            .allowedHeaders("*")
-            .allowedMethods("OPTIONS", "GET", "POST", "PUT", "DELETE")
-            .allowCredentials(true).maxAge(3600);
-    }
 }

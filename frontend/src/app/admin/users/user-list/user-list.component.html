@@ -1,5 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="space-between none">
     <div fxFlex>
+
         <md-nav-list *ngIf="users?._embedded?.users">
             <md-divider></md-divider>
             <md-list-item *ngFor="let user of users?._embedded?.users" fxLayout="column">

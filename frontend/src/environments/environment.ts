@@ -6,10 +6,10 @@
 export const environment = {
     production: false,
     api: {
-        url: 'http://localhost:8080/api'
+        url: 'http://localhost:4200/api'
     },
     oauth: {
-        url: 'http://localhost:8080/oauth',
+        url: 'http://localhost:4200/oauth',
         basic: 'd2ViYXBwOnRvcHNlY3JldA==',
         client: 'webapp',
         grant: 'password',

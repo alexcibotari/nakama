@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../shared/service/user-rest.service';
-import {Resources} from '../../../core/web/http/hal/resources.model';
 import {UserResource} from '../../../shared/model/user-resource.model';
 import {MdDialog} from "@angular/material";
 import {ConfirmationDialogComponent} from "../../../shared/component/dialog/confirmation-dialog/confirmation-dialog.component";
 import {UserDetailComponent} from "../user-detail/user-detail.component";
+import {DataSource} from "@angular/cdk";
+import {Resources} from "../../../core/web/http/hal/hal.model";
 
 @Component({
     moduleId: module.id,
@@ -15,6 +16,7 @@ import {UserDetailComponent} from "../user-detail/user-detail.component";
     providers: [UserService]
 })
 export class UserListComponent implements OnInit {
+    dataSource: DataSource<UserResource>;
     users: Resources<UserResource>;
 
     constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, public dialog: MdDialog) {

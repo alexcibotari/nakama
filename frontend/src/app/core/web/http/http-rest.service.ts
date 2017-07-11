@@ -4,8 +4,7 @@ import {OAuthService} from 'app/shared/service/oauth.service';
 import {Observable} from 'rxjs/Observable';
 import {EmptyObservable} from 'rxjs/observable/EmptyObservable';
 import {Subscriber} from 'rxjs/Subscriber';
-import {Resource} from './hal/resource.model';
-import {Resources} from './hal/resources.model';
+import {Resource, Resources} from "./hal/hal.model";
 
 export interface RestTransform {
     (response: Response): any;
