@@ -21,7 +21,7 @@ interface OAuthTokenResponse {
 }
 
 @Injectable()
-export class OAuthService {
+export class AuthService{
 
     private readonly headers: Headers = new Headers({
         'Authorization': `Basic ${environment.oauth.basic}`,
@@ -76,7 +76,7 @@ export class OAuthService {
         this.router.navigate(['/login']);
     }
 
-    isLoggedIn(): boolean {
+    public isLoggedIn(): boolean {
         var token: String = this.getToken();
         return token && token.length > 0;
     }

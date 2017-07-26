@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../../../shared/service/user-rest.service';
 import {UserResource} from '../../../shared/model/user-resource.model';
 import {MdDialog} from "@angular/material";
 import {ConfirmationDialogComponent} from "../../../shared/component/dialog/confirmation-dialog/confirmation-dialog.component";
 import {UserDetailComponent} from "../user-detail/user-detail.component";
-import {UserDataSource} from "../../../shared/service/user-data-source.service";
+import {UserService} from "../../shared/user-rest.service";
+import {UserDataSource} from "../../shared/user-data-source.service";
 
 @Component({
     moduleId: module.id,

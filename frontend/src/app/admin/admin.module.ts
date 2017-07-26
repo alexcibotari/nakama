@@ -35,23 +35,25 @@ import {
     MdToolbarModule,
     MdTooltipModule
 } from '@angular/material';
-import {RouterModule} from '@angular/router';
-import {UserService} from '../shared/service/user-rest.service';
 import {AdminRoutingModule} from './admin-routing.module';
 import {AdminComponent} from './admin.component';
 import {UserDetailComponent} from './users/user-detail/user-detail.component';
 import {UserListComponent} from './users/user-list/user-list.component';
 import {UsersComponent} from './users/users.component';
 import {CdkTableModule} from "@angular/cdk";
-import {UserDataSource} from "../shared/service/user-data-source.service";
+import {SharedModule} from "../shared/shared.module";
+import {AuthModule} from "../auth/auth.module";
+import {UserService} from "./shared/user-rest.service";
+import {UserDataSource} from "./shared/user-data-source.service";
 
 @NgModule({
     imports: [
+        SharedModule,
         CommonModule,
         FormsModule,
         FlexLayoutModule,
         AdminRoutingModule,
-        RouterModule,
+        AuthModule,
         CdkTableModule,
         MdAutocompleteModule,
         MdButtonModule,

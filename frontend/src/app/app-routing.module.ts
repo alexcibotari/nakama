@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
-import {RouterModule} from '@angular/router';
+import {PreloadAllModules, RouterModule} from '@angular/router';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {LoginComponent} from './login/login.component';
+import {LoginComponent} from "./login/login.component";
 
 @NgModule({
     imports: [
@@ -15,7 +15,7 @@ import {LoginComponent} from './login/login.component';
             {
                 path: 'admin', loadChildren: './admin/admin.module'
             }
-        ])
+        ], {preloadingStrategy: PreloadAllModules})
     ],
     exports: [
         RouterModule

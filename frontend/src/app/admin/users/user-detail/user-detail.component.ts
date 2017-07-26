@@ -1,8 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../../../shared/service/user-rest.service';
 import {UserResource} from "../../../shared/model/user-resource.model";
 import {MD_DIALOG_DATA} from "@angular/material";
+import {UserService} from "../../shared/user-rest.service";
 
 @Component({
     moduleId: module.id,

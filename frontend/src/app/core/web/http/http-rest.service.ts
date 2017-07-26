@@ -1,10 +1,10 @@
 import {Headers, Request, RequestOptionsArgs, Response} from '@angular/http';
 import {Router} from '@angular/router';
-import {OAuthService} from 'app/shared/service/oauth.service';
 import {Observable} from 'rxjs/Observable';
 import {EmptyObservable} from 'rxjs/observable/EmptyObservable';
 import {Subscriber} from 'rxjs/Subscriber';
 import {Resource, Resources} from "./hal/hal.model";
+import {AuthService} from "../../../shared/auth/auth.service";
 
 export interface RestTransform {
     (response: Response): any;
@@ -34,14 +34,14 @@ export interface Http {
 
 export abstract class RESTService<T extends Resource> {
 
-    constructor(protected http: Http, protected config: RestConfig, protected router: Router, protected oAuthService: OAuthService) {
+    constructor(protected http: Http, protected config: RestConfig, protected router: Router, protected authService: AuthService) {
         this.config.baseUrl = config.baseUrl.replace(/\/$/, '');
         this.config.path = config.path.replace(/^\//, '');
         this.config.baseHeaders = config.baseHeaders ? this.config.baseHeaders : new Headers({
             'Accept': 'application/json',
             'Content-Type': 'application/json;charset=UTF-8',
             'Access-Control-Allow-Origin': '*',
-            'Authorization': 'Bearer ' + oAuthService.getToken()
+            'Authorization': 'Bearer ' + authService.getToken()
         });
         this.config.dynamicHeaders = config.dynamicHeaders ? this.config.dynamicHeaders : () => new Headers();
         this.config.transform = config.transform ? this.config.transform : (response: Response): any => response.json();
@@ -122,7 +122,7 @@ export abstract class RESTService<T extends Resource> {
 
     protected errorInterceptor(error: Response): Observable<T> {
         if (error.status === 401 || error.status === 0) {
-            this.oAuthService.logout(this.router.url);
+            this.authService.logout(this.router.url);
             return new EmptyObservable<T>();
         } else {
             return new Observable<any>((subscriber: Subscriber<any>) => {
