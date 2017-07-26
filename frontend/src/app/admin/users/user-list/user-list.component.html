@@ -1,30 +1,50 @@
 <div fxLayout="column" fxLayoutAlign="space-between none">
-    <div fxFlex>
 
-        <md-nav-list *ngIf="users?._embedded?.users">
-            <md-divider></md-divider>
-            <md-list-item *ngFor="let user of users?._embedded?.users" fxLayout="column">
-                <div fxFlex fxLayoutAlign="start center" (click)="toDetail(user)">
-                    <md-icon md-list-avatar fxLayoutAlign="start center">person</md-icon>
-                    <h4 fxFlex fxLayoutAlign="start center">{{user.personal.fullName}}</h4>
-                    <div fxFlex fxLayoutAlign="start center">{{user.login}}</div>
-                    <div fxFlex fxLayoutAlign="start center">{{user.email}}</div>
-                </div>
-                <div fxLayoutAlign="end center">
-                    <button md-icon-button (click)="toEdit(user)">
-                        <md-icon>edit</md-icon>
-                    </button>
-                    <button md-icon-button (click)="toDelete(user)">
-                        <md-icon>delete</md-icon>
-                    </button>
-                </div>
-            </md-list-item>
-            <md-divider></md-divider>
-        </md-nav-list>
-        <div *ngIf="!users?._embedded?.users" fxLayoutAlign="center center">
-            no data
-        </div>
+    <div class="users-filter">
+        <md-input-container floatPlaceholder="never">
+            <input mdInput #filter placeholder="Filter users">
+        </md-input-container>
     </div>
+
+    <md-table #table [dataSource]="dataSource">
+
+        <ng-container cdkColumnDef="avatar">
+            <md-header-cell *cdkHeaderCellDef> Avatar</md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                <md-icon>person</md-icon>
+            </md-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="fullName">
+            <md-header-cell *cdkHeaderCellDef> Full Name</md-header-cell>
+            <md-cell *cdkCellDef="let row"> {{row.personal.fullName}}</md-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="login">
+            <md-header-cell *cdkHeaderCellDef> Login</md-header-cell>
+            <md-cell *cdkCellDef="let row"> {{row.login}}</md-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="email">
+            <md-header-cell *cdkHeaderCellDef> Email</md-header-cell>
+            <md-cell *cdkCellDef="let row"> {{row.email}}</md-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="actions">
+            <md-header-cell *cdkHeaderCellDef> Actions</md-header-cell>
+            <md-cell *cdkCellDef="let row">
+                <button md-icon-button (click)="toEdit(row)">
+                    <md-icon>edit</md-icon>
+                </button>
+                <button md-icon-button (click)="toDelete(row)">
+                    <md-icon>delete</md-icon>
+                </button>
+            </md-cell>
+        </ng-container>
+
+        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+    </md-table>
 </div>
 <button md-fab class="fab-bottom-right">
     <md-icon>add</md-icon>

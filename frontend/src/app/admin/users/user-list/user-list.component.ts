@@ -5,8 +5,7 @@ import {UserResource} from '../../../shared/model/user-resource.model';
 import {MdDialog} from "@angular/material";
 import {ConfirmationDialogComponent} from "../../../shared/component/dialog/confirmation-dialog/confirmation-dialog.component";
 import {UserDetailComponent} from "../user-detail/user-detail.component";
-import {DataSource} from "@angular/cdk";
-import {Resources} from "../../../core/web/http/hal/hal.model";
+import {UserDataSource} from "../../../shared/service/user-data-source.service";
 
 @Component({
     moduleId: module.id,
@@ -16,29 +15,26 @@ import {Resources} from "../../../core/web/http/hal/hal.model";
     providers: [UserService]
 })
 export class UserListComponent implements OnInit {
-    dataSource: DataSource<UserResource>;
-    users: Resources<UserResource>;
+    displayedColumns = ['avatar', 'fullName', 'login', 'email', 'actions'];
 
-    constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, public dialog: MdDialog) {
+    constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, public dataSource: UserDataSource, private dialog: MdDialog) {
     }
 
     ngOnInit() {
-        this.userService.query().subscribe(users => this.users = users);
     }
 
     toDetail(user: UserResource) {
-        let dialogRef = this.dialog.open(UserDetailComponent, {data : user});
+        let dialogRef = this.dialog.open(UserDetailComponent, {data: user});
     }
 
     toEdit(user: UserResource) {
-        //this.router.navigate([user.login], {relativeTo: this.route});
-        let dialogRef = this.dialog.open(UserDetailComponent, {data : user});
+        let dialogRef = this.dialog.open(UserDetailComponent, {data: user});
     }
 
     toDelete(user: UserResource) {
-        let dialogRef = this.dialog.open(ConfirmationDialogComponent, {data : {content : `Delete ${user.personal.fullName} user ?`}});
+        let dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {content: `Delete ${user.personal.fullName} user ?`}});
         dialogRef.afterClosed().subscribe(result => {
-            if(result){
+            if (result) {
                 this.userService
                     .delete(user.login)
                     .subscribe(result => {

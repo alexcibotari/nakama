@@ -8,10 +8,48 @@
     </md-toolbar>
 
     <md-sidenav #sidenav>
-        <md-nav-list>
-            <md-list-item *ngFor="let route of routes" (click)="sidenav.toggle()" routerLink="{{route.route}}">
+
+        <md-nav-list dense>
+            <md-list-item *ngFor="let route of userRoutes" (click)="sidenav.toggle()" routerLink="{{route.route}}">
                 <md-icon md-list-icon>{{route.icon}}</md-icon>
-                <h4>{{route.title}}</h4>
+                <h4 md-line>{{route.title}}</h4>
+            </md-list-item>
+
+            <ng-container *ngIf="contentRoutes">
+                <md-divider></md-divider>
+                <h3 md-subheader>Content</h3>
+                <md-list-item *ngFor="let route of contentRoutes" (click)="sidenav.toggle()"
+                              routerLink="{{route.route}}">
+                    <md-icon md-list-icon>{{route.icon}}</md-icon>
+                    <h4 md-line>{{route.title}}</h4>
+                </md-list-item>
+            </ng-container>
+
+            <ng-container *ngIf="commerceRoutes">
+                <md-divider></md-divider>
+                <h3 md-subheader>Commerce</h3>
+                <md-list-item *ngFor="let route of commerceRoutes" (click)="sidenav.toggle()"
+                              routerLink="{{route.route}}">
+                    <md-icon md-list-icon>{{route.icon}}</md-icon>
+                    <h4 md-line>{{route.title}}</h4>
+                </md-list-item>
+            </ng-container>
+
+            <ng-container *ngIf="adminRoutes">
+                <md-divider></md-divider>
+                <h3 md-subheader>Administration</h3>
+                <md-list-item *ngFor="let route of adminRoutes" (click)="sidenav.toggle()"
+                              routerLink="{{route.route}}">
+                    <md-icon md-list-icon>{{route.icon}}</md-icon>
+                    <h4 md-line>{{route.title}}</h4>
+                </md-list-item>
+            </ng-container>
+
+            <md-divider></md-divider>
+            <md-list-item *ngFor="let route of otherRoutes" (click)="sidenav.toggle()"
+                          routerLink="{{route.route}}">
+                <md-icon md-list-icon>{{route.icon}}</md-icon>
+                <h4 md-line>{{route.title}}</h4>
             </md-list-item>
         </md-nav-list>
     </md-sidenav>

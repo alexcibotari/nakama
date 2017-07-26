@@ -3,3 +3,18 @@
     right: 16px;
     bottom: 16px;
 }
+
+.users-filter {
+    min-height: 64px;
+    display: flex;
+    align-items: baseline;
+    padding: 8px 24px 0;
+    font-size: 20px;
+    justify-content: space-between;
+}
+
+.mat-input-container {
+    font-size: 14px;
+    flex-grow: 1;
+    margin-left: 32px;
+}

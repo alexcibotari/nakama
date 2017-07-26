@@ -3,7 +3,9 @@ import {UserResource} from "../model/user-resource.model";
 import {Observable} from "rxjs/Observable";
 import {UserService} from "./user-rest.service";
 import {Resources} from "../../core/web/http/hal/hal.model";
+import {Injectable} from "@angular/core";
 
+@Injectable()
 export class UserDataSource extends DataSource<UserResource> {
 
     constructor(private userService: UserService){
@@ -15,7 +17,6 @@ export class UserDataSource extends DataSource<UserResource> {
     }
 
     disconnect(collectionViewer: CollectionViewer): void {
-        throw new Error("Method not implemented.");
     }
 
 }

@@ -9,7 +9,7 @@ import './../rxjs-operators';
     styleUrls: ['admin.component.css']
 })
 export class AdminComponent implements OnInit {
-    routes: Object[] = [
+    routes = [
         {
             title: 'Users',
             route: '/admin/users',

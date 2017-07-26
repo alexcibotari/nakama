@@ -10,15 +10,71 @@ import './rxjs-operators';
 })
 export class AppComponent implements OnInit {
 
-    routes: Object[] = [
+    userRoutes = [
         {
             title: 'Dashboard',
             route: '/',
-            icon: 'dashboard',
+            icon: 'widgets',
+        }
+    ];
+
+    contentRoutes = [
+        {
+            title: 'Pages',
+            route: '/',
+            icon: 'pages',
+        }, {
+            title: 'Design',
+            route: '/',
+            icon: 'format_paint'
+        }, {
+            title: 'Analytics',
+            route: '/',
+            icon: 'timeline'
+        }
+    ];
+
+    commerceRoutes = [
+        {
+            title: 'Products',
+            route: '/',
+            icon: 'widgets',
+        }, {
+            title: 'Categories',
+            route: '/',
+            icon: 'widgets'
+        }, {
+            title: 'Discounts',
+            route: '/',
+            icon: 'money_off'
+        }, {
+            title: 'Orders',
+            route: '/',
+            icon: 'shopping_cart'
+        }
+    ];
+
+    adminRoutes = [
+        {
+            title: 'User Management',
+            route: '/admin/users',
+            icon: 'people',
         }, {
             title: 'Administration',
-            route: '/admin',
-            icon: 'supervisor_account'
+            route: '/',
+            icon: 'widgets'
+        }
+    ];
+
+    otherRoutes = [
+        {
+            title: 'Settings',
+            route: '/',
+            icon: 'settings',
+        }, {
+            title: 'Help',
+            route: '/',
+            icon: 'help'
         }
     ];
 
