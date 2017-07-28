@@ -17,20 +17,22 @@
 
 ## 2. Setup
 ### 2.1 Install Node Packages (see package.json)
-- Install Global packages `npm run install-global`
-- Install Local packages `npm install`
-
-### 2.2 Build FrontEnd
-- run `gulp`
+- Go to 'frontend' folder
+- Install FrontEnd Local packages `npm install`
 
 ## 3. Run
-### Spring Boot
-#### Gradle
+The project is made from two parts :
+- Back-End - REST API
+- Front-End - UI
+
+#### Back-End - you can run in two methods
+##### Gradle
     gradlew bootRun
-#### Java
-Run Application.java
-### Tomcat WAR
-Add project into Tomcat
+##### Java
+Run com.alexcibotari.nakama.Application.java
+
+#### Front-End
+    npm start
 
 ## 4. Application credentials
 admin / admin

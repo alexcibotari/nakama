@@ -4,9 +4,9 @@ import './rxjs-operators';
 
 @Component({
     moduleId: module.id,
-    selector: 'app-root',
+    selector: 'nkm-root',
     templateUrl: 'app.component.html',
-    styleUrls: ['app.component.css']
+    styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
 

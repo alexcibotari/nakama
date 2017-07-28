@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 
 @Component({
     moduleId: module.id,
-    selector: 'users-component',
+    selector: 'nkm-users',
     templateUrl: 'users.component.html',
-    styleUrls: ['users.component.css']
+    styleUrls: ['users.component.scss']
 })
 export class UsersComponent implements OnInit {
 

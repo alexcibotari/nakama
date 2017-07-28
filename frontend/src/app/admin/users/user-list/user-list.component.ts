@@ -9,9 +9,9 @@ import {UserDataSource} from "../../shared/user-data-source.service";
 
 @Component({
     moduleId: module.id,
-    selector: 'user-list',
+    selector: 'nkm-user-list',
     templateUrl: 'user-list.component.html',
-    styleUrls: ['user-list.component.css'],
+    styleUrls: ['user-list.component.scss'],
     providers: [UserService]
 })
 export class UserListComponent implements OnInit {
