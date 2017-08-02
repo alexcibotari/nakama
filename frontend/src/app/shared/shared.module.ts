@@ -21,6 +21,7 @@ import {
     MdTooltipModule
 } from "@angular/material";
 import {CdkTableModule} from "@angular/cdk";
+import { NavigationDrawerComponent } from './layout/navigation-drawer/navigation-drawer.component';
 
 
 const MATERIAL_MODULES: any[] = [
@@ -43,6 +44,11 @@ const MATERIAL_MODULES: any[] = [
     MdSelectModule,
 ];
 
+const LAYOUT_COMPONENTS: any[] = [
+    LayoutComponent,
+    NavigationDrawerComponent
+];
+
 
 @NgModule({
     imports: [
@@ -50,9 +56,10 @@ const MATERIAL_MODULES: any[] = [
         CommonModule,
         MATERIAL_MODULES
     ],
-    declarations: [LayoutComponent],
+    declarations: [LAYOUT_COMPONENTS],
     exports: [
-        MATERIAL_MODULES
+        MATERIAL_MODULES,
+        LAYOUT_COMPONENTS
     ]
 })
 export class SharedModule {
