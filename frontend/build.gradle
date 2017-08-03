@@ -1,10 +1,10 @@
 plugins {
-    id "com.moowork.node" version "1.1.1"
+    id "com.moowork.node" version "1.2.0"
 }
 
 node {
-    version = '7.6.0'
-    npmVersion = '4.5.0'
+    version = '6.11.0'
+    npmVersion = '3.10.10'
     download = true
     workDir = file("${project.projectDir}/node")
     nodeModulesDir = file("${project.projectDir}/")
@@ -23,9 +23,9 @@ task npmClean(type: Delete) {
 //clean.dependsOn(npmClean)
 
 // build task for npm
-//task build {}
-//build.dependsOn(npm_install)
-//build.dependsOn(npm_run_build)
+task build {}
+build.dependsOn(npm_install)
+build.dependsOn(npm_run_build)
 
 // assemble task for npm
 //task assemble {}
@@ -36,5 +36,6 @@ task npmClean(type: Delete) {
 //check.dependsOn(npm_run_test)
 
 // run all task
-//task runAll{}
-//runAll.dependsOn(npm_run_start)
+task runAll{}
+runAll.dependsOn(npm_install)
+runAll.dependsOn(npm_run_start)
