@@ -1,20 +1,7 @@
-<nkm-layout>
-
-</nkm-layout>
-
-<md-sidenav-container fxLayout="column" fullscreen>
-
-    <md-toolbar color="primary">
-        <button md-icon-button (click)="sidenav.toggle()">
-            <md-icon>menu</md-icon>
-        </button>
-        <span>Nakama</span>
-    </md-toolbar>
-
-    <md-sidenav #sidenav>
-
+<nkm-layout #layout>
+    <nkm-navigation-drawer>
         <md-nav-list dense>
-            <md-list-item *ngFor="let route of userRoutes" (click)="sidenav.toggle()" routerLink="{{route.route}}">
+            <md-list-item *ngFor="let route of userRoutes" (click)="layout.close()" routerLink="{{route.route}}">
                 <md-icon md-list-icon>{{route.icon}}</md-icon>
                 <h4 md-line>{{route.title}}</h4>
             </md-list-item>
@@ -22,7 +9,7 @@
             <ng-container *ngIf="contentRoutes">
                 <md-divider></md-divider>
                 <h3 md-subheader>Content</h3>
-                <md-list-item *ngFor="let route of contentRoutes" (click)="sidenav.toggle()"
+                <md-list-item *ngFor="let route of contentRoutes" (click)="layout.close()"
                               routerLink="{{route.route}}">
                     <md-icon md-list-icon>{{route.icon}}</md-icon>
                     <h4 md-line>{{route.title}}</h4>
@@ -32,7 +19,7 @@
             <ng-container *ngIf="commerceRoutes">
                 <md-divider></md-divider>
                 <h3 md-subheader>Commerce</h3>
-                <md-list-item *ngFor="let route of commerceRoutes" (click)="sidenav.toggle()"
+                <md-list-item *ngFor="let route of commerceRoutes" (click)="layout.close()"
                               routerLink="{{route.route}}">
                     <md-icon md-list-icon>{{route.icon}}</md-icon>
                     <h4 md-line>{{route.title}}</h4>
@@ -42,7 +29,7 @@
             <ng-container *ngIf="adminRoutes">
                 <md-divider></md-divider>
                 <h3 md-subheader>Administration</h3>
-                <md-list-item *ngFor="let route of adminRoutes" (click)="sidenav.toggle()"
+                <md-list-item *ngFor="let route of adminRoutes" (click)="layout.close()"
                               routerLink="{{route.route}}">
                     <md-icon md-list-icon>{{route.icon}}</md-icon>
                     <h4 md-line>{{route.title}}</h4>
@@ -50,14 +37,14 @@
             </ng-container>
 
             <md-divider></md-divider>
-            <md-list-item *ngFor="let route of otherRoutes" (click)="sidenav.toggle()"
+            <md-list-item *ngFor="let route of otherRoutes" (click)="layout.close()"
                           routerLink="{{route.route}}">
                 <md-icon md-list-icon>{{route.icon}}</md-icon>
                 <h4 md-line>{{route.title}}</h4>
             </md-list-item>
         </md-nav-list>
-    </md-sidenav>
+    </nkm-navigation-drawer>
 
     <router-outlet></router-outlet>
 
-</md-sidenav-container>
+</nkm-layout>

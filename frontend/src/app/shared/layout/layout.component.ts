@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {MdSidenav} from "@angular/material";
+import {MdSidenav, MdSidenavToggleResult} from "@angular/material";
 
 @Component({
     selector: 'nkm-layout',
@@ -13,6 +13,14 @@ export class LayoutComponent implements OnInit {
     @Input() mode: 'over' | 'push' | 'side' = 'over';
 
     @Input('opened') opened: boolean = false;
+
+    public open(): Promise<MdSidenavToggleResult> {
+        return this.sidenav.open();
+    }
+
+    public close(): Promise<MdSidenavToggleResult> {
+        return this.sidenav.close();
+    }
 
     constructor() {
     }

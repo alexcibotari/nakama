@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserResource} from '../../../shared/model/user-resource.model';
 import {MdDialog} from "@angular/material";
@@ -6,6 +6,8 @@ import {ConfirmationDialogComponent} from "../../../shared/component/dialog/conf
 import {UserDetailComponent} from "../user-detail/user-detail.component";
 import {UserService} from "../../shared/user-rest.service";
 import {UserDataSource} from "../../shared/user-data-source.service";
+import {Observable} from "rxjs/Observable";
+import 'rxjs/add/observable/fromEvent';
 
 @Component({
     moduleId: module.id,
@@ -17,10 +19,18 @@ import {UserDataSource} from "../../shared/user-data-source.service";
 export class UserListComponent implements OnInit {
     displayedColumns = ['avatar', 'fullName', 'login', 'email', 'actions'];
 
+    @ViewChild('filter') filter: ElementRef;
+
     constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, public dataSource: UserDataSource, private dialog: MdDialog) {
     }
 
     ngOnInit() {
+        Observable.fromEvent(this.filter.nativeElement, 'keyup')
+            .debounceTime(150)
+            .distinctUntilChanged()
+            .subscribe(() => {
+                this.dataSource.filter = this.filter.nativeElement.value;
+            });
     }
 
     toDetail(user: UserResource) {
