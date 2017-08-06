@@ -1,3 +1,5 @@
+//evaluationDependsOn(':frontend')
+
 buildscript {
 
     ext {
@@ -17,16 +19,22 @@ apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'idea'
 
-springBoot {
-    classifier = 'exec'
+bootRepackage {
+    //mainClass = 'com.alexcibotari.nakame.Application'
 }
 
+springBoot{
+    //mainClass = 'com.alexcibotari.nakame.Application'
+    executable = true
+}
+
+bootRun.dependsOn(':frontend:build')
+
 jar {
-    baseName = 'nakama'
-    version = '0.0.1'
+    baseName = rootProject.name
     manifest {
         attributes(
-            "Implementation-Title": "Nakama",
+            "Implementation-Title": rootProject.name,
             "Implementation-Version": version,
             "Main-Class": "com.alexcibotari.nakame.Application"
         )

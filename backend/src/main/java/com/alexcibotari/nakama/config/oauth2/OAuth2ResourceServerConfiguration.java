@@ -48,7 +48,7 @@ public class OAuth2ResourceServerConfiguration extends ResourceServerConfigurerA
         http
             .cors().and()
             .authorizeRequests()
-            .anyRequest().authenticated().and()
+            .antMatchers("/api/").authenticated().and()
             .headers().frameOptions().sameOrigin().and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

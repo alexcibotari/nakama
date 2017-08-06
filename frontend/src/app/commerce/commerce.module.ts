@@ -10,5 +10,5 @@ import {SharedModule} from "../shared/shared.module";
     declarations: [],
     providers: []
 })
-export default class CommerceModule {
+export class CommerceModule {
 }

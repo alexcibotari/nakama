@@ -43,3 +43,4 @@ typings
 #WebPack exclude
 frontend/dist
 frontend/node
+backend/src/main/resources/static

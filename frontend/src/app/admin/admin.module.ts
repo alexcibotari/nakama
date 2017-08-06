@@ -58,5 +58,5 @@ import {UserDataSource} from "./shared/user-data-source.service";
     declarations: [AdminComponent, UsersComponent, UserListComponent, UserDetailComponent],
     providers: [UserService, UserDataSource]
 })
-export default class AdminModule {
+export class AdminModule {
 }

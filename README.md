@@ -15,24 +15,16 @@
 - run `git checkout master`
 - run `git checkout develop`
 
-## 2. Setup
-### 2.1 Install Node Packages (see package.json)
-- Go to 'frontend' folder
-- Install FrontEnd Local packages `npm install`
-
-## 3. Run
-The project is made from two parts :
-- Back-End - REST API
-- Front-End - UI
-
-#### Back-End - you can run in two methods
-##### Gradle
+## 2. Run
     gradlew bootRun
-##### Java
+
+## 3. Development
+### 3.1 BackEnd
 Run com.alexcibotari.nakama.Application.java
 
-#### Front-End
-    npm start
+### 3.2 FrontEnd : Install Node Packages (see package.json)
+- Go to 'frontend' folder
+- Install FrontEnd Local packages `npm install`
 
 ## 4. Application credentials
 admin / admin

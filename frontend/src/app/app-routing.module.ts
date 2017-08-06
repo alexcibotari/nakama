@@ -13,7 +13,7 @@ import {LoginComponent} from "./login/login.component";
                 path: 'login', component: LoginComponent
             },
             {
-                path: 'admin', loadChildren: './admin/admin.module'
+                path: 'admin', loadChildren: './admin/admin.module#AdminModule'
             }
         ], {preloadingStrategy: PreloadAllModules})
     ],
