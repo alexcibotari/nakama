@@ -24,12 +24,12 @@ export class UserDataSource extends DataSource<UserResource> {
 
     constructor(private userService: UserService) {
         super();
-        this.userService.query().subscribe((res: Resources<UserResource>) => {
-            this._dataChanges.next(res._embedded.users);
-        });
     }
 
     connect(collectionViewer: CollectionViewer): Observable<UserResource[]> {
+        this.userService.query().subscribe((res: Resources<UserResource>) => {
+            this._dataChanges.next(res._embedded.users);
+        });
         return Observable.merge(...[this._dataChanges, this._filterChange]).map(() => {
             return this._dataChanges.getValue().slice().filter((item: UserResource) => {
                 return (item.login + item.email + item.personal.fullName).toLowerCase().indexOf(this._filterChange.getValue().toLowerCase()) != -1;
