@@ -16,7 +16,8 @@
 - run `git checkout develop`
 
 ## 2. Run
-    gradlew bootRun
+ - Run `gradlew bootRun`
+ - Open browser http://localhost:8080
 
 ## 3. Development
 ### 3.1 BackEnd
@@ -25,6 +26,8 @@ Run com.alexcibotari.nakama.Application.java
 ### 3.2 FrontEnd : Install Node Packages (see package.json)
 - Go to 'frontend' folder
 - Install FrontEnd Local packages `npm install`
+- Start Local Server with Proxy to API `npm run start`
+- Open browser http://localhost:4200
 
 ## 4. Application credentials
 admin / admin
