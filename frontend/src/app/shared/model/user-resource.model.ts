@@ -2,7 +2,7 @@ import {AuditingResource} from "./auditing-resource.model";
 import {PersonalResource} from "./personal-resource.model";
 
 export class UserResource extends AuditingResource {
-    login: string;
+    name: string;
     email: string;
 
     personal: PersonalResource;
@@ -10,9 +10,9 @@ export class UserResource extends AuditingResource {
     enabled: boolean;
     authorities: Array<string>;
 
-    constructor(login: string, email: string) {
+    constructor(name: string, email: string) {
         super();
-        this.login = login;
+        this.name = name;
         this.email = email;
     }
 }

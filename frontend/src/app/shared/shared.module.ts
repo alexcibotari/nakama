@@ -24,7 +24,6 @@ import {CdkTableModule} from "@angular/cdk";
 import { NavigationDrawerComponent } from './layout/navigation-drawer/navigation-drawer.component';
 import {LayoutNavComponent} from "./layout/layout-nav/layout-nav.component";
 
-
 const MATERIAL_MODULES: any[] = [
     CdkTableModule,
     MdButtonModule,
@@ -59,6 +58,7 @@ const LAYOUT_COMPONENTS: any[] = [
         MATERIAL_MODULES
     ],
     declarations: [LAYOUT_COMPONENTS],
+    providers: [],
     exports: [
         MATERIAL_MODULES,
         LAYOUT_COMPONENTS

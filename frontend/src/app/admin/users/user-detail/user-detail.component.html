@@ -1,39 +1,40 @@
 <div md-dialog-title fxLayout="row">
     <div fxFlex fxLayoutAlign="start center">
-        <md-icon md-list-avatar fxLayoutAlign="start center">person</md-icon>
-        <div fxFlex fxLayoutAlign="start center">{{model.personal.fullName}}</div>
+        <div fxFlex fxLayoutAlign="start center">Edit User</div>
     </div>
     <div fxLayoutAlign="end center">
-        <button md-icon-button>
-            <md-icon>edit</md-icon>
-        </button>
         <button md-icon-button md-dialog-close>
             <md-icon>close</md-icon>
         </button>
     </div>
 </div>
 
-<md-divider></md-divider>
-
 <md-dialog-content>
-    <md-list>
-        <h3 md-subheader>Personal</h3>
-        <md-list-item>
-            <md-icon md-list-icon>person</md-icon>
-            <p md-line> {{model.personal.givenName}} </p>
-        </md-list-item>
-        <md-list-item>
-            <md-icon md-list-icon>person</md-icon>
-            <p md-line> {{model.personal.familyName}} </p>
-        </md-list-item>
-        <md-divider></md-divider>
-        <h3 md-subheader>Notes</h3>
-        <md-list-item>
-            <md-icon md-list-icon>note</md-icon>
-            <h4 md-line>dsfsfd</h4>
-            <p md-line> sdfsdf </p>
-        </md-list-item>
-    </md-list>
-
-    {{ model | json }}
+    <form #modelForm="ngForm" fxLayout="column" fxLayoutAlign=" none">
+        <div>
+            <md-input-container>
+                <input mdInput placeholder="Name" [ngModel]="model.name" name="name" disabled>
+            </md-input-container>
+            <md-input-container>
+                <input mdInput placeholder="Email" [ngModel]="model.email" name="email" disabled>
+            </md-input-container>
+        </div>
+        <div>
+            <md-input-container>
+                <input mdInput placeholder="Given Name" [(ngModel)]="model.personal.givenName" name="givenName"
+                       required>
+            </md-input-container>
+            <md-input-container>
+                <input mdInput placeholder="Family Name" [(ngModel)]="model.personal.familyName" name="familyName"
+                       required>
+            </md-input-container>
+        </div>
+    </form>
 </md-dialog-content>
+<md-dialog-actions fxLayoutAlign="end center">
+    <button md-button [md-dialog-close]="false" color="accent">Cancel</button>
+    <!-- Can optionally provide a result for the closing dialog. -->
+    <button md-button [md-dialog-close]="true" color="accent"
+            [disabled]="(!modelForm.form.valid || !modelForm.form.touched)">Save
+    </button>
+</md-dialog-actions>

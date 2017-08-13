@@ -1,9 +1,9 @@
-
 /**
  * Abstraction of a HAL resource.
  *
  */
-export abstract class Resource {
+
+export abstract class Resource{
 
     /**
      * The reserved "_links" property is OPTIONAL.

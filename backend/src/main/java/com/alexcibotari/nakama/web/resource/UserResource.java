@@ -10,7 +10,7 @@ import java.util.Set;
 public class UserResource extends AbstractAuditingResource {
 
     @Size(min = 3, max = 50)
-    private String login;
+    private String name;
 
     @Size(min = 5, max = 50)
     private String email;
@@ -19,24 +19,24 @@ public class UserResource extends AbstractAuditingResource {
 
     private PersonalResource personal;
 
-    private Set<String> authorities;
+    private Set<AuthorityResource> authorities;
 
     public UserResource() {
     }
 
-    public UserResource(String login, String email, Boolean enabled, Set<String> authorities) {
-        this.login = login;
+    public UserResource(String name, String email, Boolean enabled, Set<AuthorityResource> authorities) {
+        this.name = name;
         this.email = email;
         this.enabled = enabled;
         this.authorities = authorities;
     }
 
-    public String getLogin() {
-        return login;
+    public String getName() {
+        return name;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -55,11 +55,11 @@ public class UserResource extends AbstractAuditingResource {
         this.enabled = enabled;
     }
 
-    public Set<String> getAuthorities() {
+    public Set<AuthorityResource> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(Set<String> authorities) {
+    public void setAuthorities(Set<AuthorityResource> authorities) {
         this.authorities = authorities;
     }
 
@@ -74,9 +74,10 @@ public class UserResource extends AbstractAuditingResource {
     @Override
     public String toString() {
         return "UserResource{" +
-            "login='" + login + '\'' +
+            "name='" + name + '\'' +
             ", email='" + email + '\'' +
             ", enabled=" + enabled +
+            ", personal=" + personal +
             ", authorities=" + authorities +
             '}';
     }

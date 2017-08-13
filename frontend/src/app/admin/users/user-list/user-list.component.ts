@@ -17,7 +17,7 @@ import 'rxjs/add/observable/fromEvent';
     providers: [UserService]
 })
 export class UserListComponent implements OnInit {
-    displayedColumns = ['avatar', 'fullName', 'login', 'email', 'actions'];
+    displayedColumns = ['avatar', 'fullName', 'name', 'email', 'actions'];
 
     @ViewChild('filter') filter: ElementRef;
 

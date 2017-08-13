@@ -1,7 +1,6 @@
 package com.alexcibotari.nakama.service;
 
-
-import com.alexcibotari.nakama.domain.Authority;
+import com.alexcibotari.nakama.domain.Personal;
 import com.alexcibotari.nakama.domain.User;
 import com.alexcibotari.nakama.exception.UserEmailAlreadyInUseException;
 import com.alexcibotari.nakama.exception.UserLoginAlreadyInUseException;
@@ -15,17 +14,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 @Transactional(readOnly = true)
 public class UserServiceImp implements UserService {
 
     @Autowired
-    UserRepository userRepository;
+    UserRepository repository;
 
     @Autowired
     AuthorityRepository authorityRepository;
@@ -35,41 +32,43 @@ public class UserServiceImp implements UserService {
 
     @Transactional
     public User create(UserResource resource) {
-        checkLoginAndEmail(resource.getLogin(), resource.getEmail());
+        checkNameAndEmail(resource.getName(), resource.getEmail());
 
-        User user = new User();
-        user.setLogin(resource.getLogin());
-        user.setEmail(resource.getEmail());
-        user.setEnabled(resource.getEnabled());
-        user.setPassword(passwordEncoder.encode(RandomUtil.generatePassword()));
+        User entity = new User();
+        updateEntity(entity, resource);
+        entity.setPassword(passwordEncoder.encode(RandomUtil.generatePassword()));
 
-        Set<Authority> authorities = new HashSet<>();
-        resource.getAuthorities().forEach(authority -> authorityRepository.findOneByName(authority).map(authorities::add));
-        user.setAuthorities(authorities);
-
-        return userRepository.save(user);
+        return repository.save(entity);
     }
 
     @Transactional
-    public Optional<User> update(String userName, UserResource resource) {
-        return findOneByLogin(userName)
+    public Optional<User> update(String name, UserResource resource) {
+        return findOneByName(name)
             .map(entity -> {
-                entity.setEmail(resource.getEmail());
-                entity.setEnabled(resource.getEnabled());
-                Set<Authority> authorities = new HashSet<>();
-                resource.getAuthorities().forEach(authority -> authorityRepository.findOneByName(authority).map(authorities::add));
-                entity.setAuthorities(authorities);
-                return userRepository.save(entity);
+                updateEntity(entity, resource);
+                return repository.save(entity);
             });
     }
 
-    private void checkLoginAndEmail(String login, String email) {
-        checkLogin(login);
+    private void updateEntity(User entity, UserResource resource) {
+        entity.setEmail(resource.getEmail());
+        entity.setEnabled(resource.getEnabled());
+        if (resource.getPersonal() != null) {
+            Personal personal = new Personal();
+            personal.setGivenName(resource.getPersonal().getGivenName());
+            personal.setFamilyName(resource.getPersonal().getFamilyName());
+            personal.setBirthDate(resource.getPersonal().getBirthDate());
+            entity.setPersonal(personal);
+        }
+    }
+
+    private void checkNameAndEmail(String name, String email) {
+        checkName(name);
         checkEmail(email);
     }
 
-    private void checkLogin(String login) {
-        findOneByLogin(login.toLowerCase()).ifPresent(user -> {
+    private void checkName(String name) {
+        findOneByName(name.toLowerCase()).ifPresent(user -> {
             throw new UserLoginAlreadyInUseException();
         });
     }
@@ -80,28 +79,26 @@ public class UserServiceImp implements UserService {
         });
     }
 
-    public Optional<User> findOneByLogin(String login) {
-        return userRepository.findOneByLogin(login);
+    public Optional<User> findOneByName(String name) {
+        return repository.findOneByName(name);
     }
 
     public Optional<User> findOneByEmail(String email) {
-        return userRepository.findOneByEmail(email);
+        return repository.findOneByEmail(email);
     }
 
     public Optional<User> getUser() {
-        return findOneByLogin(SecurityUtils.getCurrentUserName());
+        return findOneByName(SecurityUtils.getCurrentUserName());
     }
 
     public List<User> findAll() {
-        return (List<User>) userRepository.findAll();
+        return (List<User>) repository.findAll();
     }
 
     @Transactional
-    public Optional<User> delete(String login) {
-        Optional<User> user = this.userRepository.findOneByLogin(login);
-        user.ifPresent(entity -> {
-            this.userRepository.delete(entity);
-        });
-        return user;
+    public Optional<User> delete(String name) {
+        Optional<User> entity = repository.findOneByName(name);
+        entity.ifPresent(user -> repository.delete(user));
+        return entity;
     }
 }

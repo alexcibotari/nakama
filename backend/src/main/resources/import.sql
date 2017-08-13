@@ -1,6 +1,6 @@
 --Account
-INSERT INTO user (id, login, email, enabled, password_hash, created_by, created_date, last_modified_date, given_name, family_name) VALUES (1, 'admin', 'admin@admin', 1, '$2a$10$l/lHKoFTFdzfVyyZ9oIDPu3voNZZLu/9qi.8BhDMHRcaFmetHx/UO','system', '2013-09-29 22:00:00', '2013-09-29 22:00:00', 'givenName', 'familyName');
-INSERT INTO user (id, login, email, enabled, password_hash, created_by, created_date, last_modified_date, given_name, family_name) VALUES (2, 'user', 'user@user', 1, '$2a$10$muOJKIPqChcNnFu8nduPJONfT3uSsTIoQRstlWFXYJ3c1Yln0kzt.','system', '2013-09-29 22:00:00', '2013-09-29 22:00:00', 'givenName', 'familyName');
+INSERT INTO user (id, pname, email, enabled, password_hash, created_by, created_date, last_modified_date, given_name, family_name) VALUES (1, 'admin', 'admin@admin', 1, '$2a$10$l/lHKoFTFdzfVyyZ9oIDPu3voNZZLu/9qi.8BhDMHRcaFmetHx/UO','system', '2013-09-29 22:00:00', '2013-09-29 22:00:00', 'givenName', 'familyName');
+INSERT INTO user (id, pname, email, enabled, password_hash, created_by, created_date, last_modified_date, given_name, family_name) VALUES (2, 'user', 'user@user', 1, '$2a$10$muOJKIPqChcNnFu8nduPJONfT3uSsTIoQRstlWFXYJ3c1Yln0kzt.','system', '2013-09-29 22:00:00', '2013-09-29 22:00:00', 'givenName', 'familyName');
 --Authority
 INSERT INTO authority (id, pname) VALUES (1, 'ROLE_ADMIN');
 INSERT INTO authority (id, pname) VALUES (2, 'ROLE_USER');

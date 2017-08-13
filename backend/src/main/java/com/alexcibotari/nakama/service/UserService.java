@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface UserService {
 
-    Optional<User> findOneByLogin(String login);
+    Optional<User> findOneByName(String name);
 
     Optional<User> findOneByEmail(String email);
 

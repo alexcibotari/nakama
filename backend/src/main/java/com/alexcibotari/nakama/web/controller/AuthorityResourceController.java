@@ -5,6 +5,7 @@ import com.alexcibotari.nakama.domain.User;
 import com.alexcibotari.nakama.security.AuthoritiesConstants;
 import com.alexcibotari.nakama.service.UserService;
 import com.alexcibotari.nakama.web.assembler.UserResourceAssembler;
+import com.alexcibotari.nakama.web.resource.AuthorityResource;
 import com.alexcibotari.nakama.web.resource.UserResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +24,9 @@ import java.net.URISyntaxException;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/api/users", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-@ExposesResourceFor(UserResource.class)
-public class UserResourceController {
+@RequestMapping(path = "/api/authorities", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@ExposesResourceFor(AuthorityResource.class)
+public class AuthorityResourceController {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -76,17 +77,5 @@ public class UserResourceController {
             .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("{name}/password")
-    @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<UserResource> password(@PathVariable String name) {
-        //TODO change logic
-        return null;
-    }
 
-    @PutMapping("{name}/password/reset")
-    @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<UserResource> passwordReset(@PathVariable String name) {
-        //TODO reset logic
-        return null;
-    }
 }

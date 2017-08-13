@@ -9,8 +9,8 @@ import java.util.Set;
 @Entity
 public class User extends AbstractAuditingEntity {
 
-    @Column(nullable = false, unique = true)
-    private String login;
+    @Column(name = "pname", nullable = false, unique = true)
+    private String name;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -37,12 +37,12 @@ public class User extends AbstractAuditingEntity {
     public User() {
     }
 
-    public String getLogin() {
-        return login;
+    public String getName() {
+        return name;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {
@@ -89,14 +89,15 @@ public class User extends AbstractAuditingEntity {
         return toString().hashCode();
     }
 
+    @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("{");
-        sb.append("Id: ").append(getId()).append(", ");
-        sb.append("Login: ").append(getLogin()).append(", ");
-        sb.append("Email: ").append(getEmail()).append(", ");
-        sb.append("Enabled : ").append(getEnabled());
-        sb.append("}");
-        return sb.toString();
+        return "User{" +
+            "name='" + name + '\'' +
+            ", email='" + email + '\'' +
+            ", personal=" + personal +
+            ", password='" + password + '\'' +
+            ", enabled=" + enabled +
+            ", authorities=" + authorities +
+            '}';
     }
 }
