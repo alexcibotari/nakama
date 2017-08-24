@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
 import './rxjs-operators';
+import {MdIconRegistry} from "@angular/material";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
     moduleId: module.id,
@@ -78,7 +79,9 @@ export class AppComponent implements OnInit {
         }
     ];
 
-    constructor(private _router: Router) {
+    constructor(iconRegistry: MdIconRegistry, sanitizer: DomSanitizer) {
+        const avatarsSafeUrl = sanitizer.bypassSecurityTrustResourceUrl('./assets/avatars.svg');
+        iconRegistry.addSvgIconSetInNamespace('avatars', avatarsSafeUrl);
     }
 
     ngOnInit() {

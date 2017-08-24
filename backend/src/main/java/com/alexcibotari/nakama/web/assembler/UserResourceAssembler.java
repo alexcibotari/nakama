@@ -1,6 +1,5 @@
 package com.alexcibotari.nakama.web.assembler;
 
-import com.alexcibotari.nakama.domain.Authority;
 import com.alexcibotari.nakama.domain.User;
 import com.alexcibotari.nakama.web.controller.UserResourceController;
 import com.alexcibotari.nakama.web.resource.PersonalResource;
@@ -9,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
-
-import java.util.stream.Collectors;
 
 
 @Component
@@ -43,7 +40,7 @@ public class UserResourceAssembler extends ResourceAssemblerSupport<User, UserRe
             PersonalResource personal = new PersonalResource();
             personal.setGivenName(entity.getPersonal().getGivenName());
             personal.setFamilyName(entity.getPersonal().getFamilyName());
-            personal.setBirthDate(entity.getPersonal().getBirthDate());
+            personal.setBirthday(entity.getPersonal().getBirthday());
             resource.setPersonal(personal);
         }
 

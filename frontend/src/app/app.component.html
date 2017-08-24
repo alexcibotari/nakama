@@ -1,6 +1,6 @@
 <nkm-layout #layout>
     <nkm-navigation-drawer>
-        <md-nav-list dense>
+        <md-nav-list>
             <md-list-item *ngFor="let route of userRoutes" (click)="layout.close()" routerLink="{{route.route}}">
                 <md-icon md-list-icon>{{route.icon}}</md-icon>
                 <h4 md-line>{{route.title}}</h4>

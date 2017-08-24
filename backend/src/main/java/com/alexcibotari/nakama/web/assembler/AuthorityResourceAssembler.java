@@ -27,6 +27,9 @@ public class AuthorityResourceAssembler extends ResourceAssemblerSupport<Authori
 
     @Override
     protected AuthorityResource instantiateResource(Authority entity) {
-        return new AuthorityResource(entity.getName());
+        AuthorityResource resource = new AuthorityResource(entity.getName());
+        resource.setCreatedDate(entity.getCreatedDate());
+        resource.setLastModifiedDate(entity.getLastModifiedDate());
+        return resource;
     }
 }

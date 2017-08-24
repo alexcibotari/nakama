@@ -8,7 +8,7 @@ public class Personal {
 
     private String givenName;
     private String familyName;
-    private LocalDate birthDate;
+    private LocalDate birthday;
 
     public String getGivenName() {
         return givenName;
@@ -26,11 +26,11 @@ public class Personal {
         this.familyName = familyName;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public LocalDate getBirthday() {
+        return birthday;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 }

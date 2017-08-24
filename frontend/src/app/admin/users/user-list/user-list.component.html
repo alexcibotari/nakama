@@ -11,7 +11,7 @@
         <ng-container cdkColumnDef="avatar">
             <md-header-cell *cdkHeaderCellDef> Avatar</md-header-cell>
             <md-cell *cdkCellDef="let row">
-                <md-icon>person</md-icon>
+                <md-icon svgIcon="avatars:svg-11" class="avatar-sm"></md-icon>
             </md-cell>
         </ng-container>
 
@@ -33,6 +33,9 @@
         <ng-container cdkColumnDef="actions">
             <md-header-cell *cdkHeaderCellDef> Actions</md-header-cell>
             <md-cell *cdkCellDef="let row">
+                <button md-icon-button (click)="toDetail(row)">
+                    <md-icon>info</md-icon>
+                </button>
                 <button md-icon-button (click)="toEdit(row)">
                     <md-icon>edit</md-icon>
                 </button>

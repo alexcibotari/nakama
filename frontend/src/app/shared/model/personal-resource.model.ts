@@ -1,7 +1,7 @@
 export class PersonalResource {
     givenName: string;
     familyName: string;
-    birthDate: string;
+    birthday: string;
 
     fullName: string;
 

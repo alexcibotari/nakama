@@ -1,5 +1,4 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
 import {UserResource} from '../../../shared/model/user-resource.model';
 import {MdDialog} from "@angular/material";
 import {ConfirmationDialogComponent} from "../../../shared/component/dialog/confirmation-dialog/confirmation-dialog.component";
@@ -8,6 +7,7 @@ import {UserService} from "../../shared/user-rest.service";
 import {UserDataSource} from "../../shared/user-data-source.service";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/fromEvent';
+import {UserEditComponent} from "../user-edit/user-edit.component";
 
 @Component({
     moduleId: module.id,
@@ -21,7 +21,7 @@ export class UserListComponent implements OnInit {
 
     @ViewChild('filter') filter: ElementRef;
 
-    constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, public dataSource: UserDataSource, private dialog: MdDialog) {
+    constructor(private userService: UserService, public dataSource: UserDataSource, private dialog: MdDialog) {
     }
 
     ngOnInit() {
@@ -35,10 +35,16 @@ export class UserListComponent implements OnInit {
 
     toDetail(user: UserResource) {
         let dialogRef = this.dialog.open(UserDetailComponent, {data: user});
+        dialogRef.afterClosed().subscribe((result: UserResource) => {
+            console.log(result);
+        });
     }
 
     toEdit(user: UserResource) {
-        let dialogRef = this.dialog.open(UserDetailComponent, {data: user});
+        let dialogRef = this.dialog.open(UserEditComponent, {data: user});
+        dialogRef.afterClosed().subscribe((result: UserResource) => {
+            console.log(result);
+        });
     }
 
     toDelete(user: UserResource) {

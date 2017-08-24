@@ -48,8 +48,8 @@ export abstract class RESTService<T extends Resource> {
     }
 
     public query(params?: URLParams | URLSearchParams, transform?: RestTransform): Observable<Resources<T>> {
-        let request: Observable<Response> = this.http.get(this.buildUrl(undefined), this.buildRequestOptions(params));
-        return request.map((res: Response) => {
+        let response: Observable<Response> = this.http.get(this.buildUrl(undefined), this.buildRequestOptions(params));
+        return response.map((res: Response) => {
             if (transform) {
                 return transform(res);
             }
@@ -60,8 +60,8 @@ export abstract class RESTService<T extends Resource> {
     }
 
     public get(id: string | number, transform?: RestTransform): Observable<T> {
-        let request: Observable<Response> = this.http.get(this.buildUrl(id), this.buildRequestOptions());
-        return request.map((res: Response) => {
+        let response: Observable<Response> = this.http.get(this.buildUrl(id), this.buildRequestOptions());
+        return response.map((res: Response) => {
             if (transform) {
                 return transform(res);
             }
@@ -72,8 +72,8 @@ export abstract class RESTService<T extends Resource> {
     }
 
     public create(obj: T, transform?: RestTransform): Observable<T> {
-        let request: Observable<Response> = this.http.post(this.buildUrl(), obj, this.buildRequestOptions());
-        return request.map((res: Response) => {
+        let response: Observable<Response> = this.http.post(this.buildUrl(), obj, this.buildRequestOptions());
+        return response.map((res: Response) => {
             if (res.status === 201) {
                 if (transform) {
                     return transform(res);
@@ -88,9 +88,8 @@ export abstract class RESTService<T extends Resource> {
     }
 
     public update(id: string | number, obj: T, transform?: RestTransform): Observable<T> {
-        let requestOptions: RequestOptionsArgs = this.buildRequestOptions();
-        let request: Observable<Response> = this.http.patch(this.buildUrl(id), obj, requestOptions);
-        return request.map((res: Response) => {
+        let response: Observable<Response> = this.http.patch(this.buildUrl(id), obj, this.buildRequestOptions());
+        return response.map((res: Response) => {
             if (res.status === 200) {
                 if (transform) {
                     return transform(res);
@@ -105,8 +104,8 @@ export abstract class RESTService<T extends Resource> {
     }
 
     public delete(id: string | number, transform?: RestTransform): Observable<T> {
-        let request: Observable<Response> = this.http.delete(this.buildUrl(id), this.buildRequestOptions());
-        return request.map((res: Response) => {
+        let response: Observable<Response> = this.http.delete(this.buildUrl(id), this.buildRequestOptions());
+        return response.map((res: Response) => {
             if (res.status === 200) {
                 if (transform) {
                     return transform(res);
@@ -150,10 +149,13 @@ export abstract class RESTService<T extends Resource> {
         return requestOptions;
     }
 
-    protected buildUrl(id?: string | number): string {
+    protected buildUrl(id?: string | number, suffix?: string): string {
         let url: string = this.config.path ? this.config.path : '';
         if (id) {
             url += `/${id}`;
+        }
+        if (suffix) {
+            url += `/${suffix}`;
         }
         url = `${this.config.baseUrl}/${url}`;
         return url;

@@ -2,16 +2,13 @@ package com.alexcibotari.nakama.web.resource;
 
 import org.springframework.util.StringUtils;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class PersonalResource {
 
     private String givenName;
     private String familyName;
-    private LocalDate birthDate;
+    private LocalDate birthday;
 
     public String getGivenName() {
         return givenName;
@@ -29,12 +26,12 @@ public class PersonalResource {
         this.familyName = familyName;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public LocalDate getBirthday() {
+        return birthday;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 
     public String getFullName() {

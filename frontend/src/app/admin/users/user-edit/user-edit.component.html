@@ -1,0 +1,44 @@
+<div md-dialog-title fxLayout="row">
+    <div fxFlex fxLayoutAlign="start center">
+        <div fxFlex fxLayoutAlign="start center">Edit User</div>
+    </div>
+    <div fxLayoutAlign="end center">
+        <button md-icon-button md-dialog-close>
+            <md-icon>close</md-icon>
+        </button>
+    </div>
+</div>
+
+<md-dialog-content>
+    <form #modelForm="ngForm" fxLayout="column" fxLayoutAlign="space-around stretch">
+        <md-input-container>
+            <input mdInput placeholder="Name" [ngModel]="model.name" name="name" disabled>
+        </md-input-container>
+        <md-input-container>
+            <input mdInput placeholder="Email" [ngModel]="model.email" name="email" disabled>
+        </md-input-container>
+        <md-checkbox [(ngModel)]="model.enabled" name="enabled">Enabled</md-checkbox>
+        <md-input-container>
+            <input mdInput placeholder="Given Name" [(ngModel)]="model.personal.givenName" name="givenName"
+                   required>
+        </md-input-container>
+        <md-input-container>
+            <input mdInput placeholder="Family Name" [(ngModel)]="model.personal.familyName" name="familyName"
+                   required>
+        </md-input-container>
+        <md-input-container>
+            <input mdInput placeholder="Birthday" [(ngModel)]="model.personal.birthday" name="birthday"
+                   required [mdDatepicker]="picker">
+            <button mdSuffix [mdDatepickerToggle]="picker"></button>
+            <md-datepicker #picker></md-datepicker>
+        </md-input-container>
+        <md-divider></md-divider>
+    </form>
+</md-dialog-content>
+<md-dialog-actions fxLayoutAlign="end center">
+    <button md-button md-dialog-close color="accent">Cancel</button>
+    <!-- Can optionally provide a result for the closing dialog. -->
+    <button md-button [md-dialog-close]="model" color="accent"
+            [disabled]="(!modelForm.form.valid || !modelForm.form.touched)">Save
+    </button>
+</md-dialog-actions>

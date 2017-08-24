@@ -1,8 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {UserResource} from "../../../shared/model/user-resource.model";
-import {MD_DIALOG_DATA} from "@angular/material";
-import {UserService} from "../../shared/user-rest.service";
-import {ObjectUtils} from "../../../core/object-utils.service";
+import {MD_DIALOG_DATA, MdDialog} from "@angular/material";
+import {UserEditComponent} from "../user-edit/user-edit.component";
 
 @Component({
     moduleId: module.id,
@@ -13,12 +12,18 @@ import {ObjectUtils} from "../../../core/object-utils.service";
 export class UserDetailComponent implements OnInit {
     public model: UserResource;
 
-    constructor(@Inject(MD_DIALOG_DATA) public data: UserResource, private userService: UserService, private objectUtils: ObjectUtils) {
-
+    constructor(@Inject(MD_DIALOG_DATA) public data: UserResource, private dialog: MdDialog) {
+        this.model = this.data;
     }
 
     ngOnInit() {
-        this.model = this.objectUtils.clone(this.data);
+    }
+
+    toEdit(user: UserResource) {
+        let dialogRef = this.dialog.open(UserEditComponent, {data: user});
+        dialogRef.afterClosed().subscribe((result: UserResource) => {
+            console.log(result);
+        });
     }
 
 }

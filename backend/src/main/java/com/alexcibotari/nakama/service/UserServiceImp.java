@@ -57,7 +57,7 @@ public class UserServiceImp implements UserService {
             Personal personal = new Personal();
             personal.setGivenName(resource.getPersonal().getGivenName());
             personal.setFamilyName(resource.getPersonal().getFamilyName());
-            personal.setBirthDate(resource.getPersonal().getBirthDate());
+            personal.setBirthday(resource.getPersonal().getBirthday());
             entity.setPersonal(personal);
         }
     }
