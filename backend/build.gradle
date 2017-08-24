@@ -61,10 +61,10 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-devtools'
 
     //GraphQL
-    compile 'com.graphql-java:graphql:3.0.0'
-    compile 'com.graphql-java:graphql-java-tools:3.2.0'
-    compile 'com.graphql-java:graphql-spring-boot-starter:3.6.0'
-    compile 'com.graphql-java:graphiql-spring-boot-starter:3.6.0'
+    //compile 'com.graphql-java:graphql:3.0.0'
+    //compile 'com.graphql-java:graphql-java-tools:3.2.0'
+    //compile 'com.graphql-java:graphql-spring-boot-starter:3.6.0'
+    //compile 'com.graphql-java:graphiql-spring-boot-starter:3.6.0'
 
     //Security
     compile 'org.springframework.security.oauth:spring-security-oauth2'
