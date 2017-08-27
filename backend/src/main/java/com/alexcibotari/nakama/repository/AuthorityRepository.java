@@ -14,6 +14,6 @@ public interface AuthorityRepository extends CrudRepository<Authority, Long> {
 
     Optional<Authority> findOneByName(String name);
 
-    @Query("SELECT u.authorities FROM User u WHERE u.name = :name")
-    List<Authority> findAllByUserName(@Param("name") String name);
+    @Query("SELECT u.authorities FROM User u WHERE u.login = :login")
+    List<Authority> findAllByUserLogin(@Param("login") String login);
 }

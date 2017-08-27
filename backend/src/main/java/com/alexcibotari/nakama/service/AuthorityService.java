@@ -13,7 +13,7 @@ public interface AuthorityService {
 
     List<Authority> findAll();
 
-    List<Authority> findAllByUserName(String name);
+    List<Authority> findAllByUserLogin(String login);
 
     Authority create(AuthorityResource resource);
 

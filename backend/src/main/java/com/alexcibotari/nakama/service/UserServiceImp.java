@@ -32,7 +32,7 @@ public class UserServiceImp implements UserService {
 
     @Transactional
     public User create(UserResource resource) {
-        checkNameAndEmail(resource.getName(), resource.getEmail());
+        checkLoginAndEmail(resource.getLogin(), resource.getEmail());
 
         User entity = new User();
         updateEntity(entity, resource);
@@ -42,8 +42,8 @@ public class UserServiceImp implements UserService {
     }
 
     @Transactional
-    public Optional<User> update(String name, UserResource resource) {
-        return findOneByName(name)
+    public Optional<User> update(String login, UserResource resource) {
+        return findOneByLogin(login)
             .map(entity -> {
                 updateEntity(entity, resource);
                 return repository.save(entity);
@@ -62,13 +62,13 @@ public class UserServiceImp implements UserService {
         }
     }
 
-    private void checkNameAndEmail(String name, String email) {
-        checkName(name);
+    private void checkLoginAndEmail(String login, String email) {
+        checkLogin(login);
         checkEmail(email);
     }
 
-    private void checkName(String name) {
-        findOneByName(name.toLowerCase()).ifPresent(user -> {
+    private void checkLogin(String login) {
+        findOneByLogin(login.toLowerCase()).ifPresent(user -> {
             throw new UserLoginAlreadyInUseException();
         });
     }
@@ -79,8 +79,8 @@ public class UserServiceImp implements UserService {
         });
     }
 
-    public Optional<User> findOneByName(String name) {
-        return repository.findOneByName(name);
+    public Optional<User> findOneByLogin(String login) {
+        return repository.findOneByLogin(login);
     }
 
     public Optional<User> findOneByEmail(String email) {
@@ -88,7 +88,7 @@ public class UserServiceImp implements UserService {
     }
 
     public Optional<User> getUser() {
-        return findOneByName(SecurityUtils.getCurrentUserName());
+        return findOneByLogin(SecurityUtils.getCurrentUserLogin());
     }
 
     public List<User> findAll() {
@@ -97,7 +97,7 @@ public class UserServiceImp implements UserService {
 
     @Transactional
     public Optional<User> delete(String name) {
-        Optional<User> entity = repository.findOneByName(name);
+        Optional<User> entity = repository.findOneByLogin(name);
         entity.ifPresent(user -> repository.delete(user));
         return entity;
     }

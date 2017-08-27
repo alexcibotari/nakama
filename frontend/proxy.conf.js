@@ -2,7 +2,9 @@ const PROXY_CONFIG = [
     {
         context: [
             "/api",
-            "/oauth"
+            "/oauth",
+            "/graphql",
+            "/graphiql"
         ],
         target: "http://localhost:8080",
         secure: false

@@ -50,7 +50,7 @@ public class AuthorityResourceController {
     @GetMapping("{name}")
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<UserResource> one(@PathVariable String name) {
-        return toResourceResponse(service.findOneByName(name));
+        return toResourceResponse(service.findOneByLogin(name));
     }
 
     @PostMapping

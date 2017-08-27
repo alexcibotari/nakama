@@ -1,0 +1,30 @@
+type Query {
+    users: [User!]!
+    user(name: String!): User
+    hello(user: String = "user", pass: String): String
+}
+
+interface Entity {
+    id: ID!
+}
+
+interface AuditingEntity{
+    id: ID!
+    createdBy: String!
+    createdDate: String!
+    lastModifiedBy: String
+    lastModifiedDate: String
+}
+
+type User implements AuditingEntity {
+    id: ID!
+
+    login: String!
+    email: String!
+
+
+    createdBy: String!
+    createdDate: String!
+    lastModifiedBy: String
+    lastModifiedDate: String
+}

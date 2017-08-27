@@ -138,7 +138,7 @@ public class IssueServiceImp implements IssueService {
 
     @Transactional
     public Issue recalculateTimeSpent(Issue issue) {
-        Long value = issueRepository.calculateWorkLog(issue.getId());
+        Long value = null;//issueRepository.calculateWorkLog(issue.getId());
         if (value == null || value == 0) {
             return issue;
         }

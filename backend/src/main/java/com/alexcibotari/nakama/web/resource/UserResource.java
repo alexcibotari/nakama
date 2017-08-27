@@ -10,7 +10,7 @@ import java.util.Set;
 public class UserResource extends AbstractAuditingResource {
 
     @Size(min = 3, max = 50)
-    private String name;
+    private String login;
 
     @Size(min = 5, max = 50)
     private String email;
@@ -24,19 +24,19 @@ public class UserResource extends AbstractAuditingResource {
     public UserResource() {
     }
 
-    public UserResource(String name, String email, Boolean enabled, Set<AuthorityResource> authorities) {
-        this.name = name;
+    public UserResource(String login, String email, Boolean enabled, Set<AuthorityResource> authorities) {
+        this.login = login;
         this.email = email;
         this.enabled = enabled;
         this.authorities = authorities;
     }
 
-    public String getName() {
-        return name;
+    public String getLogin() {
+        return login;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getEmail() {
@@ -74,7 +74,7 @@ public class UserResource extends AbstractAuditingResource {
     @Override
     public String toString() {
         return "UserResource{" +
-            "name='" + name + '\'' +
+            "login='" + login + '\'' +
             ", email='" + email + '\'' +
             ", enabled=" + enabled +
             ", personal=" + personal +

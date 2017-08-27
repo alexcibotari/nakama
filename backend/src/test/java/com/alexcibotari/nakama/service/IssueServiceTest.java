@@ -39,7 +39,7 @@ public class IssueServiceTest {
 
         WorkLog workLog = workLogService.findAllByIssue(ESTIMATION_1).get(0);
         timeSpent -= workLog.getTimeWorked();
-        workLogService.delete(workLog.getId());
+        //workLogService.delete(workLog.getId());
 
         issue = issueService.findOne(ESTIMATION_1).get();
         Assert.assertEquals(timeSpent, issue.getTimeSpent());
@@ -72,7 +72,7 @@ public class IssueServiceTest {
         WorkLogResource workLogDTO = workLogResourceAssembler.toResource(workLog);
         workLogDTO.setTimeWorked(workLogDTO.getTimeWorked() + 30L);
         timeSpent += 30L;
-        workLogService.update(workLog.getId(), workLogDTO);
+        //workLogService.update(workLog.getId(), workLogDTO);
 
         issue = issueService.findOne(ESTIMATION_1).get();
         Assert.assertEquals(timeSpent, issue.getTimeSpent());
@@ -87,7 +87,7 @@ public class IssueServiceTest {
         WorkLogResource workLogDTO = workLogResourceAssembler.toResource(workLog);
         workLogDTO.setTimeWorked(workLogDTO.getTimeWorked() - 30L);
         timeSpent -= 30L;
-        workLogService.update(workLog.getId(), workLogDTO);
+        //workLogService.update(workLog.getId(), workLogDTO);
 
         issue = issueService.findOne(ESTIMATION_1).get();
         Assert.assertEquals(timeSpent, issue.getTimeSpent());

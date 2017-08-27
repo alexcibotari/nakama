@@ -46,10 +46,10 @@ public class UserResourceController {
         return ResponseEntity.ok(resources);
     }
 
-    @GetMapping("{name}")
+    @GetMapping("{login}")
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<UserResource> one(@PathVariable String name) {
-        return toResourceResponse(service.findOneByName(name));
+    public ResponseEntity<UserResource> one(@PathVariable String login) {
+        return toResourceResponse(service.findOneByLogin(login));
     }
 
     @PostMapping
@@ -59,16 +59,16 @@ public class UserResourceController {
         return ResponseEntity.created(new URI(resource.getId().getHref())).body(resource);
     }
 
-    @PutMapping("{name}")
+    @PutMapping("{login}")
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<UserResource> update(@PathVariable String name, @RequestBody UserResource resource) {
-        return toResourceResponse(service.update(name, resource));
+    public ResponseEntity<UserResource> update(@PathVariable String login, @RequestBody UserResource resource) {
+        return toResourceResponse(service.update(login, resource));
     }
 
-    @DeleteMapping("{name}")
+    @DeleteMapping("{login}")
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<UserResource> delete(@PathVariable String name) {
-        return toResourceResponse(service.delete(name));
+    public ResponseEntity<UserResource> delete(@PathVariable String login) {
+        return toResourceResponse(service.delete(login));
     }
 
     private ResponseEntity<UserResource> toResourceResponse(Optional<User> entity) {
@@ -76,16 +76,16 @@ public class UserResourceController {
             .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("{name}/password")
+    @PutMapping("{login}/password")
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<UserResource> password(@PathVariable String name) {
+    public ResponseEntity<UserResource> password(@PathVariable String login) {
         //TODO change logic
         return null;
     }
 
-    @PutMapping("{name}/password/reset")
+    @PutMapping("{login}/password/reset")
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<UserResource> passwordReset(@PathVariable String name) {
+    public ResponseEntity<UserResource> passwordReset(@PathVariable String login) {
         //TODO reset logic
         return null;
     }

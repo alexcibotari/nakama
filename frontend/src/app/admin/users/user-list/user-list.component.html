@@ -9,29 +9,29 @@
     <md-table #table [dataSource]="dataSource">
 
         <ng-container cdkColumnDef="avatar">
-            <md-header-cell *cdkHeaderCellDef> Avatar</md-header-cell>
+            <md-header-cell *cdkHeaderCellDef>Avatar</md-header-cell>
             <md-cell *cdkCellDef="let row">
                 <md-icon svgIcon="avatars:svg-11" class="avatar-sm"></md-icon>
             </md-cell>
         </ng-container>
 
         <ng-container cdkColumnDef="fullName">
-            <md-header-cell *cdkHeaderCellDef> Full Name</md-header-cell>
+            <md-header-cell *cdkHeaderCellDef>Full Name</md-header-cell>
             <md-cell *cdkCellDef="let row"> {{row.personal.fullName}}</md-cell>
         </ng-container>
 
-        <ng-container cdkColumnDef="name">
-            <md-header-cell *cdkHeaderCellDef> Name</md-header-cell>
-            <md-cell *cdkCellDef="let row"> {{row.name}}</md-cell>
+        <ng-container cdkColumnDef="login">
+            <md-header-cell *cdkHeaderCellDef>Login</md-header-cell>
+            <md-cell *cdkCellDef="let row"> {{row.login}}</md-cell>
         </ng-container>
 
         <ng-container cdkColumnDef="email">
-            <md-header-cell *cdkHeaderCellDef> Email</md-header-cell>
+            <md-header-cell *cdkHeaderCellDef>Email</md-header-cell>
             <md-cell *cdkCellDef="let row"> {{row.email}}</md-cell>
         </ng-container>
 
         <ng-container cdkColumnDef="actions">
-            <md-header-cell *cdkHeaderCellDef> Actions</md-header-cell>
+            <md-header-cell *cdkHeaderCellDef>Actions</md-header-cell>
             <md-cell *cdkCellDef="let row">
                 <button md-icon-button (click)="toDetail(row)">
                     <md-icon>info</md-icon>

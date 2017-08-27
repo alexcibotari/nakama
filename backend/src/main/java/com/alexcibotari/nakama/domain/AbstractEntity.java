@@ -1,26 +1,28 @@
 package com.alexcibotari.nakama.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
-import java.io.Serializable;
 
 @MappedSuperclass
-public abstract class AbstractEntity implements IdEntity<Long> {
+public abstract class AbstractEntity implements IdEntity<String> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     @Access(AccessType.PROPERTY)
-    private Long id;
+    private String id;
 
     /**
      * Returns the identifier of the entity.
      *
      * @return the id
      */
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

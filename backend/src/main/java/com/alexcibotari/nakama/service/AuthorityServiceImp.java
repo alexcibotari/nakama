@@ -25,8 +25,8 @@ public class AuthorityServiceImp implements AuthorityService {
     public List<Authority> findAll() {
         return (List<Authority>) repository.findAll();
     }
-    public List<Authority> findAllByUserName(String name) {
-        return repository.findAllByUserName(name);
+    public List<Authority> findAllByUserLogin(String login) {
+        return repository.findAllByUserLogin(login);
     }
 
     @Transactional
