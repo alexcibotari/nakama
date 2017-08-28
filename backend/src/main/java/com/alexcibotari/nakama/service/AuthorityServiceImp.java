@@ -18,8 +18,11 @@ public class AuthorityServiceImp implements AuthorityService {
     @Autowired
     AuthorityRepository repository;
 
-    public Optional<Authority> findOne(Long id) {
+    public Optional<Authority> findOne(String id) {
         return repository.findOneById(id);
+    }
+    public Optional<Authority> findOneByName(String name){
+        return repository.findOneByName(name);
     }
 
     public List<Authority> findAll() {
@@ -37,7 +40,7 @@ public class AuthorityServiceImp implements AuthorityService {
     }
 
     @Transactional
-    public Optional<Authority> update(Long id, AuthorityResource resource) {
+    public Optional<Authority> update(String id, AuthorityResource resource) {
         return findOne(id)
             .map(entity -> {
                 entity.setName(resource.getName());
@@ -46,7 +49,7 @@ public class AuthorityServiceImp implements AuthorityService {
     }
 
     @Transactional
-    public Optional<Authority> delete(Long id) {
+    public Optional<Authority> delete(String id) {
         Optional<Authority> entity = findOne(id);
         entity.ifPresent(authority -> repository.delete(authority));
         return entity;

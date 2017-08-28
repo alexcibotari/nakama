@@ -4,7 +4,6 @@ import com.alexcibotari.nakama.domain.Personal;
 import com.alexcibotari.nakama.domain.User;
 import com.alexcibotari.nakama.exception.UserEmailAlreadyInUseException;
 import com.alexcibotari.nakama.exception.UserLoginAlreadyInUseException;
-import com.alexcibotari.nakama.repository.AuthorityRepository;
 import com.alexcibotari.nakama.repository.UserRepository;
 import com.alexcibotari.nakama.security.SecurityUtils;
 import com.alexcibotari.nakama.service.util.RandomUtil;
@@ -21,14 +20,14 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class UserServiceImp implements UserService {
 
-    @Autowired
-    UserRepository repository;
+    private UserRepository repository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    AuthorityRepository authorityRepository;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    public UserServiceImp(UserRepository repository, PasswordEncoder passwordEncoder){
+        this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Transactional
     public User create(UserResource resource) {

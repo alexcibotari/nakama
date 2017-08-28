@@ -8,9 +8,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-public interface AuthorityRepository extends CrudRepository<Authority, Long> {
+public interface AuthorityRepository extends CrudRepository<Authority, String> {
 
-    Optional<Authority> findOneById(Long id);
+    Optional<Authority> findOneById(String id);
 
     Optional<Authority> findOneByName(String name);
 

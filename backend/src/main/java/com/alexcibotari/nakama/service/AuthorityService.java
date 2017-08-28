@@ -9,7 +9,8 @@ import java.util.Optional;
 
 public interface AuthorityService {
 
-    Optional<Authority> findOne(Long id);
+    Optional<Authority> findOne(String id);
+    Optional<Authority> findOneByName(String name);
 
     List<Authority> findAll();
 
@@ -17,8 +18,8 @@ public interface AuthorityService {
 
     Authority create(AuthorityResource resource);
 
-    Optional<Authority> update(Long id, AuthorityResource resource);
+    Optional<Authority> update(String id, AuthorityResource resource);
 
-    Optional<Authority> delete(Long id);
+    Optional<Authority> delete(String id);
 
 }

@@ -32,10 +32,10 @@ public class OAuth2ResourceServerConfiguration extends ResourceServerConfigurerA
     private Environment environment;
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth, UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder auth, UserDetailsService userDetailsService) throws Exception {
         auth
             .userDetailsService(userDetailsService)
-            .passwordEncoder(passwordEncoder);
+            .passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -48,7 +48,7 @@ public class OAuth2ResourceServerConfiguration extends ResourceServerConfigurerA
         http
             .cors().and()
             .authorizeRequests()
-            .antMatchers("/api/").authenticated().and()
+            .antMatchers("/api/"/*,"/graphql"*/).authenticated().and()
             .headers().frameOptions().sameOrigin().and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

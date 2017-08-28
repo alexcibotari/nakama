@@ -1,6 +1,10 @@
 type Query {
     users: [User!]!
     user(name: String!): User
+
+    authorities: [Authority!]!
+    authority(name: String!): Authority
+
     hello(user: String = "user", pass: String): String
 }
 
@@ -22,6 +26,16 @@ type User implements AuditingEntity {
     login: String!
     email: String!
 
+    createdBy: String!
+    createdDate: String!
+    lastModifiedBy: String
+    lastModifiedDate: String
+}
+
+type Authority implements AuditingEntity {
+    id: ID!
+
+    name: String!
 
     createdBy: String!
     createdDate: String!
