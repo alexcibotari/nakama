@@ -1,4 +1,7 @@
 type Query {
+
+    me: User
+
     users: [User!]!
     user(name: String!): User
 
