@@ -22,9 +22,9 @@ import {
     MdToolbarModule,
     MdTooltipModule
 } from "@angular/material";
-import {CdkTableModule} from "@angular/cdk";
 import { NavigationDrawerComponent } from './layout/navigation-drawer/navigation-drawer.component';
 import {LayoutNavComponent} from "./layout/layout-nav/layout-nav.component";
+import {CdkTableModule} from "@angular/cdk/table";
 
 const MATERIAL_MODULES: any[] = [
     CdkTableModule,
@@ -35,7 +35,7 @@ const MATERIAL_MODULES: any[] = [
     MdIconModule,
     MdListModule,
     MdMenuModule,
-    MdNativeDateModule,
+    //MdNativeDateModule,
     MdTooltipModule,
     MdSlideToggleModule,
     MdInputModule,

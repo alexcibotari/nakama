@@ -48,10 +48,7 @@ export class AuthService{
             .map((response: Response) => {
                 let resp: OAuthTokenResponse = response.json();
                 if (resp && resp.access_token) {
-                    localStorage.setItem(environment.oauth.key, JSON.stringify({
-                        username: username,
-                        token: resp.access_token
-                    }));
+                    localStorage.setItem(environment.oauth.key, resp.access_token);
                     if (this.urlRedirectTo) {
                         this.router.navigate([this.urlRedirectTo]);
                     } else {
@@ -65,8 +62,7 @@ export class AuthService{
     }
 
     public getToken(): string {
-        let userData = JSON.parse(localStorage.getItem(environment.oauth.key));
-        let token = userData && userData.token;
+        let token = localStorage.getItem(environment.oauth.key);
         return token ? token : '';
     }
 

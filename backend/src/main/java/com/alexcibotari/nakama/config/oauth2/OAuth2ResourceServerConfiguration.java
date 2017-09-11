@@ -48,7 +48,7 @@ public class OAuth2ResourceServerConfiguration extends ResourceServerConfigurerA
         http
             .cors().and()
             .authorizeRequests()
-            .antMatchers("/api/"/*,"/graphql"*/).authenticated().and()
+            .antMatchers("/api/","/graphql").authenticated().and()
             .headers().frameOptions().sameOrigin().and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

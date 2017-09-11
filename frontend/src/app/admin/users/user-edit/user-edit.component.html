@@ -11,27 +11,27 @@
 
 <md-dialog-content>
     <form #modelForm="ngForm" fxLayout="column" fxLayoutAlign="space-around stretch">
-        <md-input-container>
+        <md-form-field>
             <input mdInput placeholder="Login" [ngModel]="model.login" name="login" disabled>
-        </md-input-container>
-        <md-input-container>
+        </md-form-field>
+        <md-form-field>
             <input mdInput placeholder="Email" [ngModel]="model.email" name="email" disabled>
-        </md-input-container>
+        </md-form-field>
         <md-checkbox [(ngModel)]="model.enabled" name="enabled">Enabled</md-checkbox>
-        <md-input-container>
+        <md-form-field>
             <input mdInput placeholder="Given Name" [(ngModel)]="model.personal.givenName" name="givenName"
                    required>
-        </md-input-container>
-        <md-input-container>
+        </md-form-field>
+        <md-form-field>
             <input mdInput placeholder="Family Name" [(ngModel)]="model.personal.familyName" name="familyName"
                    required>
-        </md-input-container>
-        <md-input-container>
+        </md-form-field>
+        <md-form-field>
             <input mdInput placeholder="Birthday" [(ngModel)]="model.personal.birthday" name="birthday"
                    required [mdDatepicker]="picker">
-            <button mdSuffix [mdDatepickerToggle]="picker"></button>
+            <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
             <md-datepicker #picker></md-datepicker>
-        </md-input-container>
+        </md-form-field>
         <md-divider></md-divider>
     </form>
 </md-dialog-content>

@@ -3,22 +3,22 @@
 
     <form role="form" (submit)="login()" #loginForm="ngForm">
         <br/>
-        <md-input-container>
+        <md-form-field>
             <input mdInput type="text" required [(ngModel)]="model.login" id="login" name="login"/>
             <md-placeholder>
                 <md-icon>person</md-icon>
                 Username
             </md-placeholder>
-        </md-input-container>
+        </md-form-field>
         <br/>
         <br/>
-        <md-input-container>
+        <md-form-field>
             <input mdInput type="password" required [(ngModel)]="model.password" id="password" name="password"/>
             <md-placeholder>
                 <md-icon>lock_open</md-icon>
                 Password
             </md-placeholder>
-        </md-input-container>
+        </md-form-field>
         <br/>
         <br/>
         <button md-raised-button color="warn" type="submit" name="action" [disabled]="!loginForm.form.valid">LOGIN</button>

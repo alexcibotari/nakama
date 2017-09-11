@@ -10,6 +10,7 @@ import 'rxjs/add/observable/fromEvent';
 import {UserEditComponent} from "../user-edit/user-edit.component";
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
+import {ApolloService} from "../../../core/apollo.service";
 
 const users =gql`
     query users {
@@ -33,7 +34,7 @@ export class UserListComponent implements OnInit {
 
     @ViewChild('filter') filter: ElementRef;
 
-    constructor(private userService: UserService, public dataSource: UserDataSource, private apollo: Apollo, private dialog: MdDialog) {
+    constructor(private userService: UserService, public dataSource: UserDataSource, private apollo: ApolloService, private dialog: MdDialog) {
     }
 
     ngOnInit() {
@@ -44,11 +45,11 @@ export class UserListComponent implements OnInit {
                 this.dataSource.filter = this.filter.nativeElement.value;
             });
 
-        this.apollo.watchQuery<any>({
+     /*   this.apollo.watchQuery<any>({
             query: users
         }).subscribe((data) => {
             console.log(data);
-        });
+        });*/
     }
 
     toDetail(user: UserResource) {

@@ -18,6 +18,7 @@ export class UserEditComponent implements OnInit {
 
     ngOnInit() {
         this.model = this.objectUtils.clone(this.data);
+        console.log(this.model)
     }
 
 }

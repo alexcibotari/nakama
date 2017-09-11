@@ -14,14 +14,24 @@ import {ConfirmationDialogComponent} from './shared/component/dialog/confirmatio
 import {SharedModule} from './shared/shared.module';
 import {AuthModule} from './auth/auth.module';
 import {LoginComponent} from './login/login.component';
-import { ApolloClient } from 'apollo-client';
-import { ApolloModule } from 'apollo-angular';
+import {ApolloModule} from 'apollo-angular';
+import {provideClient} from './core/graphql/client'
+import {DateAdapter, MD_DATE_FORMATS, MdDateFormats, NativeDateAdapter} from "@angular/material";
+import {ApolloFactoryLoader, ApolloService, getApolloClient} from "./core/apollo.service";
+import {Router} from "@angular/router";
+import {AuthService} from "./shared/auth/auth.service";
 
-const client = new ApolloClient();
-
-export function provideClient(): ApolloClient {
-    return client;
-}
+const DATE_FORMATS: MdDateFormats = {
+    parse: {
+        dateInput: 'YYYY-MM-DD'
+    },
+    display: {
+        dateInput: 'YYYY-MM-DD',
+        monthYearLabel: {year: 'numeric', month: 'short'},
+        dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
+        monthYearA11yLabel: {year: 'numeric', month: 'long'}
+    }
+};
 
 @NgModule({
     imports: [
@@ -39,12 +49,22 @@ export function provideClient(): ApolloClient {
 
         FlexLayoutModule,
 
-        ApolloModule.forRoot(provideClient)
+        ApolloModule.forRoot(getApolloClient)
     ],
     declarations: [AppComponent, DashboardComponent, LoginComponent, ConfirmationDialogComponent],
     entryComponents: [ConfirmationDialogComponent],
-    providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+    providers: [
+        {provide: LocationStrategy, useClass: HashLocationStrategy},
+        {provide: DateAdapter, useClass: NativeDateAdapter},
+        {provide: MD_DATE_FORMATS, useValue: DATE_FORMATS},
+        {
+            provide: ApolloService,
+            useFactory: ApolloFactoryLoader,
+            deps: [AuthService, Router],
+        }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
 }
+

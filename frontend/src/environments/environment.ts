@@ -8,6 +8,9 @@ export const environment = {
     api: {
         url: '/api'
     },
+    graphql:{
+        uri: '/graphql'
+    },
     oauth: {
         url: '/oauth',
         basic: 'd2ViYXBwOnRvcHNlY3JldA==',

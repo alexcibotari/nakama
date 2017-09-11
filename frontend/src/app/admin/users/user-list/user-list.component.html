@@ -1,9 +1,9 @@
 <div fxLayout="column" fxLayoutAlign="space-between none">
 
     <div class="users-filter">
-        <md-input-container floatPlaceholder="never">
+        <md-form-field floatPlaceholder="never">
             <input mdInput #filter placeholder="Filter users">
-        </md-input-container>
+        </md-form-field>
     </div>
 
     <md-table #table [dataSource]="dataSource">

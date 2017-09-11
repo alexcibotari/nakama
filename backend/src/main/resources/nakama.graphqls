@@ -29,10 +29,18 @@ type User implements AuditingEntity {
     login: String!
     email: String!
 
+    personal: Personal!
+
     createdBy: String!
     createdDate: String!
     lastModifiedBy: String
     lastModifiedDate: String
+}
+
+type Personal {
+    givenName: String!
+    familyName: String!
+    birthday: String!
 }
 
 type Authority implements AuditingEntity {

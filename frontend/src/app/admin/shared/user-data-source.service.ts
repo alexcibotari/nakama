@@ -1,11 +1,30 @@
-import {CollectionViewer, DataSource} from "@angular/cdk";
 import {Observable} from "rxjs/Observable";
 import {UserService} from "./user-rest.service";
-import {Resources} from "../../core/web/http/hal/hal.model";
 import {Injectable} from "@angular/core";
 import {UserResource} from "../../shared/model/user-resource.model";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import 'rxjs/add/observable/merge';
+import {CollectionViewer, DataSource} from "@angular/cdk/collections";
+import gql from "graphql-tag";
+import {ApolloService} from "../../core/apollo.service";
+
+const users = gql`
+    query users {
+        users {
+            id
+            login
+            email
+            personal {
+                givenName
+                familyName
+                birthday
+            }
+        }
+    }`;
+
+interface QueryResponse {
+    users: UserResource[]
+}
 
 @Injectable()
 export class UserDataSource extends DataSource<UserResource> {
@@ -22,17 +41,24 @@ export class UserDataSource extends DataSource<UserResource> {
         this._filterChange.next(filter);
     }
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService, private apollo: ApolloService) {
         super();
     }
 
     connect(collectionViewer: CollectionViewer): Observable<UserResource[]> {
-        this.userService.query().subscribe((res: Resources<UserResource>) => {
+        /*this.userService.query().subscribe((res: Resources<UserResource>) => {
             this._dataChanges.next(res._embedded.users);
+        });*/
+
+        this.apollo.watchQuery<QueryResponse>({
+            query: users
+        }).subscribe((data) => {
+            this._dataChanges.next(data.data.users);
+            console.log(data);
         });
         return Observable.merge(...[this._dataChanges, this._filterChange]).map(() => {
             return this._dataChanges.getValue().slice().filter((item: UserResource) => {
-                return (item.login + item.email + item.personal.fullName).toLowerCase().indexOf(this._filterChange.getValue().toLowerCase()) != -1;
+                return (item.login + item.email).toLowerCase().indexOf(this._filterChange.getValue().toLowerCase()) != -1;
             });
         });
     }
