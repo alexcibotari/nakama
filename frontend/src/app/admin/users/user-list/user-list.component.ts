@@ -3,7 +3,7 @@ import {UserResource} from '../../../shared/model/user-resource.model';
 import {MdDialog} from "@angular/material";
 import {ConfirmationDialogComponent} from "../../../shared/component/dialog/confirmation-dialog/confirmation-dialog.component";
 import {UserDetailComponent} from "../user-detail/user-detail.component";
-import {UserService} from "../../shared/user-rest.service";
+import {UserRESTService} from "../../shared/user-rest.service";
 import {UserDataSource} from "../../shared/user-data-source.service";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/fromEvent';
@@ -15,14 +15,14 @@ import {ApolloService} from "../../../core/apollo.service";
     selector: 'nkm-user-list',
     templateUrl: 'user-list.component.html',
     styleUrls: ['user-list.component.scss'],
-    providers: [UserService]
+    providers: [UserRESTService]
 })
 export class UserListComponent implements OnInit {
     displayedColumns = ['avatar', 'fullName', 'login', 'email', 'actions'];
 
     @ViewChild('filter') filter: ElementRef;
 
-    constructor(private userService: UserService, public dataSource: UserDataSource, private apollo: ApolloService, private dialog: MdDialog) {
+    constructor(private userService: UserRESTService, public dataSource: UserDataSource, private apollo: ApolloService, private dialog: MdDialog) {
     }
 
     ngOnInit() {

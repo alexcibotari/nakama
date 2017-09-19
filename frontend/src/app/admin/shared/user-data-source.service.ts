@@ -1,5 +1,5 @@
 import {Observable} from "rxjs/Observable";
-import {UserService} from "./user-rest.service";
+import {UserRESTService} from "./user-rest.service";
 import {Injectable} from "@angular/core";
 import {UserResource} from "../../shared/model/user-resource.model";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
@@ -41,7 +41,7 @@ export class UserDataSource extends DataSource<UserResource> {
         this._filterChange.next(filter);
     }
 
-    constructor(private userService: UserService, private apollo: ApolloService) {
+    constructor(private userService: UserRESTService, private apollo: ApolloService) {
         super();
     }
 

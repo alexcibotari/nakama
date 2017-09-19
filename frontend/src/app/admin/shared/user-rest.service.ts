@@ -10,7 +10,7 @@ import {Observable} from "rxjs/Observable";
 import {AuthorityResource} from "../../shared/model/authority-resource.model";
 
 @Injectable()
-export class UserService extends RESTService<UserResource> {
+export class UserRESTService extends RESTService<UserResource> {
 
     constructor(http: Http, router: Router, authService: AuthService) {
         super(http,
