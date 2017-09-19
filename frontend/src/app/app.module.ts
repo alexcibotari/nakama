@@ -15,7 +15,6 @@ import {SharedModule} from './shared/shared.module';
 import {AuthModule} from './auth/auth.module';
 import {LoginComponent} from './login/login.component';
 import {ApolloModule} from 'apollo-angular';
-import {provideClient} from './core/graphql/client'
 import {DateAdapter, MD_DATE_FORMATS, MdDateFormats, NativeDateAdapter} from "@angular/material";
 import {ApolloFactoryLoader, ApolloService, getApolloClient} from "./core/apollo.service";
 import {Router} from "@angular/router";
@@ -42,13 +41,10 @@ const DATE_FORMATS: MdDateFormats = {
         HttpModule,
 
         CoreModule,
-
         AppRoutingModule,
         SharedModule,
         AuthModule.forRoot(),
-
         FlexLayoutModule,
-
         ApolloModule.forRoot(getApolloClient)
     ],
     declarations: [AppComponent, DashboardComponent, LoginComponent, ConfirmationDialogComponent],

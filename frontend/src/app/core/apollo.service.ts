@@ -34,9 +34,9 @@ networkInterface.use([{
 
 const apolloClient = new ApolloClient({
     networkInterface,
-    dataIdFromObject: (o: any) => {
+    /*dataIdFromObject: (o: any) => {
         return `${o.__typename}-${o.id}`
-    },
+    },*/
 });
 
 export function ApolloFactoryLoader(auth: AuthService, router: Router) {
@@ -49,8 +49,6 @@ export function getApolloClient() {
 
 @Injectable()
 export class ApolloService extends Apollo {
-
-    apolloClient: ApolloClient = apolloClient;
 
     constructor(private auth: AuthService, private router: Router) {
         super({default: apolloClient});

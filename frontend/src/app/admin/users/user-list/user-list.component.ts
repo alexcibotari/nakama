@@ -8,19 +8,7 @@ import {UserDataSource} from "../../shared/user-data-source.service";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/fromEvent';
 import {UserEditComponent} from "../user-edit/user-edit.component";
-import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
 import {ApolloService} from "../../../core/apollo.service";
-
-const users =gql`
-    query users {
-        users {
-            id
-            login
-            email
-        }
-    }`;
-
 
 @Component({
     moduleId: module.id,
@@ -67,7 +55,7 @@ export class UserListComponent implements OnInit {
     }
 
     toDelete(user: UserResource) {
-        let dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {content: `Delete ${user.personal.fullName} user ?`}});
+        let dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {content: `Delete ${user.personal} user ?`}});
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
                 this.userService

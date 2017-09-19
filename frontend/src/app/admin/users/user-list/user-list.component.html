@@ -17,7 +17,7 @@
 
         <ng-container cdkColumnDef="fullName">
             <md-header-cell *cdkHeaderCellDef>Full Name</md-header-cell>
-            <md-cell *cdkCellDef="let row"> {{row.personal.fullName}}</md-cell>
+            <md-cell *cdkCellDef="let row"> {{row.personal.givenName + " " + row.personal.familyName}}</md-cell>
         </ng-container>
 
         <ng-container cdkColumnDef="login">

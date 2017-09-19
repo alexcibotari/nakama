@@ -49,7 +49,6 @@ export class UserDataSource extends DataSource<UserResource> {
         /*this.userService.query().subscribe((res: Resources<UserResource>) => {
             this._dataChanges.next(res._embedded.users);
         });*/
-
         this.apollo.watchQuery<QueryResponse>({
             query: users
         }).subscribe((data) => {
@@ -58,7 +57,7 @@ export class UserDataSource extends DataSource<UserResource> {
         });
         return Observable.merge(...[this._dataChanges, this._filterChange]).map(() => {
             return this._dataChanges.getValue().slice().filter((item: UserResource) => {
-                return (item.login + item.email).toLowerCase().indexOf(this._filterChange.getValue().toLowerCase()) != -1;
+                return (item.login + item.email + item.personal.givenName + item.personal.familyName).toLowerCase().indexOf(this._filterChange.getValue().toLowerCase()) != -1;
             });
         });
     }
