@@ -3,7 +3,7 @@
  *
  */
 
-export abstract class Resource{
+export abstract class Resource {
 
     /**
      * The reserved "_links" property is OPTIONAL.
@@ -89,7 +89,7 @@ export class Resources<T extends Resource> {
     [key: string]: any;
 }
 
-export interface LinkRelations extends Relations<Link>{
+export interface LinkRelations extends Relations<Link> {
 
     /**
      * Each Resource Object SHOULD contain a 'self' link that corresponds

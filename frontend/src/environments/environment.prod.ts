@@ -3,7 +3,7 @@ export const environment = {
     api: {
         url: '/api'
     },
-    graphql:{
+    graphql: {
         uri: '/graphql'
     },
     oauth: {

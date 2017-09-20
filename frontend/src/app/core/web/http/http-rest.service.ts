@@ -6,9 +6,10 @@ import {Subscriber} from 'rxjs/Subscriber';
 import {Resource, Resources} from './hal/hal.model';
 import {AuthService} from '../../../shared/auth/auth.service';
 
-export interface RestTransform {
+/*export interface RestTransform {
     (response: Response): any;
-}
+}*/
+export type RestTransform = (response: Response) => any;
 
 export interface RestConfig {
     baseHeaders?: Headers;
