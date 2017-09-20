@@ -1,4 +1,4 @@
-import {AuditingResource} from "./auditing-resource.model";
+import {AuditingResource} from './auditing-resource.model';
 
 export class AuthorityResource extends AuditingResource{
     givenName: string;

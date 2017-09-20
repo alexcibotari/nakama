@@ -1,9 +1,9 @@
-import {ApolloClient, ApolloQueryResult, createNetworkInterface, WatchQueryOptions} from 'apollo-client';
-import {environment} from "../../environments/environment";
-import {Injectable} from "@angular/core";
-import {Router} from "@angular/router";
-import {Apollo, ApolloQueryObservable} from "apollo-angular";
-import {AuthService} from "../shared/auth/auth.service";
+import {ApolloClient, createNetworkInterface, WatchQueryOptions} from 'apollo-client';
+import {environment} from '../../environments/environment';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {Apollo, ApolloQueryObservable} from 'apollo-angular';
+import {AuthService} from '../shared/auth/auth.service';
 
 const networkInterface = createNetworkInterface({uri: environment.graphql.uri});
 
@@ -93,6 +93,4 @@ export class ApolloService extends Apollo {
     }
 }
 
-// export ApolloQueryObservable;
-// export class ApolloQueryObservable;
 export {ApolloQueryObservable, ApolloModule} from 'apollo-angular';

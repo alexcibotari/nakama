@@ -1,4 +1,4 @@
-import {MdDateFormats} from "@angular/material";
+import {MdDateFormats} from '@angular/material';
 
 export const MOMENT_DATE_FORMATS : MdDateFormats = {
     parse: {

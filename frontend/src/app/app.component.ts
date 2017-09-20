@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import './rxjs-operators';
-import {MdIconRegistry} from "@angular/material";
-import {DomSanitizer} from "@angular/platform-browser";
+import {MdIconRegistry} from '@angular/material';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
     moduleId: module.id,

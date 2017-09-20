@@ -17,8 +17,9 @@ import {LoginComponent} from './login/login.component';
 import {ApolloModule} from 'apollo-angular';
 import {DateAdapter, MD_DATE_FORMATS, MdDateFormats, NativeDateAdapter} from "@angular/material";
 import {ApolloFactoryLoader, ApolloService, getApolloClient} from "./core/apollo.service";
-import {Router} from "@angular/router";
-import {AuthService} from "./shared/auth/auth.service";
+import {Router} from '@angular/router';
+import {AuthService} from './shared/auth/auth.service';
+import './rxjs-operators';
 
 const DATE_FORMATS: MdDateFormats = {
     parse: {

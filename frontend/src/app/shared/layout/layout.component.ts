@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {MdDrawerToggleResult, MdSidenav} from "@angular/material";
+import {MdDrawerToggleResult, MdSidenav} from '@angular/material';
 
 @Component({
     selector: 'nkm-layout',

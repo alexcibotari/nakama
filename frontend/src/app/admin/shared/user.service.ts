@@ -1,7 +1,7 @@
-import {Injectable} from "@angular/core";
-import {ApolloService} from "../../core/apollo.service";
-import gql from "graphql-tag";
-import {User} from "./user.model";
+import {Injectable} from '@angular/core';
+import {ApolloService} from '../../core/apollo.service';
+import gql from 'graphql-tag';
+import {User} from './user.model';
 
 const findAll = gql`
     query users {

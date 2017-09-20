@@ -1,5 +1,5 @@
-import {Personal} from "./personal.model";
-import {AuditingResource} from "../../shared/model/auditing-resource.model";
+import {Personal} from './personal.model';
+import {AuditingResource} from '../../shared/model/auditing-resource.model';
 
 export class User extends AuditingResource {
     login: string;

@@ -2,12 +2,12 @@ import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
-import {RESTService, RestTransform} from "../../core/web/http/http-rest.service";
-import {UserResource} from "../../shared/model/user-resource.model";
-import {AuthService} from "../../shared/auth/auth.service";
-import {Resources} from "../../core/web/http/hal/hal.model";
-import {Observable} from "rxjs/Observable";
-import {AuthorityResource} from "../../shared/model/authority-resource.model";
+import {RESTService, RestTransform} from '../../core/web/http/http-rest.service';
+import {UserResource} from '../../shared/model/user-resource.model';
+import {AuthService} from '../../shared/auth/auth.service';
+import {Resources} from '../../core/web/http/hal/hal.model';
+import {Observable} from 'rxjs/Observable';
+import {AuthorityResource} from '../../shared/model/authority-resource.model';
 
 @Injectable()
 export class UserRESTService extends RESTService<UserResource> {

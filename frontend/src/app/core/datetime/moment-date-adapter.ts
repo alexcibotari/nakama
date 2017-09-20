@@ -1,6 +1,6 @@
-import {DateAdapter} from "@angular/material";
-import * as moment from "moment";
-import {isMoment, Moment} from "moment";
+import {DateAdapter} from '@angular/material';
+import * as moment from 'moment';
+import {isMoment, Moment} from 'moment';
 
 /** The default date names to use if Intl API is not available. */
 const DEFAULT_DATE_NAMES = range(31, i => String(i + 1));

@@ -3,8 +3,8 @@ import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {EmptyObservable} from 'rxjs/observable/EmptyObservable';
 import {Subscriber} from 'rxjs/Subscriber';
-import {Resource, Resources} from "./hal/hal.model";
-import {AuthService} from "../../../shared/auth/auth.service";
+import {Resource, Resources} from './hal/hal.model';
+import {AuthService} from '../../../shared/auth/auth.service';
 
 export interface RestTransform {
     (response: Response): any;

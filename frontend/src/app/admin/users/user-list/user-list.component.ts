@@ -1,14 +1,14 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {UserResource} from '../../../shared/model/user-resource.model';
-import {MdDialog} from "@angular/material";
-import {ConfirmationDialogComponent} from "../../../shared/component/dialog/confirmation-dialog/confirmation-dialog.component";
-import {UserDetailComponent} from "../user-detail/user-detail.component";
-import {UserRESTService} from "../../shared/user-rest.service";
-import {UserDataSource} from "../../shared/user-data-source.service";
-import {Observable} from "rxjs/Observable";
+import {MdDialog} from '@angular/material';
+import {ConfirmationDialogComponent} from '../../../shared/component/dialog/confirmation-dialog/confirmation-dialog.component';
+import {UserDetailComponent} from '../user-detail/user-detail.component';
+import {UserRESTService} from '../../shared/user-rest.service';
+import {UserDataSource} from '../../shared/user-data-source.service';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
-import {UserEditComponent} from "../user-edit/user-edit.component";
-import {ApolloService} from "../../../core/apollo.service";
+import {UserEditComponent} from '../user-edit/user-edit.component';
+import {ApolloService} from '../../../core/apollo.service';
 
 @Component({
     moduleId: module.id,

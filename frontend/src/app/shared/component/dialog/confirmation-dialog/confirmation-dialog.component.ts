@@ -1,5 +1,5 @@
-import {Component, Inject, OnInit} from "@angular/core";
-import {MD_DIALOG_DATA} from "@angular/material";
+import {Component, Inject, OnInit} from '@angular/core';
+import {MD_DIALOG_DATA} from '@angular/material';
 
 @Component({
     selector: 'nkm-confirmation-dialog',

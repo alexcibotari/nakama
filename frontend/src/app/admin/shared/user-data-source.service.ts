@@ -1,12 +1,12 @@
-import {Observable} from "rxjs/Observable";
-import {UserRESTService} from "./user-rest.service";
-import {Injectable} from "@angular/core";
-import {UserResource} from "../../shared/model/user-resource.model";
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Observable} from 'rxjs/Observable';
+import {UserRESTService} from './user-rest.service';
+import {Injectable} from '@angular/core';
+import {UserResource} from '../../shared/model/user-resource.model';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/observable/merge';
-import {CollectionViewer, DataSource} from "@angular/cdk/collections";
-import gql from "graphql-tag";
-import {ApolloService} from "../../core/apollo.service";
+import {CollectionViewer, DataSource} from '@angular/cdk/collections';
+import gql from 'graphql-tag';
+import {ApolloService} from '../../core/apollo.service';
 
 const users = gql`
     query users {

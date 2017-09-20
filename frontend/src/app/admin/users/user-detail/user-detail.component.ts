@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {UserResource} from "../../../shared/model/user-resource.model";
-import {MD_DIALOG_DATA, MdDialog} from "@angular/material";
-import {UserEditComponent} from "../user-edit/user-edit.component";
+import {UserResource} from '../../../shared/model/user-resource.model';
+import {MD_DIALOG_DATA, MdDialog} from '@angular/material';
+import {UserEditComponent} from '../user-edit/user-edit.component';
 
 @Component({
     moduleId: module.id,

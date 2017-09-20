@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginModel} from './login.model';
 import {Router} from '@angular/router';
-import {AuthService} from "../shared/auth/auth.service";
+import {AuthService} from '../shared/auth/auth.service';
 
 @Component({
     selector: 'nkm-login',

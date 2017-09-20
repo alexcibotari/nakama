@@ -1,6 +1,6 @@
-import {NgModule} from "@angular/core";
-import {FormsModule} from "@angular/forms";
-import {CommonModule} from "@angular/common";
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
 import {LayoutComponent} from './layout/layout.component';
 import {
     MdButtonModule,
@@ -21,10 +21,10 @@ import {
     MdTabsModule,
     MdToolbarModule,
     MdTooltipModule
-} from "@angular/material";
+} from '@angular/material';
 import { NavigationDrawerComponent } from './layout/navigation-drawer/navigation-drawer.component';
-import {LayoutNavComponent} from "./layout/layout-nav/layout-nav.component";
-import {CdkTableModule} from "@angular/cdk/table";
+import {LayoutNavComponent} from './layout/layout-nav/layout-nav.component';
+import {CdkTableModule} from '@angular/cdk/table';
 
 const MATERIAL_MODULES: any[] = [
     CdkTableModule,
