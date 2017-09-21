@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, RequestOptionsArgs, Response} from '@angular/http';
 import {Router} from '@angular/router';
-import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
 import {environment} from '../../../environments/environment';
 import {URLParams} from '../../core/web/http/http-rest.service';

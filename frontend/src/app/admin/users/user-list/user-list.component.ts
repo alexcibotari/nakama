@@ -9,6 +9,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
 import {UserEditComponent} from '../user-edit/user-edit.component';
 import {ApolloService} from '../../../core/apollo.service';
+import {UserService} from "../../shared/user.service";
 
 @Component({
     moduleId: module.id,
@@ -22,7 +23,8 @@ export class UserListComponent implements OnInit {
 
     @ViewChild('filter') filter: ElementRef;
 
-    constructor(private userService: UserRESTService,
+    constructor(private userRESTService: UserRESTService,
+                private userService: UserService,
                 public dataSource: UserDataSource,
                 private apollo: ApolloService,
                 private dialog: MdDialog) {
@@ -35,7 +37,7 @@ export class UserListComponent implements OnInit {
             .subscribe(() => {
                 this.dataSource.filter = this.filter.nativeElement.value;
             });
-
+        this.userService.findAll();
         /*   this.apollo.watchQuery<any>({
                query: users
            }).subscribe((data) => {
@@ -61,7 +63,7 @@ export class UserListComponent implements OnInit {
         const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {content: `Delete ${user.personal} user ?`}});
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                this.userService
+                this.userRESTService
                     .delete(user.login)
                     .subscribe(data => {
                         console.log(data);
