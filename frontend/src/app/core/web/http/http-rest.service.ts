@@ -49,7 +49,7 @@ export abstract class RESTService<T extends Resource> {
     }
 
     public query(params?: URLParams | URLSearchParams, transform?: RestTransform): Observable<Resources<T>> {
-        let response: Observable<Response> = this.http.get(this.buildUrl(undefined), this.buildRequestOptions(params));
+        const response: Observable<Response> = this.http.get(this.buildUrl(undefined), this.buildRequestOptions(params));
         return response.map((res: Response) => {
             if (transform) {
                 return transform(res);
@@ -61,7 +61,7 @@ export abstract class RESTService<T extends Resource> {
     }
 
     public get(id: string | number, transform?: RestTransform): Observable<T> {
-        let response: Observable<Response> = this.http.get(this.buildUrl(id), this.buildRequestOptions());
+        const response: Observable<Response> = this.http.get(this.buildUrl(id), this.buildRequestOptions());
         return response.map((res: Response) => {
             if (transform) {
                 return transform(res);
@@ -73,7 +73,7 @@ export abstract class RESTService<T extends Resource> {
     }
 
     public create(obj: T, transform?: RestTransform): Observable<T> {
-        let response: Observable<Response> = this.http.post(this.buildUrl(), obj, this.buildRequestOptions());
+        const response: Observable<Response> = this.http.post(this.buildUrl(), obj, this.buildRequestOptions());
         return response.map((res: Response) => {
             if (res.status === 201) {
                 if (transform) {
@@ -89,7 +89,7 @@ export abstract class RESTService<T extends Resource> {
     }
 
     public update(id: string | number, obj: T, transform?: RestTransform): Observable<T> {
-        let response: Observable<Response> = this.http.patch(this.buildUrl(id), obj, this.buildRequestOptions());
+        const response: Observable<Response> = this.http.patch(this.buildUrl(id), obj, this.buildRequestOptions());
         return response.map((res: Response) => {
             if (res.status === 200) {
                 if (transform) {
@@ -105,7 +105,7 @@ export abstract class RESTService<T extends Resource> {
     }
 
     public delete(id: string | number, transform?: RestTransform): Observable<T> {
-        let response: Observable<Response> = this.http.delete(this.buildUrl(id), this.buildRequestOptions());
+        const response: Observable<Response> = this.http.delete(this.buildUrl(id), this.buildRequestOptions());
         return response.map((res: Response) => {
             if (res.status === 200) {
                 if (transform) {
@@ -136,14 +136,14 @@ export abstract class RESTService<T extends Resource> {
     }
 
     protected buildRequestOptions(params?: URLParams | URLSearchParams): RequestOptionsArgs {
-        let requestHeaders: Headers = new Headers();
+        const requestHeaders: Headers = new Headers();
         this.config.baseHeaders.forEach((value: string[], key: string) => {
             requestHeaders.set(key, value);
         });
         this.config.dynamicHeaders().forEach((value: string[], key: string) => {
             requestHeaders.set(key, value);
         });
-        let requestOptions: RequestOptionsArgs = {
+        const requestOptions: RequestOptionsArgs = {
             headers: requestHeaders,
             params: params
         };
