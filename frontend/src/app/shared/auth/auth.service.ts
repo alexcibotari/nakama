@@ -21,7 +21,7 @@ interface OAuthTokenResponse {
 }
 
 @Injectable()
-export class AuthService{
+export class AuthService {
 
     private readonly headers: Headers = new Headers({
         'Authorization': `Basic ${environment.oauth.basic}`,
@@ -38,7 +38,7 @@ export class AuthService{
     }
 
     public login(username: string, password: string): Observable<boolean> {
-        let request: OAuthTokenRequest = {
+        const request: OAuthTokenRequest = {
             client_id: environment.oauth.client,
             grant_type: environment.oauth.grant,
             username: username,
@@ -46,13 +46,13 @@ export class AuthService{
         };
         return this.http.post(environment.oauth.url + '/token', this.buildFormURLEncoded(request), this.buildRequestOptions())
             .map((response: Response) => {
-                let resp: OAuthTokenResponse = response.json();
+                const resp: OAuthTokenResponse = response.json();
                 if (resp && resp.access_token) {
                     localStorage.setItem(environment.oauth.key, resp.access_token);
                     if (this.urlRedirectTo) {
                         this.router.navigate([this.urlRedirectTo]);
                     } else {
-                        this.router.navigate(['/'])
+                        this.router.navigate(['/']);
                     }
                     return true;
                 } else {
@@ -62,7 +62,7 @@ export class AuthService{
     }
 
     public getToken(): string {
-        let token = localStorage.getItem(environment.oauth.key);
+        const token = localStorage.getItem(environment.oauth.key);
         return token ? token : '';
     }
 
@@ -73,7 +73,7 @@ export class AuthService{
     }
 
     public isLoggedIn(): boolean {
-        var token: String = this.getToken();
+        const token: String = this.getToken();
         return token && token.length > 0;
     }
 
@@ -86,17 +86,19 @@ export class AuthService{
     }
 
     protected buildFormURLEncoded(params: URLParams): string {
-        let result: URLSearchParams = new URLSearchParams();
+        const result: URLSearchParams = new URLSearchParams();
         if (params) {
-            for (let key in params) {
-                let value = params[key];
-                if (value !== undefined) {
-                    if (value instanceof Array) {
-                        value.forEach(v => {
-                            result.append(key, v.toString());
-                        });
-                    } else {
-                        result.append(key, value.toString());
+            for (const key in params) {
+                if (params.hasOwnProperty(key)) {
+                    const value = params[key];
+                    if (value !== undefined) {
+                        if (value instanceof Array) {
+                            value.forEach(v => {
+                                result.append(key, v.toString());
+                            });
+                        } else {
+                            result.append(key, value.toString());
+                        }
                     }
                 }
             }

@@ -13,12 +13,11 @@ export class UserEditComponent implements OnInit {
     public model: UserResource;
 
     constructor(@Inject(MD_DIALOG_DATA) public data: UserResource, private objectUtils: ObjectUtils) {
-
     }
 
     ngOnInit() {
         this.model = this.objectUtils.clone(this.data);
-        console.log(this.model)
+        console.log(this.model);
     }
 
 }

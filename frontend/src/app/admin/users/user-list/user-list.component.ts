@@ -22,7 +22,10 @@ export class UserListComponent implements OnInit {
 
     @ViewChild('filter') filter: ElementRef;
 
-    constructor(private userService: UserRESTService, public dataSource: UserDataSource, private apollo: ApolloService, private dialog: MdDialog) {
+    constructor(private userService: UserRESTService,
+                public dataSource: UserDataSource,
+                private apollo: ApolloService,
+                private dialog: MdDialog) {
     }
 
     ngOnInit() {
@@ -33,35 +36,35 @@ export class UserListComponent implements OnInit {
                 this.dataSource.filter = this.filter.nativeElement.value;
             });
 
-     /*   this.apollo.watchQuery<any>({
-            query: users
-        }).subscribe((data) => {
-            console.log(data);
-        });*/
+        /*   this.apollo.watchQuery<any>({
+               query: users
+           }).subscribe((data) => {
+               console.log(data);
+           });*/
     }
 
     toDetail(user: UserResource) {
-        let dialogRef = this.dialog.open(UserDetailComponent, {data: user});
+        const dialogRef = this.dialog.open(UserDetailComponent, {data: user});
         dialogRef.afterClosed().subscribe((result: UserResource) => {
             console.log(result);
         });
     }
 
     toEdit(user: UserResource) {
-        let dialogRef = this.dialog.open(UserEditComponent, {data: user});
+        const dialogRef = this.dialog.open(UserEditComponent, {data: user});
         dialogRef.afterClosed().subscribe((result: UserResource) => {
             console.log(result);
         });
     }
 
     toDelete(user: UserResource) {
-        let dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {content: `Delete ${user.personal} user ?`}});
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {content: `Delete ${user.personal} user ?`}});
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
                 this.userService
                     .delete(user.login)
-                    .subscribe(result => {
-                        console.log(result);
+                    .subscribe(data => {
+                        console.log(data);
                     });
             }
         });

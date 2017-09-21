@@ -92,8 +92,7 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     format(date: Moment, displayFormat: any): string {
         if (date) {
             return date.format(displayFormat);
-        }
-        else {
+        } else {
             return '';
         }
     }
@@ -115,17 +114,16 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     }
 
     isDateInstance(obj: any): boolean {
-        console.log('isDateInstance : '+ (obj instanceof moment) + ' ' + obj);
+        console.log('isDateInstance : ' + (obj instanceof moment) + ' ' + obj);
         return obj instanceof moment;
     }
 
     isValid(date: Moment): boolean {
-        console.log('isValid : '+ date);
+        console.log('isValid : ' + date);
         return date.isValid();
     }
 
     setLocale(locale: any): void {
-        console.info('setLocale', locale);
         this.localeData = moment.localeData(locale);
     }
 
@@ -137,11 +135,9 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
         if (first == null) {
             // same if both null
             return second == null;
-        }
-        else if (isMoment(first)) {
+        } else if (isMoment(first)) {
             return first.isSame(second);
-        }
-        else {
+        } else {
             const isSame = super.sameDate(first, second);
             console.warn('first not a Moment. fallback to super.sameDate()', first, second, isSame);
             return isSame;
@@ -151,11 +147,9 @@ export class MomentDateAdapter extends DateAdapter<Moment> {
     clampDate(date: Moment, min?: any | Moment, max?: any | Moment): Moment {
         if (min && date.isBefore(min)) {
             return min;
-        }
-        else if (max && date.isAfter(max)) {
+        } else if (max && date.isAfter(max)) {
             return max;
-        }
-        else {
+        } else {
             return date;
         }
     }

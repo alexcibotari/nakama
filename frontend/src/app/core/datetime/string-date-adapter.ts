@@ -1,6 +1,6 @@
-import {DateAdapter} from "@angular/material";
-import * as moment from "moment";
-import {isMoment, Moment} from "moment";
+import {DateAdapter} from '@angular/material';
+import * as moment from 'moment';
+import {isMoment, Moment} from 'moment';
 
 /** The default date names to use if Intl API is not available. */
 const DEFAULT_DATE_NAMES = range(31, i => String(i + 1));
@@ -92,8 +92,7 @@ export class StringDateAdapter extends DateAdapter<string> {
     format(date: string, displayFormat: any): string {
         if (date) {
             return moment(date).format(displayFormat);
-        }
-        else {
+        } else {
             return '';
         }
 
@@ -124,7 +123,6 @@ export class StringDateAdapter extends DateAdapter<string> {
     }
 
     setLocale(locale: any): void {
-        console.info('setLocale', locale);
         this.localeData = moment.localeData(locale);
     }
 
@@ -136,11 +134,9 @@ export class StringDateAdapter extends DateAdapter<string> {
         if (first == null) {
             // same if both null
             return second == null;
-        }
-        else if (isMoment(moment(first))) {
+        } else if (isMoment(moment(first))) {
             return moment(first).isSame(moment(second));
-        }
-        else {
+        } else {
             const isSame = super.sameDate(first, second);
             console.warn('first not a Moment. fallback to super.sameDate()', first, second, isSame);
             return isSame;
@@ -150,11 +146,9 @@ export class StringDateAdapter extends DateAdapter<string> {
     clampDate(date: string, min?: any | string, max?: any | string): string {
         if (moment(min) && moment(date).isBefore(moment(min))) {
             return moment(min).format();
-        }
-        else if (moment(max) && moment(date).isAfter(moment(max))) {
+        } else if (moment(max) && moment(date).isAfter(moment(max))) {
             return moment(max).format();
-        }
-        else {
+        } else {
             return moment(date).format();
         }
     }

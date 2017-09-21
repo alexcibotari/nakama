@@ -20,7 +20,7 @@ export class UserDetailComponent implements OnInit {
     }
 
     toEdit(user: UserResource) {
-        let dialogRef = this.dialog.open(UserEditComponent, {data: user});
+        const dialogRef = this.dialog.open(UserEditComponent, {data: user});
         dialogRef.afterClosed().subscribe((result: UserResource) => {
             console.log(result);
         });

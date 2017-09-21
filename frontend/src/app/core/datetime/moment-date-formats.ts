@@ -1,6 +1,6 @@
 import {MdDateFormats} from '@angular/material';
 
-export const MOMENT_DATE_FORMATS : MdDateFormats = {
+export const MOMENT_DATE_FORMATS: MdDateFormats = {
     parse: {
         dateInput: 'YYYY-MM-DD'
     },

@@ -24,7 +24,7 @@ export class UserRESTService extends RESTService<UserResource> {
     }
 
     public authorities(id: string | number, transform?: RestTransform): Observable<Resources<AuthorityResource>> {
-        let response: Observable<Response> = this.http.get(this.buildUrl(id, 'authorities'), this.buildRequestOptions());
+        const response: Observable<Response> = this.http.get(this.buildUrl(id, 'authorities'), this.buildRequestOptions());
         return response.map((res: Response) => {
             if (transform) {
                 return transform(res);

@@ -18,7 +18,7 @@ const findAll = gql`
     }`;
 
 interface UsersResponse {
-    users: User
+    users: User;
 }
 
 @Injectable()
@@ -27,7 +27,7 @@ export class UserService {
     constructor(private apollo: ApolloService) {
     }
 
-    public findAll():void{
+    public findAll(): void {
         this.apollo.watchQuery<UsersResponse>({
             query: findAll
         }).subscribe((data) => {
@@ -35,7 +35,6 @@ export class UserService {
         });
     }
 
-    private transform():void{
-
+    private transform(): void {
     }
 }

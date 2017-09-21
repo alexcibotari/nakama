@@ -12,7 +12,7 @@ export class LayoutComponent implements OnInit {
 
     @Input() mode: 'over' | 'push' | 'side' = 'over';
 
-    @Input('opened') opened: boolean = false;
+    @Input('opened') opened: Boolean = false;
 
     public open(): Promise<MdDrawerToggleResult> {
         return this.sidenav.open();

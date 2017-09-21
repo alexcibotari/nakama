@@ -35,7 +35,7 @@ const MATERIAL_MODULES: any[] = [
     MdIconModule,
     MdListModule,
     MdMenuModule,
-    //MdNativeDateModule,
+    MdNativeDateModule,
     MdTooltipModule,
     MdSlideToggleModule,
     MdInputModule,
@@ -53,7 +53,6 @@ const LAYOUT_COMPONENTS: any[] = [
     LayoutNavComponent,
     NavigationDrawerComponent
 ];
-
 
 @NgModule({
     imports: [

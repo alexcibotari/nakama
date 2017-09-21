@@ -23,7 +23,7 @@ const users = gql`
     }`;
 
 interface QueryResponse {
-    users: UserResource[]
+    users: UserResource[];
 }
 
 @Injectable()
@@ -57,7 +57,8 @@ export class UserDataSource extends DataSource<UserResource> {
         });
         return Observable.merge(...[this._dataChanges, this._filterChange]).map(() => {
             return this._dataChanges.getValue().slice().filter((item: UserResource) => {
-                return (item.login + item.email + item.personal.givenName + item.personal.familyName).toLowerCase().indexOf(this._filterChange.getValue().toLowerCase()) != -1;
+                return (item.login + item.email + item.personal.givenName + item.personal.familyName)
+                    .toLowerCase().indexOf(this._filterChange.getValue().toLowerCase()) !== -1;
             });
         });
     }

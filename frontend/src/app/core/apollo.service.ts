@@ -12,7 +12,7 @@ networkInterface.use([{
         if (!req.options.headers) {
             req.options.headers = {};
         }
-        let token = localStorage.getItem(environment.oauth.key);
+        const token = localStorage.getItem(environment.oauth.key);
         if (token) {
             req.options.headers.authorization = `Bearer ${token}`;
         }
@@ -63,7 +63,7 @@ export class ApolloService extends Apollo {
      *
      */
     watchQuery<T>(options: WatchQueryOptions): ApolloQueryObservable<T> {
-        let subscription = super.watchQuery(options);
+        const subscription = super.watchQuery(options);
         subscription
             .subscribe(
                 () => {
@@ -84,7 +84,7 @@ export class ApolloService extends Apollo {
     errorHandler(err: Error): void {
         if (err.toString().indexOf('Unauthorized') !== -1) {
             this.auth.logout(this.router.url);
-            console.log("ApolloService Unauthorized")
+            console.log('ApolloService Unauthorized');
         } else {
             console.log(err);
             throw err;
