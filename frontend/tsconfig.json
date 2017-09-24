@@ -22,9 +22,6 @@
         "suppressImplicitAnyIndexErrors": true
     },
     "exclude": [
-        "node_modules",
-        "src/main/resources/public/libs",
-        "classes",
-        "build"
+        "node_modules"
     ]
 }

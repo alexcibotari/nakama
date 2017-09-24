@@ -1,18 +1,17 @@
-import {Personal} from './personal.model';
-import {AuditingResource} from '../../shared/model/auditing-resource.model';
+import {AbstractAuditingEntity} from '../../shared/model/abstract-auditing-entity.model';
 
-export class User extends AuditingResource {
+export class User extends AbstractAuditingEntity {
     login: string;
-    email: string;
-
-    personal: Personal;
-
     enabled: boolean;
     authorities: Array<string>;
 
-    constructor(login: string, email: string) {
-        super();
-        this.login = login;
-        this.email = email;
-    }
+    email: string;
+    name: string;
+    givenName: string;
+    familyName: string;
+    birthday: string;
+    gender: string;
+
+    jobTitle: string;
+    telephone: string;
 }

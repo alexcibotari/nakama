@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {UserResource} from '../../../shared/model/user-resource.model';
 import {MD_DIALOG_DATA} from '@angular/material';
 import {ObjectUtils} from '../../../core/object-utils.service';
+import {User} from '../../shared/user.model';
 
 @Component({
     moduleId: module.id,
@@ -10,9 +10,9 @@ import {ObjectUtils} from '../../../core/object-utils.service';
     styleUrls: ['user-edit.component.scss']
 })
 export class UserEditComponent implements OnInit {
-    public model: UserResource;
+    public model: User;
 
-    constructor(@Inject(MD_DIALOG_DATA) public data: UserResource, private objectUtils: ObjectUtils) {
+    constructor(@Inject(MD_DIALOG_DATA) public data: User, private objectUtils: ObjectUtils) {
     }
 
     ngOnInit() {

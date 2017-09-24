@@ -1,15 +1,14 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {UserResource} from '../../../shared/model/user-resource.model';
 import {MdDialog} from '@angular/material';
-import {ConfirmationDialogComponent} from '../../../shared/component/dialog/confirmation-dialog/confirmation-dialog.component';
-import {UserDetailComponent} from '../user-detail/user-detail.component';
-import {UserRESTService} from '../../shared/user-rest.service';
-import {UserDataSource} from '../../shared/user-data-source.service';
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
-import {UserEditComponent} from '../user-edit/user-edit.component';
 import {ApolloService} from '../../../core/apollo.service';
-import {UserService} from "../../shared/user.service";
+import {ConfirmationDialogComponent} from '../../../shared/component/dialog/confirmation-dialog/confirmation-dialog.component';
+import {UserDataSource} from '../../shared/user-data-source.service';
+import {UserRESTService} from '../../shared/user-rest.service';
+import {User} from '../../shared/user.model';
+import {UserService} from '../../shared/user.service';
+import {UserDetailComponent} from '../user-detail/user-detail.component';
+import {UserEditComponent} from '../user-edit/user-edit.component';
 
 @Component({
     moduleId: module.id,
@@ -19,7 +18,7 @@ import {UserService} from "../../shared/user.service";
     providers: [UserRESTService]
 })
 export class UserListComponent implements OnInit {
-    displayedColumns = ['avatar', 'fullName', 'login', 'email', 'actions'];
+    displayedColumns = ['avatar', 'name', 'login', 'email', 'actions'];
 
     @ViewChild('filter') filter: ElementRef;
 
@@ -37,30 +36,24 @@ export class UserListComponent implements OnInit {
             .subscribe(() => {
                 this.dataSource.filter = this.filter.nativeElement.value;
             });
-        this.userService.findAll();
-        /*   this.apollo.watchQuery<any>({
-               query: users
-           }).subscribe((data) => {
-               console.log(data);
-           });*/
     }
 
-    toDetail(user: UserResource) {
+    toDetail(user: User) {
         const dialogRef = this.dialog.open(UserDetailComponent, {data: user});
-        dialogRef.afterClosed().subscribe((result: UserResource) => {
+        dialogRef.afterClosed().subscribe((result: User) => {
             console.log(result);
         });
     }
 
-    toEdit(user: UserResource) {
+    toEdit(user: User) {
         const dialogRef = this.dialog.open(UserEditComponent, {data: user});
-        dialogRef.afterClosed().subscribe((result: UserResource) => {
+        dialogRef.afterClosed().subscribe((result: User) => {
             console.log(result);
         });
     }
 
-    toDelete(user: UserResource) {
-        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {content: `Delete ${user.personal} user ?`}});
+    toDelete(user: User) {
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {content: `Delete ${user.name} user ?`}});
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
                 this.userRESTService

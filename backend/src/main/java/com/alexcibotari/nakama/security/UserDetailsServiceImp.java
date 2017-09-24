@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserDetailsServiceImp implements UserDetailsService {
@@ -38,10 +37,10 @@ public class UserDetailsServiceImp implements UserDetailsService {
             }
             List<GrantedAuthority> grantedAuthorities = new ArrayList<>(user.getAuthorities());
             return new org.springframework.security.core.userdetails.User(lowercaseUsername,
-                    user.getPassword(),
-                    grantedAuthorities);
+                user.getPassword(),
+                grantedAuthorities);
         }).orElseThrow(() -> new UsernameNotFoundException("User " + lowercaseUsername + " was not found in the " +
-                "database"));
+            "database"));
     }
 
 }

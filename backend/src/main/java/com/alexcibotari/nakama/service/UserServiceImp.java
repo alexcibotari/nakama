@@ -1,6 +1,5 @@
 package com.alexcibotari.nakama.service;
 
-import com.alexcibotari.nakama.domain.Personal;
 import com.alexcibotari.nakama.domain.User;
 import com.alexcibotari.nakama.exception.UserEmailAlreadyInUseException;
 import com.alexcibotari.nakama.exception.UserLoginAlreadyInUseException;
@@ -24,7 +23,7 @@ public class UserServiceImp implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImp(UserRepository repository, PasswordEncoder passwordEncoder){
+    public UserServiceImp(UserRepository repository, PasswordEncoder passwordEncoder) {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -50,15 +49,15 @@ public class UserServiceImp implements UserService {
     }
 
     private void updateEntity(User entity, UserResource resource) {
-        entity.setEmail(resource.getEmail());
         entity.setEnabled(resource.getEnabled());
-        if (resource.getPersonal() != null) {
-            Personal personal = new Personal();
-            personal.setGivenName(resource.getPersonal().getGivenName());
-            personal.setFamilyName(resource.getPersonal().getFamilyName());
-            personal.setBirthday(resource.getPersonal().getBirthday());
-            entity.setPersonal(personal);
-        }
+
+        entity.setEmail(resource.getEmail());
+        entity.setGivenName(resource.getGivenName());
+        entity.setFamilyName(resource.getFamilyName());
+        entity.setBirthday(resource.getBirthday());
+        entity.setGender(resource.getGender());
+        entity.setJobTitle(resource.getJobTitle());
+        entity.setTelephone(resource.getTelephone());
     }
 
     private void checkLoginAndEmail(String login, String email) {

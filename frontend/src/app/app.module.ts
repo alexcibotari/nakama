@@ -52,8 +52,8 @@ const DATE_FORMATS: MdDateFormats = {
     entryComponents: [ConfirmationDialogComponent],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        {provide: DateAdapter, useClass: NativeDateAdapter},
-        {provide: MD_DATE_FORMATS, useValue: DATE_FORMATS},
+        /*{provide: DateAdapter, useClass: NativeDateAdapter},
+        {provide: MD_DATE_FORMATS, useValue: DATE_FORMATS},*/
         {
             provide: ApolloService,
             useFactory: ApolloFactoryLoader,

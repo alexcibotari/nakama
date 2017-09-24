@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {UserResource} from '../../../shared/model/user-resource.model';
 import {MD_DIALOG_DATA, MdDialog} from '@angular/material';
 import {UserEditComponent} from '../user-edit/user-edit.component';
+import {User} from '../../shared/user.model';
 
 @Component({
     moduleId: module.id,
@@ -10,18 +10,18 @@ import {UserEditComponent} from '../user-edit/user-edit.component';
     styleUrls: ['user-detail.component.scss']
 })
 export class UserDetailComponent implements OnInit {
-    public model: UserResource;
+    public model: User;
 
-    constructor(@Inject(MD_DIALOG_DATA) public data: UserResource, private dialog: MdDialog) {
+    constructor(@Inject(MD_DIALOG_DATA) public data: User, private dialog: MdDialog) {
         this.model = this.data;
     }
 
     ngOnInit() {
     }
 
-    toEdit(user: UserResource) {
+    toEdit(user: User) {
         const dialogRef = this.dialog.open(UserEditComponent, {data: user});
-        dialogRef.afterClosed().subscribe((result: UserResource) => {
+        dialogRef.afterClosed().subscribe((result: User) => {
             console.log(result);
         });
     }

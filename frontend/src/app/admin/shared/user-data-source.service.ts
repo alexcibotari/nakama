@@ -2,8 +2,8 @@ import {Observable} from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {CollectionViewer, DataSource} from '@angular/cdk/collections';
-import {UserService, UsersResponse} from "./user.service";
-import {User} from "./user.model";
+import {UserService} from './user.service';
+import {User} from './user.model';
 
 @Injectable()
 export class UserDataSource extends DataSource<User> {
@@ -25,7 +25,7 @@ export class UserDataSource extends DataSource<User> {
     }
 
     connect(collectionViewer: CollectionViewer): Observable<User[]> {
-        this.userService.findAll()
+        this.userService.findAllSummary()
             .subscribe((data) => {
                 this._dataChanges.next(data.data.users);
                 console.log(data);
@@ -33,7 +33,7 @@ export class UserDataSource extends DataSource<User> {
         return Observable.merge(...[this._dataChanges, this._filterChange]).map(() => {
             return this._dataChanges.getValue().slice()
                 .filter((item: User) => {
-                    return (item.login + item.email + item.personal.givenName + item.personal.familyName)
+                    return (item.login + item.email + item.name)
                         .toLowerCase().indexOf(this._filterChange.getValue().toLowerCase()) !== -1;
                 });
         });

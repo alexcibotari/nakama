@@ -19,6 +19,9 @@ interface OAuthTokenResponse {
     scope: string;
 }
 
+const LOGIN_ROUTE: string = '/login';
+const ROOT_ROUTE: string = '/';
+
 @Injectable()
 export class AuthService {
 
@@ -48,10 +51,10 @@ export class AuthService {
                 const resp: OAuthTokenResponse = response.json();
                 if (resp && resp.access_token) {
                     localStorage.setItem(environment.oauth.key, resp.access_token);
-                    if (this.urlRedirectTo) {
+                    if (this.urlRedirectTo && this.urlRedirectTo !== LOGIN_ROUTE) {
                         this.router.navigate([this.urlRedirectTo]);
                     } else {
-                        this.router.navigate(['/']);
+                        this.router.navigate([ROOT_ROUTE]);
                     }
                     return true;
                 } else {
@@ -68,7 +71,7 @@ export class AuthService {
     public logout(urlRedirectTo?: string): void {
         localStorage.removeItem(environment.oauth.key);
         this.setURLRedirectTo(urlRedirectTo);
-        this.router.navigate(['/login']);
+        this.router.navigate([LOGIN_ROUTE]);
     }
 
     public isLoggedIn(): boolean {

@@ -7,26 +7,20 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Relation(value = "user", collectionRelation = "users")
-public class UserResource extends AbstractAuditingResource {
+public class UserResource extends PersonResource {
 
     @Size(min = 3, max = 50)
     private String login;
 
-    @Size(min = 5, max = 50)
-    private String email;
-
     private Boolean enabled = Boolean.FALSE;
-
-    private PersonalResource personal;
 
     private Set<AuthorityResource> authorities;
 
     public UserResource() {
     }
 
-    public UserResource(String login, String email, Boolean enabled, Set<AuthorityResource> authorities) {
+    public UserResource(String login, Boolean enabled, Set<AuthorityResource> authorities) {
         this.login = login;
-        this.email = email;
         this.enabled = enabled;
         this.authorities = authorities;
     }
@@ -37,14 +31,6 @@ public class UserResource extends AbstractAuditingResource {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public Boolean getEnabled() {
@@ -63,21 +49,11 @@ public class UserResource extends AbstractAuditingResource {
         this.authorities = authorities;
     }
 
-    public PersonalResource getPersonal() {
-        return personal;
-    }
-
-    public void setPersonal(PersonalResource personal) {
-        this.personal = personal;
-    }
-
     @Override
     public String toString() {
         return "UserResource{" +
             "login='" + login + '\'' +
-            ", email='" + email + '\'' +
             ", enabled=" + enabled +
-            ", personal=" + personal +
             ", authorities=" + authorities +
             '}';
     }

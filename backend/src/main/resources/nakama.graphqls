@@ -3,7 +3,7 @@ type Query {
     me: User
 
     users: [User!]!
-    user(name: String!): User
+    user(login: String!): User
 
     authorities: [Authority!]!
     authority(name: String!): Authority
@@ -27,20 +27,21 @@ type User implements AuditingEntity {
     id: ID!
 
     login: String!
-    email: String!
 
-    personal: Personal!
+    email: String
+    name: String
+    givenName: String
+    familyName: String
+    birthday: String
+    gender: String
+
+    jobTitle: String
+    telephone: String
 
     createdBy: String!
     createdDate: String!
     lastModifiedBy: String
     lastModifiedDate: String
-}
-
-type Personal {
-    givenName: String!
-    familyName: String!
-    birthday: String!
 }
 
 type Authority implements AuditingEntity {

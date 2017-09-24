@@ -30,19 +30,20 @@ public class UserResourceAssembler extends ResourceAssemblerSupport<User, UserRe
     @Override
     protected UserResource instantiateResource(User entity) {
         UserResource resource = new UserResource();
+
         resource.setLogin(entity.getLogin());
-        resource.setEmail(entity.getEmail());
         resource.setEnabled(entity.getEnabled());
+
+        resource.setEmail(entity.getEmail());
+        resource.setGivenName(entity.getGivenName());
+        resource.setFamilyName(entity.getFamilyName());
+        resource.setBirthday(entity.getBirthday());
+        resource.setGender(entity.getGender());
+        resource.setJobTitle(entity.getJobTitle());
+        resource.setTelephone(entity.getTelephone());
+
         resource.setCreatedDate(entity.getCreatedDate());
         resource.setLastModifiedDate(entity.getLastModifiedDate());
-
-        if(entity.getPersonal() != null) {
-            PersonalResource personal = new PersonalResource();
-            personal.setGivenName(entity.getPersonal().getGivenName());
-            personal.setFamilyName(entity.getPersonal().getFamilyName());
-            personal.setBirthday(entity.getPersonal().getBirthday());
-            resource.setPersonal(personal);
-        }
 
         return resource;
     }

@@ -19,15 +19,15 @@
         </md-form-field>
         <md-checkbox [(ngModel)]="model.enabled" name="enabled">Enabled</md-checkbox>
         <md-form-field>
-            <input mdInput placeholder="Given Name" [(ngModel)]="model.personal.givenName" name="givenName"
+            <input mdInput placeholder="Given Name" [(ngModel)]="model.givenName" name="givenName"
                    required>
         </md-form-field>
         <md-form-field>
-            <input mdInput placeholder="Family Name" [(ngModel)]="model.personal.familyName" name="familyName"
+            <input mdInput placeholder="Family Name" [(ngModel)]="model.familyName" name="familyName"
                    required>
         </md-form-field>
         <md-form-field>
-            <input mdInput placeholder="Birthday" [(ngModel)]="model.personal.birthday" name="birthday"
+            <input mdInput placeholder="Birthday" [(ngModel)]="model.birthday" name="birthday"
                    required [mdDatepicker]="picker">
             <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
             <md-datepicker #picker></md-datepicker>

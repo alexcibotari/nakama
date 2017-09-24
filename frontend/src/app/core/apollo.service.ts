@@ -63,7 +63,7 @@ export class ApolloService extends Apollo {
      *
      */
     watchQuery<T>(options: WatchQueryOptions): ApolloQueryObservable<T> {
-        const subscription = super.watchQuery(options);
+        const subscription: ApolloQueryObservable<T> = super.watchQuery(options);
         subscription
             .subscribe(
                 () => {

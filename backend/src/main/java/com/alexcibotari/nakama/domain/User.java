@@ -7,18 +7,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class User extends AbstractAuditingEntity {
+public class User extends Person {
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, updatable = false)
     private String login;
 
-    @Column(nullable = false, unique = true)
-    private String email;
-
-    @Embedded
-    private Personal personal;
-
-    @Column(name = "password_hash", nullable = false, length = 255)
+    @Column(name = "password_hash", nullable = false)
     @JsonIgnore
     private String password;
 
@@ -28,9 +22,9 @@ public class User extends AbstractAuditingEntity {
     @JsonIgnore
     @ManyToMany
     @JoinTable(
-            name = "authorities",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
+        name = "authorities",
+        joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+        inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
     private Set<Authority> authorities = new HashSet<>();
 
 
@@ -69,22 +63,6 @@ public class User extends AbstractAuditingEntity {
         this.enabled = enabled;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Personal getPersonal() {
-        return personal;
-    }
-
-    public void setPersonal(Personal personal) {
-        this.personal = personal;
-    }
-
     public int hashCode() {
         return toString().hashCode();
     }
@@ -93,8 +71,6 @@ public class User extends AbstractAuditingEntity {
     public String toString() {
         return "User{" +
             "login='" + login + '\'' +
-            ", email='" + email + '\'' +
-            ", personal=" + personal +
             ", password='" + password + '\'' +
             ", enabled=" + enabled +
             ", authorities=" + authorities +

@@ -1,7 +1,7 @@
 <div md-dialog-title fxLayout="row">
     <div fxFlex fxLayoutAlign="start center">
         <md-icon svgIcon="avatars:svg-11" class="avatar"></md-icon>
-        <div>{{model.personal.givenName + " " + model.personal.familyName}}</div>
+        <div>{{model.name}}</div>
 
     </div>
     <div fxLayoutAlign="end center">
@@ -37,15 +37,15 @@
             <md-list dense>
                 <md-list-item>
                     <md-icon md-list-icon></md-icon>
-                    <div md-line>{{model.personal.givenName}}</div>
+                    <div md-line>{{model.givenName}}</div>
                 </md-list-item>
                 <md-list-item>
                     <md-icon md-list-icon></md-icon>
-                    <div md-line>{{model.personal.familyName}}</div>
+                    <div md-line>{{model.familyName}}</div>
                 </md-list-item>
                 <md-list-item>
                     <md-icon md-list-icon>cake</md-icon>
-                    <div md-line>{{model.personal.birthday}}</div>
+                    <div md-line>{{model.birthday}}</div>
                 </md-list-item>
             </md-list>
         </md-tab>
