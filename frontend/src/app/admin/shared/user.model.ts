@@ -1,4 +1,4 @@
-import {AbstractAuditingEntity} from '../../shared/model/abstract-auditing-entity.model';
+import {AbstractAuditingEntity} from '../../shared/model/entity.model';
 
 export class User extends AbstractAuditingEntity {
     login: string;

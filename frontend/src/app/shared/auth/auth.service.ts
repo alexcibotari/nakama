@@ -19,8 +19,8 @@ interface OAuthTokenResponse {
     scope: string;
 }
 
-const LOGIN_ROUTE: string = '/login';
-const ROOT_ROUTE: string = '/';
+const LOGIN_ROUTE = '/login';
+const ROOT_ROUTE = '/';
 
 @Injectable()
 export class AuthService {
