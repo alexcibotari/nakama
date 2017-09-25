@@ -2,7 +2,6 @@ package com.alexcibotari.nakama.web.assembler;
 
 import com.alexcibotari.nakama.domain.User;
 import com.alexcibotari.nakama.web.controller.UserResourceController;
-import com.alexcibotari.nakama.web.resource.PersonalResource;
 import com.alexcibotari.nakama.web.resource.UserResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
