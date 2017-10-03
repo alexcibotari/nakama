@@ -24,23 +24,23 @@ public class Query implements GraphQLQueryResolver {
         this.authorityService = authorityService;
     }
 
-    public Optional<User> getMe() {
+    public Optional<User> me() {
         return userService.getUser();
     }
 
-    public List<User> getUsers() {
+    public List<User> users() {
         return userService.findAll();
     }
 
-    public Optional<User> getUser(String login) {
+    public Optional<User> user(String login) {
         return userService.findOneByLogin(login);
     }
 
-    public List<Authority> getAuthorities() {
+    public List<Authority> authorities() {
         return authorityService.findAll();
     }
 
-    public Optional<Authority> getAuthority(String name) {
+    public Optional<Authority> authority(String name) {
         return authorityService.findOneByName(name);
     }
 
