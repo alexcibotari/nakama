@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {MdDrawerToggleResult, MdSidenav} from '@angular/material';
+import {MatDrawerToggleResult, MatSidenav} from '@angular/material';
 
 @Component({
     selector: 'nkm-layout',
@@ -8,17 +8,17 @@ import {MdDrawerToggleResult, MdSidenav} from '@angular/material';
 })
 export class LayoutComponent implements OnInit {
 
-    @ViewChild(MdSidenav) sidenav: MdSidenav;
+    @ViewChild(MatSidenav) sidenav: MatSidenav;
 
     @Input() mode: 'over' | 'push' | 'side' = 'over';
 
     @Input('opened') opened: Boolean = false;
 
-    public open(): Promise<MdDrawerToggleResult> {
+    public open(): Promise<MatDrawerToggleResult> {
         return this.sidenav.open();
     }
 
-    public close(): Promise<MdDrawerToggleResult> {
+    public close(): Promise<MatDrawerToggleResult> {
         return this.sidenav.close();
     }
 

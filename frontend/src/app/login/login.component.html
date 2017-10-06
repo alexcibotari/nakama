@@ -1,31 +1,31 @@
-<md-sidenav-container fxLayout="column" fxFlex fullscreen fxLayoutAlign="center center">
+<mat-sidenav-container fxLayout="column" fxFlex fullscreen fxLayoutAlign="center center">
 
 
     <form role="form" (submit)="login()" #loginForm="ngForm">
         <br/>
-        <md-form-field>
-            <input mdInput type="text" required [(ngModel)]="model.login" id="login" name="login"/>
-            <md-placeholder>
-                <md-icon>person</md-icon>
+        <mat-form-field>
+            <input matInput type="text" required [(ngModel)]="model.login" id="login" name="login"/>
+            <mat-placeholder>
+                <mat-icon>person</mat-icon>
                 Username
-            </md-placeholder>
-        </md-form-field>
+            </mat-placeholder>
+        </mat-form-field>
         <br/>
         <br/>
-        <md-form-field>
-            <input mdInput type="password" required [(ngModel)]="model.password" id="password" name="password"/>
-            <md-placeholder>
-                <md-icon>lock_open</md-icon>
+        <mat-form-field>
+            <input matInput type="password" required [(ngModel)]="model.password" id="password" name="password"/>
+            <mat-placeholder>
+                <mat-icon>lock_open</mat-icon>
                 Password
-            </md-placeholder>
-        </md-form-field>
+            </mat-placeholder>
+        </mat-form-field>
         <br/>
         <br/>
-        <button md-raised-button color="warn" type="submit" name="action" [disabled]="!loginForm.form.valid">LOGIN</button>
+        <button mat-raised-button color="warn" type="submit" name="action" [disabled]="!loginForm.form.valid">LOGIN</button>
         <br/>
         <br/>
-        <md-slide-toggle color="primary">
+        <mat-slide-toggle color="primary">
             <small>Remember me!</small>
-        </md-slide-toggle>
+        </mat-slide-toggle>
     </form>
-</md-sidenav-container>
+</mat-sidenav-container>

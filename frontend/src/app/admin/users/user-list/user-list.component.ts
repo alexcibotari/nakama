@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
 import {ApolloService} from '../../../core/apollo.service';
 import {ConfirmationDialogComponent} from '../../../shared/component/dialog/confirmation-dialog/confirmation-dialog.component';
@@ -23,7 +23,7 @@ export class UserListComponent implements OnInit {
 
     constructor(private userService: UserService,
                 public dataSource: UserDataSource,
-                private dialog: MdDialog) {
+                private dialog: MatDialog) {
     }
 
     ngOnInit() {

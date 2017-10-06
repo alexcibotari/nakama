@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MD_DIALOG_DATA, MdDialog} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material';
 import {UserEditComponent} from '../user-edit/user-edit.component';
 import {User} from '../../shared/user.model';
 
@@ -12,7 +12,7 @@ import {User} from '../../shared/user.model';
 export class UserDetailComponent implements OnInit {
     public model: User;
 
-    constructor(@Inject(MD_DIALOG_DATA) public data: User, private dialog: MdDialog) {
+    constructor(@Inject(MAT_DIALOG_DATA) public data: User, private dialog: MatDialog) {
         this.model = this.data;
     }
 

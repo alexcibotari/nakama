@@ -1,48 +1,48 @@
 <nkm-layout #layout>
     <nkm-navigation-drawer>
-        <md-nav-list>
-            <md-list-item *ngFor="let route of userRoutes" (click)="layout.close()" routerLink="{{route.route}}">
+        <mat-nav-list>
+            <mat-list-item *ngFor="let route of userRoutes" (click)="layout.close()" routerLink="{{route.route}}">
                 <md-icon md-list-icon>{{route.icon}}</md-icon>
-                <h4 md-line>{{route.title}}</h4>
-            </md-list-item>
+                <h4 mat-line>{{route.title}}</h4>
+            </mat-list-item>
 
             <ng-container *ngIf="contentRoutes">
-                <md-divider></md-divider>
-                <h3 md-subheader>Content</h3>
-                <md-list-item *ngFor="let route of contentRoutes" (click)="layout.close()"
+                <mat-divider></mat-divider>
+                <h3 mat-subheader>Content</h3>
+                <mat-list-item *ngFor="let route of contentRoutes" (click)="layout.close()"
                               routerLink="{{route.route}}">
-                    <md-icon md-list-icon>{{route.icon}}</md-icon>
-                    <h4 md-line>{{route.title}}</h4>
-                </md-list-item>
+                    <mat-icon mat-list-icon>{{route.icon}}</mat-icon>
+                    <h4 mat-line>{{route.title}}</h4>
+                </mat-list-item>
             </ng-container>
 
             <ng-container *ngIf="commerceRoutes">
-                <md-divider></md-divider>
-                <h3 md-subheader>Commerce</h3>
-                <md-list-item *ngFor="let route of commerceRoutes" (click)="layout.close()"
+                <mat-divider></mat-divider>
+                <h3 mat-subheader>Commerce</h3>
+                <mat-list-item *ngFor="let route of commerceRoutes" (click)="layout.close()"
                               routerLink="{{route.route}}">
-                    <md-icon md-list-icon>{{route.icon}}</md-icon>
-                    <h4 md-line>{{route.title}}</h4>
-                </md-list-item>
+                    <mat-icon mat-list-icon>{{route.icon}}</mat-icon>
+                    <h4 mat-line>{{route.title}}</h4>
+                </mat-list-item>
             </ng-container>
 
             <ng-container *ngIf="adminRoutes">
-                <md-divider></md-divider>
-                <h3 md-subheader>Administration</h3>
-                <md-list-item *ngFor="let route of adminRoutes" (click)="layout.close()"
+                <mat-divider></mat-divider>
+                <h3 mat-subheader>Administration</h3>
+                <mat-list-item *ngFor="let route of adminRoutes" (click)="layout.close()"
                               routerLink="{{route.route}}">
-                    <md-icon md-list-icon>{{route.icon}}</md-icon>
-                    <h4 md-line>{{route.title}}</h4>
-                </md-list-item>
+                    <mat-icon mat-list-icon>{{route.icon}}</mat-icon>
+                    <h4 mat-line>{{route.title}}</h4>
+                </mat-list-item>
             </ng-container>
 
-            <md-divider></md-divider>
-            <md-list-item *ngFor="let route of otherRoutes" (click)="layout.close()"
+            <mat-divider></mat-divider>
+            <mat-list-item *ngFor="let route of otherRoutes" (click)="layout.close()"
                           routerLink="{{route.route}}">
-                <md-icon md-list-icon>{{route.icon}}</md-icon>
-                <h4 md-line>{{route.title}}</h4>
-            </md-list-item>
-        </md-nav-list>
+                <mat-icon mat-list-icon>{{route.icon}}</mat-icon>
+                <h4 mat-line>{{route.title}}</h4>
+            </mat-list-item>
+        </mat-nav-list>
     </nkm-navigation-drawer>
 
     <router-outlet></router-outlet>

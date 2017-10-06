@@ -1,15 +1,15 @@
-<md-sidenav-container fullscreen>
-    <md-sidenav #sidenav
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav
                 [mode]="mode"
                 [opened]="opened">
         <ng-content select="nkm-navigation-drawer"></ng-content>
-    </md-sidenav>
-    <md-toolbar color="primary">
-        <button md-icon-button (click)="sidenav.open()">
-            <md-icon>menu</md-icon>
+    </mat-sidenav>
+    <mat-toolbar color="primary">
+        <button mat-icon-button (click)="sidenav.open()">
+            <mat-icon>menu</mat-icon>
         </button>
         <span>Nakama</span>
-    </md-toolbar>
+    </mat-toolbar>
 
     <ng-content></ng-content>
-</md-sidenav-container>
+</mat-sidenav-container>

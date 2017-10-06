@@ -1,55 +1,55 @@
 <div md-dialog-title fxLayout="row">
     <div fxFlex fxLayoutAlign="start center">
-        <md-icon svgIcon="avatars:svg-11" class="avatar"></md-icon>
+        <mat-icon svgIcon="avatars:svg-11" class="avatar"></mat-icon>
         <div>{{model.name}}</div>
 
     </div>
     <div fxLayoutAlign="end center">
-        <button md-icon-button (click)="toEdit(model)">
-            <md-icon>edit</md-icon>
+        <button mat-icon-button (click)="toEdit(model)">
+            <mat-icon>edit</mat-icon>
         </button>
-        <button md-icon-button md-dialog-close>
-            <md-icon>close</md-icon>
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
         </button>
     </div>
 </div>
-<md-dialog-content>
-    <md-tab-group>
-        <md-tab label="User details">
-            <md-list dense>
-                <md-list-item>
-                    <md-icon md-list-icon>person</md-icon>
-                    <div md-line>{{model.login}}</div>
-                </md-list-item>
-                <md-list-item>
-                    <md-icon md-list-icon>email</md-icon>
-                    <div md-line>{{model.email}}</div>
-                </md-list-item>
-                <md-divider></md-divider>
-                <h3 md-subheader>Authorities</h3>
-                <md-list-item>
-                    <md-icon md-list-icon>group</md-icon>
-                    <div md-line>{{model.email}}</div>
-                </md-list-item>
-            </md-list>
-        </md-tab>
-        <md-tab label="Personal details">
-            <md-list dense>
-                <md-list-item>
-                    <md-icon md-list-icon></md-icon>
-                    <div md-line>{{model.givenName}}</div>
-                </md-list-item>
-                <md-list-item>
-                    <md-icon md-list-icon></md-icon>
-                    <div md-line>{{model.familyName}}</div>
-                </md-list-item>
-                <md-list-item>
-                    <md-icon md-list-icon>cake</md-icon>
-                    <div md-line>{{model.birthday}}</div>
-                </md-list-item>
-            </md-list>
-        </md-tab>
-    </md-tab-group>
+<mat-dialog-content>
+    <mat-tab-group>
+        <mat-tab label="User details">
+            <mat-list dense>
+                <mat-list-item>
+                    <mat-icon mat-list-icon>person</mat-icon>
+                    <div mat-line>{{model.login}}</div>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon mat-list-icon>email</mat-icon>
+                    <div mat-line>{{model.email}}</div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <h3 mat-subheader>Authorities</h3>
+                <mat-list-item>
+                    <mat-icon mat-list-icon>group</mat-icon>
+                    <div mat-line>{{model.email}}</div>
+                </mat-list-item>
+            </mat-list>
+        </mat-tab>
+        <mat-tab label="Personal details">
+            <mat-list dense>
+                <mat-list-item>
+                    <mat-icon mat-list-icon></mat-icon>
+                    <div mat-line>{{model.givenName}}</div>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon mat-list-icon></mat-icon>
+                    <div mat-line>{{model.familyName}}</div>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon mat-list-icon>cake</mat-icon>
+                    <div mat-line>{{model.birthday}}</div>
+                </mat-list-item>
+            </mat-list>
+        </mat-tab>
+    </mat-tab-group>
 
 
-</md-dialog-content>
+</mat-dialog-content>

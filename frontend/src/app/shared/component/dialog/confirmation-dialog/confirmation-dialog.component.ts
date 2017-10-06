@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MD_DIALOG_DATA} from '@angular/material';
+import {MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
     selector: 'nkm-confirmation-dialog',
@@ -8,7 +8,7 @@ import {MD_DIALOG_DATA} from '@angular/material';
 })
 export class ConfirmationDialogComponent implements OnInit {
 
-    constructor(@Inject(MD_DIALOG_DATA) public data: any) {
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     }
 
     ngOnInit() {

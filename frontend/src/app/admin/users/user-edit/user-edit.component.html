@@ -3,42 +3,42 @@
         <div fxFlex fxLayoutAlign="start center">Edit User</div>
     </div>
     <div fxLayoutAlign="end center">
-        <button md-icon-button md-dialog-close>
-            <md-icon>close</md-icon>
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
         </button>
     </div>
 </div>
 
-<md-dialog-content>
+<mat-dialog-content>
     <form #modelForm="ngForm" fxLayout="column" fxLayoutAlign="space-around stretch">
-        <md-form-field>
-            <input mdInput placeholder="Login" [ngModel]="model.login" name="login" disabled>
-        </md-form-field>
-        <md-form-field>
-            <input mdInput placeholder="Email" [ngModel]="model.email" name="email" disabled>
-        </md-form-field>
-        <md-checkbox [(ngModel)]="model.enabled" name="enabled">Enabled</md-checkbox>
-        <md-form-field>
-            <input mdInput placeholder="Given Name" [(ngModel)]="model.givenName" name="givenName"
+        <mat-form-field>
+            <input matInput placeholder="Login" [ngModel]="model.login" name="login" disabled>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Email" [ngModel]="model.email" name="email" disabled>
+        </mat-form-field>
+        <mat-checkbox [(ngModel)]="model.enabled" name="enabled">Enabled</mat-checkbox>
+        <mat-form-field>
+            <input matInput placeholder="Given Name" [(ngModel)]="model.givenName" name="givenName"
                    required>
-        </md-form-field>
-        <md-form-field>
-            <input mdInput placeholder="Family Name" [(ngModel)]="model.familyName" name="familyName"
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Family Name" [(ngModel)]="model.familyName" name="familyName"
                    required>
-        </md-form-field>
-        <md-form-field>
-            <input mdInput placeholder="Birthday" [(ngModel)]="model.birthday" name="birthday"
-                   required [mdDatepicker]="picker">
-            <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-            <md-datepicker #picker></md-datepicker>
-        </md-form-field>
-        <md-divider></md-divider>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Birthday" [(ngModel)]="model.birthday" name="birthday"
+                   required [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-divider></mat-divider>
     </form>
-</md-dialog-content>
-<md-dialog-actions fxLayoutAlign="end center">
-    <button md-button md-dialog-close color="accent">Cancel</button>
+</mat-dialog-content>
+<mat-dialog-actions fxLayoutAlign="end center">
+    <button mat-button mat-dialog-close color="accent">Cancel</button>
     <!-- Can optionally provide a result for the closing dialog. -->
-    <button md-button [md-dialog-close]="model" color="accent"
+    <button mat-button [mat-dialog-close]="model" color="accent"
             [disabled]="(!modelForm.form.valid || !modelForm.form.touched)">Save
     </button>
-</md-dialog-actions>
+</mat-dialog-actions>

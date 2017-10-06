@@ -1,54 +1,54 @@
 <div fxLayout="column" fxLayoutAlign="space-between none">
 
     <div class="users-filter">
-        <md-form-field floatPlaceholder="never">
-            <input mdInput #filter placeholder="Filter users">
-        </md-form-field>
+        <mat-form-field floatPlaceholder="never">
+            <input matInput #filter placeholder="Filter users">
+        </mat-form-field>
     </div>
 
-    <md-table #table [dataSource]="dataSource">
+    <mat-table #table [dataSource]="dataSource">
 
         <ng-container cdkColumnDef="avatar">
-            <md-header-cell *cdkHeaderCellDef>Avatar</md-header-cell>
-            <md-cell *cdkCellDef="let row">
-                <md-icon svgIcon="avatars:svg-11" class="avatar-sm"></md-icon>
-            </md-cell>
+            <mat-header-cell *cdkHeaderCellDef>Avatar</mat-header-cell>
+            <mat-cell *cdkCellDef="let row">
+                <mat-icon svgIcon="avatars:svg-11" class="avatar-sm"></mat-icon>
+            </mat-cell>
         </ng-container>
 
         <ng-container cdkColumnDef="name">
-            <md-header-cell *cdkHeaderCellDef>Name</md-header-cell>
-            <md-cell *cdkCellDef="let row"> {{row.name}}</md-cell>
+            <mat-header-cell *cdkHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.name}}</mat-cell>
         </ng-container>
 
         <ng-container cdkColumnDef="login">
-            <md-header-cell *cdkHeaderCellDef>Login</md-header-cell>
-            <md-cell *cdkCellDef="let row"> {{row.login}}</md-cell>
+            <mat-header-cell *cdkHeaderCellDef>Login</mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.login}}</mat-cell>
         </ng-container>
 
         <ng-container cdkColumnDef="email">
-            <md-header-cell *cdkHeaderCellDef>Email</md-header-cell>
-            <md-cell *cdkCellDef="let row"> {{row.email}}</md-cell>
+            <mat-header-cell *cdkHeaderCellDef>Email</mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.email}}</mat-cell>
         </ng-container>
 
         <ng-container cdkColumnDef="actions">
-            <md-header-cell *cdkHeaderCellDef>Actions</md-header-cell>
-            <md-cell *cdkCellDef="let row">
-                <button md-icon-button (click)="toDetail(row)">
-                    <md-icon>info</md-icon>
+            <mat-header-cell *cdkHeaderCellDef>Actions</mat-header-cell>
+            <mat-cell *cdkCellDef="let row">
+                <button mat-icon-button (click)="toDetail(row)">
+                    <mat-icon>info</mat-icon>
                 </button>
-                <button md-icon-button (click)="toEdit(row)">
-                    <md-icon>edit</md-icon>
+                <button mat-icon-button (click)="toEdit(row)">
+                    <mat-icon>edit</mat-icon>
                 </button>
-                <button md-icon-button (click)="toDelete(row)">
-                    <md-icon>delete</md-icon>
+                <button mat-icon-button (click)="toDelete(row)">
+                    <mat-icon>delete</mat-icon>
                 </button>
-            </md-cell>
+            </mat-cell>
         </ng-container>
 
-        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
-        <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
-    </md-table>
+        <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
 </div>
-<button md-fab class="fab-bottom-right">
-    <md-icon>add</md-icon>
+<button mat-fab class="fab-bottom-right">
+    <mat-icon>add</mat-icon>
 </button>
