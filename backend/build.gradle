@@ -1,5 +1,3 @@
-//evaluationDependsOn(':frontend')
-
 buildscript {
 
     ext {
