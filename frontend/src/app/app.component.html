@@ -2,7 +2,7 @@
     <nkm-navigation-drawer>
         <mat-nav-list>
             <mat-list-item *ngFor="let route of userRoutes" (click)="layout.close()" routerLink="{{route.route}}">
-                <md-icon md-list-icon>{{route.icon}}</md-icon>
+                <mat-icon mat-list-icon>{{route.icon}}</mat-icon>
                 <h4 mat-line>{{route.title}}</h4>
             </mat-list-item>
 

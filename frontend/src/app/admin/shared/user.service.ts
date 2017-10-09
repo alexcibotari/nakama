@@ -4,8 +4,8 @@ import gql from 'graphql-tag';
 import {ApolloService} from '../../core/apollo.service';
 import {User} from './user.model';
 
-const allSummary = gql`
-    {
+const findUsersSummery = gql`
+    query findUsersSummery{
         users {
             id
             login
@@ -18,6 +18,24 @@ export interface UsersResponse {
     users: User[];
 }
 
+const findUserByLogin = gql`
+    query findUserByLogin($login: String!){
+        user (login : $login) {
+            id
+            login
+            email
+            name
+            birthday
+            authorities{
+                name
+            }
+        }
+    }`;
+
+export interface UserResponse {
+    user: User;
+}
+
 @Injectable()
 export class UserService {
 
@@ -26,6 +44,10 @@ export class UserService {
     }
 
     public findAllSummary(): ApolloQueryObservable<UsersResponse> {
-        return this.apollo.watchQuery<UsersResponse>({query: allSummary});
+        return this.apollo.watchQuery<UsersResponse>({query: findUsersSummery});
+    }
+
+    public findOne(login: string): ApolloQueryObservable<UserResponse> {
+        return this.apollo.watchQuery<UserResponse>({query: findUserByLogin, variables: {login: login}});
     }
 }

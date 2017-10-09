@@ -28,19 +28,19 @@ public class Query implements GraphQLQueryResolver {
         return userService.getUser();
     }
 
-    public List<User> users() {
+    public List<User> getUsers() {
         return userService.findAll();
     }
 
-    public Optional<User> user(String login) {
+    public Optional<User> getUser(String login) {
         return userService.findOneByLogin(login);
     }
 
-    public List<Authority> authorities() {
+    public List<Authority> getAuthorities() {
         return authorityService.findAll();
     }
 
-    public Optional<Authority> authority(String name) {
+    public Optional<Authority> getAuthority(String name) {
         return authorityService.findOneByName(name);
     }
 

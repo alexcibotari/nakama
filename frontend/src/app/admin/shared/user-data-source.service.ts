@@ -26,9 +26,9 @@ export class UserDataSource extends DataSource<User> {
 
     connect(collectionViewer: CollectionViewer): Observable<User[]> {
         this.userService.findAllSummary()
-            .subscribe((data) => {
-                this._dataChanges.next(data.data.users);
-                console.log(data);
+            .subscribe((value) => {
+                this._dataChanges.next(value.data.users);
+                console.log(value);
             });
         return Observable.merge(...[this._dataChanges, this._filterChange]).map(() => {
             return this._dataChanges.getValue().slice()

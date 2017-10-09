@@ -3,7 +3,7 @@
     flex: 1;
 }
 
-/deep/ md-icon.avatar {
+/deep/ mat-icon.avatar {
     overflow: hidden;
     width: 60px;
     height: 60px;
@@ -11,7 +11,7 @@
     margin: 10px;
 }
 
-/deep/ md-icon.avatar-sm {
+/deep/ mat-icon.avatar-sm {
     overflow: hidden;
     width: 30px;
     height: 30px;
@@ -19,6 +19,6 @@
     margin: 10px;
 }
 
-/deep/ md-dialog-container {
+/deep/ mat-dialog-container {
     min-width: 50vw;
 }

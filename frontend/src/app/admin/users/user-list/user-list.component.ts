@@ -1,11 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
-import {ApolloService} from '../../../core/apollo.service';
 import {ConfirmationDialogComponent} from '../../../shared/component/dialog/confirmation-dialog/confirmation-dialog.component';
 import {UserDataSource} from '../../shared/user-data-source.service';
 import {User} from '../../shared/user.model';
-import {UserService} from '../../shared/user.service';
 import {UserDetailComponent} from '../user-detail/user-detail.component';
 import {UserEditComponent} from '../user-edit/user-edit.component';
 
@@ -21,8 +19,7 @@ export class UserListComponent implements OnInit {
 
     @ViewChild('filter') filter: ElementRef;
 
-    constructor(private userService: UserService,
-                public dataSource: UserDataSource,
+    constructor(public dataSource: UserDataSource,
                 private dialog: MatDialog) {
     }
 
@@ -37,22 +34,22 @@ export class UserListComponent implements OnInit {
 
     toDetail(user: User) {
         const dialogRef = this.dialog.open(UserDetailComponent, {data: user});
-        dialogRef.afterClosed().subscribe((result: User) => {
-            console.log(result);
+        dialogRef.afterClosed().subscribe((value: User) => {
+            console.log(value);
         });
     }
 
     toEdit(user: User) {
         const dialogRef = this.dialog.open(UserEditComponent, {data: user});
-        dialogRef.afterClosed().subscribe((result: User) => {
-            console.log(result);
+        dialogRef.afterClosed().subscribe((value: User) => {
+            console.log(value);
         });
     }
 
     toDelete(user: User) {
         const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {content: `Delete ${user.name} user ?`}});
-        dialogRef.afterClosed().subscribe(result => {
-            console.log(result);
+        dialogRef.afterClosed().subscribe(value => {
+            console.log(value);
         });
     }
 }

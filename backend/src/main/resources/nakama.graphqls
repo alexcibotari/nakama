@@ -1,5 +1,6 @@
 type Query {
 
+    #Current user information
     me: User
 
     users: [User!]!
@@ -12,23 +13,30 @@ type Query {
 }
 
 interface Entity {
+    #Unique Identifier
     id: ID!
 }
 
 interface AuditingEntity{
+    #Unique Identifier
     id: ID!
     createdBy: String!
     createdDate: String!
     lastModifiedBy: String
     lastModifiedDate: String
 }
-
+#A user is an individual's account on Nakama
 type User implements AuditingEntity {
+    #Unique Identifier
     id: ID!
-
+    #The username used to login.
     login: String!
-
+    #The user's publicly visible profile email.
     email: String
+    #The user's authorities
+    authorities: [Authority!]
+
+    #The user's public profile name.
     name: String
     givenName: String
     familyName: String
