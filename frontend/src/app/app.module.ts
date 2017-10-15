@@ -16,6 +16,7 @@ import {ApolloFactoryLoader, ApolloService, getApolloClient} from './core/apollo
 import {CoreModule} from './core/core.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {LoginComponent} from './login/login.component';
+import {MainComponent} from './main/main.component';
 import './rxjs-operators';
 import {AuthService} from './shared/auth/auth.service';
 import {ConfirmationDialogComponent} from './shared/component/dialog/confirmation-dialog/confirmation-dialog.component';
@@ -36,7 +37,7 @@ import {SharedModule} from './shared/shared.module';
         FlexLayoutModule,
         ApolloModule.forRoot(getApolloClient)
     ],
-    declarations: [AppComponent, DashboardComponent, LoginComponent, ConfirmationDialogComponent],
+    declarations: [AppComponent, MainComponent, DashboardComponent, LoginComponent, ConfirmationDialogComponent],
     entryComponents: [ConfirmationDialogComponent],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

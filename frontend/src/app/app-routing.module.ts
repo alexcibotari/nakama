@@ -2,19 +2,25 @@ import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule} from '@angular/router';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {LoginComponent} from './login/login.component';
+import {MainComponent} from './main/main.component';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
             {
-                path: '', component: DashboardComponent
-            },
-            {
                 path: 'login', component: LoginComponent
             },
             {
-                path: 'admin', loadChildren: './admin/admin.module#AdminModule'
-            }
+                path: '', component: MainComponent,
+                children: [
+                    {
+                        path: '', component: DashboardComponent
+                    },
+                    {
+                        path: 'admin', loadChildren: './admin/admin.module#AdminModule'
+                    }
+                ]
+            },
         ], {preloadingStrategy: PreloadAllModules})
     ],
     exports: [
