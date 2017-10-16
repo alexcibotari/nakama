@@ -1,7 +1,5 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import {FormsModule} from '@angular/forms';
 import {AdminRoutingModule} from './admin-routing.module';
 import {AdminComponent} from './admin.component';
 import {UserDetailComponent} from './users/user-detail/user-detail.component';
@@ -17,8 +15,6 @@ import {UserService} from './shared/user.service';
     imports: [
         SharedModule,
         CommonModule,
-        FormsModule,
-        FlexLayoutModule,
         AdminRoutingModule,
         AuthModule
     ],

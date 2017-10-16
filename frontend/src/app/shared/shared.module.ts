@@ -26,6 +26,15 @@ import {
 import {LayoutNavComponent} from './component/layout/layout-nav/layout-nav.component';
 import {LayoutComponent} from './component/layout/layout.component';
 import {NavigationDrawerComponent} from './component/layout/navigation-drawer/navigation-drawer.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
+
+const ANGULAR_MODULE: any[] = [
+    FormsModule
+];
+
+const ANGULAR_LAYOUT_MODULE: any[] = [
+    FlexLayoutModule
+];
 
 const MATERIAL_MODULES: any[] = [
     CdkTableModule,
@@ -60,11 +69,15 @@ const LAYOUT_COMPONENTS: any[] = [
     imports: [
         FormsModule,
         CommonModule,
+        ANGULAR_MODULE,
+        ANGULAR_LAYOUT_MODULE,
         MATERIAL_MODULES
     ],
     declarations: [LAYOUT_COMPONENTS],
     providers: [],
     exports: [
+        ANGULAR_MODULE,
+        ANGULAR_LAYOUT_MODULE,
         MATERIAL_MODULES,
         LAYOUT_COMPONENTS
     ]
