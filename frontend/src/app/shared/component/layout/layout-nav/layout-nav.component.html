@@ -1,6 +1,10 @@
-<div>
-    <mat-toolbar>
+<div fxLayout="column" fxFlex>
+    <mat-toolbar color="primary">
         <ng-content select="[nkm-menu-button]"></ng-content>
+        <button mat-icon-button (click)="_layout.open()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>Nakama &nbsp;</span>
         <ng-content select="[nkm-toolbar-content]"></ng-content>
     </mat-toolbar>
     <div>

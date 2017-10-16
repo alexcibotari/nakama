@@ -5,12 +5,5 @@
         <ng-content select="nkm-navigation-drawer"></ng-content>
         <ng-content select="[nkm-sidenav-content]"></ng-content>
     </mat-sidenav>
-    <mat-toolbar color="primary">
-        <button mat-icon-button (click)="sidenav.open()">
-            <mat-icon>menu</mat-icon>
-        </button>
-        <span>Nakama</span>
-    </mat-toolbar>
-
     <ng-content></ng-content>
 </mat-sidenav-container>

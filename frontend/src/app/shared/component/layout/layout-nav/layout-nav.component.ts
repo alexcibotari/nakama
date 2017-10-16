@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, forwardRef, Inject, OnInit} from '@angular/core';
+import {LayoutComponent} from '../layout.component';
 
 @Component({
     selector: 'nkm-layout-nav',
@@ -7,7 +8,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class LayoutNavComponent implements OnInit {
 
-    constructor() {
+    constructor(@Inject(forwardRef(() => LayoutComponent)) public _layout: LayoutComponent) {
     }
 
     ngOnInit() {
