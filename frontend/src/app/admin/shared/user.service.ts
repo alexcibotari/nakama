@@ -26,6 +26,8 @@ const findUserByLogin = gql`
             email
             name
             birthday
+            familyName
+            givenName
             authorities{
                 name
             }

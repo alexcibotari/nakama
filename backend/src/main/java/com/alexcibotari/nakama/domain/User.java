@@ -20,7 +20,7 @@ public class User extends Person {
     private Boolean enabled;
 
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "authorities",
         joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
