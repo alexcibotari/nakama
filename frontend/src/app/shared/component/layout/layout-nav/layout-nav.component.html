@@ -1,4 +1,4 @@
-<div>
+<ng-container>
     <mat-toolbar color="primary">
         <ng-content select="[nkm-menu-button]"></ng-content>
         <button mat-icon-button (click)="_layout.open()">
@@ -11,4 +11,4 @@
         <ng-content></ng-content>
     </div>
     <ng-content select="nkm-layout-footer"></ng-content>
-</div>
+</ng-container>
