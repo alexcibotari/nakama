@@ -32,14 +32,16 @@ type User implements AuditingEntity {
     #The username used to login.
     login: String!
     #The user's publicly visible profile email.
-    email: String
+    email: String!
+    #The use's activation status
+    enabled: Boolean!
     #The user's authorities
     authorities: [Authority!]
 
     #The user's public profile name.
-    name: String
-    givenName: String
-    familyName: String
+    name: String!
+    givenName: String!
+    familyName: String!
     birthday: String
     gender: String
 

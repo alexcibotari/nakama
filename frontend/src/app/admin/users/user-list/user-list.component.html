@@ -10,36 +10,48 @@
 
         <ng-container cdkColumnDef="avatar">
             <mat-header-cell *cdkHeaderCellDef>Avatar</mat-header-cell>
-            <mat-cell *cdkCellDef="let row">
+            <mat-cell *cdkCellDef="let item">
                 <mat-icon svgIcon="avatars:svg-11" class="avatar-sm"></mat-icon>
             </mat-cell>
         </ng-container>
 
         <ng-container cdkColumnDef="name">
             <mat-header-cell *cdkHeaderCellDef>Name</mat-header-cell>
-            <mat-cell *cdkCellDef="let row"> {{row.name}}</mat-cell>
+            <mat-cell *cdkCellDef="let item"> {{item.name}}</mat-cell>
         </ng-container>
 
         <ng-container cdkColumnDef="login">
             <mat-header-cell *cdkHeaderCellDef>Login</mat-header-cell>
-            <mat-cell *cdkCellDef="let row"> {{row.login}}</mat-cell>
+            <mat-cell *cdkCellDef="let item"> {{item.login}}</mat-cell>
         </ng-container>
 
         <ng-container cdkColumnDef="email">
             <mat-header-cell *cdkHeaderCellDef>Email</mat-header-cell>
-            <mat-cell *cdkCellDef="let row"> {{row.email}}</mat-cell>
+            <mat-cell *cdkCellDef="let item"> {{item.email}}</mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="enabled">
+            <mat-header-cell *cdkHeaderCellDef>Enabled</mat-header-cell>
+            <mat-cell *cdkCellDef="let item">
+                <ng-container *ngIf="item.enabled">
+                    <mat-icon>check</mat-icon>
+                </ng-container>
+                <ng-container *ngIf="!item.enabled">
+                    <mat-icon>close</mat-icon>
+                </ng-container>
+            </mat-cell>
         </ng-container>
 
         <ng-container cdkColumnDef="actions">
             <mat-header-cell *cdkHeaderCellDef>Actions</mat-header-cell>
-            <mat-cell *cdkCellDef="let row">
-                <button mat-icon-button (click)="toDetail(row)">
+            <mat-cell *cdkCellDef="let item">
+                <button mat-icon-button (click)="toDetail(item)">
                     <mat-icon>info</mat-icon>
                 </button>
-                <button mat-icon-button (click)="toEdit(row)">
+                <button mat-icon-button (click)="toEdit(item)">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-icon-button (click)="toDelete(row)">
+                <button mat-icon-button (click)="toDelete(item)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </mat-cell>

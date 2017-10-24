@@ -11,6 +11,7 @@ const findUsersSummery = gql`
             login
             email
             name
+            enabled
         }
     }`;
 

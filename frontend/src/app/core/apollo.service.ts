@@ -3,7 +3,7 @@ import {environment} from '../../environments/environment';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Apollo, ApolloQueryObservable} from 'apollo-angular';
-import {AuthService} from '../shared/auth/auth.service';
+import {AuthService} from '../core/auth.service';
 
 const networkInterface = createNetworkInterface({uri: environment.graphql.uri});
 

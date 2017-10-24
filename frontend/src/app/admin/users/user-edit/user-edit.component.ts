@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
-import {ObjectUtils} from '../../../core/object-utils.service';
 import {User} from '../../shared/user.model';
+import {UserService} from '../../shared/user.service';
 
 @Component({
     moduleId: module.id,
@@ -11,13 +11,17 @@ import {User} from '../../shared/user.model';
 })
 export class UserEditComponent implements OnInit {
     public model: User;
+    public loading = true;
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data: User, private objectUtils: ObjectUtils) {
+    constructor(@Inject(MAT_DIALOG_DATA) public data: User, private userService: UserService) {
     }
 
     ngOnInit() {
-        this.model = this.objectUtils.clone(this.data);
-        console.log(this.model);
+        this.userService.findOne(this.data.login)
+            .subscribe(value => {
+                this.loading = value.loading;
+                this.model = value.data.user;
+            });
     }
 
 }

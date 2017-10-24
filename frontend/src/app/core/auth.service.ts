@@ -2,8 +2,7 @@ import {Injectable} from '@angular/core';
 import {Headers, Http, RequestOptionsArgs, Response} from '@angular/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
-import {environment} from '../../../environments/environment';
-import {URLParams} from '../../core/web/http/http-rest.service';
+import {environment} from '../../environments/environment';
 
 interface OAuthTokenRequest {
     client_id: string;
@@ -17,6 +16,10 @@ interface OAuthTokenResponse {
     token_type: string;
     expires_in: number;
     scope: string;
+}
+
+interface URLParams {
+    [key: string]: any | any[];
 }
 
 const LOGIN_ROUTE = '/login';

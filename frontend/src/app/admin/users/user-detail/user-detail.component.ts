@@ -25,8 +25,8 @@ export class UserDetailComponent implements OnInit {
             });
     }
 
-    toEdit(user: User) {
-        const dialogRef = this.dialog.open(UserEditComponent, {data: user});
+    toEdit() {
+        const dialogRef = this.dialog.open(UserEditComponent, {data: this.model});
         dialogRef.afterClosed().subscribe((value: User) => {
             console.log(value);
         });

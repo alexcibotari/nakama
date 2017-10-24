@@ -1,44 +1,50 @@
-<div mat-dialog-title fxLayout="row">
-    <div fxFlex fxLayoutAlign="start center">
-        <div fxFlex fxLayoutAlign="start center">Edit User</div>
-    </div>
-    <div fxLayoutAlign="end center">
-        <button mat-icon-button mat-dialog-close>
-            <mat-icon>close</mat-icon>
-        </button>
-    </div>
-</div>
+<ng-container *ngIf="loading">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-container>
 
-<mat-dialog-content>
-    <form #modelForm="ngForm" fxLayout="column" fxLayoutAlign="space-around stretch">
-        <mat-form-field>
-            <input matInput placeholder="Login" [ngModel]="model.login" name="login" disabled>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Email" [ngModel]="model.email" name="email" disabled>
-        </mat-form-field>
-        <mat-checkbox [(ngModel)]="model.enabled" name="enabled">Enabled</mat-checkbox>
-        <mat-form-field>
-            <input matInput placeholder="Given Name" [(ngModel)]="model.givenName" name="givenName"
-                   required>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Family Name" [(ngModel)]="model.familyName" name="familyName"
-                   required>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Birthday" [(ngModel)]="model.birthday" name="birthday"
-                   required [matDatepicker]="picker">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <mat-divider></mat-divider>
-    </form>
-</mat-dialog-content>
-<mat-dialog-actions fxLayoutAlign="end center">
-    <button mat-button mat-dialog-close color="accent">Cancel</button>
-    <!-- Can optionally provide a result for the closing dialog. -->
-    <button mat-button [mat-dialog-close]="model" color="accent"
-            [disabled]="(!modelForm.form.valid || !modelForm.form.touched)">Save
-    </button>
-</mat-dialog-actions>
+<ng-container *ngIf="!loading">
+    <div mat-dialog-title fxLayout="row">
+        <div fxFlex fxLayoutAlign="start center">
+            <div fxFlex fxLayoutAlign="start center">Edit User</div>
+        </div>
+        <div fxLayoutAlign="end center">
+            <button mat-icon-button mat-dialog-close>
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <mat-dialog-content>
+        <form #modelForm="ngForm" fxLayout="column" fxLayoutAlign="space-around stretch">
+            <mat-form-field>
+                <input matInput placeholder="Login" [ngModel]="model.login" name="login" disabled>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Email" [ngModel]="model.email" name="email" disabled>
+            </mat-form-field>
+            <mat-checkbox [(ngModel)]="model.enabled" name="enabled">Enabled</mat-checkbox>
+            <mat-form-field>
+                <input matInput placeholder="Given Name" [(ngModel)]="model.givenName" name="givenName"
+                       required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Family Name" [(ngModel)]="model.familyName" name="familyName"
+                       required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Birthday" [(ngModel)]="model.birthday" name="birthday"
+                       required [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-divider></mat-divider>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions fxLayoutAlign="end center">
+        <button mat-button mat-dialog-close color="accent">Cancel</button>
+        <!-- Can optionally provide a result for the closing dialog. -->
+        <button mat-button [mat-dialog-close]="model" color="accent"
+                [disabled]="(!modelForm.form.valid || !modelForm.form.touched)">Save
+        </button>
+    </mat-dialog-actions>
+</ng-container>

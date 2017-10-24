@@ -1,5 +1,5 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
-import {AuthService} from '../shared/auth/auth.service';
+import {AuthService} from '../core/auth.service';
 
 @NgModule({
     imports: [/* Other nifty modules */],

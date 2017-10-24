@@ -15,7 +15,7 @@ import {UserEditComponent} from '../user-edit/user-edit.component';
     providers: []
 })
 export class UserListComponent implements OnInit {
-    displayedColumns = ['avatar', 'name', 'login', 'email', 'actions'];
+    displayedColumns = ['avatar', 'name', 'login', 'email', 'enabled', 'actions'];
 
     @ViewChild('filter') filter: ElementRef;
 
