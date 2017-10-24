@@ -1,18 +1,18 @@
 package com.alexcibotari.nakama.utils;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class ClassUtils {
 
-    protected ClassUtils() { }
+    protected ClassUtils() {
+    }
 
-    public static  void setIfNotNull(final Supplier getter, final Consumer setter) {
-
-       /* T t = getter.get();
-
-        if (null != t) {
+    public static <T> void setIfNotNull(final Supplier<T> getter, final Consumer<T> setter) {
+        T t = getter.get();
+        if (Objects.nonNull(t)) {
             setter.accept(t);
-        }*/
+        }
     }
 }
