@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, RequestOptionsArgs, Response} from '@angular/http';
+import {HttpHeaders, HttpClient, HttpResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {environment} from '../../environments/environment';
@@ -28,14 +28,14 @@ const ROOT_ROUTE = '/';
 @Injectable()
 export class AuthService {
 
-    private readonly headers: Headers = new Headers({
+    private readonly headers: HttpHeaders = new HttpHeaders({
         'Authorization': `Basic ${environment.oauth.basic}`,
         'Content-Type': 'application/x-www-form-urlencoded'
     });
 
     private urlRedirectTo: string;
 
-    constructor(private http: Http, private router: Router) {
+    constructor(private http: HttpClient, private router: Router) {
     }
 
     public setURLRedirectTo(urlRedirectTo: string): void {
@@ -49,11 +49,10 @@ export class AuthService {
             username: username,
             password: password
         };
-        return this.http.post(environment.oauth.url + '/token', this.buildFormURLEncoded(request), this.buildRequestOptions())
-            .map((response: Response) => {
-                const resp: OAuthTokenResponse = response.json();
-                if (resp && resp.access_token) {
-                    localStorage.setItem(environment.oauth.key, resp.access_token);
+        return this.http.post<OAuthTokenResponse>(environment.oauth.url + '/token', this.buildFormURLEncoded(request), this.buildRequestOptions())
+            .map(value => {
+                if (value && value.access_token) {
+                    localStorage.setItem(environment.oauth.key, value.access_token);
                     if (this.urlRedirectTo && this.urlRedirectTo !== LOGIN_ROUTE) {
                         this.router.navigate([this.urlRedirectTo]);
                     } else {
@@ -83,7 +82,7 @@ export class AuthService {
     }
 
 
-    protected buildRequestOptions(params?: URLParams | URLSearchParams): RequestOptionsArgs {
+    protected buildRequestOptions(params?: URLParams | URLSearchParams): Object {
         return {
             headers: this.headers,
             params: params

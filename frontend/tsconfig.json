@@ -1,7 +1,6 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
-        "baseUrl": "src",
         "outDir": "./dist/out-tsc",
         "sourceMap": true,
         "declaration": false,
@@ -9,17 +8,15 @@
         "target": "es5",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "types": [
-            "hammerjs"
+        "typeRoots": [
+            "node_modules/@types"
         ],
         "module": "commonjs",
         "lib": [
             "esnext",
             "es2016",
             "dom"
-        ],
-        "noImplicitAny": true,
-        "suppressImplicitAnyIndexErrors": true
+        ]
     },
     "exclude": [
         "node_modules"
