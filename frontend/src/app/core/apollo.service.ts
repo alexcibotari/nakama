@@ -39,10 +39,6 @@ const apolloClient = new ApolloClient({
     },*/
 });
 
-export function ApolloFactoryLoader(auth: AuthService, router: Router) {
-    return new ApolloService(auth, router);
-}
-
 export function getApolloClient() {
     return apolloClient;
 }
@@ -91,6 +87,10 @@ export class ApolloService extends Apollo {
         }
 
     }
+}
+
+export function ApolloFactoryLoader(auth: AuthService, router: Router) {
+    return new ApolloService(auth, router);
 }
 
 export {ApolloQueryObservable, ApolloModule} from 'apollo-angular';

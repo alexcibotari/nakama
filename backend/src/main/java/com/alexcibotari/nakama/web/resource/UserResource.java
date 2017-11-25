@@ -1,12 +1,8 @@
 package com.alexcibotari.nakama.web.resource;
 
-
-import org.springframework.hateoas.core.Relation;
-
 import javax.validation.constraints.Size;
 import java.util.Set;
 
-@Relation(value = "user", collectionRelation = "users")
 public class UserResource extends PersonResource {
 
     @Size(min = 3, max = 50)
@@ -49,7 +45,6 @@ public class UserResource extends PersonResource {
         this.authorities = authorities;
     }
 
-    @Override
     public String toString() {
         return "UserResource{" +
             "login='" + login + '\'' +

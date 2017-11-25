@@ -19,7 +19,7 @@
             "testTsconfig": "tsconfig.spec.json",
             "prefix": "nkm",
             "styles": [
-                "styles.css",
+                "styles.scss",
                 "theme.scss"
             ],
             "scripts": [],

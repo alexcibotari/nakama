@@ -25,7 +25,7 @@ public class Query implements GraphQLQueryResolver {
     }
 
     public Optional<User> me() {
-        return userService.getUser();
+        return userService.getCurrentUser();
     }
 
     public List<User> getUsers() {

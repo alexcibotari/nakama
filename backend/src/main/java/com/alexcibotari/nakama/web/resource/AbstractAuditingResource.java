@@ -1,10 +1,8 @@
 package com.alexcibotari.nakama.web.resource;
 
-import org.springframework.hateoas.ResourceSupport;
-
 import java.time.ZonedDateTime;
 
-public abstract class AbstractAuditingResource extends ResourceSupport {
+public abstract class AbstractAuditingResource {
 
     AbstractAuditingResource() {
     }

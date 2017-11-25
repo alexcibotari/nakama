@@ -85,7 +85,7 @@ public class UserServiceImp implements UserService {
         return repository.findOneByEmail(email);
     }
 
-    public Optional<User> getUser() {
+    public Optional<User> getCurrentUser() {
         return findOneByLogin(SecurityUtils.getCurrentUserLogin());
     }
 

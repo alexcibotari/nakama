@@ -17,7 +17,7 @@ public interface UserService {
 
     Optional<User> update(String login, UserResource resource);
 
-    Optional<User> getUser();
+    Optional<User> getCurrentUser();
 
     List<User> findAll();
 

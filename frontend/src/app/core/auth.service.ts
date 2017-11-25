@@ -1,5 +1,5 @@
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {HttpHeaders, HttpClient, HttpResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {environment} from '../../environments/environment';
@@ -49,7 +49,11 @@ export class AuthService {
             username: username,
             password: password
         };
-        return this.http.post<OAuthTokenResponse>(environment.oauth.url + '/token', this.buildFormURLEncoded(request), this.buildRequestOptions())
+        return this.http.post<OAuthTokenResponse>(
+            environment.oauth.url + '/token',
+            this.buildFormURLEncoded(request),
+            this.buildRequestOptions()
+        )
             .map(value => {
                 if (value && value.access_token) {
                     localStorage.setItem(environment.oauth.key, value.access_token);
