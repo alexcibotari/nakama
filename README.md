@@ -15,22 +15,19 @@
 - run `git checkout master`
 - run `git checkout develop`
 
-## 2. Setup
-### 2.1 Install Node Packages (see package.json)
-- Install Global packages `npm run install-global`
-- Install Local packages `npm install`
+## 2. Run
+ - Run `gradlew bootRun`
+ - Open browser http://localhost:8080
 
-### 2.2 Build FrontEnd
-- run `gulp`
+## 3. Development
+### 3.1 BackEnd
+Run com.alexcibotari.nakama.Application.java
 
-## 3. Run
-### Spring Boot
-#### Gradle
-    gradlew bootRun
-#### Java
-Run Application.java
-### Tomcat WAR
-Add project into Tomcat
+### 3.2 FrontEnd : Install Node Packages (see package.json)
+- Go to 'frontend' folder
+- Install FrontEnd Local packages `npm install`
+- Start Local Server with Proxy to API `npm run start`
+- Open browser http://localhost:4200
 
 ## 4. Application credentials
 admin / admin

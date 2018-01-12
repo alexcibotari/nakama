@@ -23,7 +23,7 @@ node_modules
 
 ### Gradle template
 .gradle
-build/
+build
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
@@ -41,5 +41,6 @@ javadoc/
 typings
 
 #WebPack exclude
-src/main/resources/public/app/
-src/main/resources/public/libs/
+frontend/dist
+frontend/node
+backend/src/main/resources/static

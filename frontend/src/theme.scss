@@ -1,0 +1,22 @@
+@import '~@angular/material/theming';
+@import 'app/admin/admin-theme';
+
+@include mat-core();
+
+$primary: mat-palette($mat-red);
+$accent: mat-palette($mat-blue);
+
+$theme: mat-light-theme($primary, $accent);
+
+@include angular-material-theme($theme);
+@include admin-theme($theme);
+
+.dark-theme {
+    $dark-primary: mat-palette($mat-light-blue);
+    $dark-accent: mat-palette($mat-green);
+
+    $dark-theme: mat-dark-theme($dark-primary, $dark-accent);
+
+    @include angular-material-theme($dark-theme);
+    @include admin-theme($theme);
+}

@@ -1,0 +1,14 @@
+<ng-container>
+    <mat-toolbar color="primary">
+        <ng-content select="[nkm-menu-button]"></ng-content>
+        <button mat-icon-button (click)="_layout.open()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>Nakama &nbsp;</span>
+        <ng-content select="[nkm-toolbar-content]"></ng-content>
+    </mat-toolbar>
+    <div>
+        <ng-content></ng-content>
+    </div>
+    <ng-content select="nkm-layout-footer"></ng-content>
+</ng-container>

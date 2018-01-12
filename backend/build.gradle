@@ -1,0 +1,86 @@
+buildscript {
+
+    ext {
+        springBootVersion = '1.5.9.RELEASE'
+        springLoadedVersion = '1.2.6.RELEASE'
+    }
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.springframework:springloaded:${springLoadedVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'idea'
+
+bootRepackage {
+    //mainClass = 'com.alexcibotari.nakame.Application'
+}
+
+springBoot{
+    //mainClass = 'com.alexcibotari.nakame.Application'
+    executable = true
+}
+
+bootRun.dependsOn(':frontend:build')
+
+jar {
+    baseName = rootProject.name
+    manifest {
+        attributes(
+            "Implementation-Title": rootProject.name,
+            "Implementation-Version": version,
+            "Main-Class": "com.alexcibotari.nakame.Application"
+        )
+    }
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+
+    //DEV
+    compile 'org.springframework.boot:spring-boot-devtools'
+
+    //GraphQL
+    compile 'com.graphql-java:graphql-java:4.2'
+    compile 'com.graphql-java:graphql-java-tools:4.1.2'
+    compile 'com.graphql-java:graphql-spring-boot-starter:3.9.2'
+    compile 'com.graphql-java:graphiql-spring-boot-starter:3.9.2'
+
+    //Security
+    compile 'org.springframework.security.oauth:spring-security-oauth2'
+
+    //Database
+    compile 'org.hibernate:hibernate-envers'
+    compile 'mysql:mysql-connector-java'
+    compile 'com.h2database:h2'
+
+    //Commons
+    compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+    //Test Artifacts -->
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}

@@ -1,0 +1,10 @@
+spring:
+    profiles:
+        active: dev
+    jpa:
+        open-in-view: true
+        hibernate:
+            ddl-auto: none
+security:
+    basic:
+        enabled: false
