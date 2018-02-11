@@ -1,30 +1,30 @@
 <nkm-layout #layout>
-    <nkm-navigation-drawer>
-        <mat-nav-list>
-            <mat-list-item *ngFor="let route of userRoutes" (click)="layout.close()" routerLink="{{route.route}}">
-                <mat-icon mat-list-icon>{{route.icon}}</mat-icon>
-                <h4 mat-line>{{route.title}}</h4>
-            </mat-list-item>
+  <nkm-navigation-drawer>
+    <mat-nav-list>
+      <mat-list-item *ngFor="let route of userRoutes" (click)="layout.close()" routerLink="{{route.route}}">
+        <mat-icon mat-list-icon>{{route.icon}}</mat-icon>
+        <h4 mat-line>{{route.title}}</h4>
+      </mat-list-item>
 
-            <ng-container *ngIf="adminRoutes">
-                <mat-divider></mat-divider>
-                <h3 mat-subheader>Administration</h3>
-                <mat-list-item *ngFor="let route of adminRoutes" (click)="layout.close()"
-                               routerLink="{{route.route}}">
-                    <mat-icon mat-list-icon>{{route.icon}}</mat-icon>
-                    <h4 mat-line>{{route.title}}</h4>
-                </mat-list-item>
-            </ng-container>
+      <ng-container *ngIf="adminRoutes">
+        <mat-divider></mat-divider>
+        <h3 mat-subheader>Administration</h3>
+        <mat-list-item *ngFor="let route of adminRoutes" (click)="layout.close()"
+                       routerLink="{{route.route}}">
+          <mat-icon mat-list-icon>{{route.icon}}</mat-icon>
+          <h4 mat-line>{{route.title}}</h4>
+        </mat-list-item>
+      </ng-container>
 
-            <mat-divider></mat-divider>
-            <mat-list-item *ngFor="let route of otherRoutes" (click)="layout.close()"
-                           routerLink="{{route.route}}">
-                <mat-icon mat-list-icon>{{route.icon}}</mat-icon>
-                <h4 mat-line>{{route.title}}</h4>
-            </mat-list-item>
-        </mat-nav-list>
-    </nkm-navigation-drawer>
+      <mat-divider></mat-divider>
+      <mat-list-item *ngFor="let route of otherRoutes" (click)="layout.close()"
+                     routerLink="{{route.route}}">
+        <mat-icon mat-list-icon>{{route.icon}}</mat-icon>
+        <h4 mat-line>{{route.title}}</h4>
+      </mat-list-item>
+    </mat-nav-list>
+  </nkm-navigation-drawer>
 
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 
 </nkm-layout>

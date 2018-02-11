@@ -1,56 +1,57 @@
 import {Injectable} from '@angular/core';
-import {ApolloQueryObservable} from 'apollo-angular';
 import gql from 'graphql-tag';
-import {ApolloService} from '../../core/apollo.service';
 import {User} from './user.model';
+import {Apollo, QueryRef} from 'apollo-angular';
+import {ApolloQueryResult} from 'apollo-client';
+import {Observable} from 'rxjs/Observable';
 
 const findUsersSummery = gql`
-    query findUsersSummery{
-        users {
-            id
-            login
-            email
-            name
-            enabled
-        }
-    }`;
+  query findUsersSummery{
+    users {
+      id
+      login
+      email
+      name
+      enabled
+    }
+  }`;
 
 export interface UsersResponse {
-    users: User[];
+  users: User[];
 }
 
 const findUserByLogin = gql`
-    query findUserByLogin($login: String!){
-        user (login : $login) {
-            id
-            login
-            email
-            name
-            birthday
-            familyName
-            givenName
-            authorities{
-                name
-            }
-        }
-    }`;
+  query findUserByLogin($login: String!){
+    user (login : $login) {
+      id
+      login
+      email
+      name
+      birthday
+      familyName
+      givenName
+      authorities{
+        name
+      }
+    }
+  }`;
 
 export interface UserResponse {
-    user: User;
+  user: User;
 }
 
 @Injectable()
 export class UserService {
 
-    constructor(private apollo: ApolloService) {
+  constructor(private apollo: Apollo) {
 
-    }
+  }
 
-    public findAllSummary(): ApolloQueryObservable<UsersResponse> {
-        return this.apollo.watchQuery<UsersResponse>({query: findUsersSummery});
-    }
+  public findAllSummary(): QueryRef<UsersResponse> {
+    return this.apollo.watchQuery<UsersResponse>({query: findUsersSummery});
+  }
 
-    public findOne(login: string): ApolloQueryObservable<UserResponse> {
-        return this.apollo.watchQuery<UserResponse>({query: findUserByLogin, variables: {login: login}});
-    }
+  public findOne(login: string): QueryRef<UserResponse> {
+    return this.apollo.watchQuery<UserResponse>({query: findUserByLogin, variables: {login: login}});
+  }
 }

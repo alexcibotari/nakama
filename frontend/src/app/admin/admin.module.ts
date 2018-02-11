@@ -12,15 +12,15 @@ import {UserEditComponent} from './users/user-edit/user-edit.component';
 import {UserService} from './shared/user.service';
 
 @NgModule({
-    imports: [
-        SharedModule,
-        CommonModule,
-        AdminRoutingModule,
-        AuthModule
-    ],
-    declarations: [AdminComponent, UsersComponent, UserListComponent, UserDetailComponent, UserEditComponent],
-    entryComponents: [UserDetailComponent, UserEditComponent],
-    providers: [UserDataSource, UserService]
+  imports: [
+    SharedModule,
+    CommonModule,
+    AdminRoutingModule,
+    AuthModule
+  ],
+  declarations: [AdminComponent, UsersComponent, UserListComponent, UserDetailComponent, UserEditComponent],
+  entryComponents: [UserDetailComponent, UserEditComponent],
+  providers: [UserDataSource, UserService]
 })
 export class AdminModule {
 }

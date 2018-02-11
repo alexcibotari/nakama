@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'nkm-main',
@@ -8,38 +8,39 @@ import { Router } from '@angular/router';
 })
 export class MainComponent {
 
-    userRoutes = [
-        {
-            title: 'Dashboard',
-            route: '/',
-            icon: 'widgets',
-        }
-    ];
+  userRoutes = [
+    {
+      title: 'Dashboard',
+      route: '/',
+      icon: 'widgets',
+    }
+  ];
 
-    adminRoutes = [
-        {
-            title: 'User Management',
-            route: '/admin/users',
-            icon: 'people',
-        }, {
-            title: 'Administration',
-            route: '/',
-            icon: 'widgets'
-        }
-    ];
+  adminRoutes = [
+    {
+      title: 'User Management',
+      route: '/admin/users',
+      icon: 'people',
+    }, {
+      title: 'Administration',
+      route: '/',
+      icon: 'widgets'
+    }
+  ];
 
-    otherRoutes = [
-        {
-            title: 'Settings',
-            route: '/',
-            icon: 'settings',
-        }, {
-            title: 'Help',
-            route: '/',
-            icon: 'help'
-        }
-    ];
+  otherRoutes = [
+    {
+      title: 'Settings',
+      route: '/',
+      icon: 'settings',
+    }, {
+      title: 'Help',
+      route: '/',
+      icon: 'help'
+    }
+  ];
 
-  constructor(private _router: Router) {}
+  constructor(private _router: Router) {
+  }
 
 }

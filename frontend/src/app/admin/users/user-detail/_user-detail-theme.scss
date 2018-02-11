@@ -2,10 +2,10 @@
 
 @mixin user-detail-theme($theme) {
 
-    $background: map-get($theme, background);
-    $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
 
-    [md-dialog-title] {
-    }
+  [md-dialog-title] {
+  }
 
 }

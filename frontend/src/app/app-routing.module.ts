@@ -5,27 +5,27 @@ import {LoginComponent} from './login/login.component';
 import {MainComponent} from './main/main.component';
 
 @NgModule({
-    imports: [
-        RouterModule.forRoot([
-            {
-                path: 'login', component: LoginComponent
-            },
-            {
-                path: '', component: MainComponent,
-                children: [
-                    {
-                        path: '', component: DashboardComponent
-                    },
-                    {
-                        path: 'admin', loadChildren: './admin/admin.module#AdminModule'
-                    }
-                ]
-            },
-        ], {preloadingStrategy: PreloadAllModules})
-    ],
-    exports: [
-        RouterModule
-    ]
+  imports: [
+    RouterModule.forRoot([
+      {
+        path: 'login', component: LoginComponent
+      },
+      {
+        path: '', component: MainComponent,
+        children: [
+          {
+            path: '', component: DashboardComponent
+          },
+          {
+            path: 'admin', loadChildren: './admin/admin.module#AdminModule'
+          }
+        ]
+      },
+    ], {preloadingStrategy: PreloadAllModules})
+  ],
+  exports: [
+    RouterModule
+  ]
 })
 export class AppRoutingModule {
 }

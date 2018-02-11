@@ -4,21 +4,21 @@ import {Router} from '@angular/router';
 import {AuthService} from '../core/auth.service';
 
 @Component({
-    selector: 'nkm-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
+  selector: 'nkm-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    model: LoginModel = new LoginModel('admin', 'admin');
+  model: LoginModel = new LoginModel('admin', 'admin');
 
-    constructor(private router: Router, private authService: AuthService) {
-    }
+  constructor(private router: Router, private authService: AuthService) {
+  }
 
-    ngOnInit() {
-    }
+  ngOnInit() {
+  }
 
-    login() {
-        this.authService.login(this.model.login, this.model.password).subscribe();
-    }
+  login() {
+    this.authService.login(this.model.login, this.model.password).subscribe();
+  }
 
 }

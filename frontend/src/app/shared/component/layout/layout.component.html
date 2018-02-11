@@ -1,9 +1,9 @@
 <mat-sidenav-container fullscreen>
-    <mat-sidenav #sidenav
-                [mode]="mode"
-                [opened]="opened">
-        <ng-content select="nkm-navigation-drawer"></ng-content>
-        <ng-content select="[nkm-sidenav-content]"></ng-content>
-    </mat-sidenav>
-    <ng-content></ng-content>
+  <mat-sidenav #sidenav
+               [mode]="mode"
+               [opened]="opened">
+    <ng-content select="nkm-navigation-drawer"></ng-content>
+    <ng-content select="[nkm-sidenav-content]"></ng-content>
+  </mat-sidenav>
+  <ng-content></ng-content>
 </mat-sidenav-container>
