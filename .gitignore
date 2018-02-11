@@ -41,6 +41,6 @@ javadoc/
 typings
 
 #WebPack exclude
-frontend/dist
+dist
 frontend/node
 backend/src/main/resources/static
