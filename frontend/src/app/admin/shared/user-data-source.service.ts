@@ -8,7 +8,7 @@ import {User} from './user.model';
 @Injectable()
 export class UserDataSource extends DataSource<User> {
 
-  private _dataChanges: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
+  private readonly _dataChanges: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
 
   _filterChange = new BehaviorSubject('');
 
@@ -20,7 +20,7 @@ export class UserDataSource extends DataSource<User> {
     this._filterChange.next(filter);
   }
 
-  constructor(private userService: UserService) {
+  constructor(private readonly userService: UserService) {
     super();
   }
 

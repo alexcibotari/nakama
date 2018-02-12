@@ -2,8 +2,6 @@ import {Injectable} from '@angular/core';
 import gql from 'graphql-tag';
 import {User} from './user.model';
 import {Apollo, QueryRef} from 'apollo-angular';
-import {ApolloQueryResult} from 'apollo-client';
-import {Observable} from 'rxjs/Observable';
 
 const findUsersSummery = gql`
   query findUsersSummery{
@@ -43,7 +41,7 @@ export interface UserResponse {
 @Injectable()
 export class UserService {
 
-  constructor(private apollo: Apollo) {
+  constructor(private readonly apollo: Apollo) {
 
   }
 

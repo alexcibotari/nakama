@@ -42,8 +42,8 @@ export class CoreModule {
       return forward(operation);
     });
 
-    const logoutLink = onError((errorResponse) => {
-      if (errorResponse.response.status === 401) {
+    const logoutLink = onError(errorResponse => {
+      if (errorResponse.networkError['status'] === 401) {
         this.auth.logout(this.router.url);
       }
     });
