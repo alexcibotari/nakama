@@ -4,4 +4,5 @@ import com.alexcibotari.nakama.domain.Authority;
 import com.coxautodev.graphql.tools.GraphQLResolver;
 
 public class AuthorityResolver implements GraphQLResolver<Authority> {
+
 }

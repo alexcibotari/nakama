@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ExceptionResourceController {
 
-    @ExceptionHandler(AbstractServiceException.class)
-    public ResponseEntity<ServiceExceptionResource> processConcurencyError(AbstractServiceException ex) {
-        return ResponseEntity.badRequest().body(new ServiceExceptionResource(ex));
-    }
+  @ExceptionHandler(AbstractServiceException.class)
+  public ResponseEntity<ServiceExceptionResource> processConcurencyError(
+    AbstractServiceException ex) {
+    return ResponseEntity.badRequest().body(new ServiceExceptionResource(ex));
+  }
 }

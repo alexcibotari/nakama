@@ -16,35 +16,35 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 @EnableAuthorizationServer
 public class OAuth2AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-    @Autowired
-    AuthenticationManager authenticationManager;
+  @Autowired
+  AuthenticationManager authenticationManager;
 
-    @Bean
-    public TokenStore tokenStore() {
-        return new InMemoryTokenStore();
-    }
+  @Bean
+  public TokenStore tokenStore() {
+    return new InMemoryTokenStore();
+  }
 
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+  @Override
+  public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
             /*security
                 .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()");*/
-    }
+  }
 
-    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-            .withClient("webapp")
-            .secret("topsecret")
-            .scopes("read", "write")
-            .authorizedGrantTypes("password")
-            .accessTokenValiditySeconds(3600);
-    }
+  @Override
+  public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+    clients.inMemory()
+      .withClient("webapp")
+      .secret("topsecret")
+      .scopes("read", "write")
+      .authorizedGrantTypes("password")
+      .accessTokenValiditySeconds(3600);
+  }
 
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints
-            .tokenStore(tokenStore())
-            .authenticationManager(authenticationManager);
-    }
+  @Override
+  public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    endpoints
+      .tokenStore(tokenStore())
+      .authenticationManager(authenticationManager);
+  }
 }

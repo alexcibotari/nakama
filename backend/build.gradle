@@ -16,6 +16,8 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'idea'
+apply plugin: "eclipse"
+apply plugin: "checkstyle"
 
 bootRepackage {
     //mainClass = 'com.alexcibotari.nakame.Application'
@@ -79,8 +81,19 @@ dependencies {
 }
 
 idea {
-    module {
-        downloadJavadoc = true
-        downloadSources = true
-    }
+  module {
+    downloadJavadoc = true
+    downloadSources = true
+  }
+}
+
+eclipse {
+  classpath {
+    downloadJavadoc = true
+    downloadSources = true
+  }
+}
+
+checkstyle {
+  toolVersion "8.8"
 }

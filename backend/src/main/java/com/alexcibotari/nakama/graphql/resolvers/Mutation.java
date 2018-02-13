@@ -11,16 +11,16 @@ import org.springframework.stereotype.Component;
 public class Mutation implements GraphQLMutationResolver {
 
 
-    private UserService userService;
-    private AuthorityService authorityService;
+  private UserService userService;
+  private AuthorityService authorityService;
 
-    public Mutation(UserService service, AuthorityService authorityService) {
-        this.userService = service;
-        this.authorityService = authorityService;
-    }
+  public Mutation(UserService service, AuthorityService authorityService) {
+    this.userService = service;
+    this.authorityService = authorityService;
+  }
 
-    public UserPayload addUser(AddUserInput input) {
-        return null;
-    }
+  public UserPayload addUser(AddUserInput input) {
+    return null;
+  }
 
 }

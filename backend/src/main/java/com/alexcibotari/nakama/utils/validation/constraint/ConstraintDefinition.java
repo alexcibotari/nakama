@@ -5,42 +5,43 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class ConstraintDefinition<C extends ConstraintDefinition<C, A>, A extends Annotation> {
-    private String constraintType;
-    private Map<String, Object> parameters;
 
-    public ConstraintDefinition(Class<A> constraintType) {
-        this.constraintType = constraintType.getSimpleName();
-        this.parameters = new HashMap<>();
-    }
+  private String constraintType;
+  private Map<String, Object> parameters;
 
-    @SuppressWarnings("unchecked")
-    private C getThis() {
-        return (C) this;
-    }
+  public ConstraintDefinition(Class<A> constraintType) {
+    this.constraintType = constraintType.getSimpleName();
+    this.parameters = new HashMap<>();
+  }
 
-    protected void addParameter(String key, Object value) {
-        parameters.put(key, value);
-    }
+  @SuppressWarnings("unchecked")
+  private C getThis() {
+    return (C) this;
+  }
 
-    public C message(String message) {
-        addParameter("message", message);
-        return getThis();
-    }
+  protected void addParameter(String key, Object value) {
+    parameters.put(key, value);
+  }
 
-    public String getConstraintType() {
-        return constraintType;
-    }
+  public C message(String message) {
+    addParameter("message", message);
+    return getThis();
+  }
+
+  public String getConstraintType() {
+    return constraintType;
+  }
 
 
-    public Map<String, Object> getParameters() {
-        return parameters;
-    }
+  public Map<String, Object> getParameters() {
+    return parameters;
+  }
 
-    @Override
-    public String toString() {
-        return "ConstraintDefinition{" +
-            "constraintType='" + constraintType + '\'' +
-            ", parameters=" + parameters +
-            '}';
-    }
+  @Override
+  public String toString() {
+    return "ConstraintDefinition{" +
+      "constraintType='" + constraintType + '\'' +
+      ", parameters=" + parameters +
+      '}';
+  }
 }

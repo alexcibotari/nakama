@@ -13,12 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ProjectControllerTest {
 
-    private static final String BASE_URI = "http://localhost:8080/api";
+  private static final String BASE_URI = "http://localhost:8080/api";
 
-    @Test
-    public void test() {
-        Assert.assertTrue(true);
-    }
+  @Test
+  public void test() {
+    Assert.assertTrue(true);
+  }
 
 /*    @Test
     public void createNewProject() {
