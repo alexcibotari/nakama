@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import gql from 'graphql-tag';
 import {User} from './user.model';
-import {Apollo, QueryRef} from 'apollo-angular';
+import {Apollo} from 'apollo-angular';
+import {Observable} from "rxjs/Observable";
 
 const findUsersSummery = gql`
   query findUsersSummery{
@@ -45,11 +46,15 @@ export class UserService {
 
   }
 
-  public findAllSummary(): QueryRef<UsersResponse> {
-    return this.apollo.watchQuery<UsersResponse>({query: findUsersSummery});
+  public findAllSummary(): Observable<User[]> {
+    return this.apollo.query<UsersResponse>({query: findUsersSummery})
+    .map(result => result.data.users);
   }
 
-  public findOne(login: string): QueryRef<UserResponse> {
-    return this.apollo.watchQuery<UserResponse>({query: findUserByLogin, variables: {login: login}});
+  public findOne(login: string): Observable<User> {
+    return this.apollo.query<UserResponse>(
+      {query: findUserByLogin, variables: {login: login}}
+    )
+    .map(result => result.data.user);
   }
 }

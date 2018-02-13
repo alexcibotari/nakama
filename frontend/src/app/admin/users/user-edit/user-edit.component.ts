@@ -13,19 +13,16 @@ export class UserEditComponent implements OnInit {
   public model: User;
   public loading = true;
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: User,
-    private readonly userService: UserService
-  ) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: User,
+              private readonly userService: UserService) {
   }
 
   ngOnInit() {
     this.userService.findOne(this.data.login)
-      .valueChanges
-      .subscribe(value => {
-        this.loading = value.loading;
-        this.model = value.data.user;
-      });
+    .subscribe(value => {
+      this.loading = false;
+      this.model = value;
+    });
   }
 
 }

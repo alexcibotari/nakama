@@ -23,10 +23,9 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit() {
     this.userService.findOne(this.data.login)
-      .valueChanges
       .subscribe(value => {
-        this.loading = value.loading;
-        this.model = value.data.user;
+        this.loading = false;
+        this.model = value;
       });
   }
 
