@@ -39,8 +39,8 @@ public class UserDetailsServiceImp implements UserDetailsService {
         user.getPassword(),
         grantedAuthorities);
     }).orElseThrow(
-      () -> new UsernameNotFoundException("User " + lowercaseUsername + " was not found in the " +
-        "database"));
+      () -> new UsernameNotFoundException("User " + lowercaseUsername + " was not found in the "
+        + "database"));
   }
 
 }

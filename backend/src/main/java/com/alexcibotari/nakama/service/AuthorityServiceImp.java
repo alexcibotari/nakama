@@ -1,9 +1,7 @@
 package com.alexcibotari.nakama.service;
 
-
 import com.alexcibotari.nakama.domain.Authority;
 import com.alexcibotari.nakama.repository.AuthorityRepository;
-import com.alexcibotari.nakama.web.resource.AuthorityResource;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,22 +29,6 @@ public class AuthorityServiceImp implements AuthorityService {
 
   public List<Authority> findAllByUserLogin(String login) {
     return repository.findAllByUserLogin(login);
-  }
-
-  @Transactional
-  public Authority create(AuthorityResource resource) {
-    Authority entity = new Authority();
-    entity.setName(resource.getName());
-    return repository.save(entity);
-  }
-
-  @Transactional
-  public Optional<Authority> update(String id, AuthorityResource resource) {
-    return findOne(id)
-      .map(entity -> {
-        entity.setName(resource.getName());
-        return repository.save(entity);
-      });
   }
 
   @Transactional

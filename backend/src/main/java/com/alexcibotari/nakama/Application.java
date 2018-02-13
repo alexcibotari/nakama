@@ -1,6 +1,5 @@
 package com.alexcibotari.nakama;
 
-import java.net.InetAddress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -19,12 +18,6 @@ public class Application {
     ApplicationContext context = app.run(args);
     Environment env = context.getEnvironment();
     String serverPort = env.getProperty("server.port", "8080");
-    log.info("Access URLs:\n----------------------------------------------------------\n\t" +
-        "Local: \t\thttp://127.0.0.1:{}\n\t" +
-        "External: \thttp://{}:{}\n----------------------------------------------------------",
-      serverPort,
-      InetAddress.getLocalHost().getHostAddress(),
-      serverPort);
   }
 
 }

@@ -5,8 +5,6 @@ import com.alexcibotari.nakama.exception.UserEmailAlreadyInUseException;
 import com.alexcibotari.nakama.exception.UserLoginAlreadyInUseException;
 import com.alexcibotari.nakama.repository.UserRepository;
 import com.alexcibotari.nakama.security.SecurityUtils;
-import com.alexcibotari.nakama.service.util.RandomUtil;
-import com.alexcibotari.nakama.web.resource.UserResource;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,38 +23,6 @@ public class UserServiceImp implements UserService {
   public UserServiceImp(UserRepository repository, PasswordEncoder passwordEncoder) {
     this.repository = repository;
     this.passwordEncoder = passwordEncoder;
-  }
-
-  @Transactional
-  public User create(UserResource resource) {
-    checkLoginAndEmail(resource.getLogin(), resource.getEmail());
-
-    User entity = new User();
-    updateEntity(entity, resource);
-    entity.setPassword(passwordEncoder.encode(RandomUtil.generatePassword()));
-
-    return repository.save(entity);
-  }
-
-  @Transactional
-  public Optional<User> update(String login, UserResource resource) {
-    return findOneByLogin(login)
-      .map(entity -> {
-        updateEntity(entity, resource);
-        return repository.save(entity);
-      });
-  }
-
-  private void updateEntity(User entity, UserResource resource) {
-    entity.setEnabled(resource.getEnabled());
-
-    entity.setEmail(resource.getEmail());
-    entity.setGivenName(resource.getGivenName());
-    entity.setFamilyName(resource.getFamilyName());
-    entity.setBirthday(resource.getBirthday());
-    entity.setGender(resource.getGender());
-    entity.setJobTitle(resource.getJobTitle());
-    entity.setTelephone(resource.getTelephone());
   }
 
   private void checkLoginAndEmail(String login, String email) {

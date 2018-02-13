@@ -72,14 +72,14 @@ public class PersonPayload extends AbstractAuditingPayload {
 
   @Override
   public String toString() {
-    return "PersonPayload{" +
-      "email='" + email + '\'' +
-      ", givenName='" + givenName + '\'' +
-      ", familyName='" + familyName + '\'' +
-      ", birthday=" + birthday +
-      ", gender='" + gender + '\'' +
-      ", jobTitle='" + jobTitle + '\'' +
-      ", telephone='" + telephone + '\'' +
-      '}';
+    return "PersonPayload{"
+      + "email='" + email + '\''
+      + ", givenName='" + givenName + '\''
+      + ", familyName='" + familyName + '\''
+      + ", birthday=" + birthday
+      + ", gender='" + gender + '\''
+      + ", jobTitle='" + jobTitle + '\''
+      + ", telephone='" + telephone + '\''
+      + '}';
   }
 }
