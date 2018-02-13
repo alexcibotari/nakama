@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'nkm-main',
@@ -40,7 +39,7 @@ export class MainComponent {
     }
   ];
 
-  constructor(private _router: Router) {
+  constructor() {
   }
 
 }

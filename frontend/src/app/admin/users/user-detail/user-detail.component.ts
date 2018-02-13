@@ -14,7 +14,11 @@ export class UserDetailComponent implements OnInit {
   public model: User;
   public loading = true;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: User, private dialog: MatDialog, private userService: UserService) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: User,
+    private readonly dialog: MatDialog,
+    private readonly userService: UserService
+  ) {
   }
 
   ngOnInit() {

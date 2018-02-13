@@ -89,6 +89,10 @@ export class Resources<T extends Resource> {
   [key: string]: any;
 }
 
+export interface Relations<T> {
+  [key: string]: T | any;
+}
+
 export interface LinkRelations extends Relations<Link> {
 
   /**
@@ -185,8 +189,4 @@ export interface Link {
    * the target resource (as defined by [RFC5988]).
    */
   hreflang?: string;
-}
-
-export interface Relations<T> {
-  [key: string]: T | any;
 }

@@ -28,8 +28,8 @@ export class CoreModule {
 
   constructor(apollo: Apollo,
               httpLink: HttpLink,
-              private auth: AuthService,
-              private router: Router) {
+              private readonly auth: AuthService,
+              private readonly router: Router) {
     const link = httpLink.create({uri: environment.graphql.uri});
 
     const authMiddleware = new ApolloLink((operation, forward) => {
@@ -51,6 +51,6 @@ export class CoreModule {
     apollo.create({
       link: ApolloLink.from([authMiddleware, logoutLink, link]),
       cache: new InMemoryCache()
-    })
+    });
   }
 }

@@ -20,7 +20,8 @@ export class UserListComponent implements OnInit {
   @ViewChild('filter') filter: ElementRef;
 
   constructor(public dataSource: UserDataSource,
-              private dialog: MatDialog) {
+              private readonly dialog: MatDialog
+  ) {
   }
 
   ngOnInit() {

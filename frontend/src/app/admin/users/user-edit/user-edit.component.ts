@@ -13,7 +13,10 @@ export class UserEditComponent implements OnInit {
   public model: User;
   public loading = true;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: User, private userService: UserService) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: User,
+    private readonly userService: UserService
+  ) {
   }
 
   ngOnInit() {

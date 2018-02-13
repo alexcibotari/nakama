@@ -35,7 +35,7 @@ export class AuthService {
 
   private urlRedirectTo: string;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private readonly http: HttpClient, private readonly router: Router) {
   }
 
   public setURLRedirectTo(urlRedirectTo: string): void {
@@ -84,7 +84,6 @@ export class AuthService {
     const token: String = this.getToken();
     return token && token.length > 0;
   }
-
 
   protected buildRequestOptions(params?: URLParams | URLSearchParams): Object {
     return {
