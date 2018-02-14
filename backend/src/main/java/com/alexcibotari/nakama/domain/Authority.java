@@ -7,9 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 @Entity
 public class Authority extends AbstractAuditingEntity implements GrantedAuthority {
 
-  /**
-   *
-   */
   private static final long serialVersionUID = 7190787175352450609L;
 
   @Column(name = "pname", nullable = false, unique = true, length = 50)

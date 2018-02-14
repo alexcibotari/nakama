@@ -31,7 +31,6 @@ public class AuthorityServiceImp implements AuthorityService {
     return repository.findAllByUserLogin(login);
   }
 
-  @Transactional
   public Optional<Authority> delete(String id) {
     Optional<Authority> entity = findOne(id);
     entity.ifPresent(authority -> repository.delete(authority));
