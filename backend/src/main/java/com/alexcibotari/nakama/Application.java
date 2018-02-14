@@ -12,12 +12,7 @@ public class Application {
 
   private static final Logger log = LoggerFactory.getLogger(Application.class);
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     SpringApplication app = new SpringApplication(Application.class);
-
-    ApplicationContext context = app.run(args);
-    Environment env = context.getEnvironment();
-    String serverPort = env.getProperty("server.port", "8080");
   }
-
 }
