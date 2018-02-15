@@ -1,10 +1,10 @@
 spring:
   data:
     cassandra:
-      keyspace-name: sunriseroaming
-      schema-action: recreate_drop_unused
+      keyspace-name: cassandra_unit_keyspace
+      schema-action: none
       contact-points: localhost
-      port: 9042
+      port: 9142
       cluster-name: Test Cluster
 
 logging:

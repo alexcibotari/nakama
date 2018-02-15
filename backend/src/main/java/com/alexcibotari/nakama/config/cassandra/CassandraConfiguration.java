@@ -1,7 +1,13 @@
 package com.alexcibotari.nakama.config.cassandra;
 
+import static com.alexcibotari.nakama.config.ConfigurationConstants.PROFILE_DEV;
+
 import com.alexcibotari.nakama.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanClassLoaderAware;
@@ -16,13 +22,6 @@ import org.springframework.data.cassandra.config.SchemaAction;
 import org.springframework.data.cassandra.config.java.AbstractCassandraConfiguration;
 import org.springframework.data.cassandra.convert.CustomConversions;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
-
-import javax.annotation.PostConstruct;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import static com.alexcibotari.nakama.config.ConfigurationConstants.PROFILE_DEV;
 
 @Configuration
 @EnableConfigurationProperties(CassandraProperties.class)
@@ -39,12 +38,12 @@ public class CassandraConfiguration extends AbstractCassandraConfiguration imple
   /**
    * Default constructor for Cassandra Configuration.
    *
-   * @param environment  environment properties
-   * @param properties   cassandra properties
+   * @param environment environment properties
+   * @param properties cassandra properties
    * @param objectMapper JSON object mapper
    */
   public CassandraConfiguration(Environment environment, CassandraProperties properties,
-                                ObjectMapper objectMapper) {
+    ObjectMapper objectMapper) {
     this.environment = environment;
     this.properties = properties;
     this.objectMapper = objectMapper;

@@ -1,5 +1,12 @@
 package com.alexcibotari.nakama.config.cassandra;
 
+import static com.alexcibotari.nakama.config.ConfigurationConstants.PROFILE_DEV;
+
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
@@ -9,14 +16,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
-
-import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import static com.alexcibotari.nakama.config.ConfigurationConstants.PROFILE_DEV;
 
 @Component
 @Order

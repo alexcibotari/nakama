@@ -1,7 +1,7 @@
 package com.alexcibotari.nakama.graphql.resolvers;
 
-import com.alexcibotari.nakama.domain.Authority;
-import com.alexcibotari.nakama.domain.User;
+import com.alexcibotari.nakama.model.Authority;
+import com.alexcibotari.nakama.model.User;
 import com.alexcibotari.nakama.service.AuthorityService;
 import com.alexcibotari.nakama.service.UserService;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
@@ -37,10 +37,6 @@ public class Query implements GraphQLQueryResolver {
 
   public List<Authority> getAuthorities() {
     return authorityService.findAll();
-  }
-
-  public Optional<Authority> getAuthority(String name) {
-    return authorityService.findOneByName(name);
   }
 
   public String hello(String user, String pass) {

@@ -1,10 +1,6 @@
 spring:
-    profiles:
-        active: dev
-    jpa:
-        open-in-view: true
-        hibernate:
-            ddl-auto: none
+  profiles:
+    active: dev
 security:
-    basic:
-        enabled: false
+  basic:
+    enabled: false

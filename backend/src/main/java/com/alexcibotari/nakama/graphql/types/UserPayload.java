@@ -10,10 +10,10 @@ public class UserPayload extends PersonPayload {
 
   @Override
   public String toString() {
-    return "UserPayload{" +
-      "login='" + login + '\'' +
-      ", password='" + password + '\'' +
-      ", enabled=" + enabled +
-      '}';
+    return "UserPayload{"
+      + "login='" + login + '\''
+      + ", password='" + password + '\''
+      + ", enabled=" + enabled
+      + '}';
   }
 }

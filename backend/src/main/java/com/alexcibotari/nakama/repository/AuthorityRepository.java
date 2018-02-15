@@ -1,18 +1,11 @@
 package com.alexcibotari.nakama.repository;
 
-import com.alexcibotari.nakama.domain.Authority;
-import java.util.List;
+import com.alexcibotari.nakama.model.Authority;
 import java.util.Optional;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.cassandra.repository.CassandraRepository;
 
-public interface AuthorityRepository extends CrudRepository<Authority, String> {
+public interface AuthorityRepository extends CassandraRepository<Authority> {
 
   Optional<Authority> findOneById(String id);
 
-  Optional<Authority> findOneByName(String name);
-
-  @Query("SELECT u.authorities FROM User u WHERE u.login = :login")
-  List<Authority> findAllByUserLogin(@Param("login") String login);
 }
