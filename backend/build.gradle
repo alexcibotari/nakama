@@ -1,25 +1,26 @@
 buildscript {
-
-  ext {
-    springBootVersion = '1.5.10.RELEASE'
-    springLoadedVersion = '1.2.6.RELEASE'
-  }
   repositories {
     jcenter()
+    maven { url "http://repo.spring.io/plugins-release" }
   }
   dependencies {
-    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    classpath("org.springframework:springloaded:${springLoadedVersion}")
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    classpath "org.springframework:springloaded:${springLoadedVersion}"
+    classpath "io.spring.gradle:propdeps-plugin:0.0.9.RELEASE"
   }
 }
 
-apply plugin: 'java'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'idea'
+apply plugin: "java"
+apply plugin: "org.springframework.boot"
+apply plugin: "idea"
 apply plugin: "eclipse"
 apply plugin: "checkstyle"
+apply plugin: "propdeps"
+apply plugin: "propdeps-idea"
+apply plugin: "propdeps-eclipse"
+apply plugin: "io.spring.dependency-management"
 
-bootRun.dependsOn(':frontend:build')
+bootRun.dependsOn(":frontend:build")
 
 jar {
   baseName = rootProject.name
@@ -41,11 +42,11 @@ repositories {
 }
 
 dependencies {
-
+  compile "org.springframework.boot:spring-boot-starter-actuator"
+  compile "org.springframework.boot:spring-boot-starter-aop"
   compile "org.springframework.boot:spring-boot-starter-data-cassandra"
   compile "org.springframework.boot:spring-boot-starter-security"
   compile "org.springframework.boot:spring-boot-starter-web"
-  compile "org.springframework.boot:spring-boot-starter-aop"
 
   //DEV
   compile "org.springframework.boot:spring-boot-devtools"
@@ -57,13 +58,15 @@ dependencies {
   compile "com.graphql-java:graphiql-spring-boot-starter:${graphqlSpringBootVersion}"
 
   //Security
-  compile "org.springframework.security.oauth:spring-security-oauth2"
+  compile "org.springframework.security:spring-security-oauth2-core"
+  compile "org.springframework.security:spring-security-oauth2-jose"
+  compile "org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.0.RELEASE"
 
   //Database
   compile "com.datastax.cassandra:cassandra-driver-core:${cassandraDriverVersion}"
 
   //Commons
-  compile "org.apache.commons:commons-lang3:${commonsLangVersion}"
+  //compile "org.apache.commons:commons-lang3:${commonsLangVersion}"
   compile "org.apache.httpcomponents:httpclient"
   compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
 

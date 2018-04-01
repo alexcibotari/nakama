@@ -1,6 +1,6 @@
 package com.alexcibotari.nakama.config.oauth2;
 
-import com.alexcibotari.nakama.config.ConfigurationConstants;
+import com.alexcibotari.nakama.config.ProfileConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,7 +41,7 @@ public class OAuth2ResourceServerConfiguration extends ResourceServerConfigurerA
   @Override
   public void configure(HttpSecurity http) throws Exception {
 
-    if (environment.acceptsProfiles(ConfigurationConstants.PROFILE_DEV)) {
+    if (environment.acceptsProfiles(ProfileConstants.DEV)) {
       http.authorizeRequests().antMatchers("/h2-console/*").permitAll();
     }
 

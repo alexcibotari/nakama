@@ -1,7 +1,7 @@
 spring:
   data:
     cassandra:
-      keyspace-name: sunriseroaming
+      keyspace-name: nakama
       schema-action: recreate_drop_unused
       contact-points: localhost
       port: 9042

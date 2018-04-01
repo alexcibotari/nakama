@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import gql from 'graphql-tag';
-import {User} from './user.model';
 import {Apollo} from 'apollo-angular';
-import {Observable} from "rxjs/Observable";
+import gql from 'graphql-tag';
+import {Observable} from 'rxjs/Observable';
+import {User} from './user.model';
 
 const findUsersSummery = gql`
   query findUsersSummery{
