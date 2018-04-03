@@ -9,12 +9,12 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 @Configuration
 public class JacksonConfiguration {
 
-    @Bean
-    Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder() {
-        JavaTimeModule module = new JavaTimeModule();
-        return new Jackson2ObjectMapperBuilder()
-            .featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-            .findModulesViaServiceLoader(true)
-            .modulesToInstall(module);
-    }
+  @Bean
+  Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder() {
+    JavaTimeModule module = new JavaTimeModule();
+    return new Jackson2ObjectMapperBuilder()
+      .featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+      .findModulesViaServiceLoader(true)
+      .modulesToInstall(module);
+  }
 }

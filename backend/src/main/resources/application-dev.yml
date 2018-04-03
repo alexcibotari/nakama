@@ -1,18 +1,14 @@
 spring:
-    datasource:
-        url: jdbc:h2:mem:nakama;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-        name:
-        username: nakama
-        password:
-    h2:
-        console:
-            enabled: true
-    jpa:
-        open-in-view: true
-        hibernate:
-            ddl-auto: create
-        show_sql: true
-    thymeleaf:
-        cache: false
-server:
-    port: 8080
+  data:
+    cassandra:
+      keyspace-name: nakama
+      schema-action: recreate_drop_unused
+      contact-points: localhost
+      port: 9042
+      cluster-name: Test Cluster
+
+logging:
+  level:
+    org:
+      springframework:
+        security: debug

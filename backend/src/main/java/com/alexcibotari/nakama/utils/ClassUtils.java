@@ -6,13 +6,13 @@ import java.util.function.Supplier;
 
 public class ClassUtils {
 
-    protected ClassUtils() {
-    }
+  protected ClassUtils() {
+  }
 
-    public static <T> void setIfNotNull(final Supplier<T> getter, final Consumer<T> setter) {
-        T t = getter.get();
-        if (Objects.nonNull(t)) {
-            setter.accept(t);
-        }
+  public static <T> void setIfNotNull(final Supplier<T> getter, final Consumer<T> setter) {
+    T t = getter.get();
+    if (Objects.nonNull(t)) {
+      setter.accept(t);
     }
+  }
 }

@@ -1,14 +1,10 @@
 package com.alexcibotari.nakama.repository;
 
-
-import com.alexcibotari.nakama.domain.User;
-import org.springframework.data.repository.PagingAndSortingRepository;
-
+import com.alexcibotari.nakama.model.User;
 import java.util.Optional;
+import org.springframework.data.cassandra.repository.MapIdCassandraRepository;
 
-public interface UserRepository extends PagingAndSortingRepository<User, String> {
+public interface UserRepository extends MapIdCassandraRepository<User> {
 
-    Optional<User> findOneByLogin(String login);
-
-    Optional<User> findOneByEmail(String email);
+  Optional<User> findOneByLogin(String login);
 }

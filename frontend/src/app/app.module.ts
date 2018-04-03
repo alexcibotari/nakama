@@ -19,27 +19,25 @@ import {ConfirmationDialogComponent} from './shared/component/dialog/confirmatio
 import {SharedModule} from './shared/shared.module';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-
-        CoreModule,
-        AppRoutingModule,
-        SharedModule,
-        AuthModule.forRoot(),
-        FlexLayoutModule
-    ],
-    declarations: [AppComponent, MainComponent, DashboardComponent, LoginComponent, ConfirmationDialogComponent],
-    entryComponents: [ConfirmationDialogComponent],
-    providers: [
-        {provide: LocationStrategy, useClass: HashLocationStrategy},
-        {provide: DateAdapter, useClass: NativeDateAdapter}
-    ],
-    bootstrap: [AppComponent]
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    CoreModule,
+    AppRoutingModule,
+    SharedModule,
+    AuthModule.forRoot(),
+    FlexLayoutModule,
+  ],
+  declarations: [AppComponent, MainComponent, DashboardComponent, LoginComponent, ConfirmationDialogComponent],
+  entryComponents: [ConfirmationDialogComponent],
+  providers: [
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    {provide: DateAdapter, useClass: NativeDateAdapter}
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
-

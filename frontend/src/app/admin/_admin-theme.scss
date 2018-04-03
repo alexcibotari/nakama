@@ -1,5 +1,5 @@
 @import 'users/user-detail/user-detail-theme';
 
-@mixin admin-theme($theme){
-    @include user-detail-theme($theme);
+@mixin admin-theme($theme) {
+  @include user-detail-theme($theme);
 }

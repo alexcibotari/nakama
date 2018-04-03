@@ -6,61 +6,13 @@ type Query {
     users: [User!]!
     user(login: String!): User
 
-    authorities: [Authority!]!
-    authority(name: String!): Authority
-
     hello(user: String = "user", pass: String): String
 }
 
-interface Entity {
-    #Unique Identifier
-    id: ID!
-}
-
-interface AuditingEntity{
-    #Unique Identifier
-    id: ID!
-    createdBy: String!
-    createdDate: String!
-    lastModifiedBy: String
-    lastModifiedDate: String
-}
 #A user is an individual's account on Nakama
-type User implements AuditingEntity {
-    #Unique Identifier
-    id: ID!
+type User {
     #The username used to login.
     login: String!
-    #The user's publicly visible profile email.
-    email: String!
     #The use's activation status
     enabled: Boolean!
-    #The user's authorities
-    authorities: [Authority!]
-
-    #The user's public profile name.
-    name: String!
-    givenName: String!
-    familyName: String!
-    birthday: String
-    gender: String
-
-    jobTitle: String
-    telephone: String
-
-    createdBy: String!
-    createdDate: String!
-    lastModifiedBy: String
-    lastModifiedDate: String
-}
-
-type Authority implements AuditingEntity {
-    id: ID!
-
-    name: String!
-
-    createdBy: String!
-    createdDate: String!
-    lastModifiedBy: String
-    lastModifiedDate: String
 }

@@ -1,51 +1,38 @@
 package com.alexcibotari.nakama.graphql.resolvers;
 
-import com.alexcibotari.nakama.domain.Authority;
-import com.alexcibotari.nakama.domain.User;
-import com.alexcibotari.nakama.service.AuthorityService;
+import com.alexcibotari.nakama.model.User;
 import com.alexcibotari.nakama.service.UserService;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class Query implements GraphQLQueryResolver {
 
 
-    private UserService userService;
-    private AuthorityService authorityService;
+  private UserService userService;
 
-    @Autowired
-    public Query(UserService service, AuthorityService authorityService) {
-        this.userService = service;
-        this.authorityService = authorityService;
-    }
+  @Autowired
+  public Query(UserService service) {
+    this.userService = service;
+  }
 
-    public Optional<User> me() {
-        return userService.getCurrentUser();
-    }
+  public Optional<User> me() {
+    return userService.getCurrentUser();
+  }
 
-    public List<User> getUsers() {
-        return userService.findAll();
-    }
+  public List<User> getUsers() {
+    return userService.findAll();
+  }
 
-    public Optional<User> getUser(String login) {
-        return userService.findOneByLogin(login);
-    }
+  public Optional<User> getUser(String login) {
+    return userService.findOneByLogin(login);
+  }
 
-    public List<Authority> getAuthorities() {
-        return authorityService.findAll();
-    }
-
-    public Optional<Authority> getAuthority(String name) {
-        return authorityService.findOneByName(name);
-    }
-
-    public String hello(String user, String pass) {
-        System.out.println(user + ":" + pass);
-        return user + ":" + pass;
-    }
+  public String hello(String user, String pass) {
+    System.out.println(user + ":" + pass);
+    return user + ":" + pass;
+  }
 }

@@ -1,31 +1,29 @@
 <mat-sidenav-container fxLayout="column" fxFlex fullscreen fxLayoutAlign="center center">
-
-
-    <form role="form" (submit)="login()" #loginForm="ngForm">
-        <br/>
-        <mat-form-field>
-            <input matInput type="text" required [(ngModel)]="model.login" id="login" name="login"/>
-            <mat-placeholder>
-                <mat-icon>person</mat-icon>
-                Username
-            </mat-placeholder>
-        </mat-form-field>
-        <br/>
-        <br/>
-        <mat-form-field>
-            <input matInput type="password" required [(ngModel)]="model.password" id="password" name="password"/>
-            <mat-placeholder>
-                <mat-icon>lock_open</mat-icon>
-                Password
-            </mat-placeholder>
-        </mat-form-field>
-        <br/>
-        <br/>
-        <button mat-raised-button color="warn" type="submit" name="action" [disabled]="!loginForm.form.valid">LOGIN</button>
-        <br/>
-        <br/>
-        <mat-slide-toggle color="primary">
-            <small>Remember me!</small>
-        </mat-slide-toggle>
-    </form>
+  <form role="form" (submit)="login()" #loginForm="ngForm">
+    <br/>
+    <mat-form-field>
+      <input matInput type="text" required [(ngModel)]="model.login" id="login" name="login"/>
+      <mat-placeholder>
+        <mat-icon>person</mat-icon>
+        Username
+      </mat-placeholder>
+    </mat-form-field>
+    <br/>
+    <br/>
+    <mat-form-field>
+      <input matInput type="password" required [(ngModel)]="model.password" id="password" name="password"/>
+      <mat-placeholder>
+        <mat-icon>lock_open</mat-icon>
+        Password
+      </mat-placeholder>
+    </mat-form-field>
+    <br/>
+    <br/>
+    <button mat-raised-button color="warn" type="submit" name="action" [disabled]="!loginForm.form.valid">LOGIN</button>
+    <br/>
+    <br/>
+    <mat-slide-toggle color="primary">
+      <small>Remember me!</small>
+    </mat-slide-toggle>
+  </form>
 </mat-sidenav-container>

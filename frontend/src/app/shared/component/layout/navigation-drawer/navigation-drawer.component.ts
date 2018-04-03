@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'nkm-navigation-drawer',
@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationDrawerComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

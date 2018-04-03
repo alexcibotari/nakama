@@ -1,10 +1,10 @@
 export abstract class AbstractEntity {
-    id: string;
+  id: string;
 }
 
 export abstract class AbstractAuditingEntity extends AbstractEntity {
-    createdBy: string;
-    createdDate: Date;
-    lastModifiedBy: string;
-    lastModifiedDate: Date;
+  createdBy: string;
+  createdDate: Date;
+  lastModifiedBy: string;
+  lastModifiedDate: Date;
 }

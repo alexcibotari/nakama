@@ -1,56 +1,60 @@
 import {Injectable} from '@angular/core';
-import {ApolloQueryObservable} from 'apollo-angular';
+import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
-import {ApolloService} from '../../core/apollo.service';
+import {Observable} from 'rxjs/Observable';
 import {User} from './user.model';
 
 const findUsersSummery = gql`
-    query findUsersSummery{
-        users {
-            id
-            login
-            email
-            name
-            enabled
-        }
-    }`;
+  query findUsersSummery{
+    users {
+      id
+      login
+      email
+      name
+      enabled
+    }
+  }`;
 
 export interface UsersResponse {
-    users: User[];
+  users: User[];
 }
 
 const findUserByLogin = gql`
-    query findUserByLogin($login: String!){
-        user (login : $login) {
-            id
-            login
-            email
-            name
-            birthday
-            familyName
-            givenName
-            authorities{
-                name
-            }
-        }
-    }`;
+  query findUserByLogin($login: String!){
+    user (login : $login) {
+      id
+      login
+      email
+      name
+      birthday
+      familyName
+      givenName
+      authorities{
+        name
+      }
+    }
+  }`;
 
 export interface UserResponse {
-    user: User;
+  user: User;
 }
 
 @Injectable()
 export class UserService {
 
-    constructor(private apollo: ApolloService) {
+  constructor(private readonly apollo: Apollo) {
 
-    }
+  }
 
-    public findAllSummary(): ApolloQueryObservable<UsersResponse> {
-        return this.apollo.watchQuery<UsersResponse>({query: findUsersSummery});
-    }
+  public findAllSummary(): Observable<User[]> {
+    return this.apollo.query<UsersResponse>({query: findUsersSummery})
+    .map(result => result.data.users);
+  }
 
-    public findOne(login: string): ApolloQueryObservable<UserResponse> {
-        return this.apollo.watchQuery<UserResponse>({query: findUserByLogin, variables: {login: login}});
-    }
+  public findOne(login: string): Observable<User> {
+    return this.apollo.query<UserResponse>(
+      {query: findUserByLogin, variables: {login: login}}
+    )
+    .map(result => result.data.user);
+  }
 }

@@ -1,0 +1,14 @@
+spring:
+  data:
+    cassandra:
+      keyspace-name: cassandra_unit_keyspace
+      schema-action: none
+      contact-points: localhost
+      port: 9142
+      cluster-name: Test Cluster
+
+logging:
+  level:
+    org:
+      springframework:
+        security: debug

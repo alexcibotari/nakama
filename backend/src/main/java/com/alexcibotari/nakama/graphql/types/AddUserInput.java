@@ -2,50 +2,50 @@ package com.alexcibotari.nakama.graphql.types;
 
 public class AddUserInput {
 
-    private String login;
-    private String email;
-    private String password;
+  private String login;
+  private String email;
+  private String password;
 
-    private String givenName;
-    private String familyName;
+  private String givenName;
+  private String familyName;
 
-    public String getLogin() {
-        return login;
-    }
+  public String getLogin() {
+    return login;
+  }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+  public void setLogin(String login) {
+    this.login = login;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-    public String getGivenName() {
-        return givenName;
-    }
+  public String getGivenName() {
+    return givenName;
+  }
 
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
-    }
+  public void setGivenName(String givenName) {
+    this.givenName = givenName;
+  }
 
-    public String getFamilyName() {
-        return familyName;
-    }
+  public String getFamilyName() {
+    return familyName;
+  }
 
-    public void setFamilyName(String familyName) {
-        this.familyName = familyName;
-    }
+  public void setFamilyName(String familyName) {
+    this.familyName = familyName;
+  }
 }
