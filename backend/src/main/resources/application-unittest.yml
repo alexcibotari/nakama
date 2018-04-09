@@ -1,10 +1,10 @@
 spring:
   data:
     cassandra:
-      keyspace-name: cassandra_unit_keyspace
-      schema-action: none
+      keyspace-name: nakama
+      schema-action: recreate_drop_unused
       contact-points: localhost
-      port: 9142
+      port: 9042
       cluster-name: Test Cluster
 
 logging:
