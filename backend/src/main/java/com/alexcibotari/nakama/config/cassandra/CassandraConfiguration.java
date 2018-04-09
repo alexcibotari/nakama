@@ -41,7 +41,7 @@ public class CassandraConfiguration extends AbstractCassandraConfiguration {
    * @param objectMapper JSON object mapper
    */
   public CassandraConfiguration(Environment environment, CassandraProperties properties,
-    ObjectMapper objectMapper) {
+      ObjectMapper objectMapper) {
     this.environment = environment;
     this.properties = properties;
     this.objectMapper = objectMapper;
@@ -56,9 +56,9 @@ public class CassandraConfiguration extends AbstractCassandraConfiguration {
   protected List<CreateKeyspaceSpecification> getKeyspaceCreations() {
     if (environment.acceptsProfiles(ProfileConstants.DEV)) {
       CreateKeyspaceSpecification specification = CreateKeyspaceSpecification
-        .createKeyspace(properties.getKeyspaceName())
-        .ifNotExists()
-        .with(KeyspaceOption.DURABLE_WRITES, true);
+          .createKeyspace(properties.getKeyspaceName())
+          .ifNotExists()
+          .with(KeyspaceOption.DURABLE_WRITES, true);
       return Collections.singletonList(specification);
     }
     return Collections.emptyList();

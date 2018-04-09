@@ -9,6 +9,9 @@ public class ClassUtils {
   protected ClassUtils() {
   }
 
+  /**
+   * Set if null.
+   */
   public static <T> void setIfNotNull(final Supplier<T> getter, final Consumer<T> setter) {
     T t = getter.get();
     if (Objects.nonNull(t)) {

@@ -2,7 +2,7 @@ package com.alexcibotari.nakama.exception;
 
 public class UserEmailAlreadyInUseException extends AbstractServiceException {
 
-  public final static String ERROR_ID = "user.email.alreadyInUse";
+  public static final String ERROR_ID = "user.email.alreadyInUse";
 
   public UserEmailAlreadyInUseException() {
     super(ERROR_ID);

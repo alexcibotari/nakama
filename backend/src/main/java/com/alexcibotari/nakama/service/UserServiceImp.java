@@ -8,7 +8,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImp implements UserService {
@@ -34,7 +33,9 @@ public class UserServiceImp implements UserService {
     return (List<User>) repository.findAll();
   }
 
-  @Transactional
+  /**
+   * Delete user.
+   */
   public Optional<User> delete(String name) {
     Optional<User> entity = repository.findOneByLogin(name);
     entity.ifPresent(user -> repository.delete(user));

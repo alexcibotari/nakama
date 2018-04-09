@@ -28,10 +28,13 @@ public class OAuth2ResourceServerConfiguration extends ResourceServerConfigurerA
   @Autowired
   private Environment environment;
 
+  /**
+   * Configure Auth.
+   */
   @Autowired
   public void configureGlobal(
-    AuthenticationManagerBuilder auth,
-    UserDetailsService userDetailsService
+      AuthenticationManagerBuilder auth,
+      UserDetailsService userDetailsService
   ) throws Exception {
     auth
       .userDetailsService(userDetailsService)

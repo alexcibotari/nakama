@@ -25,7 +25,7 @@ public class Application {
     Environment env = context.getEnvironment();
     String port = env.getProperty("server.port", "8080");
     String schema =
-      env.getProperty("server.ssl.enabled", Boolean.class, Boolean.FALSE) ? "https" : "http";
+        env.getProperty("server.ssl.enabled", Boolean.class, Boolean.FALSE) ? "https" : "http";
     log.info("Local: \t\t{}://127.0.0.1:{}", schema, port);
     log.info("External: \t{}://{}:{}", schema, InetAddress.getLocalHost().getHostAddress(), port);
   }

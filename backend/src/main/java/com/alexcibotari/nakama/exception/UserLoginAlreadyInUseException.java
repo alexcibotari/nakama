@@ -2,7 +2,7 @@ package com.alexcibotari.nakama.exception;
 
 public class UserLoginAlreadyInUseException extends AbstractServiceException {
 
-  public final static String ERROR_ID = "user.login.alreadyInUse";
+  public static final String ERROR_ID = "user.login.alreadyInUse";
 
   public UserLoginAlreadyInUseException() {
     super(ERROR_ID);

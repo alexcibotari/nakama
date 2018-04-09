@@ -31,8 +31,7 @@ public class DataInitializer {
    *
    * @param cassandraOperations service Injection
    */
-  public DataInitializer(CassandraOperations cassandraOperations,
-    ResourceLoader resourceLoader) {
+  public DataInitializer(CassandraOperations cassandraOperations, ResourceLoader resourceLoader) {
     this.cassandraOperations = cassandraOperations;
     this.resourceLoader = resourceLoader;
   }
@@ -50,17 +49,17 @@ public class DataInitializer {
     logger.info("Initialize {}", fileName);
     Resource resource = resourceLoader.getResource("classpath:cassandra/" + fileName);
     CqlOperations cqlOperations = cassandraOperations.getCqlOperations();
-    BufferedReader reader = new BufferedReader(
-      new InputStreamReader(resource.getURL().openStream()));
+    BufferedReader reader =
+        new BufferedReader(new InputStreamReader(resource.getURL().openStream()));
     long rows = reader.lines()
-      .filter(line -> !line.startsWith("#"))
-      .peek(line -> {
-        if (logger.isDebugEnabled()) {
-          logger.debug(line);
-        }
-      })
-      .peek(cqlOperations::execute)
-      .count();
+        .filter(line -> !line.startsWith("#"))
+        .peek(line -> {
+          if (logger.isDebugEnabled()) {
+            logger.debug(line);
+          }
+        })
+        .peek(cqlOperations::execute)
+        .count();
     logger.info("{} rows inserted.", rows);
   }
 }
