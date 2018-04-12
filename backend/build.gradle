@@ -90,5 +90,5 @@ eclipse {
 }
 
 checkstyle {
-  toolVersion "8.8"
+  toolVersion "8.9"
 }
