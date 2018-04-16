@@ -1,5 +1,6 @@
 package com.alexcibotari.nakama.security;
 
+import com.alexcibotari.nakama.model.Authority;
 import java.util.Collection;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -46,7 +47,7 @@ public final class SecurityUtils {
         .getAuthorities();
     if (authorities != null) {
       for (GrantedAuthority authority : authorities) {
-        if (authority.getAuthority().equals(AuthoritiesConstants.ANONYMOUS)) {
+        if (authority.getAuthority().equals(Authority.ANONYMOUS.toString())) {
           return false;
         }
       }
