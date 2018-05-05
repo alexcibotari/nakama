@@ -7,6 +7,7 @@ buildscript {
     classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
     classpath "org.springframework:springloaded:${springLoadedVersion}"
     classpath "io.spring.gradle:propdeps-plugin:0.0.9.RELEASE"
+    classpath "net.researchgate:gradle-release:2.7.0"
   }
 }
 
@@ -19,19 +20,9 @@ apply plugin: "propdeps"
 apply plugin: "propdeps-idea"
 apply plugin: "propdeps-eclipse"
 apply plugin: "io.spring.dependency-management"
+apply plugin: "net.researchgate.release"
 
 bootRun.dependsOn(":frontend:build")
-
-jar {
-  baseName = rootProject.name
-  manifest {
-    attributes(
-      "Implementation-Title": rootProject.name,
-      "Implementation-Version": version,
-      "Main-Class": "com.alexcibotari.nakame.Application"
-    )
-  }
-}
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -53,6 +44,7 @@ dependencies {
 
   //GraphQL
   compile "com.graphql-java:graphql-java:${graphqlJavaVersion}"
+  compile "com.graphql-java:graphql-java-servlet:${graphqlServletVersion}"
   compile "com.graphql-java:graphql-java-tools:${graphqlToolVersion}"
   compile "com.graphql-java:graphql-spring-boot-starter:${graphqlSpringBootVersion}"
   compile "com.graphql-java:graphiql-spring-boot-starter:${graphqlSpringBootVersion}"
@@ -69,11 +61,14 @@ dependencies {
   compile "org.apache.httpcomponents:httpclient"
   compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
 
+  optional "org.springframework.boot:spring-boot-configuration-processor"
+
   //Test Artifacts -->
   testCompile "org.springframework.boot:spring-boot-starter-test"
-  testCompile "org.cassandraunit:cassandra-unit-spring:${cassandraUnitVersion}"
   testCompile "org.springframework.security:spring-security-test"
 }
+
+compileJava.dependsOn(processResources)
 
 idea {
   module {
@@ -89,6 +84,14 @@ eclipse {
   }
 }
 
+test {
+  failFast = true
+}
+
 checkstyle {
   toolVersion "8.9"
+}
+
+springBoot {
+  buildInfo()
 }
