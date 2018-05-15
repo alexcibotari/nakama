@@ -1,8 +1,9 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
+import {Observable, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
+import {catchError, map} from "rxjs/operators";
 
 interface OAuthTokenRequest {
   client_id: string;
@@ -54,7 +55,8 @@ export class AuthService {
       this.buildFormURLEncoded(request),
       this.buildRequestOptions()
     )
-      .map(value => {
+    .pipe(
+      map(value => {
         if (value && value.access_token) {
           localStorage.setItem(environment.oauth.key, value.access_token);
           if (this.urlRedirectTo && this.urlRedirectTo !== LOGIN_ROUTE) {
@@ -66,7 +68,9 @@ export class AuthService {
         } else {
           return false;
         }
-      }).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+      }),
+      catchError((error: any) => throwError(error.json().error || 'Server error'))
+    );
   }
 
   public getToken(): string {

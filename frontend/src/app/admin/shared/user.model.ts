@@ -1,6 +1,4 @@
-import {AbstractAuditingEntity} from '../../shared/model/entity.model';
-
-export class User extends AbstractAuditingEntity {
+export class User {
   login: string;
   enabled: boolean;
   email: string;

@@ -1,11 +1,12 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {Observable} from 'rxjs/Observable';
+import {fromEvent} from 'rxjs';
 import {ConfirmationDialogComponent} from '../../../shared/component/dialog/confirmation-dialog/confirmation-dialog.component';
 import {UserDataSource} from '../../shared/user-data-source.service';
 import {User} from '../../shared/user.model';
 import {UserDetailComponent} from '../user-detail/user-detail.component';
 import {UserEditComponent} from '../user-edit/user-edit.component';
+import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 
 @Component({
   moduleId: module.id,
@@ -25,12 +26,14 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit() {
-    Observable.fromEvent(this.filter.nativeElement, 'keyup')
-      .debounceTime(150)
-      .distinctUntilChanged()
-      .subscribe(() => {
-        this.dataSource.filter = this.filter.nativeElement.value;
-      });
+    fromEvent(this.filter.nativeElement, 'keyup')
+    .pipe(
+      debounceTime(150),
+      distinctUntilChanged()
+    )
+    .subscribe(() => {
+      this.dataSource.filter = this.filter.nativeElement.value;
+    });
   }
 
   toDetail(user: User) {

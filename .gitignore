@@ -40,7 +40,8 @@ javadoc/
 ## Typings
 typings
 
-#WebPack exclude
+#WebPack
+out-tsc
 dist
 frontend/node
 backend/src/main/resources/static

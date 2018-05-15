@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material';
+import {MatDrawerToggleResult} from "@angular/material/sidenav/typings/drawer";
 
 @Component({
   selector: 'nkm-layout',
@@ -14,11 +15,11 @@ export class LayoutComponent implements OnInit {
 
   @Input('opened') opened: Boolean = false;
 
-  public open(): Promise<void> {
+  public open(): Promise<MatDrawerToggleResult> {
     return this.sidenav.open();
   }
 
-  public close(): Promise<void> {
+  public close(): Promise<MatDrawerToggleResult> {
     return this.sidenav.close();
   }
 

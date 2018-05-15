@@ -1,11 +1,13 @@
 buildscript {
+  ext {
+    springBootVersion = '2.0.2.RELEASE'
+  }
   repositories {
     jcenter()
     maven { url "https://repo.spring.io/plugins-release" }
   }
   dependencies {
     classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
-    classpath "org.springframework:springloaded:${springLoadedVersion}"
     classpath "io.spring.gradle:propdeps-plugin:0.0.9.RELEASE"
     classpath "net.researchgate:gradle-release:2.7.0"
   }
@@ -26,6 +28,13 @@ bootRun.dependsOn(":frontend:build")
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
+
+ext {
+  graphqlJavaVersion = '8.0'
+  graphqlServletVersion = '5.0.0'
+  graphqlToolVersion = '5.0.0'
+  graphqlSpringBootVersion = '4.0.0'
+}
 
 repositories {
   jcenter()
@@ -52,10 +61,7 @@ dependencies {
   //Security
   compile "org.springframework.security:spring-security-oauth2-core"
   compile "org.springframework.security:spring-security-oauth2-jose"
-  compile "org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.0.RELEASE"
-
-  //Database
-  compile "com.datastax.cassandra:cassandra-driver-core:${cassandraDriverVersion}"
+  compile "org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.1.RELEASE"
 
   //Commons
   compile "org.apache.httpcomponents:httpclient"
@@ -84,12 +90,23 @@ eclipse {
   }
 }
 
+release {
+  preCommitText = '[skip ci]'
+  preTagCommitMessage = 'pre tag commit: '
+  tagCommitMessage = 'creating tag: '
+  newVersionCommitMessage = 'new version commit: '
+  buildTasks = ['assemble']
+  git {
+    requireBranch = "master|develop"
+  }
+}
+
 test {
   failFast = true
 }
 
 checkstyle {
-  toolVersion "8.9"
+  toolVersion "8.10"
 }
 
 springBoot {

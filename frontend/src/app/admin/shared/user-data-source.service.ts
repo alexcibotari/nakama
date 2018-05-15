@@ -1,9 +1,9 @@
-import {Observable} from 'rxjs/Observable';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {CollectionViewer, DataSource} from '@angular/cdk/collections';
 import {UserService} from './user.service';
 import {User} from './user.model';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class UserDataSource extends DataSource<User> {
@@ -26,17 +26,20 @@ export class UserDataSource extends DataSource<User> {
 
   connect(collectionViewer: CollectionViewer): Observable<User[]> {
     this.userService.findAllSummary()
-      .subscribe((value) => {
-        this._dataChanges.next(value);
-        console.log(value);
-      });
-    return Observable.merge(...[this._dataChanges, this._filterChange]).map(() => {
-      return this._dataChanges.getValue().slice()
+    .subscribe((value) => {
+      this._dataChanges.next(value);
+      console.log(value);
+    });
+    return of(...[this._dataChanges, this._filterChange])
+    .pipe(
+      map(() => {
+        return this._dataChanges.getValue().slice()
         .filter((item: User) => {
           return (item.login + item.email + item.name)
-            .toLowerCase().indexOf(this._filterChange.getValue().toLowerCase()) !== -1;
+          .toLowerCase().indexOf(this._filterChange.getValue().toLowerCase()) !== -1;
         });
-    });
+      })
+    );
   }
 
   disconnect(collectionViewer: CollectionViewer): void {

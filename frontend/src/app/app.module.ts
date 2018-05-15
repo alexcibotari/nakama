@@ -14,7 +14,6 @@ import {CoreModule} from './core/core.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {LoginComponent} from './login/login.component';
 import {MainComponent} from './main/main.component';
-import './rxjs-operators';
 import {ConfirmationDialogComponent} from './shared/component/dialog/confirmation-dialog/confirmation-dialog.component';
 import {SharedModule} from './shared/shared.module';
 
