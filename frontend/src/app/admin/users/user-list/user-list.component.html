@@ -2,49 +2,44 @@
 
   <div class="users-filter">
     <mat-form-field floatLabel="never">
-      <input matInput #filter placeholder="Filter users">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
   </div>
 
-  <mat-table #table [dataSource]="dataSource">
+  <table mat-table #table [dataSource]="dataSource">
 
-    <ng-container cdkColumnDef="avatar">
-      <mat-header-cell *cdkHeaderCellDef>Avatar</mat-header-cell>
-      <mat-cell *cdkCellDef="let item">
+    <ng-container matColumnDef="avatar">
+      <th mat-header-cell *matHeaderCellDef>Avatar</th>
+      <td mat-cell *matCellDef="let item">
         <mat-icon svgIcon="avatars:svg-11" class="avatar-sm"></mat-icon>
-      </mat-cell>
+      </td>
     </ng-container>
 
-    <ng-container cdkColumnDef="name">
-      <mat-header-cell *cdkHeaderCellDef>Name</mat-header-cell>
-      <mat-cell *cdkCellDef="let item"> {{item.name}}</mat-cell>
+    <ng-container matColumnDef="login">
+      <th mat-header-cell *matHeaderCellDef>Login</th>
+      <td mat-cell *matCellDef="let item"> {{item.login}} </td>
     </ng-container>
 
-    <ng-container cdkColumnDef="login">
-      <mat-header-cell *cdkHeaderCellDef>Login</mat-header-cell>
-      <mat-cell *cdkCellDef="let item"> {{item.login}}</mat-cell>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let item"> {{item.email}} </td>
     </ng-container>
 
-    <ng-container cdkColumnDef="email">
-      <mat-header-cell *cdkHeaderCellDef>Email</mat-header-cell>
-      <mat-cell *cdkCellDef="let item"> {{item.email}}</mat-cell>
-    </ng-container>
-
-    <ng-container cdkColumnDef="enabled">
-      <mat-header-cell *cdkHeaderCellDef>Enabled</mat-header-cell>
-      <mat-cell *cdkCellDef="let item">
+    <ng-container matColumnDef="enabled">
+      <th mat-header-cell *matHeaderCellDef>Enabled</th>
+      <td mat-cell *matCellDef="let item">
         <ng-container *ngIf="item.enabled">
           <mat-icon>check</mat-icon>
         </ng-container>
         <ng-container *ngIf="!item.enabled">
           <mat-icon>close</mat-icon>
         </ng-container>
-      </mat-cell>
+      </td>
     </ng-container>
 
-    <ng-container cdkColumnDef="actions">
-      <mat-header-cell *cdkHeaderCellDef>Actions</mat-header-cell>
-      <mat-cell *cdkCellDef="let item">
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let item">
         <button mat-icon-button (click)="toDetail(item)">
           <mat-icon>info</mat-icon>
         </button>
@@ -54,12 +49,12 @@
         <button mat-icon-button (click)="toDelete(item)">
           <mat-icon>delete</mat-icon>
         </button>
-      </mat-cell>
+      </td>
     </ng-container>
 
-    <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 </div>
 <button mat-fab class="fab-bottom-right">
   <mat-icon>add</mat-icon>

@@ -1,12 +1,10 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {MatDialog} from '@angular/material';
-import {fromEvent} from 'rxjs';
+import {MatDialog, MatTableDataSource} from '@angular/material';
 import {ConfirmationDialogComponent} from '../../../shared/component/dialog/confirmation-dialog/confirmation-dialog.component';
-import {UserDataSource} from '../../shared/user-data-source.service';
 import {User} from '../../shared/user.model';
 import {UserDetailComponent} from '../user-detail/user-detail.component';
 import {UserEditComponent} from '../user-edit/user-edit.component';
-import {debounceTime, distinctUntilChanged} from "rxjs/operators";
+import {UserService} from '../../shared/user.service';
 
 @Component({
   moduleId: module.id,
@@ -16,24 +14,20 @@ import {debounceTime, distinctUntilChanged} from "rxjs/operators";
   providers: []
 })
 export class UserListComponent implements OnInit {
-  displayedColumns = ['avatar', 'name', 'login', 'email', 'enabled', 'actions'];
+  displayedColumns: String[] = ['avatar', 'login', 'email', 'enabled', 'actions'];
+  dataSource: MatTableDataSource<User> = new MatTableDataSource();
 
   @ViewChild('filter') filter: ElementRef;
 
-  constructor(public dataSource: UserDataSource,
-              private readonly dialog: MatDialog
-  ) {
+  constructor(private readonly userService: UserService, private readonly dialog: MatDialog) {
   }
 
-  ngOnInit() {
-    fromEvent(this.filter.nativeElement, 'keyup')
-    .pipe(
-      debounceTime(150),
-      distinctUntilChanged()
-    )
-    .subscribe(() => {
-      this.dataSource.filter = this.filter.nativeElement.value;
-    });
+  ngOnInit(): void {
+    this.userService.findAllSummary().subscribe(value => this.dataSource.data = value);
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   toDetail(user: User) {
@@ -51,7 +45,7 @@ export class UserListComponent implements OnInit {
   }
 
   toDelete(user: User) {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {content: `Delete ${user.name} user ?`}});
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {content: `Delete ${user.login} user ?`}});
     dialogRef.afterClosed().subscribe(value => {
       console.log(value);
     });

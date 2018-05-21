@@ -1,1 +1,1 @@
-INSERT INTO user (login, password, authorities, enabled) VALUES ('admin', '{noop}admin', {'ADMIN'},true);
+INSERT INTO user (login, email, password, authorities, enabled) VALUES ('admin', 'admin@admin', '{noop}admin', {'ADMIN'},true);

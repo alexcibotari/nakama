@@ -3,15 +3,13 @@ import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 import {Observable} from 'rxjs';
 import {User} from './user.model';
-import {map} from "rxjs/operators";
+import {map} from 'rxjs/operators';
 
 const findUsersSummery = gql`
   query findUsersSummery{
     users {
-      id
       login
       email
-      name
       enabled
     }
   }`;
@@ -23,16 +21,9 @@ export interface UsersResponse {
 const findUserByLogin = gql`
   query findUserByLogin($login: String!){
     user (login : $login) {
-      id
       login
       email
-      name
-      birthday
-      familyName
-      givenName
-      authorities{
-        name
-      }
+      enabled
     }
   }`;
 

@@ -1,15 +1,6 @@
 export class User {
   login: string;
-  enabled: boolean;
   email: string;
+  enabled: boolean;
   authorities?: Array<string>;
-
-  name: string;
-  givenName: string;
-  familyName: string;
-  birthday: string;
-  gender: string;
-
-  jobTitle: string;
-  telephone: string;
 }

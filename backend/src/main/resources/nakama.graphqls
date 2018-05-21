@@ -1,18 +1,26 @@
 type Query {
 
-    #Current user information
-    me: User
+  #Current user information
+  me: User
 
-    users: [User!]!
-    user(login: String!): User
+  users: [User!]!
+  user(login: String!): User
 
-    hello(user: String = "user", pass: String): String
+  hello(user: String = "user", pass: String): String
 }
 
 #A user is an individual's account on Nakama
 type User {
-    #The username used to login.
-    login: String!
-    #The use's activation status
-    enabled: Boolean!
+  #The username used to login.
+  login: String!
+  email: String!
+  #The use's activation status
+  enabled: Boolean!
+  authorities: [Authority!]!
+}
+
+enum Authority {
+  ADMIN
+  USER
+  ANONYMOUS
 }

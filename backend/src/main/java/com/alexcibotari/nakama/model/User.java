@@ -11,6 +11,7 @@ public class User {
 
   @PrimaryKey
   private String login;
+  private String email;
 
   private String password;
 
@@ -28,6 +29,14 @@ public class User {
 
   public void setLogin(String login) {
     this.login = login;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
   }
 
   public String getPassword() {
@@ -58,6 +67,7 @@ public class User {
   public String toString() {
     return "User{"
       + "login='" + login + '\''
+      + ", email='" + email + '\''
       + ", password='" + password + '\''
       + ", enabled=" + enabled
       + ", authorities=" + authorities
