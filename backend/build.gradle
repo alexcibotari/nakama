@@ -32,7 +32,7 @@ targetCompatibility = JavaVersion.VERSION_1_8
 ext {
   graphqlJavaVersion = '8.0'
   graphqlServletVersion = '5.0.0'
-  graphqlToolVersion = '5.0.0'
+  graphqlToolVersion = '5.1.0'
   graphqlSpringBootVersion = '4.0.0'
 }
 

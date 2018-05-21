@@ -6,19 +6,16 @@ import com.alexcibotari.nakama.security.SecurityUtils;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImp implements UserService {
 
   private UserRepository repository;
-  private PasswordEncoder passwordEncoder;
 
   @Autowired
-  public UserServiceImp(UserRepository repository, PasswordEncoder passwordEncoder) {
+  public UserServiceImp(UserRepository repository) {
     this.repository = repository;
-    this.passwordEncoder = passwordEncoder;
   }
 
   public Optional<User> findOneByLogin(String login) {
@@ -30,7 +27,7 @@ public class UserServiceImp implements UserService {
   }
 
   public List<User> findAll() {
-    return (List<User>) repository.findAll();
+    return repository.findAll();
   }
 
   /**
