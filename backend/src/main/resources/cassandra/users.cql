@@ -1,1 +1,12 @@
-INSERT INTO user (login, email, password, authorities, enabled) VALUES ('admin', 'admin@admin', '{noop}admin', {'ADMIN'},true);
+INSERT INTO user (login, email, password, authorities, enabled) VALUES ('admin', 'admin@nakama', '{noop}admin', {'ADMIN'}, true);
+INSERT INTO user (login, email, password, authorities, enabled) VALUES ('user', 'user@nakama', '{noop}user', {'USER'}, true);
+INSERT INTO user (login, email, password, authorities, enabled) VALUES ('2-1B', '2-1B@nakama', '{noop}user', {'USER'}, true);
+INSERT INTO user (login, email, password, authorities, enabled) VALUES ('4-LOM', '4-LOM@nakama', '{noop}user', {'USER'}, true);
+INSERT INTO user (login, email, password, authorities, enabled) VALUES ('8D8', '8D8@nakama', '{noop}user', {'USER'}, true);
+INSERT INTO user (login, email, password, authorities, enabled) VALUES ('Clone99', 'Clone99@nakama', '{noop}user', {'USER'}, true);
+INSERT INTO user (login, email, password, authorities, enabled) VALUES ('0-0-0', '0-0-0@nakama', '{noop}user', {'USER'}, true);
+INSERT INTO user (login, email, password, authorities, enabled) VALUES ('GialAckbar', 'GialAckbar@nakama', '{noop}user', {'USER'}, true);
+INSERT INTO user (login, email, password, authorities, enabled) VALUES ('SimAloo', 'SimAloo@nakama', '{noop}user', {'USER'}, true);
+INSERT INTO user (login, email, password, authorities, enabled) VALUES ('Almec', 'Almec@nakama', '{noop}user', {'USER'}, true);
+INSERT INTO user (login, email, password, authorities, enabled) VALUES ('MasAmedda', 'MasAmedda@nakama', '{noop}user', {'USER'}, true);
+INSERT INTO user (login, email, password, authorities, enabled) VALUES ('Amee', 'Amee@nakama', '{noop}user', {'USER'}, true);
