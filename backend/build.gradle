@@ -1,6 +1,6 @@
 buildscript {
   ext {
-    springBootVersion = '2.0.2.RELEASE'
+    springBootVersion = '2.0.3.RELEASE'
   }
   repositories {
     jcenter()
@@ -31,9 +31,8 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 ext {
   graphqlJavaVersion = '8.0'
-  graphqlServletVersion = '5.0.0'
   graphqlToolVersion = '5.1.0'
-  graphqlSpringBootVersion = '4.0.0'
+  graphqlSpringBootVersion = '4.2.0'
 }
 
 repositories {
@@ -53,7 +52,6 @@ dependencies {
 
   //GraphQL
   compile "com.graphql-java:graphql-java:${graphqlJavaVersion}"
-  compile "com.graphql-java:graphql-java-servlet:${graphqlServletVersion}"
   compile "com.graphql-java:graphql-java-tools:${graphqlToolVersion}"
   compile "com.graphql-java:graphql-spring-boot-starter:${graphqlSpringBootVersion}"
   compile "com.graphql-java:graphiql-spring-boot-starter:${graphqlSpringBootVersion}"
