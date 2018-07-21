@@ -31,8 +31,8 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 ext {
   graphqlJavaVersion = '8.0'
-  graphqlToolVersion = '5.1.0'
-  graphqlSpringBootVersion = '4.2.0'
+  graphqlToolVersion = '5.2.0'
+  graphqlSpringBootVersion = '4.4.0'
 }
 
 repositories {
@@ -54,7 +54,6 @@ dependencies {
   compile "com.graphql-java:graphql-java:${graphqlJavaVersion}"
   compile "com.graphql-java:graphql-java-tools:${graphqlToolVersion}"
   compile "com.graphql-java:graphql-spring-boot-starter:${graphqlSpringBootVersion}"
-  compile "com.graphql-java:graphiql-spring-boot-starter:${graphqlSpringBootVersion}"
 
   //Security
   compile "org.springframework.security:spring-security-oauth2-core"
@@ -104,7 +103,7 @@ test {
 }
 
 checkstyle {
-  toolVersion "8.10"
+  toolVersion "8.11"
 }
 
 springBoot {
